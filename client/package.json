@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "prebuild": "rm -rf public/assets && mkdir -p public && cp -R ../assets public/assets",
     "build": "vite build",
     "preview": "vite preview"
   },

@@ -5,54 +5,141 @@ import { useCardState } from '../editor/state'
 import { TemplateSelector } from '../editor/TemplateSelector'
 import type { General } from '../editor/types'
 import { EditorCanvas } from '../editor/Canvas'
-import { ImageSidebar } from '../editor/ImageSidebar'
 import { PowersEditor } from '../editor/PowersEditor'
 import { CustomThemePanel, type CustomTheme } from '../editor/CustomThemePanel'
 import { createCard, getCard, patchCard, postImage, postPower, patchPower, patchImage, deleteImageApi, listThemes, createTheme, deleteTheme } from '../lib/api'
 import { DEFAULT_CARD } from '../editor/types'
 
-function Header({ saving }: { saving: boolean }) {
+type ViewMode = 'both' | 'canvas' | 'panel'
+
+function Header({ saving, title, onTitleChange, general, onGeneralChange, onExport, onSaveToAccount, isAuthenticated: authProp, cardId, viewMode, onViewModeChange }: {
+  saving: boolean
+  title: string
+  onTitleChange: (title: string) => void
+  general: General
+  onGeneralChange: (g: General) => void
+  onExport: () => void
+  onSaveToAccount: () => void
+  isAuthenticated: boolean
+  cardId: number | null
+  viewMode: ViewMode
+  onViewModeChange: (m: ViewMode) => void
+}) {
   const { isAuthenticated, loginWithRedirect, loginWithPopup, logout, user, isLoading } = useAuth0()
   return (
-    <header className="header-glass px-6 py-3">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-4">
-          <Link to="/projects" className="flex items-center gap-2 text-slate-900 hover:text-blue-600 transition-colors group">
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <header className="header-glass">
+      <div className="flex items-center justify-between gap-4 px-4 py-2">
+        {/* Left: Back button + Title + Template */}
+        <div className="flex items-center gap-3 flex-1 min-w-0">
+          <Link to="/projects" className="text-slate-500 hover:text-blue-600 transition-colors flex-shrink-0" title="Back to Projects">
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
-            <span className="font-semibold">Projects</span>
           </Link>
-          <div className="h-6 w-px bg-slate-200"></div>
-          <div className="flex items-center gap-2">
-            {saving ? (
-              <>
-                <div className="spinner"></div>
-                <span className="text-sm text-slate-500">Saving...</span>
-              </>
-            ) : (
-              <>
-                <svg className="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                </svg>
-                <span className="text-sm text-slate-500">All changes saved</span>
-              </>
-            )}
-          </div>
+          <input
+            className="text-lg font-semibold text-slate-900 outline-none bg-transparent placeholder:text-slate-400 focus:text-blue-600 transition-colors flex-1 min-w-0"
+            placeholder="Untitled Card"
+            value={title}
+            onChange={(e) => onTitleChange(e.target.value)}
+          />
+          <TemplateSelector value={general} onChange={onGeneralChange} />
         </div>
-        <div className="flex items-center gap-3">
-          {!isLoading && isAuthenticated && (
-            <div className="flex items-center gap-3">
-              {user?.picture && (
-                <img src={user.picture} className="w-8 h-8 rounded-full ring-2 ring-slate-200" alt={user?.name} />
-              )}
-              <span className="text-sm font-medium text-slate-700">{user?.name}</span>
-              <button
-                className="btn-secondary text-sm py-1.5 px-3"
-                onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}
-              >
-                Log out
-              </button>
+
+        {/* Center: Save status */}
+        <div className="flex items-center gap-2 text-xs text-slate-500 flex-shrink-0">
+          {saving ? (
+            <>
+              <div className="spinner"></div>
+              <span>Saving...</span>
+            </>
+          ) : (
+            <>
+              <svg className="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+              </svg>
+              <span>Saved</span>
+            </>
+          )}
+        </div>
+
+        {/* Right: View toggle + Export + User */}
+        <div className="flex items-center gap-2 flex-shrink-0">
+          {/* View toggle */}
+          <div className="flex items-center gap-1 bg-slate-100 p-0.5 rounded-lg">
+            <button
+              className={`px-2.5 py-1.5 rounded-md text-xs md:text-sm font-medium inline-flex items-center gap-1.5 transition-colors ${viewMode==='canvas' ? 'bg-blue-50 text-blue-700 ring-1 ring-blue-200' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'}`}
+              onClick={() => onViewModeChange('canvas')}
+              title="Show Card Only"
+              aria-pressed={viewMode==='canvas'}
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h12a2 2 0 012 2v12a2 2 0 01-2 2H6a2 2 0 01-2-2V6z" />
+              </svg>
+              <span className="hidden sm:inline">Card</span>
+            </button>
+            <button
+              className={`px-2.5 py-1.5 rounded-md text-xs md:text-sm font-medium inline-flex items-center gap-1.5 transition-colors ${viewMode==='panel' ? 'bg-blue-50 text-blue-700 ring-1 ring-blue-200' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'}`}
+              onClick={() => onViewModeChange('panel')}
+              title="Show Configs Only"
+              aria-pressed={viewMode==='panel'}
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 7h16M4 12h16M4 17h16" />
+              </svg>
+              <span className="hidden sm:inline">Configs</span>
+            </button>
+            <button
+              className={`px-2.5 py-1.5 rounded-md text-xs md:text-sm font-medium inline-flex items-center gap-1.5 transition-colors ${viewMode==='both' ? 'bg-blue-50 text-blue-700 ring-1 ring-blue-200' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'}`}
+              onClick={() => onViewModeChange('both')}
+              title="Show Both"
+              aria-pressed={viewMode==='both'}
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h7v7H4V6zm9 0h7v7h-7V6zM4 15h16v3H4z" />
+              </svg>
+              <span className="hidden sm:inline">Both</span>
+            </button>
+          </div>
+          <button
+            className="btn-secondary text-sm py-1.5 px-3 flex items-center gap-1.5"
+            onClick={onExport}
+            title="Export as PNG"
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+            </svg>
+            Export
+          </button>
+          {authProp && !cardId && (
+            <button
+              className="btn-secondary text-sm py-1.5 px-3 flex items-center gap-1.5"
+              onClick={onSaveToAccount}
+              title="Save to your account"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" />
+              </svg>
+              Save
+            </button>
+          )}
+          {!isLoading && isAuthenticated && user?.picture && (
+            <div className="relative group">
+              <img
+                src={user.picture}
+                className="w-8 h-8 rounded-full ring-2 ring-slate-200 cursor-pointer hover:ring-blue-400 transition-all"
+                alt={user?.name}
+                title={user?.name}
+              />
+              <div className="absolute right-0 top-10 bg-white rounded-lg shadow-xl border border-slate-200 py-2 px-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50 min-w-[180px]">
+                <div className="text-sm font-medium text-slate-900 mb-1">{user?.name}</div>
+                <div className="text-xs text-slate-500 mb-3">{user?.email}</div>
+                <button
+                  className="w-full text-left text-sm text-red-600 hover:text-red-700 font-medium"
+                  onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}
+                >
+                  Log out
+                </button>
+              </div>
             </div>
           )}
           {!isLoading && !isAuthenticated && (
@@ -80,13 +167,15 @@ export default function EditorPage() {
   const params = useParams()
   const nav = useNavigate()
   const { isAuthenticated, getAccessTokenSilently } = useAuth0()
-  const { card, saving, setTitle, setGeneral, updateField, addImage, updateImage, deleteImage, reorderImage, setCard, resetToDefaults } = useCardState()
+  const { card, saving, setTitle, setGeneral, updateField, addImage, updateImage, deleteImage, setCard, resetToDefaults } = useCardState()
   const location = useLocation()
   const [selectedId, setSelectedId] = useState<string | null>(null)
   const cardId = params.id ? parseInt(params.id) : null
   const [loading, setLoading] = useState<boolean>(!!cardId)
   const [customTheme, setCustomTheme] = useState<CustomTheme>({ primary: '#3080ff', secondary: '#88aacc', background: '#556677' })
+  const [activeTab, setActiveTab] = useState<'images' | 'theme' | 'attributes' | 'powers'>('images')
   const [savedThemes, setSavedThemes] = useState<{ id: number; name: string; primary_hex: string; secondary_hex: string; background_hex: string }[]>([])
+  const [viewMode, setViewMode] = useState<ViewMode>('both')
   const promotionRef = useRef(false)
 
   // If opening a new guest card, reset local state to defaults
@@ -327,7 +416,47 @@ export default function EditorPage() {
 
   return (
     <div className="h-screen flex flex-col overflow-hidden">
-      <Header saving={saving} />
+      <Header
+        saving={saving}
+        title={card.title}
+        onTitleChange={(title) => {
+          setTitle(title)
+          if (isAuthenticated && card.id) {
+            ;(async () => {
+              const token = await getAccessTokenSilently().catch(() => null)
+              try { await patchCard(card.id!, { title }, token) } catch {}
+            })()
+          }
+        }}
+        general={card.general}
+        onGeneralChange={async (g: General) => {
+          setGeneral(g)
+          if (isAuthenticated && card.id) {
+            const token = await getAccessTokenSilently().catch(() => null)
+            try { await patchCard(card.id, { general: g }, token) } catch {}
+          }
+        }}
+        onExport={() => {
+          setSelectedId(null)
+          requestAnimationFrame(() => {
+            const canvas = document.querySelector('canvas') as HTMLCanvasElement | null
+            if (!canvas) return
+            canvas.toBlob((blob) => {
+              if (!blob) return
+              const a = document.createElement('a')
+              a.href = URL.createObjectURL(blob)
+              a.download = `${card.fields.cardName || 'card'}.png`
+              a.click()
+              URL.revokeObjectURL(a.href)
+            })
+          })
+        }}
+        onSaveToAccount={() => { void ensureRemoteCard() }}
+        isAuthenticated={isAuthenticated}
+        cardId={cardId}
+        viewMode={viewMode}
+        onViewModeChange={setViewMode}
+      />
       {loading ? (
         <div className="flex items-center justify-center py-20">
           <div className="text-center">
@@ -336,125 +465,343 @@ export default function EditorPage() {
           </div>
         </div>
       ) : (
-        <main className="flex flex-1 min-h-0 overflow-hidden">
-          <div className="flex-1 flex flex-col min-h-0">
-            <div className="bg-white border-b border-slate-200 px-6 py-4 flex items-center gap-4 flex-shrink-0">
-              <input
-                className="text-2xl font-bold text-slate-900 outline-none flex-1 bg-transparent placeholder:text-slate-400 focus:text-blue-600 transition-colors"
-                placeholder="Untitled Card"
-                value={card.title}
-                onChange={(e) => setTitle(e.target.value)}
-                onBlur={async (e) => {
-                  if (isAuthenticated && card.id) {
-                    const token = await getAccessTokenSilently().catch(() => null)
-                    try { await patchCard(card.id, { title: e.target.value }, token) } catch {}
-                  }
-                }}
-              />
-              <TemplateSelector
-                value={card.general}
-                onChange={async (g: General) => {
-                  setGeneral(g)
-                  if (isAuthenticated && card.id) {
-                    const token = await getAccessTokenSilently().catch(() => null)
-                    try {
-                      await patchCard(card.id, { general: g }, token)
-                    } catch {}
-                  }
-                }}
-              />
+        <main className="flex flex-1 min-h-0 overflow-hidden flex-col md:flex-row">
+          {/* Canvas area (first on mobile) */}
+          <div className={`flex-1 flex flex-col min-h-0 bg-slate-50 order-1 md:order-2 ${viewMode === 'panel' ? 'hidden' : ''}`}>
+            <EditorCanvas
+              card={card}
+              selectedId={selectedId}
+              onSelect={setSelectedId}
+              onUpdateImage={(id, patch) => {
+                updateImage(id, patch)
+                if (!isAuthenticated || !card.id) return
+                const layer = card.images.find((i) => i.id === id)
+                if (!layer || !(layer as any).remoteId) return
+                ;(async () => {
+                  const token = await getAccessTokenSilently().catch(() => null)
+                  try { await patchImage(card.id!, (layer as any).remoteId, patch as any, token) } catch {}
+                })()
+              }}
+              onDeleteImage={handleDeleteImage}
+              customTheme={card.general === 'custom' ? customTheme : null}
+            />
+            {/* Bottom hint bar */}
+            <div className="bg-white/80 backdrop-blur-sm border-t border-slate-200 px-4 py-2 text-xs text-slate-500 text-center">
+              Click and drag images • Arrow keys to nudge • Shift+arrows for larger steps • Backspace to delete
             </div>
-            <div className="flex-1 flex min-h-0 overflow-hidden">
-              <ImageSidebar
-                images={card.images}
-                selectedId={selectedId}
-                onSelect={(id) => setSelectedId(id)}
-                onUpload={(dataUrl, name) => {
-                  const newId = crypto.randomUUID()
-                  // add locally immediately for responsiveness
-                  addImage(dataUrl, name, newId)
-                  setSelectedId(newId)
-                  // persist to server if signed in
-                  ;(async () => {
-                    if (!isAuthenticated) return
-                    const ensureId = await ensureRemoteCard(false)
-                    if (!ensureId) return
-                    const layer = card.images.find((i) => i.id === newId) || { id: newId, name, dataUrl, x: 980, y: 550, scale: 1, rotation: null, order: (card.images.length ? Math.max(...card.images.map(i=>i.order))+1 : 0) } as any
-                    const token = await getAccessTokenSilently().catch(() => null)
-                    try {
-                      const created = await postImage(ensureId, layer as any, token)
-                      // attach remoteId + canonical order
-                      setCard((prev) => ({
-                        ...prev,
-                        images: prev.images.map((im) => im.id === newId ? { ...im, order: created.order, remoteId: created.id } : im)
-                      }))
-                    } catch {}
-                  })()
-                }}
-                onDelete={handleDeleteImage}
-                onReorderList={(ids) => {
-                  // Reassign orders based on new ids sequence
-                  const orderMap = new Map<string, number>()
-                  ids.forEach((id, idx) => orderMap.set(id, idx))
-                  setCard((prev) => ({
-                    ...prev,
-                    images: prev.images.map((im) => orderMap.has(im.id) ? { ...im, order: orderMap.get(im.id)! } : im)
-                  }))
-                  // Persist orders when signed in
-                  if (isAuthenticated && card.id) {
-                    ;(async () => {
-                      const token = await getAccessTokenSilently().catch(() => null)
-                      try {
-                        const imagesToPatch = card.images.filter((im) => (im as any).remoteId)
-                        await Promise.all(imagesToPatch.map((im) => patchImage(card.id!, (im as any).remoteId, { order: orderMap.get(im.id) ?? im.order }, token)))
-                      } catch {}
-                    })()
-                  }
-                }}
-                onScale={(id, delta) => {
-                  const layer = card.images.find((i) => i.id === id)
-                  if (!layer) return
-                  const next = Math.max(0.05, layer.scale + delta)
-                  updateImage(id, { scale: next })
-                  if (isAuthenticated && card.id && (layer as any).remoteId) {
-                    ;(async () => {
-                      const token = await getAccessTokenSilently().catch(() => null)
-                      try { await patchImage(card.id!, (layer as any).remoteId, { scale: next }, token) } catch {}
-                    })()
-                  }
-                }}
-                onNudge={(id, dx, dy) => {
-                  const layer = card.images.find((i) => i.id === id)
-                  if (!layer) return
-                  const nx = layer.x + dx, ny = layer.y + dy
-                  updateImage(id, { x: nx, y: ny })
-                  if (isAuthenticated && card.id && (layer as any).remoteId) {
-                    ;(async () => {
-                      const token = await getAccessTokenSilently().catch(() => null)
-                      try { await patchImage(card.id!, (layer as any).remoteId, { x: nx, y: ny }, token) } catch {}
-                    })()
-                  }
-                }}
-              />
-              <EditorCanvas
-                card={card}
-                selectedId={selectedId}
-                onSelect={setSelectedId}
-                onUpdateImage={(id, patch) => {
-                  updateImage(id, patch)
-                  if (!isAuthenticated || !card.id) return
-                  const layer = card.images.find((i) => i.id === id)
-                  if (!layer || !(layer as any).remoteId) return
-                  ;(async () => {
-                    const token = await getAccessTokenSilently().catch(() => null)
-                    try { await patchImage(card.id!, (layer as any).remoteId, patch as any, token) } catch {}
-                  })()
-                }}
-                onDeleteImage={handleDeleteImage}
-                customTheme={card.general === 'custom' ? customTheme : null}
-              />
-              <div className="w-96 sidebar-modern p-6 space-y-6 overflow-y-auto h-full min-h-0">
+          </div>
+
+          {/* Left: Unified sidebar with tabs (full width on mobile) */}
+          <div className={`w-full md:w-[520px] xl:w-[560px] 2xl:w-[600px] bg-white border-r border-slate-200 shadow-lg flex flex-col min-h-0 order-2 md:order-1 ${viewMode === 'canvas' ? 'hidden' : ''}`}
+          >
+            {/* Tabs */}
+            <div className="sticky top-0 z-20 bg-white/95 backdrop-blur-sm border-b border-slate-200">
+              <div className="flex flex-wrap gap-1.5 px-3 pt-3 pb-2">
+                <button
+                  className={`inline-flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${activeTab==='images' ? 'bg-blue-50 text-blue-700 ring-1 ring-blue-200' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'}`}
+                  onClick={() => setActiveTab('images')}
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
+                  Images
+                </button>
                 {card.general === 'custom' && (
+                  <button
+                    className={`inline-flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${activeTab==='theme' ? 'bg-blue-50 text-blue-700 ring-1 ring-blue-200' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'}`}
+                    onClick={() => setActiveTab('theme')}
+                  >
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+                    </svg>
+                    Custom Themes
+                  </button>
+                )}
+                <button
+                  className={`inline-flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${activeTab==='attributes' ? 'bg-blue-50 text-blue-700 ring-1 ring-blue-200' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'}`}
+                  onClick={() => setActiveTab('attributes')}
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                  Attributes
+                </button>
+                <button
+                  className={`inline-flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${activeTab==='powers' ? 'bg-blue-50 text-blue-700 ring-1 ring-blue-200' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'}`}
+                  onClick={() => setActiveTab('powers')}
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                  Special Powers
+                </button>
+              </div>
+            </div>
+            <div className="flex-1 overflow-y-auto p-5 space-y-4">
+              {/* Images Section */}
+              {activeTab === 'images' && (
+              <section className="space-y-3">
+                  <h3 className="text-base font-semibold text-slate-900 flex items-center gap-2 py-1">
+                    <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                    Images
+                  </h3>
+                <label className="block">
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={async (e) => {
+                      const file = e.target.files?.[0]
+                      if (!file) return
+                      const reader = new FileReader()
+                      reader.onload = () => {
+                        const dataUrl = reader.result as string
+                        const name = file.name
+                        const newId = crypto.randomUUID()
+                        addImage(dataUrl, name, newId)
+                        setSelectedId(newId)
+                        ;(async () => {
+                          if (!isAuthenticated) return
+                          const ensureId = await ensureRemoteCard(false)
+                          if (!ensureId) return
+                          const layer = card.images.find((i) => i.id === newId) || { id: newId, name, dataUrl, x: 980, y: 550, scale: 1, rotation: null, order: (card.images.length ? Math.max(...card.images.map(i=>i.order))+1 : 0) } as any
+                          const token = await getAccessTokenSilently().catch(() => null)
+                          try {
+                            const created = await postImage(ensureId, layer as any, token)
+                            setCard((prev) => ({
+                              ...prev,
+                              images: prev.images.map((im) => im.id === newId ? { ...im, order: created.order, remoteId: created.id } : im)
+                            }))
+                          } catch {}
+                        })()
+                      }
+                      reader.readAsDataURL(file)
+                      e.target.value = ''
+                    }}
+                    className="hidden"
+                  />
+                  <div className="btn-primary w-full text-center cursor-pointer flex items-center justify-center gap-2">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                    </svg>
+                    Upload Image
+                  </div>
+                </label>
+
+                {selectedId && (
+                  <div className="bg-blue-50/50 border border-blue-200 rounded-lg p-3 space-y-2">
+                    <div className="text-xs font-medium text-blue-900 mb-2">Selected Image Controls</div>
+                    <div className="grid grid-cols-3 gap-1.5">
+                      <div></div>
+                      <button className="btn-icon text-xs" onClick={() => selectedId && ((id, dx, dy) => {
+                        const layer = card.images.find((i) => i.id === id)
+                        if (!layer) return
+                        const nx = layer.x + dx, ny = layer.y + dy
+                        updateImage(id, { x: nx, y: ny })
+                        if (isAuthenticated && card.id && (layer as any).remoteId) {
+                          ;(async () => {
+                            const token = await getAccessTokenSilently().catch(() => null)
+                            try { await patchImage(card.id!, (layer as any).remoteId, { x: nx, y: ny }, token) } catch {}
+                          })()
+                        }
+                      })(selectedId, 0, -5)} title="Move up">
+                        <svg className="w-4 h-4 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
+                        </svg>
+                      </button>
+                      <div></div>
+                      <button className="btn-icon text-xs" onClick={() => selectedId && ((id, dx, dy) => {
+                        const layer = card.images.find((i) => i.id === id)
+                        if (!layer) return
+                        const nx = layer.x + dx, ny = layer.y + dy
+                        updateImage(id, { x: nx, y: ny })
+                        if (isAuthenticated && card.id && (layer as any).remoteId) {
+                          ;(async () => {
+                            const token = await getAccessTokenSilently().catch(() => null)
+                            try { await patchImage(card.id!, (layer as any).remoteId, { x: nx, y: ny }, token) } catch {}
+                          })()
+                        }
+                      })(selectedId, -5, 0)} title="Move left">
+                        <svg className="w-4 h-4 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                        </svg>
+                      </button>
+                      <div className="flex items-center justify-center text-[10px] text-slate-500 font-medium">MOVE</div>
+                      <button className="btn-icon text-xs" onClick={() => selectedId && ((id, dx, dy) => {
+                        const layer = card.images.find((i) => i.id === id)
+                        if (!layer) return
+                        const nx = layer.x + dx, ny = layer.y + dy
+                        updateImage(id, { x: nx, y: ny })
+                        if (isAuthenticated && card.id && (layer as any).remoteId) {
+                          ;(async () => {
+                            const token = await getAccessTokenSilently().catch(() => null)
+                            try { await patchImage(card.id!, (layer as any).remoteId, { x: nx, y: ny }, token) } catch {}
+                          })()
+                        }
+                      })(selectedId, 5, 0)} title="Move right">
+                        <svg className="w-4 h-4 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        </svg>
+                      </button>
+                      <div></div>
+                      <button className="btn-icon text-xs" onClick={() => selectedId && ((id, dx, dy) => {
+                        const layer = card.images.find((i) => i.id === id)
+                        if (!layer) return
+                        const nx = layer.x + dx, ny = layer.y + dy
+                        updateImage(id, { x: nx, y: ny })
+                        if (isAuthenticated && card.id && (layer as any).remoteId) {
+                          ;(async () => {
+                            const token = await getAccessTokenSilently().catch(() => null)
+                            try { await patchImage(card.id!, (layer as any).remoteId, { x: nx, y: ny }, token) } catch {}
+                          })()
+                        }
+                      })(selectedId, 0, 5)} title="Move down">
+                        <svg className="w-4 h-4 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                        </svg>
+                      </button>
+                      <div></div>
+                    </div>
+                    <div className="flex items-center gap-2 pt-1">
+                      <button className="flex-1 btn-icon text-xs" onClick={() => {
+                        const layer = card.images.find((i) => i.id === selectedId)
+                        if (!layer) return
+                        const next = Math.max(0.05, layer.scale - 0.1)
+                        updateImage(selectedId!, { scale: next })
+                        if (isAuthenticated && card.id && (layer as any).remoteId) {
+                          ;(async () => {
+                            const token = await getAccessTokenSilently().catch(() => null)
+                            try { await patchImage(card.id!, (layer as any).remoteId, { scale: next }, token) } catch {}
+                          })()
+                        }
+                      }} title="Scale down">
+                        <svg className="w-3.5 h-3.5 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 12H4" />
+                        </svg>
+                      </button>
+                      <div className="text-[10px] text-slate-500 font-medium">SCALE</div>
+                      <button className="flex-1 btn-icon text-xs" onClick={() => {
+                        const layer = card.images.find((i) => i.id === selectedId)
+                        if (!layer) return
+                        const next = layer.scale + 0.1
+                        updateImage(selectedId!, { scale: next })
+                        if (isAuthenticated && card.id && (layer as any).remoteId) {
+                          ;(async () => {
+                            const token = await getAccessTokenSilently().catch(() => null)
+                            try { await patchImage(card.id!, (layer as any).remoteId, { scale: next }, token) } catch {}
+                          })()
+                        }
+                      }} title="Scale up">
+                        <svg className="w-3.5 h-3.5 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+                )}
+
+                <div className="space-y-2">
+                  <div className="text-xs font-medium text-slate-600 flex items-center gap-1.5">
+                    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8h16M4 16h16" />
+                    </svg>
+                    Layer Order (drag to reorder)
+                  </div>
+                  {[...card.images].sort((a, b) => a.order - b.order).length === 0 ? (
+                    <div className="text-center py-6 text-slate-400 text-xs">
+                      <svg className="w-10 h-10 mx-auto mb-2 opacity-40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                      </svg>
+                      No images yet
+                    </div>
+                  ) : (
+                    <ul className="space-y-1.5">
+                      {[...card.images].sort((a, b) => a.order - b.order).map((img) => {
+                        const dragIdRef = (typeof window !== 'undefined') ? (window as any).__imgDragIdRef || { current: null as string | null } : { current: null as string | null }
+                        if ((window as any)) (window as any).__imgDragIdRef = dragIdRef
+                        return (
+                          <li
+                            key={img.id}
+                            draggable
+                            onDragStart={(e) => {
+                              dragIdRef.current = img.id
+                              e.dataTransfer.effectAllowed = 'move'
+                              try { e.dataTransfer.setData('text/plain', img.id) } catch {}
+                            }}
+                            onDragOver={(e) => {
+                              e.preventDefault()
+                              e.dataTransfer.dropEffect = 'move'
+                            }}
+                            onDrop={(e) => {
+                              e.preventDefault()
+                              const src = ((): string | null => {
+                                try { const d = e.dataTransfer.getData('text/plain'); if (d) return d } catch {}
+                                return dragIdRef.current
+                              })()
+                              if (!src || src === img.id) { dragIdRef.current = null; return }
+                              const rect = (e.currentTarget as HTMLElement).getBoundingClientRect()
+                              const before = e.clientY < rect.top + rect.height / 2
+                              const sorted = [...card.images].sort((a,b) => a.order - b.order)
+                              const ids = sorted.map(i => i.id)
+                              const from = ids.indexOf(src)
+                              let to = ids.indexOf(img.id)
+                              if (!before) to = to + 1
+                              if (from < 0) return
+                              ids.splice(from, 1)
+                              if (to > ids.length) to = ids.length
+                              ids.splice(to, 0, src)
+                              const orderMap = new Map<string, number>()
+                              ids.forEach((id, idx) => orderMap.set(id, idx))
+                              setCard((prev) => ({
+                                ...prev,
+                                images: prev.images.map((im) => orderMap.has(im.id) ? { ...im, order: orderMap.get(im.id)! } : im)
+                              }))
+                              if (isAuthenticated && card.id) {
+                                ;(async () => {
+                                  const token = await getAccessTokenSilently().catch(() => null)
+                                  try {
+                                    const imagesToPatch = card.images.filter((im) => (im as any).remoteId)
+                                    await Promise.all(imagesToPatch.map((im) => patchImage(card.id!, (im as any).remoteId, { order: orderMap.get(im.id) ?? im.order }, token)))
+                                  } catch {}
+                                })()
+                              }
+                              dragIdRef.current = null
+                            }}
+                            className={`${selectedId === img.id ? 'layer-item-selected' : 'layer-item'} p-2.5 cursor-grab active:cursor-grabbing`}
+                          >
+                            <div className="flex items-center gap-2">
+                              <svg className="w-3.5 h-3.5 text-slate-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8h16M4 16h16" />
+                              </svg>
+                              <button
+                                className="text-left flex-1 min-w-0 truncate text-xs font-medium text-slate-900"
+                                onClick={() => setSelectedId(img.id)}
+                              >
+                                {img.name || 'Image'}
+                              </button>
+                              <button
+                                className="text-red-500 hover:text-red-700 p-1"
+                                onClick={() => handleDeleteImage(img.id)}
+                                title="Delete"
+                              >
+                                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                </svg>
+                              </button>
+                            </div>
+                          </li>
+                        )
+                      })}
+                    </ul>
+                  )}
+                </div>
+              </section>
+              )}
+
+              {/* Custom Theme Panel */}
+              {activeTab === 'theme' && card.general === 'custom' && (
+                <>
                   <CustomThemePanel
                     value={customTheme}
                     onChange={setCustomTheme}
@@ -481,51 +828,59 @@ export default function EditorPage() {
                       try { await deleteTheme(id, token); setSavedThemes((prev) => prev.filter((t) => t.id !== id)) } catch {}
                     }}
                   />
-                )}
-                <section className="space-y-3">
-                  <h3 className="text-lg font-semibold text-slate-900 flex items-center gap-2">
+                </>
+              )}
+
+              {/* Attributes Section */}
+              {activeTab === 'attributes' && (
+              <section className="space-y-3">
+                  <h3 className="text-base font-semibold text-slate-900 flex items-center gap-2 py-1">
                     <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                     </svg>
                     Attributes
                   </h3>
-                  <div className="space-y-3">
-                    {([
-                      ['cardName', 'Card Name'],
-                      ['tribeName', 'General Name'],
-                      ['species', 'Species'],
-                      ['uniqueness', 'Uniqueness'],
-                      ['class', 'Class'],
-                      ['personality', 'Personality'],
-                      ['size', 'Size'],
-                      ['life', 'Life'],
-                      ['move', 'Move'],
-                      ['range', 'Range'],
-                      ['attack', 'Attack'],
-                      ['defense', 'Defense'],
-                      ['points', 'Points'],
-                    ] as const).map(([key, label]) => (
-                      <div key={key}>
-                        <label className="block text-xs font-medium text-slate-600 mb-1.5">{label}</label>
-                        <input
-                          className="input-modern text-sm"
-                          value={card.fields[key]}
-                          onChange={(e) => updateField(key, e.target.value)}
-                          onBlur={async (e) => {
-                            if (isAuthenticated && card.id) {
-                              const token = await getAccessTokenSilently().catch(() => null)
-                              const serverKey =
-                                key === 'cardName' ? 'card_name' :
-                                key === 'tribeName' ? 'tribe_name' :
-                                key
-                              try { await patchCard(card.id, { [serverKey]: e.target.value } as any, token) } catch {}
-                            }
-                          }}
-                        />
-                      </div>
-                    ))}
-                  </div>
-                </section>
+                <div className="grid grid-cols-2 gap-3">
+                  {([
+                    ['cardName', 'Card Name'],
+                    ['tribeName', 'General Name'],
+                    ['species', 'Species'],
+                    ['uniqueness', 'Uniqueness'],
+                    ['class', 'Class'],
+                    ['personality', 'Personality'],
+                    ['size', 'Size'],
+                    ['life', 'Life'],
+                    ['move', 'Move'],
+                    ['range', 'Range'],
+                    ['attack', 'Attack'],
+                    ['defense', 'Defense'],
+                    ['points', 'Points'],
+                  ] as const).map(([key, label]) => (
+                    <div key={key} className={key === 'cardName' || key === 'tribeName' ? 'col-span-2' : ''}>
+                      <label className="block text-xs font-medium text-slate-600 mb-1">{label}</label>
+                      <input
+                        className="input-modern text-sm"
+                        value={card.fields[key]}
+                        onChange={(e) => updateField(key, e.target.value)}
+                        onBlur={async (e) => {
+                          if (isAuthenticated && card.id) {
+                            const token = await getAccessTokenSilently().catch(() => null)
+                            const serverKey =
+                              key === 'cardName' ? 'card_name' :
+                              key === 'tribeName' ? 'tribe_name' :
+                              key
+                            try { await patchCard(card.id, { [serverKey]: e.target.value } as any, token) } catch {}
+                          }
+                        }}
+                      />
+                    </div>
+                  ))}
+                </div>
+              </section>
+              )}
+
+              {/* Powers Section */}
+              {activeTab === 'powers' && (
                 <PowersEditor
                   powers={card.powers}
                   onChange={(p) => setCard({ ...card, powers: p })}
@@ -539,7 +894,6 @@ export default function EditorPage() {
                       await patchPower(card.id, (existing as any).remoteId, { heading: p.heading, body: p.body }, token)
                     } else {
                       const created = await postPower(card.id, { order: existing.order, heading: p.heading, body: p.body }, token)
-                      // attach remoteId using functional update to avoid stale state
                       setCard((prev) => ({
                         ...prev,
                         powers: prev.powers.map((x) => (x.id === p.id ? ({ ...x, remoteId: created.id } as any) : x)),
@@ -547,45 +901,7 @@ export default function EditorPage() {
                     }
                   }}
                 />
-              </div>
-            </div>
-            <div className="bg-white border-t border-slate-200 px-6 py-4 flex items-center justify-between flex-shrink-0">
-              <div className="flex items-center gap-3">
-                <button
-                  className="btn-primary flex items-center gap-2"
-                  onClick={() => {
-                    setSelectedId(null)
-                    requestAnimationFrame(() => {
-                      const canvas = document.querySelector('canvas') as HTMLCanvasElement | null
-                      if (!canvas) return
-                      canvas.toBlob((blob) => {
-                        if (!blob) return
-                        const a = document.createElement('a')
-                        a.href = URL.createObjectURL(blob)
-                        a.download = `${card.fields.cardName || 'card'}.png`
-                        a.click()
-                        URL.revokeObjectURL(a.href)
-                      })
-                    })
-                  }}
-                >
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                  </svg>
-                  Export PNG
-                </button>
-                {isAuthenticated && !card.id && (
-                  <button className="btn-secondary flex items-center gap-2" onClick={() => { void ensureRemoteCard() }}>
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" />
-                    </svg>
-                    Save to Account
-                  </button>
-                )}
-              </div>
-              <div className="text-xs text-slate-400">
-                Press arrow keys to nudge selected image • Shift + arrow for larger steps
-              </div>
+              )}
             </div>
           </div>
         </main>

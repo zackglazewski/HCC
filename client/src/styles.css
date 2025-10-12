@@ -53,12 +53,12 @@
 
   /* Header Styles */
   .header-glass {
-    @apply backdrop-blur-md bg-white/80 border-b border-slate-200/60 shadow-sm;
+    @apply backdrop-blur-md bg-white/90 border-b border-slate-200 shadow-sm;
   }
 
   /* Sidebar Styles */
   .sidebar-modern {
-    @apply bg-white/50 backdrop-blur-sm border-r border-slate-200/60;
+    @apply bg-white border-l border-slate-200 shadow-lg;
   }
 
   /* Image Layer Item */
