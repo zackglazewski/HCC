@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="viewport" content="width=768">
+        <title>X-2 Customs Card Creator</title>
+    
+        <link rel="stylesheet" href="sandbox.css" type="text/css">
+        <link rel="stylesheet" href="version1-font.css" type="text/css">
+        <link rel="stylesheet" href="canvasControls.css" type="text/css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
+    </head>
+    <body>
+        <div id="home" class="page active">
+            <button class="instructions-button" onclick="showPage('instructions');">Instructions</button>
+
+            <div id="work-area">
+
+                <div id="media" class="sidebar">
+                    <input type="file" id="imageUploader" accept="image/*">
+
+                    <div id="scale-control">
+                        <div class="scale-label">
+                            Scale:
+                        </div>
+                        <div class="controls">
+                            <button class="media-button" id="decreaseScale">-</button>
+                            <button class="media-button" id="increaseScale">+</button>
+                        </div>
+                    </div>
+                    
+
+                    <div class="render-list">
+                        <h2>Images Render Order</h2>
+                        <ul id="imageList" class="sortable-list"></ul>
+                    </div>
+                    <button class="media-close-button" onclick="drawPowers();toggleMediaEditor()">Close</button>
+                </div>
+
+                <div id="functions" class="sidebar">
+                    <div id="template-save-container">
+                        <div class="label-block">
+                            <div class="x2cc-template-label">Template</div>
+                            <select id="generalName" onchange="changeTemplate()" class="x2cc-template-name">
+                                <option value="aquilla">Aquilla</option>
+                                <option value="einar">Einar</option>
+                                <option value="jandar">Jandar</option>
+                                <option value="ullar">Ullar</option>
+                                <option value="utgar">Utgar</option>
+                                <option value="valkrill">Valkrill-ish</option>
+                                <option value="vydar" selected>Vydar</option>
+                                <option value="custom">Custom</option>
+                            </select>
+                        </div>
+                        <button id="save-card-button" onclick="saveCard();" class="x2cc-save-button">Save Card</button>
+                    </div>
+                    
+                    
+                    
+
+                    <div id="color-picker">
+                        <div class="function-buttons">
+                        
+                            <input class="hidden-loader" onchange="loadTheme(event);" type="file" id="themeLoader">
+                            <button class="x2cc-load-button" onclick="triggerThemeLoader();">Load Theme</button>
+        
+                            <button id="save-theme-button" onclick="saveTheme();" class="x2cc-load-button">Save Theme</button>
+                        </div>
+                        <div class="label-block">
+                            <div class="x2cc-template-label">Background</div>
+                            <select id="background-type" onchange="changeTemplate()" class="x2cc-template-name">
+                                <option value="branches">Branches</option>
+                                <option value="desert">Desert</option>
+                                <option value="mountains">Mountains</option>
+                                <option value="forest">Forest</option>
+                                <option value="volcano">Volcano</option>
+                                <option value="dust">Dust</option>
+                                <option value="canyon">Canyon</option>
+                                <option value="smoke" selected>Smoke</option>
+                            </select>
+                        </div>
+
+
+
+                        <div class="scrollable-div">
+                            <label class='slider-label' for="primary-hue">Primary Hue</label>
+                            <div id="slider-number-container">
+                                <input id="primary-hue-number" onchange="changeTemplate();" class="number-picker" type="number" value="180">
+                                <input type="range" min="0" max="360" value="180" onchange="changeTemplate()" class="color-selector" id="primary-hue">
+                            </div>
+
+                            <label class='slider-label' for="primary-sat">Primary Sat</label>
+                            <div id="slider-number-container">
+                                <input id="primary-sat-number" onchange="changeTemplate();" class="number-picker" type="number" value="50">
+                                <input type="range" min="0" max="100" value="50" onchange="changeTemplate()" class="color-selector" id="primary-sat">
+                            </div>
+                            <label class='slider-label' for="primary-val">Primary Val</label>
+                            <div id="slider-number-container">
+                                <input id="primary-val-number" onchange="changeTemplate();" class="number-picker" type="number" value="30">
+                                <input type="range" min="0" max="100" value="30" onchange="changeTemplate()" class="color-selector" id="primary-val">
+                            </div>
+                            
+
+
+                            
+                            <label class='slider-label' for="primary-hue">Secondary Hue</label>
+                            <div id="slider-number-container">
+                                <input id="secondary-hue-number" onchange="changeTemplate();" class="number-picker" type="number" value="324">
+                                <input type="range" min="0" max="360" value="324" onchange="changeTemplate()" class="color-selector" id="secondary-hue">
+                            </div>
+                            <label class='slider-label' for="primary-sat">Secondary Sat</label>
+                            <div id="slider-number-container">
+                                <input id="secondary-sat-number" onchange="changeTemplate();" class="number-picker" type="number" value="90">
+                                <input type="range" min="0" max="100" value="90" onchange="changeTemplate()" class="color-selector" id="secondary-sat">
+                            </div>
+                            <label class='slider-label' for="primary-val">Secondary Val</label>
+                            <div id="slider-number-container">
+                                <input id="secondary-val-number" onchange="changeTemplate();" class="number-picker" type="number" value="30">
+                                <input type="range" min="0" max="100" value="30" onchange="changeTemplate()" class="color-selector" id="secondary-val">
+                            </div>
+                            
+
+
+                            <label class='slider-label' for="background-hue">Background Hue</label>
+                            <div id="slider-number-container">
+                                <input id="background-hue-number" onchange="changeTemplate();" class="number-picker" type="number" value="180">
+                                <input type="range" min="0" max="360" value="180" onchange="changeTemplate()" class="color-selector" id="background-hue">
+                            </div>
+                            
+                            <label class='slider-label' for="background-sat">Background Sat</label>
+                            <div id="slider-number-container">
+                                <input id="background-sat-number" onchange="changeTemplate();" class="number-picker" type="number" value="50">
+                                <input type="range" min="0" max="100" value="50" onchange="changeTemplate()" class="color-selector" id="background-sat">
+                            </div>
+                            
+                            <label class='slider-label' for="background-val">Background Val</label>
+                            <div id="slider-number-container">
+                                <input id="background-val-number" onchange="changeTemplate();" class="number-picker" type="number" value="30">
+                                <input type="range" min="0" max="100" value="30" onchange="changeTemplate()" class="color-selector" id="background-val">
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <div id="stage">
+
+                    <div class="title">
+                        <div class="title-text">
+                            X-2 Card Creator
+                            <small style="font-size:70%;margin-top:-5px;"><br>
+                                Version 1.3, 7/9/24
+                            </small>
+                        </div>
+                    </div>
+
+                    <div id="x2cc-powers-box" class="x2cc-action-box">
+                        <div class="x2cc-modal-heading">Special Powers Editor</div>
+                
+                        <input id="power1Heading" class="x2cc-powers-heading" value="Icy Helmet">
+                        <textarea id="power1Text" class="x2cc-powers-text">At the beginning of each round, after placing Order Markers, you may remove or replace Freeze Man's helmet. If Freeze Man is not wearing his helmet, add 3 to his Range and subtract 1 from his Defense.</textarea>
+                        
+                        <input id="power2Heading" class="x2cc-powers-heading" value="Freeze Ray">
+                        <textarea id="power2Text" class="x2cc-powers-text">Small and medium figures roll 1 fewer defense die against a normal attack from Freeze Man. When attacking any figure with the Lava Resistant special power, Freeze Man adds 1 skull to whatever is rolled.</textarea>
+                
+                        <input id="power3Heading" class="x2cc-powers-heading" value="Ice Cold">
+                        <textarea id="power3Text" class="x2cc-powers-text">While Freeze Man is on a water or ice space, that space and all same-level water spaces adjacent to him are considered normal ice spaces. Figures do not have to stop their movement on normal ice spaces.</textarea>
+                
+                        <input id="power4Heading" class="x2cc-powers-heading" value="">
+                        <textarea id="power4Text" class="x2cc-powers-text"></textarea>
+                
+                        <button class="x2cc-modal-button" onclick="drawPowers();togglePowersEditor()">Close</button>
+                    </div>
+                    
+                    <div class="canvas-holder">
+                        <canvas id="input-layer" width="1500" height="1500"></canvas>
+                        <canvas id="text-layer" width="1500" height="1500"></canvas>
+                        <canvas id="background-layer" width="1500" height="1500"></canvas>
+                        <canvas id="image-layer" width="1500" height="1500"></canvas>
+                        <canvas id="fog-layer" width="1500" height="1500"></canvas>
+                    </div>
+                    
+        
+                    <div id="inputForm">
+                        <textarea id="cardName" class="x2cc-card-name" oninput="drawTitle()" onkeypress="if(event.keyCode==13)return false;">Freeze Man</textarea>
+                        <textarea id="tribeName" class="x2cc-tribe-name" oninput="drawTitle()" onkeypress="if(event.keyCode==13)return false;">Earth</textarea>
+                        
+                
+                        <input id="species" class="x2cc-attribute x2cc-species" oninput="drawAttrs()" type="text" value="human">
+                        <input id="uniqueness" class="x2cc-attribute x2cc-uniqueness" oninput="drawAttrs()" type="text" value="unique hero">
+                        <input id="class" class="x2cc-attribute x2cc-class" type="text" oninput="drawAttrs()" value="agent">
+                        <input id="personality" class="x2cc-attribute x2cc-personality" oninput="drawAttrs()" type="text" value="tricky">
+                        <input id="size" class="x2cc-attribute x2cc-size" type="text" oninput="drawAttrs()" value="medium 5">
+                
+                        <input id="life" class="x2cc-life-value" oninput="drawSpecs()" type="text" value="4">
+                        <input id="move" class="x2cc-spec-value x2cc-move-value" oninput="drawSpecs()" type="text" value="5">
+                        <input id="range" class="x2cc-spec-value x2cc-range-value" oninput="drawSpecs()" type="text" value="3">
+                        <input id="attack" class="x2cc-spec-value x2cc-attack-value" oninput="drawSpecs()" type="text" value="3">
+                        <input id="defense" class="x2cc-spec-value x2cc-defense-value" oninput="drawSpecs()" type="text" value="4">
+                        <input id="points" class="x2cc-points-value" oninput="drawSpecs()" type="text" value="100">
+        
+                        <div id="powersClickReceiver" onclick="togglePowersEditor()"></div>
+                        <div id="heroImageClickReceiver" onclick="toggleMediaEditor()"></div>
+                    </div>
+        
+                    
+                </div>
+
+            </div>
+        </div>
+        
+        <div id="instructions" class="page">
+            <h1 style="margin-left: 20px;">Instructions</h1>
+            <ol style="margin-left: 20px;">
+                <li>To use the image uploader, click or press the area above the stats. This will display an uploader sidebar. </li>
+                <li>Add as many images as you want, separately. Drag them around on the render list to determine depth order. </li>
+                <li>To change the scale or position of an image, select it from the render list. To move, simply drag on the canvas. To change the scale, click the plus and minus buttons above the render list. </li>
+                <li>Once you are done with the image uploading and positioning, press close at the bottom to return.</li>
+                <li>To create a custom theme, change the template option to "Custom". An editor will display which allows you to update the Hue, Saturation, and Value of a primary, secondary, and background color.</li>
+                <li>To save a custom theme, update the values to your desired theme and press "save theme". This will be saved as a JSON file. </li>
+                <li>To upload a saved theme, change the template option to "Custom" and press "upload theme". Select your desired JSON file. </li>
+            </ol>
+        
+            <h1 style="margin-left: 20px;">Change Log</h1>
+            <p style="margin-left: 20px;"> Version 1.2 </p>
+            <ol style="margin-left: 20px;">
+                <li>Add image uploading feature</li>
+                <li>Add general name editer</li>
+                <li>Re-enable custom theme</li>
+            </ol>
+        
+            <p style="margin-left: 20px;"> Version 1.3 </p>
+            <ol style="margin-left: 20px;">
+                <li>Add custom color changer</li>
+                <li>Add theme saver and loader</li>
+                <li>Update save mechanism</li>
+                <li>Add touch screen draggability</li>
+                <li>Add instruction tab</li>
+            </ol>
+            <button class="instructions-button" onclick="showPage('home')"> RETURN </button>
+        </div>
+            
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+        <script src="canvasControls.js"></script>
+        <script src="path2d.js"></script> <!-- path2d polyfill for IE all versions, safari prior to v10 -->
+        <script src="canvastoblob.js"></script>
+        <script src="filesaver.js"></script>
+        <script src="sandbox.js"></script>
+    </body>
+</html>

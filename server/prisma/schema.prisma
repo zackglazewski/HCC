@@ -1,0 +1,91 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model users {
+  id            Int      @id @default(autoincrement())
+  auth_provider String
+  auth_sub      String   @unique
+  email         String?  @unique
+  name          String?
+  avatar_url    String?
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
+  cards         cards[]
+  themes        user_themes[]
+}
+
+model cards {
+  id             Int          @id @default(autoincrement())
+  user_id        Int
+  title          String
+  general        String
+  card_name      String? 
+  tribe_name     String?
+  species        String?
+  uniqueness     String?
+  class          String?
+  personality    String?
+  size           String?
+  life           String?
+  move           String?
+  range          String?
+  attack         String?
+  defense        String?
+  points         String?
+  theme_primary_hex   String?
+  theme_secondary_hex String?
+  theme_background_hex String?
+  schema_version Int          @default(1)
+  created_at     DateTime     @default(now())
+  updated_at     DateTime     @updatedAt
+
+  user    users       @relation(fields: [user_id], references: [id])
+  powers  card_powers[]
+  images  card_images[]
+}
+
+model card_powers {
+  id       Int    @id @default(autoincrement())
+  card_id  Int
+  order    Int
+  heading  String
+  body     String
+
+  card cards @relation(fields: [card_id], references: [id], onDelete: Cascade)
+}
+
+model card_images {
+  id        Int      @id @default(autoincrement())
+  card_id   Int
+  order     Int
+  x         Float
+  y         Float
+  scale     Float
+  rotation  Float?
+  name      String?
+  blob      Bytes
+  created_at DateTime @default(now())
+
+  card cards @relation(fields: [card_id], references: [id], onDelete: Cascade)
+}
+
+model user_themes {
+  id              Int      @id @default(autoincrement())
+  user_id         Int
+  name            String
+  primary_hex     String
+  secondary_hex   String
+  background_hex  String
+  created_at      DateTime @default(now())
+  updated_at      DateTime @updatedAt
+
+  user users @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  @@unique([user_id, name])
+}
