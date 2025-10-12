@@ -1,5 +1,7 @@
 import { General } from './types'
 
+type BaseGeneral = Exclude<General, 'custom'>
+
 type Images = { mask: HTMLImageElement; blank: HTMLImageElement; background: HTMLImageElement }
 export type CustomThemeHSV = {
   primary: { h: number; s: number; v: number }
@@ -46,7 +48,7 @@ export function hsvToRgb(h: number, s: number, v: number) {
   return { r: Math.round(r * 255), g: Math.round(g * 255), b: Math.round(b * 255) }
 }
 
-const templatePrimary: Record<General, {hue:number; sat:number; val:number; constantSat:boolean}> = {
+const templatePrimary: Record<BaseGeneral, {hue:number; sat:number; val:number; constantSat:boolean}> = {
   aquilla: { hue: 46/360, sat: 0.75, val: 0.77, constantSat: false },
   einar:   { hue: 310/360, sat: 0.83, val: 0.22, constantSat: false },
   jandar:  { hue: 142/360, sat: -0.02, val: 0.95, constantSat: true },
@@ -56,7 +58,7 @@ const templatePrimary: Record<General, {hue:number; sat:number; val:number; cons
   valkrill:{ hue: 28/360,  sat: 0.57, val: 0.54, constantSat: false },
 }
 
-const templateSecondary: Record<General, {hue:number; sat:number; val:number; invert:boolean}> = {
+const templateSecondary: Record<BaseGeneral, {hue:number; sat:number; val:number; invert:boolean}> = {
   aquilla: { hue: 224/360, sat: 1.00, val: 0.08, invert: true },
   einar:   { hue: 27/360,  sat: 0.71, val: 0.61, invert: false },
   jandar:  { hue: 211/360, sat: 0.67, val: 0.67, invert: false },
@@ -84,19 +86,28 @@ function internalBuildThemedBase(images: Images, general: General, custom?: Cust
 
   const basePri = templatePrimary['vydar']
   const baseSec = templateSecondary['vydar']
-  const usePri = general === 'custom' && custom ? { h: custom.primary.h, s: custom.primary.s, v: custom.primary.v } : templatePrimary[general]
-  const useSec = general === 'custom' && custom ? { h: custom.secondary.h, s: custom.secondary.s, v: custom.secondary.v, invert: false } : templateSecondary[general]
-  const pri = {
-    hue: usePri.h ?? usePri.hue,
-    sat: usePri.s ?? usePri.sat,
-    valDiff: (usePri.v ?? usePri.val) - basePri.val,
-  }
+  const usePri = general === 'custom' && custom
+    ? { h: custom.primary.h, s: custom.primary.s, v: custom.primary.v }
+    : templatePrimary[general as BaseGeneral]
+  const useSec = general === 'custom' && custom
+    ? { h: custom.secondary.h, s: custom.secondary.s, v: custom.secondary.v, invert: false }
+    : templateSecondary[general as BaseGeneral]
+
+  const priHue = ('h' in usePri) ? usePri.h : usePri.hue
+  const priSat = ('s' in usePri) ? usePri.s : usePri.sat
+  const priVal = ('v' in usePri) ? usePri.v : usePri.val
+  const pri = { hue: priHue, sat: priSat, valDiff: priVal - basePri.val }
+
+  const secHue = ('h' in useSec) ? useSec.h : useSec.hue
+  const secSat = ('s' in useSec) ? useSec.s : useSec.sat
+  const secVal = ('v' in useSec) ? useSec.v : useSec.val
+  const secInvert = ('invert' in useSec) ? (useSec as any).invert : false
   const sec = {
-    hueDiff: (useSec.h ?? useSec.hue) - baseSec.hue,
-    satDiff: (useSec.s ?? useSec.sat) - baseSec.sat,
-    valDiff: (useSec.v ?? useSec.val) - baseSec.val,
-    val: (useSec.v ?? useSec.val),
-    invert: (useSec as any).invert ?? false,
+    hueDiff: secHue - baseSec.hue,
+    satDiff: secSat - baseSec.sat,
+    valDiff: secVal - baseSec.val,
+    val: secVal,
+    invert: secInvert,
   }
 
   for (let i=0,l=pixels.length;i<l;i+=4){

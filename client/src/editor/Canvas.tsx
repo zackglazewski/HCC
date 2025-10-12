@@ -20,12 +20,14 @@ export function EditorCanvas({
   selectedId,
   onSelect,
   onUpdateImage,
+  onDeleteImage,
   customTheme,
 }: {
   card: CardState
   selectedId?: string | null
   onSelect: (id: string | null) => void
   onUpdateImage: (id: string, patch: Partial<ImageLayer>) => void
+  onDeleteImage?: (id: string) => void
   customTheme?: CustomTheme | null
 }) {
   const ref = useRef<HTMLCanvasElement | null>(null)
@@ -37,12 +39,14 @@ export function EditorCanvas({
   const cardRef = useRef<CardState>(card)
   const selectedRef = useRef<string | null>(selectedId || null)
   const updateImageRef = useRef(onUpdateImage)
+  const deleteImageRef = useRef(onDeleteImage)
   const imgCacheRef = useRef<Map<string, HTMLImageElement>>(new Map())
   // Live, uncommitted transforms for smooth drag/scale
   const liveOverridesRef = useRef<Map<string, { x?: number; y?: number; scale?: number }>>(new Map())
 
   const size = 1500
-  const display = 750
+  const [display, setDisplay] = useState(750)
+  const containerRef = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
     let canceled = false
@@ -113,6 +117,7 @@ export function EditorCanvas({
   useEffect(() => { cardRef.current = card }, [card])
   useEffect(() => { selectedRef.current = selectedId || null }, [selectedId])
   useEffect(() => { updateImageRef.current = onUpdateImage }, [onUpdateImage])
+  useEffect(() => { deleteImageRef.current = onDeleteImage }, [onDeleteImage])
 
   const draw = useCallback(() => {
     const canvas = ref.current
@@ -210,6 +215,12 @@ export function EditorCanvas({
       else if (e.key === 'ArrowDown') dy = step
       else if (e.key === 'ArrowLeft') dx = -step
       else if (e.key === 'ArrowRight') dx = step
+      else if (e.key === 'Backspace' || e.key === 'Delete') {
+        e.preventDefault()
+        if (deleteImageRef.current) deleteImageRef.current(sid)
+        onSelect(null)
+        return
+      }
       else return
       e.preventDefault()
       const current = cardRef.current
@@ -474,8 +485,32 @@ export function EditorCanvas({
     }
   }, [onSelect, draw])
 
+  // Resize canvas display size to fit available container space
+  useEffect(() => {
+    function recalc() {
+      const el = containerRef.current
+      if (!el) return
+      const rect = el.getBoundingClientRect()
+      // Fit within the container, keep square, cap at 750px
+      const next = Math.max(300, Math.min(750, Math.floor(Math.min(rect.width, rect.height))))
+      setDisplay(next)
+    }
+    recalc()
+    let ro: ResizeObserver | null = null
+    if (typeof ResizeObserver !== 'undefined' && containerRef.current) {
+      ro = new ResizeObserver(() => recalc())
+      ro.observe(containerRef.current)
+    } else {
+      window.addEventListener('resize', recalc)
+    }
+    return () => {
+      if (ro && containerRef.current) ro.unobserve(containerRef.current)
+      window.removeEventListener('resize', recalc)
+    }
+  }, [])
+
   return (
-    <div className="flex-1 flex items-center justify-center bg-neutral-200">
+    <div ref={containerRef} className="flex-1 flex items-center justify-center bg-neutral-200 min-h-0 overflow-hidden">
       <canvas ref={ref} width={size} height={size} style={{ width: display, height: display, background: '#fff' }} />
     </div>
   )
