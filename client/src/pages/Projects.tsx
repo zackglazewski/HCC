@@ -90,7 +90,7 @@ export default function ProjectsPage() {
                 <div>
                   <h3 className="font-semibold text-slate-900 mb-1">Guest Mode</h3>
                   <p className="text-slate-600 text-sm">
-                    Sign in to save and manage your projects across devices. Your work will be securely stored.
+                    Sign in to save and manage your projects across devices.
                   </p>
                 </div>
               </div>
