@@ -6,7 +6,8 @@ export const onRequest: PagesFunction = async (context) => {
   }
 
   const url = new URL(request.url)
-  const path = (params as any).path ? '/' + (params as any).path : ''
+  const raw = (params as any).path
+  const path = Array.isArray(raw) ? '/' + raw.join('/') : (raw ? '/' + String(raw) : '')
   const target = new URL(origin.replace(/\/$/, '') + '/api' + path + url.search)
 
   const init: RequestInit = {
@@ -23,4 +24,3 @@ export const onRequest: PagesFunction = async (context) => {
   // Ensure CORS not required since same origin; but keep content-type, etc.
   return new Response(resp.body, { status: resp.status, statusText: resp.statusText, headers })
 }
-

@@ -153,6 +153,15 @@ export function EditorCanvas({
     if (overlayRef.current) ctx.drawImage(overlayRef.current, 0, 0)
     renderText(ctx, current)
     drawEmblem(ctx, current.general)
+    // Hasbro trademark/copyright notice (matching reference implementation)
+    ctx.save()
+    ctx.font = '20px ScapeCondensedLight'
+    ctx.textAlign = 'center'
+    ctx.textBaseline = 'alphabetic'
+    ;(ctx as any).letterSpacing = 0
+    ctx.fillStyle = '#666'
+    ctx.fillText('HEROSCAPE and all related characters are trademarks of Hasbro. © 2006 Hasbro. All Rights Reserved.', 750, 1495)
+    ctx.restore()
     // selection overlay
     const sid = selectedRef.current
     if (sid) {

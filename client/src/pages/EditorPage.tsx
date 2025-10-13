@@ -177,6 +177,7 @@ export default function EditorPage() {
   const [savedThemes, setSavedThemes] = useState<{ id: number; name: string; primary_hex: string; secondary_hex: string; background_hex: string }[]>([])
   const [viewMode, setViewMode] = useState<ViewMode>('both')
   const promotionRef = useRef(false)
+  const creatingRemoteRef = useRef<Promise<number | undefined> | null>(null)
 
   // If opening a new guest card, reset local state to defaults
   useEffect(() => {
@@ -346,11 +347,20 @@ export default function EditorPage() {
   async function ensureRemoteCard(navigateToEditor: boolean = true): Promise<number | undefined> {
     if (card.id) return card.id
     if (!isAuthenticated) return undefined
-    const token = await getAccessTokenSilently().catch(() => null)
-    const created = await createCard({ title: card.title, general: card.general }, token)
-    setCard({ ...card, id: created.id })
-    if (navigateToEditor) nav(`/editor/${created.id}`)
-    return created.id
+    if (creatingRemoteRef.current) return creatingRemoteRef.current
+    const inFlight = (async () => {
+      const token = await getAccessTokenSilently().catch(() => null)
+      const created = await createCard({ title: card.title, general: card.general }, token)
+      setCard((prev) => ({ ...prev, id: created.id }))
+      if (navigateToEditor) nav(`/editor/${created.id}`)
+      return created.id
+    })()
+    creatingRemoteRef.current = inFlight
+    try {
+      return await inFlight
+    } finally {
+      creatingRemoteRef.current = null
+    }
   }
 
   const handleDeleteImage = (id: string) => {
