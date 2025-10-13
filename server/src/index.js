@@ -292,8 +292,11 @@ app.post('/api/cards/:id/images', requireAuth, imageLimiter, async (req, res) =>
   const match = dataUrl.match(/^data:([^;]+);base64,(.*)$/)
   if (!match) return res.status(400).json({ error: 'invalid_dataUrl' })
   const mime = match[1].toLowerCase()
-  const allowed = new Set(['image/png', 'image/jpeg', 'image/webp'])
-  if (!allowed.has(mime)) return res.status(415).json({ error: 'unsupported_media_type' })
+  // Accept common MIME aliases and WebP variants
+  const allowed = new Set(['image/png', 'image/jpeg', 'image/jpg', 'image/webp', 'image/x-webp'])
+  if (!allowed.has(mime)) {
+    return res.status(415).json({ error: 'unsupported_media_type', allowed: Array.from(allowed).join(', ') })
+  }
   const base64 = match[2]
   const blob = Buffer.from(base64, 'base64')
   // Minimal sniffing to confirm the type
@@ -301,8 +304,8 @@ app.post('/api/cards/:id/images', requireAuth, imageLimiter, async (req, res) =>
   const jpegSig = blob[0] === 0xff && blob[1] === 0xd8
   const webpSig = blob.subarray(0, 12).toString('ascii') === 'RIFF' && blob.subarray(8,12).toString('ascii') === 'WEBP'
   if (mime === 'image/png' && !pngSig) return res.status(415).json({ error: 'invalid_png' })
-  if (mime === 'image/jpeg' && !jpegSig) return res.status(415).json({ error: 'invalid_jpeg' })
-  if (mime === 'image/webp' && !webpSig) return res.status(415).json({ error: 'invalid_webp' })
+  if ((mime === 'image/jpeg' || mime === 'image/jpg') && !jpegSig) return res.status(415).json({ error: 'invalid_jpeg' })
+  if ((mime === 'image/webp' || mime === 'image/x-webp') && !webpSig) return res.status(415).json({ error: 'invalid_webp' })
   const maxOrder = await prisma.card_images.aggregate({ _max: { order: true }, where: { card_id: id } })
   const order = (maxOrder._max.order ?? -1) + 1
   const created = await prisma.card_images.create({
