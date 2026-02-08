@@ -11,9 +11,11 @@ function patchLetterSpacing(ctx: CanvasRenderingContext2D) {
   ;(ctx as any)._ls_patched = true
   const origFillText = ctx.fillText.bind(ctx)
   const origMeasureText = ctx.measureText.bind(ctx)
-  ;(ctx as any).letterSpacing = 0
+  // Use _ls instead of letterSpacing to avoid conflicting with the native
+  // CanvasRenderingContext2D.letterSpacing property in modern browsers.
+  ;(ctx as any)._ls = 0
   ctx.fillText = function (text: string, x: number, y: number, maxWidth?: number) {
-    const ls = parseFloat(((ctx as any).letterSpacing || 0) as any)
+    const ls = parseFloat(((ctx as any)._ls || 0) as any)
     if (!ls) return origFillText(text, x, y, maxWidth as any)
     let total = 0
     for (let i = 0; i < text.length; i++) total += origMeasureText(text[i]).width
@@ -21,15 +23,19 @@ function patchLetterSpacing(ctx: CanvasRenderingContext2D) {
     let startX = x
     if (ctx.textAlign === 'center') startX = x - total / 2
     else if (ctx.textAlign === 'right') startX = x - total
+    // Draw individual chars left-aligned since we manually computed startX
+    const savedAlign = ctx.textAlign
+    ctx.textAlign = 'left'
     let cx = startX
     for (let i = 0; i < text.length; i++) {
       const ch = text[i]
       origFillText(ch, cx, y)
       cx += origMeasureText(ch).width + ls
     }
+    ctx.textAlign = savedAlign
   } as any
   ctx.measureText = function (text: string) {
-    const ls = parseFloat(((ctx as any).letterSpacing || 0) as any)
+    const ls = parseFloat(((ctx as any)._ls || 0) as any)
     const w = origMeasureText(text).width
     return { width: w + Math.max(0, text.length - 1) * (ls || 0) } as TextMetrics
   } as any
@@ -66,13 +72,13 @@ function drawTextRef(ctx: CanvasRenderingContext2D, text: string, x: number, y: 
 
 function measureWord(ctx: CanvasRenderingContext2D, text: string, textSpec: TextSpec) {
   const saveFont = ctx.font
-  const saveLS = (ctx as any).letterSpacing
+  const saveLS = (ctx as any)._ls
   setFont(ctx, textSpec.fontSize, textSpec.fontFamily)
   patchLetterSpacing(ctx)
-  ;(ctx as any).letterSpacing = textSpec.letterSpacing
+  ;(ctx as any)._ls = textSpec.letterSpacing
   const result = ctx.measureText(text).width
   ctx.font = saveFont
-  ;(ctx as any).letterSpacing = saveLS
+  ;(ctx as any)._ls = saveLS
   return result
 }
 
@@ -255,7 +261,7 @@ function drawTextSpaced(
   patchLetterSpacing(ctx)
   ctx.fillStyle = color
   ctx.textAlign = align
-  ;(ctx as any).letterSpacing = letterSpacing || 0
+  ;(ctx as any)._ls = letterSpacing || 0
   if (!text) return
   ctx.fillText(text, x, y)
 }
@@ -272,12 +278,40 @@ function fitText(
   maxWidth: number
 ) {
   setFont(ctx, size, family)
-  const width = ctx.measureText(text).width
-  let spacing = 0
-  if (text.length > 1 && width > maxWidth) {
-    spacing = -(width - maxWidth) / (text.length - 1)
+  patchLetterSpacing(ctx)
+  ;(ctx as any)._ls = 0
+
+  // Measure each character individually
+  const charWidths: number[] = []
+  let totalWidth = 0
+  for (let i = 0; i < text.length; i++) {
+    const w = ctx.measureText(text[i]).width
+    charWidths.push(w)
+    totalWidth += w
   }
-  drawTextSpaced(ctx, text, x, y, family, size, color, align, spacing)
+
+  let spacing = 0
+  if (text.length > 1 && totalWidth > maxWidth) {
+    spacing = -(totalWidth - maxWidth) / (text.length - 1)
+  }
+
+  const finalWidth = totalWidth + Math.max(0, text.length - 1) * spacing
+
+  ctx.fillStyle = color
+  // Manually position chars with left-alignment to avoid any textAlign issues
+  const savedAlign = ctx.textAlign
+  ctx.textAlign = 'left'
+
+  let startX = x
+  if (align === 'center') startX = x - finalWidth / 2
+  else if (align === 'right') startX = x - finalWidth
+
+  let cx = startX
+  for (let i = 0; i < text.length; i++) {
+    ctx.fillText(text[i], cx, y)
+    cx += charWidths[i] + spacing
+  }
+  ctx.textAlign = savedAlign
 }
 
 function wrapText(
@@ -329,10 +363,10 @@ export function renderText(ctx: CanvasRenderingContext2D, card: CardState) {
   const personality = (card.fields.personality || '').toUpperCase()
   const size = (card.fields.size || '').toUpperCase()
   // Do not clear; we redraw the entire frame in the renderer
-  fitText(ctx, species, 290, 644, 'ScapeCondensedBold', 29.2, '#fff', 'right', 119)
-  fitText(ctx, uniqueness, 290, 695, 'ScapeCondensedBold', 29.2, '#fff', 'right', 187)
-  fitText(ctx, klass, 290, 745, 'ScapeCondensedBold', 29.2, '#fff', 'right', 214)
-  fitText(ctx, personality, 290, 796, 'ScapeCondensedBold', 29.2, '#fff', 'right', 214)
+  fitText(ctx, species, 290, 644, 'ScapeCondensedBold', 29.2, '#fff', 'right', 135)
+  fitText(ctx, uniqueness, 290, 695, 'ScapeCondensedBold', 29.2, '#fff', 'right', 200)
+  fitText(ctx, klass, 290, 745, 'ScapeCondensedBold', 29.2, '#fff', 'right', 228)
+  fitText(ctx, personality, 290, 796, 'ScapeCondensedBold', 29.2, '#fff', 'right', 228)
   fitText(ctx, size, 290, 865, 'ScapeCondensedBold', 41.7, '#fff', 'right', 181)
 
   // Specs (life/move/range/attack/defense/points)

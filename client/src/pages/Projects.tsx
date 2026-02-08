@@ -14,14 +14,17 @@ export default function ProjectsPage() {
       if (!isAuthenticated) return setCards([])
       setLoading(true)
       try {
-        const token = await getAccessTokenSilently().catch(() => null)
+        const token = await getAccessTokenSilently()
         const data = await listCards(token)
         setCards(data)
+      } catch {
+        // Token expired or refresh failed — clear stale Auth0 cache
+        logout({ openUrl: false })
       } finally {
         setLoading(false)
       }
     })()
-  }, [isAuthenticated, getAccessTokenSilently])
+  }, [isAuthenticated, getAccessTokenSilently, logout])
 
   async function onNew() {
     const token = await getAccessTokenSilently().catch(() => null)

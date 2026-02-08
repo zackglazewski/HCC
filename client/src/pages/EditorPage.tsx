@@ -166,7 +166,7 @@ function Header({ saving, title, onTitleChange, general, onGeneralChange, onExpo
 export default function EditorPage() {
   const params = useParams()
   const nav = useNavigate()
-  const { isAuthenticated, getAccessTokenSilently } = useAuth0()
+  const { isAuthenticated, getAccessTokenSilently, logout } = useAuth0()
   const { card, saving, setTitle, setGeneral, updateField, addImage, updateImage, deleteImage, setCard, resetToDefaults } = useCardState()
   const location = useLocation()
   const [selectedId, setSelectedId] = useState<string | null>(null)
@@ -205,7 +205,7 @@ export default function EditorPage() {
     ;(async () => {
       if (!cardId || !isAuthenticated) { setLoading(false); return }
       try {
-        const token = await getAccessTokenSilently().catch(() => null)
+        const token = await getAccessTokenSilently()
         const server = await getCard(cardId, token)
         // Convert server images to object URLs
         const images = (server.images || []).map((im) => {
@@ -219,35 +219,34 @@ export default function EditorPage() {
         })
 
         // Merge powers: always provide 4 rows (orders 0..3).
+        // Use DEFAULT_CARD as the base — never the stale local `card` state,
+        // which may hold data from a previously loaded card.
         const serverPowers = (server.powers || []).map((p) => ({ id: String(p.id), order: p.order, heading: p.heading, body: p.body, remoteId: p.id } as any))
-        const basePowers = (card.powers && card.powers.length > 0 ? card.powers : DEFAULT_CARD.powers)
         const mergedPowers = [0,1,2,3].map((ord) => {
           const fromServer: any = serverPowers.find((p: any) => p.order === ord)
           if (fromServer) return fromServer
-          const fromBase = basePowers.find((p) => p.order === ord)
-          return fromBase ? fromBase : ({ id: crypto.randomUUID(), order: ord, heading: '', body: '' } as any)
+          return { id: crypto.randomUUID(), order: ord, heading: '', body: '' } as any
         })
-        const pick = (sv: string | null | undefined, lv: string) => (sv && sv.length ? sv : lv)
+        const str = (sv: string | null | undefined) => sv ?? ''
         const nextCard = {
-          ...card,
+          ...DEFAULT_CARD,
           id: server.id,
-          title: server.title || card.title,
-          general: (server.general as any) || card.general || 'vydar',
+          title: server.title || 'Untitled Card',
+          general: (server.general as any) || 'vydar',
           fields: {
-            ...card.fields,
-            cardName: pick(server.card_name, card.fields.cardName),
-            tribeName: pick(server.tribe_name, card.fields.tribeName),
-            species: pick(server.species, card.fields.species),
-            uniqueness: pick(server.uniqueness, card.fields.uniqueness),
-            class: pick(server.class, card.fields.class),
-            personality: pick(server.personality, card.fields.personality),
-            size: pick(server.size, card.fields.size),
-            life: pick(server.life, card.fields.life),
-            move: pick(server.move, card.fields.move),
-            range: pick(server.range, card.fields.range),
-            attack: pick(server.attack, card.fields.attack),
-            defense: pick(server.defense, card.fields.defense),
-            points: pick(server.points, card.fields.points),
+            cardName: str(server.card_name),
+            tribeName: str(server.tribe_name),
+            species: str(server.species),
+            uniqueness: str(server.uniqueness),
+            class: str(server.class),
+            personality: str(server.personality),
+            size: str(server.size),
+            life: str(server.life),
+            move: str(server.move),
+            range: str(server.range),
+            attack: str(server.attack),
+            defense: str(server.defense),
+            points: str(server.points),
           },
           powers: mergedPowers,
           images,
@@ -272,6 +271,9 @@ export default function EditorPage() {
             } catch {}
           }
         }
+      } catch {
+        // Token expired or refresh failed — clear stale Auth0 cache
+        logout({ openUrl: false })
       } finally {
         setLoading(false)
       }
