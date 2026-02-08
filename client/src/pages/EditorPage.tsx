@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, useCallback } from 'react'
 import { useParams, useNavigate, Link, useLocation } from 'react-router-dom'
 import { useAuth0 } from '@auth0/auth0-react'
 import { useCardState } from '../editor/state'
@@ -176,6 +176,7 @@ export default function EditorPage() {
   const [activeTab, setActiveTab] = useState<'images' | 'theme' | 'attributes' | 'powers'>('images')
   const [savedThemes, setSavedThemes] = useState<{ id: number; name: string; primary_hex: string; secondary_hex: string; background_hex: string }[]>([])
   const [viewMode, setViewMode] = useState<ViewMode>('both')
+  const [removingBg, setRemovingBg] = useState(false)
   const promotionRef = useRef(false)
   const creatingRemoteRef = useRef<Promise<number | undefined> | null>(null)
 
@@ -364,6 +365,44 @@ export default function EditorPage() {
       creatingRemoteRef.current = null
     }
   }
+
+  const handleRemoveBg = useCallback(async () => {
+    if (!selectedId || removingBg) return
+    const layer = card.images.find((i) => i.id === selectedId)
+    if (!layer?.dataUrl) return
+    setRemovingBg(true)
+    try {
+      const { removeBackground } = await import('@imgly/background-removal')
+      const blob = await removeBackground(layer.dataUrl)
+      const newDataUrl = await new Promise<string>((resolve, reject) => {
+        const reader = new FileReader()
+        reader.onload = () => resolve(reader.result as string)
+        reader.onerror = reject
+        reader.readAsDataURL(blob)
+      })
+      updateImage(selectedId, { dataUrl: newDataUrl })
+      // Re-upload to server if authenticated
+      if (isAuthenticated && card.id && (layer as any).remoteId) {
+        const token = await getAccessTokenSilently().catch(() => null)
+        try {
+          const oldRemoteId = (layer as any).remoteId
+          const created = await postImage(card.id, { ...layer, dataUrl: newDataUrl } as any, token)
+          setCard((prev) => ({
+            ...prev,
+            images: prev.images.map((im) => im.id === selectedId ? { ...im, remoteId: created.id } : im)
+          }))
+          // Only delete old image after new one is confirmed saved
+          try { await deleteImageApi(card.id, oldRemoteId, token) } catch {}
+        } catch (e) {
+          console.error('Background removal re-upload failed', e)
+        }
+      }
+    } catch (e) {
+      console.warn('Background removal failed', e)
+    } finally {
+      setRemovingBg(false)
+    }
+  }, [selectedId, removingBg, card.images, card.id, isAuthenticated, getAccessTokenSilently, updateImage, setCard])
 
   const handleDeleteImage = (id: string) => {
     const layer = card.images.find((i) => i.id === id)
@@ -585,7 +624,9 @@ export default function EditorPage() {
                               ...prev,
                               images: prev.images.map((im) => im.id === newId ? { ...im, order: created.order, remoteId: created.id } : im)
                             }))
-                          } catch {}
+                          } catch (e) {
+                            console.error('Image upload failed', e)
+                          }
                         })()
                       }
                       reader.readAsDataURL(file)
@@ -710,6 +751,26 @@ export default function EditorPage() {
                         </svg>
                       </button>
                     </div>
+                    <button
+                      className="w-full btn-secondary text-xs py-1.5 flex items-center justify-center gap-1.5"
+                      onClick={handleRemoveBg}
+                      disabled={removingBg}
+                      title="Remove image background using AI"
+                    >
+                      {removingBg ? (
+                        <>
+                          <div className="spinner" style={{ width: 14, height: 14 }}></div>
+                          Removing...
+                        </>
+                      ) : (
+                        <>
+                          <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                          </svg>
+                          Remove Background
+                        </>
+                      )}
+                    </button>
                   </div>
                 )}
 

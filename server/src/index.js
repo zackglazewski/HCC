@@ -291,21 +291,15 @@ app.post('/api/cards/:id/images', requireAuth, imageLimiter, async (req, res) =>
   const { name, dataUrl, x = 0, y = 0, scale = 1, rotation = null } = parsed.data
   const match = dataUrl.match(/^data:([^;]+);base64,(.*)$/)
   if (!match) return res.status(400).json({ error: 'invalid_dataUrl' })
-  const mime = match[1].toLowerCase()
-  // Accept common MIME aliases and WebP variants
-  const allowed = new Set(['image/png', 'image/jpeg', 'image/jpg', 'image/webp', 'image/x-webp'])
-  if (!allowed.has(mime)) {
-    return res.status(415).json({ error: 'unsupported_media_type', allowed: Array.from(allowed).join(', ') })
-  }
   const base64 = match[2]
   const blob = Buffer.from(base64, 'base64')
-  // Minimal sniffing to confirm the type
-  const pngSig = blob.subarray(0, 8).equals(Buffer.from([137,80,78,71,13,10,26,10]))
-  const jpegSig = blob[0] === 0xff && blob[1] === 0xd8
-  const webpSig = blob.subarray(0, 12).toString('ascii') === 'RIFF' && blob.subarray(8,12).toString('ascii') === 'WEBP'
-  if (mime === 'image/png' && !pngSig) return res.status(415).json({ error: 'invalid_png' })
-  if ((mime === 'image/jpeg' || mime === 'image/jpg') && !jpegSig) return res.status(415).json({ error: 'invalid_jpeg' })
-  if ((mime === 'image/webp' || mime === 'image/x-webp') && !webpSig) return res.status(415).json({ error: 'invalid_webp' })
+  // Validate actual content by magic bytes (ignore claimed MIME — files often have wrong extensions)
+  const isPng = blob.length >= 8 && blob.subarray(0, 8).equals(Buffer.from([137,80,78,71,13,10,26,10]))
+  const isJpeg = blob.length >= 2 && blob[0] === 0xff && blob[1] === 0xd8
+  const isWebp = blob.length >= 12 && blob.subarray(0, 4).toString('ascii') === 'RIFF' && blob.subarray(8,12).toString('ascii') === 'WEBP'
+  if (!isPng && !isJpeg && !isWebp) {
+    return res.status(415).json({ error: 'unsupported_format', detail: 'Content must be PNG, JPEG, or WebP' })
+  }
   const maxOrder = await prisma.card_images.aggregate({ _max: { order: true }, where: { card_id: id } })
   const order = (maxOrder._max.order ?? -1) + 1
   const created = await prisma.card_images.create({
