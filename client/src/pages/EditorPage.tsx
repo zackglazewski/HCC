@@ -463,7 +463,7 @@ export default function EditorPage() {
   }, [isAuthenticated])
 
   return (
-    <div className="h-screen flex flex-col overflow-y-auto md:overflow-hidden">
+    <div className="min-h-screen md:h-screen flex flex-col md:overflow-hidden">
       <Header
         saving={saving}
         title={card.title}
