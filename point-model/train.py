@@ -474,13 +474,45 @@ def analyze_errors(rows, y_true, y_pred, top_n=10):
 # Main
 # ──────────────────────────────────────────────
 
+def is_numeric(val):
+    try:
+        float(val)
+        return True
+    except (ValueError, TypeError):
+        return False
+
+
 def load_data():
     with open(DATA_PATH) as f:
         rows = list(csv.DictReader(f))
 
     required = ["name", "figure_type", "size", "points"] + NUMERIC_FIELDS
-    valid = [r for r in rows if all(r.get(f) for f in required)]
+    numeric_required = ["points"] + NUMERIC_FIELDS
+
+    valid = []
+    skipped_fields = 0
+    skipped_numeric = 0
+    skipped_figure_type = 0
+    for r in rows:
+        if not all(r.get(f) for f in required):
+            skipped_fields += 1
+            continue
+        if not all(is_numeric(r.get(f)) for f in numeric_required):
+            skipped_numeric += 1
+            continue
+        if r.get("figure_type", "").strip().title() not in FIGURE_TYPES:
+            skipped_figure_type += 1
+            continue
+        pts = float(r["points"])
+        if pts <= 0 or pts > 1000:
+            skipped_numeric += 1
+            continue
+        valid.append(r)
+
     print(f"Loaded {len(valid)} valid rows (of {len(rows)} total)")
+    print(f"  Skipped: {skipped_fields} missing fields, "
+          f"{skipped_numeric} non-numeric, "
+          f"{skipped_figure_type} unknown figure type")
     return valid
 
 
@@ -511,6 +543,10 @@ def parse_args():
     parser.add_argument(
         "--clean", action="store_true",
         help="Delete existing fold checkpoints before training",
+    )
+    parser.add_argument(
+        "--dry-run", action="store_true",
+        help="Just show how many valid training rows exist, then exit",
     )
     return parser.parse_args()
 
@@ -548,7 +584,44 @@ def main():
     print(f"  Cards: {len(rows)}")
     print(f"  Point range: {y.min():.0f} - {y.max():.0f}")
     print(f"  Point mean: {y.mean():.1f}, std: {y.std():.1f}")
-    print(f"  Figure types: {dict(zip(*np.unique([r.get('figure_type','?') for r in rows], return_counts=True)))}")
+    ft_counts = dict(zip(*np.unique([r.get('figure_type', '?') for r in rows], return_counts=True)))
+    print(f"  Figure types: {ft_counts}")
+
+    if args.dry_run:
+        # Point outliers
+        sorted_idx = np.argsort(y)
+        print(f"\n  Bottom 10 point values:")
+        for idx in sorted_idx[:10]:
+            r = rows[idx]
+            print(f"    {r.get('name', '?'):35s} {y[idx]:>7.0f} pts  ({r.get('source_file', '')})")
+        print(f"\n  Top 10 point values:")
+        for idx in sorted_idx[-10:][::-1]:
+            r = rows[idx]
+            print(f"    {r.get('name', '?'):35s} {y[idx]:>7.0f} pts  ({r.get('source_file', '')})")
+
+        # Point distribution
+        print(f"\n  Point distribution:")
+        for lo, hi in [(0, 50), (50, 100), (100, 150), (150, 200),
+                       (200, 300), (300, 500), (500, 1000), (1000, 9999)]:
+            count = np.sum((y >= lo) & (y < hi))
+            if count:
+                print(f"    {lo:>5d}-{hi:<5d}: {count:>4d}")
+        neg = np.sum(y < 0)
+        if neg:
+            print(f"    < 0:       {neg:>4d}")
+
+        # Dropped rows summary
+        with open(DATA_PATH) as f:
+            all_rows = list(csv.DictReader(f))
+        required = ["name", "figure_type", "size", "points"] + NUMERIC_FIELDS
+        dropped = [r for r in all_rows if not all(r.get(f) for f in required)]
+        print(f"\n  Dropped {len(dropped)} rows (missing required fields):")
+        for r in dropped[:15]:
+            missing = [f for f in required if not r.get(f)]
+            print(f"    {r.get('source_file', '?'):40s} missing: {', '.join(missing)}")
+        if len(dropped) > 15:
+            print(f"    ... and {len(dropped) - 15} more")
+        return
 
     print(f"\nLoading tokenizer ({encoder_name})...")
     tokenizer = AutoTokenizer.from_pretrained(encoder_name)

@@ -463,7 +463,7 @@ export default function EditorPage() {
   }, [isAuthenticated])
 
   return (
-    <div className="h-screen flex flex-col overflow-hidden">
+    <div className="h-screen flex flex-col overflow-y-auto md:overflow-hidden">
       <Header
         saving={saving}
         title={card.title}
@@ -513,9 +513,9 @@ export default function EditorPage() {
           </div>
         </div>
       ) : (
-        <main className="flex flex-1 min-h-0 overflow-hidden flex-col md:flex-row">
+        <main className="flex flex-1 md:min-h-0 md:overflow-hidden flex-col md:flex-row">
           {/* Canvas area (first on mobile) */}
-          <div className={`flex-1 flex flex-col min-h-0 bg-slate-50 order-1 md:order-2 ${viewMode === 'panel' ? 'hidden' : ''}`}>
+          <div className={`md:flex-1 flex flex-col md:min-h-0 bg-slate-50 order-1 md:order-2 ${viewMode === 'panel' ? 'hidden' : ''}`}>
             <EditorCanvas
               card={card}
               selectedId={selectedId}
@@ -540,7 +540,7 @@ export default function EditorPage() {
           </div>
 
           {/* Left: Unified sidebar with tabs (full width on mobile) */}
-          <div className={`w-full md:w-[520px] xl:w-[560px] 2xl:w-[600px] bg-white border-r border-slate-200 shadow-lg flex flex-col min-h-0 order-2 md:order-1 ${viewMode === 'canvas' ? 'hidden' : ''}`}
+          <div className={`w-full md:w-[520px] xl:w-[560px] 2xl:w-[600px] bg-white border-r border-slate-200 shadow-lg flex flex-col md:min-h-0 order-2 md:order-1 ${viewMode === 'canvas' ? 'hidden' : ''}`}
           >
             {/* Tabs */}
             <div className="sticky top-0 z-20 bg-white/95 backdrop-blur-sm border-b border-slate-200">
@@ -585,7 +585,7 @@ export default function EditorPage() {
                 </button>
               </div>
             </div>
-            <div className="flex-1 overflow-y-auto p-3 sm:p-5 space-y-4">
+            <div className="md:flex-1 md:overflow-y-auto p-3 sm:p-5 space-y-4">
               {/* Images Section */}
               {activeTab === 'images' && (
               <section className="space-y-3">
