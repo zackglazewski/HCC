@@ -34,33 +34,35 @@ export default function ProjectsPage() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <header className="header-glass sticky top-0 z-10 px-6 py-4">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <div>
-            <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+      <header className="header-glass sticky top-0 z-10 px-4 sm:px-6 py-3 sm:py-4">
+        <div className="max-w-7xl mx-auto flex items-center justify-between gap-3">
+          <div className="min-w-0">
+            <h1 className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
               Heroscape Card Editor
             </h1>
-            <p className="text-sm text-slate-500 mt-0.5">Create custom cards for your armies</p>
+            <p className="text-xs sm:text-sm text-slate-500 mt-0.5 hidden sm:block">Create custom cards for your armies</p>
           </div>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
             {!isAuthenticated && (
-              <Link className="btn-primary" to="/editor?new=1">
-                <svg className="inline-block w-4 h-4 mr-2 -ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <Link className="btn-primary text-sm" to="/editor?new=1">
+                <svg className="inline-block w-4 h-4 mr-1 sm:mr-2 -ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
                 </svg>
-                New Guest Card
+                <span className="hidden sm:inline">New Guest Card</span>
+                <span className="sm:hidden">New</span>
               </Link>
             )}
             {isAuthenticated ? (
               <>
-                <button className="btn-primary" onClick={onNew}>
-                  <svg className="inline-block w-4 h-4 mr-2 -ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <button className="btn-primary text-sm" onClick={onNew}>
+                  <svg className="inline-block w-4 h-4 mr-1 sm:mr-2 -ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
                   </svg>
-                  New Card
+                  <span className="hidden sm:inline">New Card</span>
+                  <span className="sm:hidden">New</span>
                 </button>
                 <button
-                  className="btn-secondary"
+                  className="btn-secondary text-sm"
                   onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}
                 >
                   Log out
@@ -68,7 +70,7 @@ export default function ProjectsPage() {
               </>
             ) : !isLoading ? (
               <button
-                className="btn-primary"
+                className="btn-primary text-sm"
                 onClick={() => {
                   try { sessionStorage.setItem('hcc:returnTo', window.location.pathname + window.location.search) } catch {}
                   loginWithRedirect({ appState: { returnTo: window.location.pathname + window.location.search } })
@@ -80,7 +82,7 @@ export default function ProjectsPage() {
           </div>
         </div>
       </header>
-      <main className="flex-1 px-6 py-8">
+      <main className="flex-1 px-4 sm:px-6 py-6 sm:py-8">
         <div className="max-w-7xl mx-auto">
           {!isAuthenticated && (
             <div className="mb-8 p-6 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-xl animate-in">

@@ -28,109 +28,64 @@ function Header({ saving, title, onTitleChange, general, onGeneralChange, onExpo
   const { isAuthenticated, loginWithRedirect, loginWithPopup, logout, user, isLoading } = useAuth0()
   return (
     <header className="header-glass">
-      <div className="flex items-center justify-between gap-4 px-4 py-2">
-        {/* Left: Back button + Title + Template */}
-        <div className="flex items-center gap-3 flex-1 min-w-0">
+      <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5 px-3 py-2 sm:px-4">
+        {/* Left: Back button + Title */}
+        <div className="flex items-center gap-2 flex-1 min-w-0">
           <Link to="/projects" className="text-slate-500 hover:text-blue-600 transition-colors flex-shrink-0" title="Back to Projects">
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
           </Link>
           <input
-            className="text-lg font-semibold text-slate-900 outline-none bg-transparent placeholder:text-slate-400 focus:text-blue-600 transition-colors flex-1 min-w-0"
+            className="text-base sm:text-lg font-semibold text-slate-900 outline-none bg-transparent placeholder:text-slate-400 focus:text-blue-600 transition-colors flex-1 min-w-0"
             placeholder="Untitled Card"
             value={title}
             onChange={(e) => onTitleChange(e.target.value)}
           />
-          <TemplateSelector value={general} onChange={onGeneralChange} />
         </div>
 
-        {/* Center: Save status */}
-        <div className="flex items-center gap-2 text-xs text-slate-500 flex-shrink-0">
-          {saving ? (
-            <>
-              <div className="spinner"></div>
-              <span>Saving...</span>
-            </>
-          ) : (
-            <>
+        {/* Right: compact action buttons */}
+        <div className="flex items-center gap-1.5 sm:gap-2 flex-shrink-0">
+          {/* Save status - icon only on mobile */}
+          <div className="flex items-center gap-1 text-xs text-slate-500 flex-shrink-0">
+            {saving ? (
+              <div className="spinner" style={{ width: 16, height: 16 }}></div>
+            ) : (
               <svg className="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
-              <span>Saved</span>
-            </>
-          )}
-        </div>
-
-        {/* Right: View toggle + Export + User */}
-        <div className="flex items-center gap-2 flex-shrink-0">
-          {/* View toggle */}
-          <div className="flex items-center gap-1 bg-slate-100 p-0.5 rounded-lg">
-            <button
-              className={`px-2.5 py-1.5 rounded-md text-xs md:text-sm font-medium inline-flex items-center gap-1.5 transition-colors ${viewMode==='canvas' ? 'bg-blue-50 text-blue-700 ring-1 ring-blue-200' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'}`}
-              onClick={() => onViewModeChange('canvas')}
-              title="Show Card Only"
-              aria-pressed={viewMode==='canvas'}
-            >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h12a2 2 0 012 2v12a2 2 0 01-2 2H6a2 2 0 01-2-2V6z" />
-              </svg>
-              <span className="hidden sm:inline">Card</span>
-            </button>
-            <button
-              className={`px-2.5 py-1.5 rounded-md text-xs md:text-sm font-medium inline-flex items-center gap-1.5 transition-colors ${viewMode==='panel' ? 'bg-blue-50 text-blue-700 ring-1 ring-blue-200' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'}`}
-              onClick={() => onViewModeChange('panel')}
-              title="Show Configs Only"
-              aria-pressed={viewMode==='panel'}
-            >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 7h16M4 12h16M4 17h16" />
-              </svg>
-              <span className="hidden sm:inline">Configs</span>
-            </button>
-            <button
-              className={`px-2.5 py-1.5 rounded-md text-xs md:text-sm font-medium inline-flex items-center gap-1.5 transition-colors ${viewMode==='both' ? 'bg-blue-50 text-blue-700 ring-1 ring-blue-200' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'}`}
-              onClick={() => onViewModeChange('both')}
-              title="Show Both"
-              aria-pressed={viewMode==='both'}
-            >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h7v7H4V6zm9 0h7v7h-7V6zM4 15h16v3H4z" />
-              </svg>
-              <span className="hidden sm:inline">Both</span>
-            </button>
+            )}
+            <span className="hidden sm:inline">{saving ? 'Saving...' : 'Saved'}</span>
           </div>
           <button
-            className="btn-secondary text-sm py-1.5 px-3 flex items-center gap-1.5"
+            className="btn-icon !p-1.5 sm:!p-2"
             onClick={onExport}
             title="Export as PNG"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
             </svg>
-            Export
           </button>
           {authProp && !cardId && (
             <button
-              className="btn-secondary text-sm py-1.5 px-3 flex items-center gap-1.5"
+              className="btn-icon !p-1.5 sm:!p-2"
               onClick={onSaveToAccount}
               title="Save to your account"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" />
               </svg>
-              Save
             </button>
           )}
           {!isLoading && isAuthenticated && user?.picture && (
             <div className="relative group">
               <img
                 src={user.picture}
-                className="w-8 h-8 rounded-full ring-2 ring-slate-200 cursor-pointer hover:ring-blue-400 transition-all"
+                className="w-7 h-7 sm:w-8 sm:h-8 rounded-full ring-2 ring-slate-200 cursor-pointer hover:ring-blue-400 transition-all"
                 alt={user?.name}
                 title={user?.name}
               />
-              <div className="absolute right-0 top-10 bg-white rounded-lg shadow-xl border border-slate-200 py-2 px-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50 min-w-[180px]">
+              <div className="absolute right-0 top-9 sm:top-10 bg-white rounded-lg shadow-xl border border-slate-200 py-2 px-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50 min-w-[160px]">
                 <div className="text-sm font-medium text-slate-900 mb-1">{user?.name}</div>
                 <div className="text-xs text-slate-500 mb-3">{user?.email}</div>
                 <button
@@ -144,7 +99,7 @@ function Header({ saving, title, onTitleChange, general, onGeneralChange, onExpo
           )}
           {!isLoading && !isAuthenticated && (
             <button
-              className="btn-primary text-sm py-1.5 px-4"
+              className="btn-primary text-xs sm:text-sm py-1.5 px-3"
               onClick={async () => {
                 try {
                   await loginWithPopup()
@@ -157,6 +112,46 @@ function Header({ saving, title, onTitleChange, general, onGeneralChange, onExpo
               Log in
             </button>
           )}
+        </div>
+
+        {/* Second row: Template selector + View toggle - full width on mobile */}
+        <div className="flex items-center gap-2 w-full">
+          <TemplateSelector value={general} onChange={onGeneralChange} />
+          <div className="flex items-center gap-0.5 bg-slate-100 p-0.5 rounded-lg ml-auto">
+            <button
+              className={`px-2 py-1.5 rounded-md text-xs font-medium inline-flex items-center gap-1 transition-colors ${viewMode==='canvas' ? 'bg-blue-50 text-blue-700 ring-1 ring-blue-200' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'}`}
+              onClick={() => onViewModeChange('canvas')}
+              title="Show Card Only"
+              aria-pressed={viewMode==='canvas'}
+            >
+              <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h12a2 2 0 012 2v12a2 2 0 01-2 2H6a2 2 0 01-2-2V6z" />
+              </svg>
+              <span className="hidden sm:inline">Card</span>
+            </button>
+            <button
+              className={`px-2 py-1.5 rounded-md text-xs font-medium inline-flex items-center gap-1 transition-colors ${viewMode==='panel' ? 'bg-blue-50 text-blue-700 ring-1 ring-blue-200' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'}`}
+              onClick={() => onViewModeChange('panel')}
+              title="Show Configs Only"
+              aria-pressed={viewMode==='panel'}
+            >
+              <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 7h16M4 12h16M4 17h16" />
+              </svg>
+              <span className="hidden sm:inline">Configs</span>
+            </button>
+            <button
+              className={`px-2 py-1.5 rounded-md text-xs font-medium inline-flex items-center gap-1 transition-colors ${viewMode==='both' ? 'bg-blue-50 text-blue-700 ring-1 ring-blue-200' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'}`}
+              onClick={() => onViewModeChange('both')}
+              title="Show Both"
+              aria-pressed={viewMode==='both'}
+            >
+              <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h7v7H4V6zm9 0h7v7h-7V6zM4 15h16v3H4z" />
+              </svg>
+              <span className="hidden sm:inline">Both</span>
+            </button>
+          </div>
         </div>
       </div>
     </header>
@@ -175,7 +170,7 @@ export default function EditorPage() {
   const [customTheme, setCustomTheme] = useState<CustomTheme>({ primary: '#3080ff', secondary: '#88aacc', background: '#556677' })
   const [activeTab, setActiveTab] = useState<'images' | 'theme' | 'attributes' | 'powers'>('images')
   const [savedThemes, setSavedThemes] = useState<{ id: number; name: string; primary_hex: string; secondary_hex: string; background_hex: string }[]>([])
-  const [viewMode, setViewMode] = useState<ViewMode>('both')
+  const [viewMode, setViewMode] = useState<ViewMode>(() => window.innerWidth < 768 ? 'panel' : 'both')
   const [removingBg, setRemovingBg] = useState(false)
   const promotionRef = useRef(false)
   const creatingRemoteRef = useRef<Promise<number | undefined> | null>(null)
@@ -253,8 +248,10 @@ export default function EditorPage() {
           images,
         }
         setCard(nextCard)
-        // Load custom theme if present on server; otherwise fall back to localStorage
-        if ((server.general as any) === 'custom') {
+        // Load custom theme if present on server; otherwise reset to default
+        if ((server.general as any) !== 'custom') {
+          setCustomTheme({ primary: '#3080ff', secondary: '#88aacc', background: '#556677' })
+        } else if ((server.general as any) === 'custom') {
           const fromServer = {
             primary: (server as any).theme_primary_hex || null,
             secondary: (server as any).theme_secondary_hex || null,
@@ -537,7 +534,7 @@ export default function EditorPage() {
               customTheme={card.general === 'custom' ? customTheme : null}
             />
             {/* Bottom hint bar */}
-            <div className="bg-white/80 backdrop-blur-sm border-t border-slate-200 px-4 py-2 text-xs text-slate-500 text-center">
+            <div className="hidden sm:block bg-white/80 backdrop-blur-sm border-t border-slate-200 px-4 py-2 text-xs text-slate-500 text-center">
               Click and drag images • Arrow keys to nudge • Shift+arrows for larger steps • Backspace to delete
             </div>
           </div>
@@ -547,9 +544,9 @@ export default function EditorPage() {
           >
             {/* Tabs */}
             <div className="sticky top-0 z-20 bg-white/95 backdrop-blur-sm border-b border-slate-200">
-              <div className="flex flex-wrap gap-1.5 px-3 pt-3 pb-2">
+              <div className="flex gap-1 px-2 pt-2 pb-1.5 sm:gap-1.5 sm:px-3 sm:pt-3 sm:pb-2 overflow-x-auto">
                 <button
-                  className={`inline-flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${activeTab==='images' ? 'bg-blue-50 text-blue-700 ring-1 ring-blue-200' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'}`}
+                  className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-md text-xs sm:text-sm font-medium transition-colors whitespace-nowrap flex-shrink-0 ${activeTab==='images' ? 'bg-blue-50 text-blue-700 ring-1 ring-blue-200' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'}`}
                   onClick={() => setActiveTab('images')}
                 >
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -559,17 +556,17 @@ export default function EditorPage() {
                 </button>
                 {card.general === 'custom' && (
                   <button
-                    className={`inline-flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${activeTab==='theme' ? 'bg-blue-50 text-blue-700 ring-1 ring-blue-200' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'}`}
+                    className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-md text-xs sm:text-sm font-medium transition-colors whitespace-nowrap flex-shrink-0 ${activeTab==='theme' ? 'bg-blue-50 text-blue-700 ring-1 ring-blue-200' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'}`}
                     onClick={() => setActiveTab('theme')}
                   >
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
                     </svg>
-                    Custom Themes
+                    Theme
                   </button>
                 )}
                 <button
-                  className={`inline-flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${activeTab==='attributes' ? 'bg-blue-50 text-blue-700 ring-1 ring-blue-200' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'}`}
+                  className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-md text-xs sm:text-sm font-medium transition-colors whitespace-nowrap flex-shrink-0 ${activeTab==='attributes' ? 'bg-blue-50 text-blue-700 ring-1 ring-blue-200' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'}`}
                   onClick={() => setActiveTab('attributes')}
                 >
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -578,17 +575,17 @@ export default function EditorPage() {
                   Attributes
                 </button>
                 <button
-                  className={`inline-flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${activeTab==='powers' ? 'bg-blue-50 text-blue-700 ring-1 ring-blue-200' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'}`}
+                  className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-md text-xs sm:text-sm font-medium transition-colors whitespace-nowrap flex-shrink-0 ${activeTab==='powers' ? 'bg-blue-50 text-blue-700 ring-1 ring-blue-200' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'}`}
                   onClick={() => setActiveTab('powers')}
                 >
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                   </svg>
-                  Special Powers
+                  Powers
                 </button>
               </div>
             </div>
-            <div className="flex-1 overflow-y-auto p-5 space-y-4">
+            <div className="flex-1 overflow-y-auto p-3 sm:p-5 space-y-4">
               {/* Images Section */}
               {activeTab === 'images' && (
               <section className="space-y-3">
@@ -913,7 +910,7 @@ export default function EditorPage() {
                     </svg>
                     Attributes
                   </h3>
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {([
                     ['cardName', 'Card Name'],
                     ['tribeName', 'General Name'],
@@ -929,7 +926,7 @@ export default function EditorPage() {
                     ['defense', 'Defense'],
                     ['points', 'Points'],
                   ] as const).map(([key, label]) => (
-                    <div key={key} className={key === 'cardName' || key === 'tribeName' ? 'col-span-2' : ''}>
+                    <div key={key} className={key === 'cardName' || key === 'tribeName' ? 'sm:col-span-2' : ''}>
                       <label className="block text-xs font-medium text-slate-600 mb-1">{label}</label>
                       <input
                         className="input-modern text-sm"

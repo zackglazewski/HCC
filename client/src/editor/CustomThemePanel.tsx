@@ -69,50 +69,44 @@ export function CustomThemePanel({
         <div className="grid grid-cols-3 gap-3">
           <div>
             <label className="block text-xs text-slate-500 mb-2">Primary</label>
-            <div className="relative">
-              <input
-                type="color"
-                value={value.primary}
-                onChange={(e) => onChange({ ...value, primary: e.target.value })}
-                className="w-full h-12 rounded-lg border-2 border-slate-200 cursor-pointer hover:border-blue-400 transition-colors"
-              />
-              <div className="absolute inset-x-0 -bottom-6 text-[10px] text-center text-slate-400 font-mono">
-                {value.primary.toUpperCase()}
-              </div>
+            <input
+              type="color"
+              value={value.primary}
+              onChange={(e) => onChange({ ...value, primary: e.target.value })}
+              className="w-full h-12 rounded-lg border-2 border-slate-200 cursor-pointer hover:border-blue-400 transition-colors"
+            />
+            <div className="mt-1 text-[10px] text-center text-slate-400 font-mono">
+              {value.primary.toUpperCase()}
             </div>
           </div>
           <div>
             <label className="block text-xs text-slate-500 mb-2">Secondary</label>
-            <div className="relative">
-              <input
-                type="color"
-                value={value.secondary}
-                onChange={(e) => onChange({ ...value, secondary: e.target.value })}
-                className="w-full h-12 rounded-lg border-2 border-slate-200 cursor-pointer hover:border-blue-400 transition-colors"
-              />
-              <div className="absolute inset-x-0 -bottom-6 text-[10px] text-center text-slate-400 font-mono">
-                {value.secondary.toUpperCase()}
-              </div>
+            <input
+              type="color"
+              value={value.secondary}
+              onChange={(e) => onChange({ ...value, secondary: e.target.value })}
+              className="w-full h-12 rounded-lg border-2 border-slate-200 cursor-pointer hover:border-blue-400 transition-colors"
+            />
+            <div className="mt-1 text-[10px] text-center text-slate-400 font-mono">
+              {value.secondary.toUpperCase()}
             </div>
           </div>
           <div>
             <label className="block text-xs text-slate-500 mb-2">Background</label>
-            <div className="relative">
-              <input
-                type="color"
-                value={value.background}
-                onChange={(e) => onChange({ ...value, background: e.target.value })}
-                className="w-full h-12 rounded-lg border-2 border-slate-200 cursor-pointer hover:border-blue-400 transition-colors"
-              />
-              <div className="absolute inset-x-0 -bottom-6 text-[10px] text-center text-slate-400 font-mono">
-                {value.background.toUpperCase()}
-              </div>
+            <input
+              type="color"
+              value={value.background}
+              onChange={(e) => onChange({ ...value, background: e.target.value })}
+              className="w-full h-12 rounded-lg border-2 border-slate-200 cursor-pointer hover:border-blue-400 transition-colors"
+            />
+            <div className="mt-1 text-[10px] text-center text-slate-400 font-mono">
+              {value.background.toUpperCase()}
             </div>
           </div>
         </div>
       </div>
 
-      <div className="card p-4 space-y-3 mt-8">
+      <div className="card p-4 space-y-3">
         <label className="block text-xs font-medium text-slate-600">Save Current Theme</label>
         <input
           className="input-modern text-sm"
