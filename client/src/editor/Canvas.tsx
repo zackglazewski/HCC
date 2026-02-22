@@ -400,16 +400,17 @@ export function EditorCanvas({
     window.addEventListener('mousemove', onMove)
     window.addEventListener('mouseup', onUp)
     // touch support
+    let touchActive = false
     const onTouchStart = (e: TouchEvent) => {
-      e.preventDefault()
       const { x, y } = getTouch(e)
-      // Simulate mousedown logic
       // Prefer handles
       if (selectedRef.current) {
         const layer = cardRef.current.images.find((l) => l.id === selectedRef.current)
         if (layer) {
           const hh = hitHandle(layer, x, y)
           if (hh) {
+            e.preventDefault()
+            touchActive = true
             onSelect(layer.id)
             startX = x; startY = y; startLayer = { ...layer }
             liveOverridesRef.current.set(layer.id, { x: layer.x, y: layer.y })
@@ -430,6 +431,8 @@ export function EditorCanvas({
       for (const layer of layers) {
         const { x: lx, y: ly, w, h } = imageBox(layer)
         if (w > 0 && h > 0 && x >= lx && x <= lx + w && y >= ly && y <= ly + h) {
+          e.preventDefault()
+          touchActive = true
           onSelect(layer.id)
           dragging = true
           startX = x; startY = y; startLayer = { ...layer }
@@ -440,6 +443,7 @@ export function EditorCanvas({
       if (!found) onSelect(null)
     }
     const onTouchMove = (e: TouchEvent) => {
+      if (!touchActive) return
       e.preventDefault()
       const { x, y } = getTouch(e)
       if (resizing && startLayer) {
@@ -473,24 +477,26 @@ export function EditorCanvas({
       }
     }
     const onTouchEnd = () => {
-      const sid = startLayer?.id
-      const ov = sid ? liveOverridesRef.current.get(sid) : undefined
-      if (sid && ov) {
-        updateImageRef.current(sid, { ...(ov.x !== undefined ? { x: ov.x } : {}), ...(ov.y !== undefined ? { y: ov.y } : {}), ...(ov.scale !== undefined ? { scale: ov.scale } : {}) })
-        liveOverridesRef.current.delete(sid)
+      if (touchActive) {
+        const sid = startLayer?.id
+        const ov = sid ? liveOverridesRef.current.get(sid) : undefined
+        if (sid && ov) {
+          updateImageRef.current(sid, { ...(ov.x !== undefined ? { x: ov.x } : {}), ...(ov.y !== undefined ? { y: ov.y } : {}), ...(ov.scale !== undefined ? { scale: ov.scale } : {}) })
+          liveOverridesRef.current.delete(sid)
+        }
       }
-      dragging = false; resizing = null; startLayer = null
+      dragging = false; resizing = null; startLayer = null; touchActive = false
     }
     canvas.addEventListener('touchstart', onTouchStart, { passive: false })
-    window.addEventListener('touchmove', onTouchMove, { passive: false })
-    window.addEventListener('touchend', onTouchEnd)
+    canvas.addEventListener('touchmove', onTouchMove, { passive: false })
+    canvas.addEventListener('touchend', onTouchEnd)
     return () => {
       canvas.removeEventListener('mousedown', onDown)
       window.removeEventListener('mousemove', onMove)
       window.removeEventListener('mouseup', onUp)
       canvas.removeEventListener('touchstart', onTouchStart as any)
-      window.removeEventListener('touchmove', onTouchMove as any)
-      window.removeEventListener('touchend', onTouchEnd as any)
+      canvas.removeEventListener('touchmove', onTouchMove as any)
+      canvas.removeEventListener('touchend', onTouchEnd as any)
     }
   }, [onSelect, draw])
 
@@ -520,7 +526,7 @@ export function EditorCanvas({
 
   return (
     <div ref={containerRef} className="md:flex-1 flex items-center justify-center bg-neutral-200 md:min-h-0 overflow-hidden p-2 md:p-0">
-      <canvas ref={ref} width={size} height={size} style={{ width: display, height: display, background: '#fff' }} />
+      <canvas ref={ref} width={size} height={size} style={{ width: display, height: display, background: '#fff', touchAction: 'none' }} />
     </div>
   )
 }
