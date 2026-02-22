@@ -16,6 +16,22 @@ export type ImageLayer = {
   remoteId?: number
 }
 
+export type HitboxSilhouette = {
+  imageId: string
+  x: number
+  y: number
+  scale: number
+  grayMaskDataUrl: string | null
+  disabled?: boolean
+}
+
+export type LOSMarker = { id: string; imageId: string; offsetX: number; offsetY: number; radius: number }
+
+export type HitboxState = {
+  silhouettes: HitboxSilhouette[]
+  losMarkers: LOSMarker[]
+}
+
 export type CardState = {
   id?: number
   title: string
@@ -37,6 +53,7 @@ export type CardState = {
   }
   powers: Power[]
   images: ImageLayer[]
+  hitbox?: HitboxState
 }
 
 export const DEFAULT_CARD: CardState = {

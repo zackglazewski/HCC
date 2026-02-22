@@ -6,9 +6,42 @@ import { TemplateSelector } from '../editor/TemplateSelector'
 import type { General } from '../editor/types'
 import { EditorCanvas } from '../editor/Canvas'
 import { PowersEditor } from '../editor/PowersEditor'
+import { HitboxEditor } from '../editor/HitboxEditor'
 import { CustomThemePanel, type CustomTheme } from '../editor/CustomThemePanel'
 import { createCard, getCard, patchCard, postImage, postPower, patchPower, patchImage, deleteImageApi, listThemes, createTheme, deleteTheme } from '../lib/api'
 import { DEFAULT_CARD } from '../editor/types'
+import type { HitboxState } from '../editor/types'
+
+/** Serialize hitbox for server: convert local imageId UUIDs → server remoteIds */
+function serializeHitbox(hitbox: HitboxState | undefined, images: { id: string; remoteId?: number }[]): string | null {
+  if (!hitbox || hitbox.silhouettes.length === 0) return null
+  const localToRemote = new Map<string, number>()
+  for (const img of images) {
+    if (img.remoteId) localToRemote.set(img.id, img.remoteId)
+  }
+  return JSON.stringify({
+    silhouettes: hitbox.silhouettes.map((s) => ({ ...s, imageId: localToRemote.get(s.imageId) ?? s.imageId })),
+    losMarkers: (hitbox.losMarkers ?? []).map((m) => ({ ...m, imageId: localToRemote.get(m.imageId) ?? m.imageId })),
+  })
+}
+
+/** Deserialize hitbox from server: convert server remoteIds → local imageId UUIDs */
+function deserializeHitbox(json: string | null | undefined, images: { id: string; remoteId?: number }[]): HitboxState | undefined {
+  if (!json) return undefined
+  try {
+    const parsed = JSON.parse(json)
+    const remoteToLocal = new Map<number, string>()
+    for (const img of images) {
+      if (img.remoteId) remoteToLocal.set(img.remoteId, img.id)
+    }
+    return {
+      silhouettes: (parsed.silhouettes || []).map((s: any) => ({ ...s, imageId: remoteToLocal.get(s.imageId) ?? s.imageId })),
+      losMarkers: (parsed.losMarkers || []).map((m: any) => ({ ...m, imageId: remoteToLocal.get(m.imageId) ?? m.imageId })),
+    }
+  } catch {
+    return undefined
+  }
+}
 
 type ViewMode = 'both' | 'canvas' | 'panel'
 
@@ -162,13 +195,13 @@ export default function EditorPage() {
   const params = useParams()
   const nav = useNavigate()
   const { isAuthenticated, getAccessTokenSilently, logout } = useAuth0()
-  const { card, saving, setTitle, setGeneral, updateField, addImage, updateImage, deleteImage, setCard, resetToDefaults } = useCardState()
+  const { card, saving, setTitle, setGeneral, updateField, addImage, updateImage, deleteImage, setCard, resetToDefaults, updateSilhouette, addLOSMarker, updateLOSMarker, deleteLOSMarker, syncHitboxSilhouettes } = useCardState()
   const location = useLocation()
   const [selectedId, setSelectedId] = useState<string | null>(null)
   const cardId = params.id ? parseInt(params.id) : null
   const [loading, setLoading] = useState<boolean>(!!cardId)
   const [customTheme, setCustomTheme] = useState<CustomTheme>({ primary: '#3080ff', secondary: '#88aacc', background: '#556677' })
-  const [activeTab, setActiveTab] = useState<'images' | 'theme' | 'attributes' | 'powers'>('images')
+  const [activeTab, setActiveTab] = useState<'images' | 'theme' | 'attributes' | 'powers' | 'hitbox'>('images')
   const [savedThemes, setSavedThemes] = useState<{ id: number; name: string; primary_hex: string; secondary_hex: string; background_hex: string }[]>([])
   const [viewMode, setViewMode] = useState<ViewMode>(() => window.innerWidth < 768 ? 'panel' : 'both')
   const [removingBg, setRemovingBg] = useState(false)
@@ -224,6 +257,7 @@ export default function EditorPage() {
           return { id: crypto.randomUUID(), order: ord, heading: '', body: '' } as any
         })
         const str = (sv: string | null | undefined) => sv ?? ''
+        const hitbox = deserializeHitbox(server.hitbox_json, images)
         const nextCard = {
           ...DEFAULT_CARD,
           id: server.id,
@@ -246,6 +280,7 @@ export default function EditorPage() {
           },
           powers: mergedPowers,
           images,
+          ...(hitbox ? { hitbox } : {}),
         }
         setCard(nextCard)
         // Load custom theme if present on server; otherwise reset to default
@@ -304,6 +339,7 @@ export default function EditorPage() {
       }
       const token = await getAccessTokenSilently().catch(() => null)
       try {
+        const hitboxJson = serializeHitbox(card.hitbox, card.images as any)
         await patchCard(remoteId, {
           title: card.title,
           general: card.general,
@@ -320,12 +356,13 @@ export default function EditorPage() {
           attack: card.fields.attack,
           defense: card.fields.defense,
           points: card.fields.points,
+          hitbox_json: hitboxJson,
           ...(card.general === 'custom' ? {
             theme_primary_hex: customTheme.primary,
             theme_secondary_hex: customTheme.secondary,
             theme_background_hex: customTheme.background,
           } : {}),
-        }, token)
+        } as any, token)
       } catch (e) {
         // swallow errors, but keep autosave loop
         console.warn('Autosave failed', e)
@@ -540,7 +577,7 @@ export default function EditorPage() {
           </div>
 
           {/* Left: Unified sidebar with tabs (full width on mobile) */}
-          <div className={`w-full md:w-[520px] xl:w-[560px] 2xl:w-[600px] bg-white border-r border-slate-200 shadow-lg md:flex md:flex-col md:min-h-0 md:order-1 ${viewMode === 'canvas' ? 'hidden' : ''}`}
+          <div className={`w-full md:w-[520px] xl:w-[560px] 2xl:w-[600px] md:flex-shrink-0 bg-white border-r border-slate-200 shadow-lg md:flex md:flex-col md:min-h-0 md:order-1 ${viewMode === 'canvas' ? 'hidden' : ''}`}
           >
             {/* Tabs */}
             <div className="sticky top-0 z-20 bg-white/95 backdrop-blur-sm border-b border-slate-200">
@@ -583,9 +620,19 @@ export default function EditorPage() {
                   </svg>
                   Powers
                 </button>
+                <button
+                  className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-md text-xs sm:text-sm font-medium transition-colors whitespace-nowrap flex-shrink-0 ${activeTab==='hitbox' ? 'bg-blue-50 text-blue-700 ring-1 ring-blue-200' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'}`}
+                  onClick={() => setActiveTab('hitbox')}
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="3" strokeWidth={2} />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 2v4m0 12v4m10-10h-4M6 12H2" />
+                  </svg>
+                  Hitbox
+                </button>
               </div>
             </div>
-            <div className="md:flex-1 md:overflow-y-auto p-3 sm:p-5 space-y-4">
+            <div className="md:flex-1 md:overflow-y-auto overflow-x-hidden p-3 sm:p-5 space-y-4">
               {/* Images Section */}
               {activeTab === 'images' && (
               <section className="space-y-3">
@@ -983,6 +1030,18 @@ export default function EditorPage() {
                       }))
                     }
                   }}
+                />
+              )}
+
+              {/* Hitbox Section */}
+              {activeTab === 'hitbox' && (
+                <HitboxEditor
+                  card={card}
+                  onUpdateSilhouette={updateSilhouette}
+                  onAddLOSMarker={addLOSMarker}
+                  onUpdateLOSMarker={updateLOSMarker}
+                  onDeleteLOSMarker={deleteLOSMarker}
+                  onSyncSilhouettes={syncHitboxSilhouettes}
                 />
               )}
             </div>

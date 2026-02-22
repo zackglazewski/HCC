@@ -179,6 +179,7 @@ const CardPatchSchema = z.object({
   theme_primary_hex: z.string().regex(/^#?[0-9a-fA-F]{6}$/).optional(),
   theme_secondary_hex: z.string().regex(/^#?[0-9a-fA-F]{6}$/).optional(),
   theme_background_hex: z.string().regex(/^#?[0-9a-fA-F]{6}$/).optional(),
+  hitbox_json: z.string().max(2000000).nullable().optional(),
 }).strict()
 
 const ImageCreateSchema = z.object({

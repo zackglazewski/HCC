@@ -3,6 +3,7 @@ import { CardState, ImageLayer } from './types'
 import { renderText } from './text'
 import { drawEmblem } from './emblems'
 import { buildUnderlayLayer, buildOverlayLayer, hexToHsv } from './theme'
+import { buildHitboxMask, renderHitboxToCanvas, type HitboxMaskInfo } from './hitbox'
 import type { CustomTheme } from './CustomThemePanel'
 
 async function loadImage(src: string): Promise<HTMLImageElement> {
@@ -43,6 +44,10 @@ export function EditorCanvas({
   const imgCacheRef = useRef<Map<string, HTMLImageElement>>(new Map())
   // Live, uncommitted transforms for smooth drag/scale
   const liveOverridesRef = useRef<Map<string, { x?: number; y?: number; scale?: number }>>(new Map())
+  const hitboxCacheRef = useRef<HTMLCanvasElement | null>(null)
+  const hitboxImgCacheRef = useRef<Map<string, HTMLImageElement>>(new Map())
+  const hitboxMaskRef = useRef<HitboxMaskInfo | null>(null)
+  const [hitboxMaskVersion, setHitboxMaskVersion] = useState(0)
 
   const size = 1500
   const [display, setDisplay] = useState(750)
@@ -67,13 +72,20 @@ export function EditorCanvas({
         } : undefined
         const ul = buildUnderlayLayer({ blank, mask, background: bg }, card.general, customHSV as any)
         const ol = buildOverlayLayer({ blank, mask, background: bg }, card.general, customHSV as any)
+        const hitboxMask = buildHitboxMask(mask)
         if (!canceled) {
           setUnderlay(ul); underlayRef.current = ul
           setOverlay(ol); overlayRef.current = ol
+          hitboxMaskRef.current = hitboxMask
+          setHitboxMaskVersion((v) => v + 1)
         }
       } catch (e) {
         console.error('theme layer build failed', e)
-        if (!canceled) { setUnderlay(null); setOverlay(null); underlayRef.current = null; overlayRef.current = null }
+        if (!canceled) {
+          setUnderlay(null); setOverlay(null); underlayRef.current = null; overlayRef.current = null
+          hitboxMaskRef.current = null
+          setHitboxMaskVersion((v) => v + 1)
+        }
       }
     })()
     return () => { canceled = true }
@@ -151,6 +163,10 @@ export function EditorCanvas({
       }
     }
     if (overlayRef.current) ctx.drawImage(overlayRef.current, 0, 0)
+    // Hitbox rendering (after overlay; clipped to hex mask)
+    if (hitboxCacheRef.current) {
+      ctx.drawImage(hitboxCacheRef.current, 0, 0)
+    }
     renderText(ctx, current)
     drawEmblem(ctx, current.general)
     // Hasbro trademark/copyright notice (matching reference implementation)
@@ -206,6 +222,24 @@ export function EditorCanvas({
       }
     }
   }, [fontsReady])
+
+  // Rebuild hitbox cache when hitbox state changes
+  useEffect(() => {
+    let canceled = false
+    ;(async () => {
+      const result = await renderHitboxToCanvas(
+        card.hitbox,
+        card.images,
+        hitboxImgCacheRef.current,
+        hitboxMaskRef.current,
+      )
+      if (!canceled) {
+        hitboxCacheRef.current = result
+        draw()
+      }
+    })()
+    return () => { canceled = true }
+  }, [card.hitbox, card.images, hitboxMaskVersion, draw])
 
   // draw when base/image/text state change
   useEffect(() => { draw() }, [draw, underlay, overlay, card, selectedId])

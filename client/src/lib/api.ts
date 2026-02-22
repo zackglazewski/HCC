@@ -34,6 +34,7 @@ export type ServerCard = {
   attack?: string | null
   defense?: string | null
   points?: string | null
+  hitbox_json?: string | null
   created_at: string
   updated_at: string
   powers?: { id: number; order: number; heading: string; body: string }[]

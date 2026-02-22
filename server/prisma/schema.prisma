@@ -41,6 +41,7 @@ model cards {
   theme_primary_hex   String?
   theme_secondary_hex String?
   theme_background_hex String?
+  hitbox_json          String?
   schema_version Int          @default(1)
   created_at     DateTime     @default(now())
   updated_at     DateTime     @updatedAt
