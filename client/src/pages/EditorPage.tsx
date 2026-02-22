@@ -463,7 +463,7 @@ export default function EditorPage() {
   }, [isAuthenticated])
 
   return (
-    <div className="min-h-screen md:h-screen flex flex-col md:overflow-hidden">
+    <div className="md:h-screen md:flex md:flex-col md:overflow-hidden">
       <Header
         saving={saving}
         title={card.title}
@@ -513,9 +513,9 @@ export default function EditorPage() {
           </div>
         </div>
       ) : (
-        <main className="flex flex-1 md:min-h-0 md:overflow-hidden flex-col md:flex-row">
+        <main className="md:flex md:flex-1 md:min-h-0 md:overflow-hidden md:flex-row">
           {/* Canvas area (first on mobile) */}
-          <div className={`md:flex-1 flex flex-col md:min-h-0 bg-slate-50 order-1 md:order-2 ${viewMode === 'panel' ? 'hidden' : ''}`}>
+          <div className={`md:flex-1 md:flex md:flex-col md:min-h-0 bg-slate-50 md:order-2 ${viewMode === 'panel' ? 'hidden' : ''}`}>
             <EditorCanvas
               card={card}
               selectedId={selectedId}
@@ -540,7 +540,7 @@ export default function EditorPage() {
           </div>
 
           {/* Left: Unified sidebar with tabs (full width on mobile) */}
-          <div className={`w-full md:w-[520px] xl:w-[560px] 2xl:w-[600px] bg-white border-r border-slate-200 shadow-lg flex flex-col md:min-h-0 order-2 md:order-1 ${viewMode === 'canvas' ? 'hidden' : ''}`}
+          <div className={`w-full md:w-[520px] xl:w-[560px] 2xl:w-[600px] bg-white border-r border-slate-200 shadow-lg md:flex md:flex-col md:min-h-0 md:order-1 ${viewMode === 'canvas' ? 'hidden' : ''}`}
           >
             {/* Tabs */}
             <div className="sticky top-0 z-20 bg-white/95 backdrop-blur-sm border-b border-slate-200">
@@ -924,7 +924,6 @@ export default function EditorPage() {
                     ['range', 'Range'],
                     ['attack', 'Attack'],
                     ['defense', 'Defense'],
-                    ['points', 'Points'],
                   ] as const).map(([key, label]) => (
                     <div key={key} className={key === 'cardName' || key === 'tribeName' ? 'sm:col-span-2' : ''}>
                       <label className="block text-xs font-medium text-slate-600 mb-1">{label}</label>
@@ -945,6 +944,20 @@ export default function EditorPage() {
                       />
                     </div>
                   ))}
+                  <div>
+                    <label className="block text-xs font-medium text-slate-600 mb-1">Points</label>
+                    <input
+                      className="input-modern text-sm"
+                      value={card.fields.points}
+                      onChange={(e) => updateField('points', e.target.value)}
+                      onBlur={async (e) => {
+                        if (isAuthenticated && card.id) {
+                          const token = await getAccessTokenSilently().catch(() => null)
+                          try { await patchCard(card.id, { points: e.target.value } as any, token) } catch {}
+                        }
+                      }}
+                    />
+                  </div>
                 </div>
               </section>
               )}

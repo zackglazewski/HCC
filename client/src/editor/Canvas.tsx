@@ -519,7 +519,7 @@ export function EditorCanvas({
   }, [])
 
   return (
-    <div ref={containerRef} className="flex-1 flex items-center justify-center bg-neutral-200 min-h-0 overflow-hidden">
+    <div ref={containerRef} className="md:flex-1 flex items-center justify-center bg-neutral-200 md:min-h-0 overflow-hidden p-2 md:p-0">
       <canvas ref={ref} width={size} height={size} style={{ width: display, height: display, background: '#fff' }} />
     </div>
   )

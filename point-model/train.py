@@ -149,12 +149,18 @@ class HeroPointEstimator(nn.Module):
     4. MLP regression head
     """
 
-    def __init__(self, encoder_name, n_stats=6, n_cats=8, proj_dim=128):
+    def __init__(self, encoder_name, n_stats=6, n_cats=8, proj_dim=128, pretrained=True):
         super().__init__()
         self.proj_dim = proj_dim
 
         # Text encoder (partially frozen)
-        self.encoder = AutoModel.from_pretrained(encoder_name)
+        # pretrained=False skips loading base weights (for when we load our own checkpoint)
+        if pretrained:
+            self.encoder = AutoModel.from_pretrained(encoder_name)
+        else:
+            from transformers import AutoConfig
+            config = AutoConfig.from_pretrained(encoder_name)
+            self.encoder = AutoModel.from_config(config)
         self._freeze_encoder()
         self.embed_dim = self.encoder.config.hidden_size
 
@@ -276,7 +282,7 @@ def evaluate(model, loader, device):
 
 
 def train_fold(train_rows, val_rows, tokenizer, encoder_name, device,
-               fold_num=0, epochs=80, verbose=True):
+               fold_num=0, epochs=80, output_dir=None, verbose=True):
     if verbose:
         print(f"\n    Building datasets...")
     train_ds = CardDataset(train_rows, tokenizer)
@@ -286,6 +292,17 @@ def train_fold(train_rows, val_rows, tokenizer, encoder_name, device,
                               pin_memory=pin, num_workers=0)
     val_loader = DataLoader(val_ds, batch_size=64, shuffle=False,
                             pin_memory=pin, num_workers=0)
+
+    # Check for mid-fold checkpoint to resume from
+    start_epoch = 0
+    mid_ckpt_path = os.path.join(output_dir, f"fold_{fold_num}_mid.pt") if output_dir else None
+
+    if mid_ckpt_path and os.path.exists(mid_ckpt_path):
+        ckpt = torch.load(mid_ckpt_path, map_location=device, weights_only=True)
+        start_epoch = ckpt["epoch"]
+        if verbose:
+            print(f"    Resuming from mid-fold checkpoint (epoch {start_epoch}, "
+                  f"best MAE={ckpt['best_val_mae']:.1f})")
 
     if verbose:
         print(f"    Initializing model...")
@@ -309,10 +326,19 @@ def train_fold(train_rows, val_rows, tokenizer, encoder_name, device,
     patience = 20
     patience_counter = 0
 
+    # Restore state if resuming
+    if mid_ckpt_path and os.path.exists(mid_ckpt_path):
+        model.load_state_dict(ckpt["model_state"])
+        optimizer.load_state_dict(ckpt["optimizer_state"])
+        scheduler.load_state_dict(ckpt["scheduler_state"])
+        best_val_mae = ckpt["best_val_mae"]
+        best_state = ckpt["best_model_state"]
+        patience_counter = ckpt["patience_counter"]
+
     if verbose:
         print(f"    Training (max {epochs} epochs, patience={patience})...")
 
-    for epoch in range(epochs):
+    for epoch in range(start_epoch, epochs):
         train_loss = train_epoch(model, train_loader, optimizer, loss_fn, device)
         scheduler.step()
 
@@ -337,10 +363,28 @@ def train_fold(train_rows, val_rows, tokenizer, encoder_name, device,
                   f"patience={patience_counter:2d}  "
                   f"lr=[{enc_lr:.1e},{head_lr:.1e}]{improved}")
 
+        # Mid-fold checkpoint every 10 epochs
+        if mid_ckpt_path and (epoch + 1) % 10 == 0:
+            torch.save({
+                "epoch": epoch + 1,
+                "model_state": {k: v.cpu() for k, v in model.state_dict().items()},
+                "optimizer_state": optimizer.state_dict(),
+                "scheduler_state": scheduler.state_dict(),
+                "best_model_state": best_state,
+                "best_val_mae": best_val_mae,
+                "patience_counter": patience_counter,
+            }, mid_ckpt_path)
+            if verbose:
+                print(f"    Saved mid-fold checkpoint (epoch {epoch+1})")
+
         if patience_counter >= patience:
             if verbose:
                 print(f"    Early stopped at epoch {epoch+1}")
             break
+
+    # Clean up mid-fold checkpoint
+    if mid_ckpt_path and os.path.exists(mid_ckpt_path):
+        os.remove(mid_ckpt_path)
 
     model.load_state_dict(best_state)
     model.to(device)
@@ -391,7 +435,7 @@ def cross_validate(rows, tokenizer, encoder_name, device, output_dir,
 
         model, val_preds, val_targets = train_fold(
             train_rows, val_rows, tokenizer, encoder_name, device,
-            fold_num=fold+1, epochs=epochs,
+            fold_num=fold+1, epochs=epochs, output_dir=output_dir,
         )
         all_preds[val_idx] = val_preds
         all_targets[val_idx] = val_targets
@@ -674,6 +718,10 @@ def main():
     tokenizer_path = os.path.join(output_dir, "tokenizer")
     tokenizer.save_pretrained(tokenizer_path)
     print(f"Saved tokenizer to {tokenizer_path}")
+
+    config_path = os.path.join(output_dir, "encoder_config")
+    model.encoder.config.save_pretrained(config_path)
+    print(f"Saved encoder config to {config_path}")
 
     meta = {
         "encoder_name": encoder_name,
