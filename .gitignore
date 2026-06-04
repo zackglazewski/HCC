@@ -18,6 +18,7 @@ coverage/
 # Production builds
 build/
 dist/
+client/public/assets/
 
 # Misc
 .DS_Store

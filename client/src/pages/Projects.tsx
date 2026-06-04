@@ -2,6 +2,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { useAuth0 } from '@auth0/auth0-react'
 import { createCard, deleteCard, listCards, patchCard, ServerCard } from '../lib/api'
+import { SupportLink } from '../lib/support'
 
 export default function ProjectsPage() {
   const { isAuthenticated, isLoading, loginWithRedirect, getAccessTokenSilently, logout } = useAuth0()
@@ -43,6 +44,7 @@ export default function ProjectsPage() {
             <p className="text-xs sm:text-sm text-slate-500 mt-0.5 hidden sm:block">Create custom cards for your armies</p>
           </div>
           <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
+            <SupportLink />
             {!isAuthenticated && (
               <Link className="btn-primary text-sm" to="/editor?new=1">
                 <svg className="inline-block w-4 h-4 mr-1 sm:mr-2 -ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">

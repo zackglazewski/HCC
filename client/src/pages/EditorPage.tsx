@@ -9,6 +9,7 @@ import { PowersEditor } from '../editor/PowersEditor'
 import { HitboxEditor } from '../editor/HitboxEditor'
 import { CustomThemePanel, type CustomTheme } from '../editor/CustomThemePanel'
 import { createCard, getCard, patchCard, postImage, postPower, patchPower, patchImage, deleteImageApi, listThemes, createTheme, deleteTheme } from '../lib/api'
+import { SupportLink } from '../lib/support'
 import { DEFAULT_CARD } from '../editor/types'
 import type { HitboxState } from '../editor/types'
 
@@ -79,6 +80,7 @@ function Header({ saving, title, onTitleChange, general, onGeneralChange, onExpo
 
         {/* Right: compact action buttons */}
         <div className="flex items-center gap-1.5 sm:gap-2 flex-shrink-0">
+          <SupportLink compact />
           {/* Save status - icon only on mobile */}
           <div className="flex items-center gap-1 text-xs text-slate-500 flex-shrink-0">
             {saving ? (
