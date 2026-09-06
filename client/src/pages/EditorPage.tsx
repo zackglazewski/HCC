@@ -4,12 +4,21 @@ import { useAuth0 } from '@auth0/auth0-react'
 import { useCardState } from '../editor/state'
 import { TemplateSelector } from '../editor/TemplateSelector'
 import type { General } from '../editor/types'
-import { EditorCanvas } from '../editor/Canvas'
+import { EditorCanvas, CanvasSnapshot } from '../editor/Canvas'
 import { PowersEditor } from '../editor/PowersEditor'
 import { HitboxEditor } from '../editor/HitboxEditor'
 import { CustomThemePanel, type CustomTheme } from '../editor/CustomThemePanel'
-import { createCard, getCard, patchCard, postImage, postPower, patchPower, patchImage, deleteImageApi, listThemes, createTheme, deleteTheme } from '../lib/api'
+import { createCard, getCard, patchCard, postImage, postPower, patchPower, patchImage, deleteImageApi, listThemes, createTheme, deleteTheme, putThumbnail } from '../lib/api'
 import { SupportLink } from '../lib/support'
+import { rememberLocalThumbnail } from '../projects/thumbnails'
+import { DEFAULT_CUSTOM_THEME, serverCardToState } from '../editor/serverCard'
+import { encodeThumbnail, THUMBNAIL_PX } from '../editor/thumbnail'
+
+/** Wait for edits to settle before snapshotting a preview. */
+const THUMBNAIL_DEBOUNCE_MS = 1200
+/** The canvas may still be loading fonts/theme layers on open; keep trying for a while. */
+const THUMBNAIL_RETRY_MS = 400
+const THUMBNAIL_MAX_ATTEMPTS = 40
 import { DEFAULT_CARD } from '../editor/types'
 import type { HitboxState } from '../editor/types'
 
@@ -27,26 +36,9 @@ function serializeHitbox(hitbox: HitboxState | undefined, images: { id: string; 
 }
 
 /** Deserialize hitbox from server: convert server remoteIds → local imageId UUIDs */
-function deserializeHitbox(json: string | null | undefined, images: { id: string; remoteId?: number }[]): HitboxState | undefined {
-  if (!json) return undefined
-  try {
-    const parsed = JSON.parse(json)
-    const remoteToLocal = new Map<number, string>()
-    for (const img of images) {
-      if (img.remoteId) remoteToLocal.set(img.remoteId, img.id)
-    }
-    return {
-      silhouettes: (parsed.silhouettes || []).map((s: any) => ({ ...s, imageId: remoteToLocal.get(s.imageId) ?? s.imageId })),
-      losMarkers: (parsed.losMarkers || []).map((m: any) => ({ ...m, imageId: remoteToLocal.get(m.imageId) ?? m.imageId })),
-    }
-  } catch {
-    return undefined
-  }
-}
-
 type ViewMode = 'both' | 'canvas' | 'panel'
 
-function Header({ saving, title, onTitleChange, general, onGeneralChange, onExport, onSaveToAccount, isAuthenticated: authProp, cardId, viewMode, onViewModeChange }: {
+function Header({ saving, title, onTitleChange, general, onGeneralChange, onExport, onSaveToAccount, isAuthenticated: authProp, cardId, viewMode, onViewModeChange, backTo = '/projects' }: {
   saving: boolean
   title: string
   onTitleChange: (title: string) => void
@@ -58,6 +50,8 @@ function Header({ saving, title, onTitleChange, general, onGeneralChange, onExpo
   cardId: number | null
   viewMode: ViewMode
   onViewModeChange: (m: ViewMode) => void
+  /** Where the back arrow goes — the card's folder when it has one. */
+  backTo?: string
 }) {
   const { isAuthenticated, loginWithRedirect, loginWithPopup, logout, user, isLoading } = useAuth0()
   return (
@@ -65,7 +59,7 @@ function Header({ saving, title, onTitleChange, general, onGeneralChange, onExpo
       <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5 px-3 py-2 sm:px-4">
         {/* Left: Back button + Title */}
         <div className="flex items-center gap-2 flex-1 min-w-0">
-          <Link to="/projects" className="text-slate-500 hover:text-blue-600 transition-colors flex-shrink-0" title="Back to Projects">
+          <Link to={backTo} className="text-slate-500 hover:text-blue-600 transition-colors flex-shrink-0" title="Back to Projects">
             <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
@@ -202,6 +196,13 @@ export default function EditorPage() {
   const [selectedId, setSelectedId] = useState<string | null>(null)
   const cardId = params.id ? parseInt(params.id) : null
   const [loading, setLoading] = useState<boolean>(!!cardId)
+  const [folderId, setFolderId] = useState<number | null>(null)
+  const snapshotRef = useRef<CanvasSnapshot | null>(null)
+  /** Last thumbnail we sent, so leaving the editor doesn't re-upload an identical render. */
+  const lastThumbnailRef = useRef<{ cardId: number; dataUrl: string } | null>(null)
+  /** Latest values for the unmount-time snapshot (that effect deliberately has no deps). */
+  const thumbnailCtxRef = useRef({ cardId: null as number | null, isAuthenticated: false })
+  thumbnailCtxRef.current = { cardId: card.id ?? null, isAuthenticated }
   const [customTheme, setCustomTheme] = useState<CustomTheme>({ primary: '#3080ff', secondary: '#88aacc', background: '#556677' })
   const [activeTab, setActiveTab] = useState<'images' | 'theme' | 'attributes' | 'powers' | 'hitbox'>('images')
   const [savedThemes, setSavedThemes] = useState<{ id: number; name: string; primary_hex: string; secondary_hex: string; background_hex: string }[]>([])
@@ -238,56 +239,12 @@ export default function EditorPage() {
       try {
         const token = await getAccessTokenSilently()
         const server = await getCard(cardId, token)
-        // Convert server images to object URLs
-        const images = (server.images || []).map((im) => {
-          let dataUrl = ''
-          if (im.blob && Array.isArray(im.blob.data)) {
-            const u8 = new Uint8Array(im.blob.data)
-            const blob = new Blob([u8])
-            dataUrl = URL.createObjectURL(blob)
-          }
-          return { id: crypto.randomUUID(), name: im.name || undefined, dataUrl, x: im.x, y: im.y, scale: im.scale, rotation: im.rotation ?? null, order: im.order, remoteId: im.id }
-        })
-
-        // Merge powers: always provide 4 rows (orders 0..3).
-        // Use DEFAULT_CARD as the base — never the stale local `card` state,
-        // which may hold data from a previously loaded card.
-        const serverPowers = (server.powers || []).map((p) => ({ id: String(p.id), order: p.order, heading: p.heading, body: p.body, remoteId: p.id } as any))
-        const mergedPowers = [0,1,2,3].map((ord) => {
-          const fromServer: any = serverPowers.find((p: any) => p.order === ord)
-          if (fromServer) return fromServer
-          return { id: crypto.randomUUID(), order: ord, heading: '', body: '' } as any
-        })
-        const str = (sv: string | null | undefined) => sv ?? ''
-        const hitbox = deserializeHitbox(server.hitbox_json, images)
-        const nextCard = {
-          ...DEFAULT_CARD,
-          id: server.id,
-          title: server.title || 'Untitled Card',
-          general: (server.general as any) || 'vydar',
-          fields: {
-            cardName: str(server.card_name),
-            tribeName: str(server.tribe_name),
-            species: str(server.species),
-            uniqueness: str(server.uniqueness),
-            class: str(server.class),
-            personality: str(server.personality),
-            size: str(server.size),
-            life: str(server.life),
-            move: str(server.move),
-            range: str(server.range),
-            attack: str(server.attack),
-            defense: str(server.defense),
-            points: str(server.points),
-          },
-          powers: mergedPowers,
-          images,
-          ...(hitbox ? { hitbox } : {}),
-        }
+        setFolderId(server.folder_id ?? null)
+        const nextCard = serverCardToState(server)
         setCard(nextCard)
         // Load custom theme if present on server; otherwise reset to default
         if ((server.general as any) !== 'custom') {
-          setCustomTheme({ primary: '#3080ff', secondary: '#88aacc', background: '#556677' })
+          setCustomTheme(DEFAULT_CUSTOM_THEME)
         } else if ((server.general as any) === 'custom') {
           const fromServer = {
             primary: (server as any).theme_primary_hex || null,
@@ -373,6 +330,59 @@ export default function EditorPage() {
     timer = window.setTimeout(save, 1000)
     return () => { if (timer) window.clearTimeout(timer) }
   }, [card, customTheme, isAuthenticated, getAccessTokenSilently])
+
+  // Upload a small rendered preview for the projects explorer once edits settle.
+  // Also runs on open (backfilling cards created before previews existed). The canvas can take a
+  // moment to become ready after load — fonts, base images, custom-theme recolouring — so a snapshot
+  // that isn't available yet is retried instead of silently skipped.
+  useEffect(() => {
+    if (!isAuthenticated || !card.id) return
+    const cardId = card.id
+    let cancelled = false
+    let attempts = 0
+    let timer = window.setTimeout(attempt, THUMBNAIL_DEBOUNCE_MS)
+    async function attempt() {
+      if (cancelled) return
+      const snapshot = snapshotRef.current?.(THUMBNAIL_PX)
+      if (!snapshot) {
+        if (++attempts < THUMBNAIL_MAX_ATTEMPTS) timer = window.setTimeout(attempt, THUMBNAIL_RETRY_MS)
+        return
+      }
+      const dataUrl = encodeThumbnail(snapshot)
+      if (cancelled) return
+      void uploadThumbnail(cardId, dataUrl)
+    }
+    return () => {
+      cancelled = true
+      window.clearTimeout(timer)
+    }
+  }, [card, customTheme, isAuthenticated, getAccessTokenSilently])
+
+  async function uploadThumbnail(cardId: number, dataUrl: string) {
+    const last = lastThumbnailRef.current
+    if (last && last.cardId === cardId && last.dataUrl === dataUrl) return
+    lastThumbnailRef.current = { cardId, dataUrl }
+    rememberLocalThumbnail(cardId, dataUrl)
+    const token = await getAccessTokenSilently().catch(() => null)
+    try {
+      await putThumbnail(cardId, dataUrl, token)
+    } catch (e) {
+      console.warn('Thumbnail upload failed', e)
+    }
+  }
+  const uploadThumbnailRef = useRef(uploadThumbnail)
+  uploadThumbnailRef.current = uploadThumbnail
+
+  // Leaving the editor quickly (before the debounce fired) should still leave a preview behind.
+  useEffect(() => {
+    return () => {
+      const { cardId, isAuthenticated: authed } = thumbnailCtxRef.current
+      if (!authed || !cardId) return
+      const snapshot = snapshotRef.current?.(THUMBNAIL_PX)
+      if (!snapshot) return
+      void uploadThumbnailRef.current(cardId, encodeThumbnail(snapshot))
+    }
+  }, [])
 
   // Persist custom theme to localStorage for fast restore and guest mode
   useEffect(() => {
@@ -505,6 +515,7 @@ export default function EditorPage() {
     <div className="md:h-screen md:flex md:flex-col md:overflow-hidden">
       <Header
         saving={saving}
+        backTo={folderId != null ? `/projects?folder=${folderId}` : '/projects'}
         title={card.title}
         onTitleChange={(title) => {
           setTitle(title)
@@ -571,6 +582,7 @@ export default function EditorPage() {
               }}
               onDeleteImage={handleDeleteImage}
               customTheme={card.general === 'custom' ? customTheme : null}
+              snapshotRef={snapshotRef}
             />
             {/* Bottom hint bar */}
             <div className="hidden sm:block bg-white/80 backdrop-blur-sm border-t border-slate-200 px-4 py-2 text-xs text-slate-500 text-center">

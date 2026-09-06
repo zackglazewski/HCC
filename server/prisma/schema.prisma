@@ -14,15 +14,19 @@ model users {
   email         String?  @unique
   name          String?
   avatar_url    String?
+  // Free-form JSON blob of per-user UI preferences (explorer view mode, previews, ...).
+  preferences   String?
   created_at    DateTime @default(now())
   updated_at    DateTime @updatedAt
   cards         cards[]
   themes        user_themes[]
+  folders       folders[]
 }
 
 model cards {
   id             Int          @id @default(autoincrement())
   user_id        Int
+  folder_id      Int?
   title          String
   general        String
   card_name      String? 
@@ -47,8 +51,41 @@ model cards {
   updated_at     DateTime     @updatedAt
 
   user    users       @relation(fields: [user_id], references: [id])
+  folder  folders?    @relation(fields: [folder_id], references: [id], onDelete: Cascade)
   powers  card_powers[]
   images  card_images[]
+  thumbnail card_thumbnails?
+
+  @@index([user_id, folder_id])
+}
+
+// Small rendered preview of a card, uploaded by the editor after autosave. Kept in its own table
+// so listing cards never drags the image bytes along.
+model card_thumbnails {
+  card_id    Int      @id
+  mime       String
+  blob       Bytes
+  updated_at DateTime @updatedAt
+
+  card cards @relation(fields: [card_id], references: [id], onDelete: Cascade)
+}
+
+// Recursive folder tree for organizing cards. parent_id = null means the folder lives at the root.
+// Deleting a folder cascades to its subfolders and the cards inside them.
+model folders {
+  id         Int      @id @default(autoincrement())
+  user_id    Int
+  parent_id  Int?
+  name       String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  user     users     @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  parent   folders?  @relation("folder_tree", fields: [parent_id], references: [id], onDelete: Cascade)
+  children folders[] @relation("folder_tree")
+  cards    cards[]
+
+  @@index([user_id, parent_id])
 }
 
 model card_powers {
