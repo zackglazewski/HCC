@@ -19,6 +19,7 @@ export async function api<T>(path: string, options: RequestInit = {}, token?: st
 export type ServerCard = {
   id: number
   user_id: number
+  folder_id?: number | null
   title: string
   general: string
   card_name?: string | null
@@ -35,8 +36,13 @@ export type ServerCard = {
   defense?: string | null
   points?: string | null
   hitbox_json?: string | null
+  theme_primary_hex?: string | null
+  theme_secondary_hex?: string | null
+  theme_background_hex?: string | null
   created_at: string
   updated_at: string
+  /** Present (with its version stamp) when the editor has uploaded a rendered preview. */
+  thumbnail?: { updated_at: string } | null
   powers?: { id: number; order: number; heading: string; body: string }[]
   images?: { id: number; order: number; x: number; y: number; scale: number; rotation?: number | null; name?: string | null; blob?: { type: 'Buffer'; data: number[] } }[]
 }
@@ -59,6 +65,73 @@ export async function patchCard(id: number, input: Partial<ServerCard>, token?: 
 
 export async function deleteCard(id: number, token?: string | null) {
   return api<void>('/cards/' + id, { method: 'DELETE' }, token)
+}
+
+// Current user + preferences
+export type ServerUser = {
+  id: number
+  email: string | null
+  name: string | null
+  avatar_url: string | null
+  preferences: Record<string, unknown>
+}
+
+export async function getMe(token?: string | null) {
+  return api<ServerUser>('/me', {}, token)
+}
+
+/** Shallow-merges keys into the stored preferences; a null value removes the key. */
+export async function patchMe(preferences: Record<string, unknown>, token?: string | null) {
+  return api<ServerUser>('/me', { method: 'PATCH', body: JSON.stringify({ preferences }) }, token)
+}
+
+// Thumbnails API
+export async function putThumbnail(cardId: number, dataUrl: string, token?: string | null) {
+  return api<{ updated_at: string }>(`/cards/${cardId}/thumbnail`, { method: 'PUT', body: JSON.stringify({ dataUrl }) }, token)
+}
+
+/** Fetches the thumbnail bytes (needs the bearer token, so it can't be a plain <img src>). */
+export async function fetchThumbnailBlob(cardId: number, version: string, token?: string | null): Promise<Blob | null> {
+  const res = await fetch(`${API_BASE}/cards/${cardId}/thumbnail?v=${encodeURIComponent(version)}`, {
+    headers: token ? { Authorization: `Bearer ${token}` } : {},
+  })
+  if (!res.ok) return null
+  return res.blob()
+}
+
+// Folders API
+// Folders form a tree through parent_id (null = root). The server returns the flat list.
+export type ServerFolder = {
+  id: number
+  user_id: number
+  parent_id: number | null
+  name: string
+  created_at: string
+  updated_at: string
+}
+
+export async function listFolders(token?: string | null) {
+  return api<ServerFolder[]>('/folders', {}, token)
+}
+
+export async function createFolder(input: { name: string; parent_id: number | null }, token?: string | null) {
+  return api<ServerFolder>('/folders', { method: 'POST', body: JSON.stringify(input) }, token)
+}
+
+export async function patchFolder(id: number, input: Partial<{ name: string; parent_id: number | null }>, token?: string | null) {
+  return api<ServerFolder>('/folders/' + id, { method: 'PATCH', body: JSON.stringify(input) }, token)
+}
+
+export async function deleteFolder(id: number, token?: string | null) {
+  return api<void>('/folders/' + id, { method: 'DELETE' }, token)
+}
+
+/** Move any mix of cards and folders into target folder (null = root) in one atomic request. */
+export async function moveItems(
+  input: { card_ids: number[]; folder_ids: number[]; target_folder_id: number | null },
+  token?: string | null,
+) {
+  return api<{ ok: true; moved: { cards: number; folders: number } }>('/move', { method: 'POST', body: JSON.stringify(input) }, token)
 }
 
 export async function postImage(cardId: number, layer: ImageLayer, token?: string | null) {

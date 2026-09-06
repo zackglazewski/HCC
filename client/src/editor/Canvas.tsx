@@ -1,10 +1,14 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState, MutableRefObject } from 'react'
 import { CardState, ImageLayer } from './types'
 import { renderText } from './text'
 import { drawEmblem } from './emblems'
 import { buildUnderlayLayer, buildOverlayLayer, hexToHsv } from './theme'
 import { buildHitboxMask, renderHitboxToCanvas, type HitboxMaskInfo } from './hitbox'
 import type { CustomTheme } from './CustomThemePanel'
+
+function layerKey(general: string, theme: CustomTheme | null | undefined): string {
+  return general === 'custom' && theme ? `custom|${theme.primary}|${theme.secondary}|${theme.background}` : general
+}
 
 async function loadImage(src: string): Promise<HTMLImageElement> {
   return new Promise((resolve, reject) => {
@@ -16,6 +20,9 @@ async function loadImage(src: string): Promise<HTMLImageElement> {
   })
 }
 
+/** Renders the finished card (no selection handles) into a square canvas of `px` pixels. */
+export type CanvasSnapshot = (px: number) => HTMLCanvasElement | null
+
 export function EditorCanvas({
   card,
   selectedId,
@@ -23,6 +30,7 @@ export function EditorCanvas({
   onUpdateImage,
   onDeleteImage,
   customTheme,
+  snapshotRef,
 }: {
   card: CardState
   selectedId?: string | null
@@ -30,6 +38,8 @@ export function EditorCanvas({
   onUpdateImage: (id: string, patch: Partial<ImageLayer>) => void
   onDeleteImage?: (id: string) => void
   customTheme?: CustomTheme | null
+  /** Receives a function the parent can call to snapshot the rendered card (used for thumbnails). */
+  snapshotRef?: MutableRefObject<CanvasSnapshot | null>
 }) {
   const ref = useRef<HTMLCanvasElement | null>(null)
   const [underlay, setUnderlay] = useState<HTMLCanvasElement | null>(null)
@@ -48,6 +58,10 @@ export function EditorCanvas({
   const hitboxImgCacheRef = useRef<Map<string, HTMLImageElement>>(new Map())
   const hitboxMaskRef = useRef<HitboxMaskInfo | null>(null)
   const [hitboxMaskVersion, setHitboxMaskVersion] = useState(0)
+  /** Which (general, theme) the current underlay/overlay were built for — see `layerKey`. */
+  const layersKeyRef = useRef<string | null>(null)
+  const customThemeRef = useRef<CustomTheme | null | undefined>(customTheme)
+  useEffect(() => { customThemeRef.current = customTheme }, [customTheme])
 
   const size = 1500
   const [display, setDisplay] = useState(750)
@@ -55,6 +69,7 @@ export function EditorCanvas({
 
   useEffect(() => {
     let canceled = false
+    const key = layerKey(card.general, customTheme)
     ;(async () => {
       try {
         const bgPath = card.general === 'custom' ? '/assets/backgrounds/vydar.png' : `/assets/backgrounds/${card.general}.png`
@@ -76,6 +91,7 @@ export function EditorCanvas({
         if (!canceled) {
           setUnderlay(ul); underlayRef.current = ul
           setOverlay(ol); overlayRef.current = ol
+          layersKeyRef.current = key
           hitboxMaskRef.current = hitboxMask
           setHitboxMaskVersion((v) => v + 1)
         }
@@ -83,6 +99,7 @@ export function EditorCanvas({
         console.error('theme layer build failed', e)
         if (!canceled) {
           setUnderlay(null); setOverlay(null); underlayRef.current = null; overlayRef.current = null
+          layersKeyRef.current = null
           hitboxMaskRef.current = null
           setHitboxMaskVersion((v) => v + 1)
         }
@@ -131,10 +148,10 @@ export function EditorCanvas({
   useEffect(() => { updateImageRef.current = onUpdateImage }, [onUpdateImage])
   useEffect(() => { deleteImageRef.current = onDeleteImage }, [onDeleteImage])
 
-  const draw = useCallback(() => {
-    const canvas = ref.current
-    if (!canvas || !fontsReady) return
-    const ctx = canvas.getContext('2d')!
+  const drawRef = useRef<() => void>(() => {})
+
+  /** Paints the full card into `ctx`. Selection handles are only drawn for the live editor canvas. */
+  const drawScene = useCallback((ctx: CanvasRenderingContext2D, opts: { selection: boolean; hitbox: boolean }) => {
     ctx.imageSmoothingEnabled = true
     // @ts-ignore
     if (ctx.imageSmoothingQuality) (ctx as any).imageSmoothingQuality = 'high'
@@ -153,7 +170,7 @@ export function EditorCanvas({
         img = new Image()
         img.crossOrigin = 'anonymous'
         img.src = layer.dataUrl
-        img.onload = () => { requestAnimationFrame(draw) }
+        img.onload = () => { requestAnimationFrame(() => drawRef.current()) }
         imgCacheRef.current.set(layer.id, img)
       }
       if (img.complete && img.naturalWidth > 0) {
@@ -164,7 +181,7 @@ export function EditorCanvas({
     }
     if (overlayRef.current) ctx.drawImage(overlayRef.current, 0, 0)
     // Hitbox rendering (after overlay; clipped to hex mask)
-    if (hitboxCacheRef.current) {
+    if (opts.hitbox && hitboxCacheRef.current) {
       ctx.drawImage(hitboxCacheRef.current, 0, 0)
     }
     renderText(ctx, current)
@@ -179,7 +196,7 @@ export function EditorCanvas({
     ctx.fillText('HEROSCAPE and all related characters are trademarks of Hasbro. © 2006 Hasbro. All Rights Reserved.', 750, 1495)
     ctx.restore()
     // selection overlay
-    const sid = selectedRef.current
+    const sid = opts.selection ? selectedRef.current : null
     if (sid) {
       const layer = current.images.find((l) => l.id === sid)
       if (layer) {
@@ -221,7 +238,49 @@ export function EditorCanvas({
         }
       }
     }
-  }, [fontsReady])
+  }, [])
+
+  const draw = useCallback(() => {
+    const canvas = ref.current
+    if (!canvas || !fontsReady) return
+    drawScene(canvas.getContext('2d')!, { selection: true, hitbox: true })
+  }, [drawScene, fontsReady])
+  useEffect(() => { drawRef.current = draw }, [draw])
+
+  // Expose a clean snapshot (no handles) for thumbnails.
+  useEffect(() => {
+    if (!snapshotRef) return
+    snapshotRef.current = (px: number) => {
+      if (!fontsReady || !underlayRef.current) return null
+      // The template layers are rebuilt asynchronously when the general/theme changes; don't
+      // snapshot until they match the card currently being shown.
+      if (layersKeyRef.current !== layerKey(cardRef.current.general, customThemeRef.current)) return null
+      // Skip this round while any layer image is still loading; the caller retries. A broken image
+      // (complete but zero-sized) is skipped by drawScene just like on the live canvas, so it
+      // shouldn't block the snapshot forever.
+      for (const layer of cardRef.current.images) {
+        const img = imgCacheRef.current.get(layer.id)
+        if (!img || !img.complete) return null
+      }
+      const full = document.createElement('canvas')
+      full.width = size
+      full.height = size
+      // Hitbox/LOS aids are editing helpers, not part of the card, so previews leave them out.
+      drawScene(full.getContext('2d')!, { selection: false, hitbox: false })
+      const out = document.createElement('canvas')
+      out.width = px
+      out.height = px
+      const octx = out.getContext('2d')!
+      octx.imageSmoothingEnabled = true
+      // @ts-ignore
+      if (octx.imageSmoothingQuality) (octx as any).imageSmoothingQuality = 'high'
+      octx.fillStyle = '#fff'
+      octx.fillRect(0, 0, px, px)
+      octx.drawImage(full, 0, 0, px, px)
+      return out
+    }
+    return () => { snapshotRef.current = null }
+  }, [snapshotRef, drawScene, fontsReady])
 
   // Rebuild hitbox cache when hitbox state changes
   useEffect(() => {
