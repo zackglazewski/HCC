@@ -42,3 +42,6 @@ TASK.md
 # Point model artifacts
 point-model/card-images/
 point-model/output
+
+# Wrangler local state (wrangler pages dev)
+.wrangler/

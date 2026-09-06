@@ -7,7 +7,8 @@ import './styles.css'
 
 const domain = import.meta.env.VITE_AUTH0_DOMAIN as string
 const clientId = import.meta.env.VITE_AUTH0_CLIENT_ID as string
-const redirectUri = import.meta.env.VITE_AUTH0_REDIRECT_URI as string
+// Falls back to the current origin so Cloudflare Pages branch previews work without a per-branch build variable.
+const redirectUri = (import.meta.env.VITE_AUTH0_REDIRECT_URI as string | undefined) || window.location.origin
 const audience = import.meta.env.VITE_AUTH0_AUDIENCE as string | undefined
 
 function onRedirectCallback(appState?: any) {
