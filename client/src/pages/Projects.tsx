@@ -12,7 +12,7 @@ export default function ProjectsPage() {
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-3">
           <div className="min-w-0">
             <h1 className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-              Heroscape Card Editor
+              Heroscape Card Editor Test
             </h1>
             <p className="text-xs sm:text-sm text-slate-500 mt-0.5 hidden sm:block">Create custom cards for your armies</p>
           </div>
