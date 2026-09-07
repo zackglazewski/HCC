@@ -47,6 +47,7 @@ import {
   PlusIcon,
   SearchIcon,
   SelectIcon,
+  SlidersIcon,
   TrashIcon,
   XIcon,
 } from './icons'
@@ -104,6 +105,9 @@ export function FileExplorer() {
   const [dropTarget, setDropTarget] = useState<number | null | undefined>(undefined)
   const [menu, setMenu] = useState<MenuState | null>(null)
   const closeMenu = useCallback(() => setMenu(null), [])
+  /** Phone-only dropdown that stands in for the view/artwork/sort controls. */
+  const [viewMenu, setViewMenu] = useState<{ x: number; y: number } | null>(null)
+  const closeViewMenu = useCallback(() => setViewMenu(null), [])
   const [dialog, setDialog] = useState<DialogState | null>(null)
   const closeDialog = useCallback(() => setDialog(null), [])
   const ghostRef = useRef<HTMLDivElement>(null)
@@ -317,7 +321,7 @@ export function FileExplorer() {
   // ---- keyboard --------------------------------------------------------
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (dialog || menu) return
+      if (dialog || menu || viewMenu) return
       const target = e.target as HTMLElement | null
       if (target && (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.tagName === 'SELECT' || target.isContentEditable)) return
       if (e.key === 'Escape') return exitSelectMode()
@@ -342,7 +346,7 @@ export function FileExplorer() {
     }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
-  }, [dialog, menu, selected, itemByKey, exitSelectMode, selectAll, openItem])
+  }, [dialog, menu, viewMenu, selected, itemByKey, exitSelectMode, selectAll, openItem])
 
   // ---- drag & drop -----------------------------------------------------
   /** Dragging a selected item drags the whole selection; dragging anything else moves just that item. */
@@ -542,6 +546,23 @@ export function FileExplorer() {
     ]
   }
 
+  /** Same choices as the desktop toggles, as a menu for narrow screens. */
+  function viewMenuItems(): MenuItem[] {
+    const tick = (on: boolean) => (on ? '✓' : undefined)
+    return [
+      { label: 'Grid view', icon: <GridIcon className="w-4 h-4" />, onSelect: () => updatePrefs({ view: 'grid' }), shortcut: tick(view === 'grid') },
+      { label: 'List view', icon: <ListIcon className="w-4 h-4" />, onSelect: () => updatePrefs({ view: 'list' }), shortcut: tick(view === 'list') },
+      { separator: true },
+      { label: 'General crests', icon: <CrestIcon className="w-4 h-4" />, onSelect: () => updatePrefs({ cardPreview: 'emblem' }), shortcut: tick(cardPreview === 'emblem') },
+      { label: 'Card previews', icon: <ImageIcon className="w-4 h-4" />, onSelect: () => updatePrefs({ cardPreview: 'render' }), shortcut: tick(cardPreview === 'render') },
+      { separator: true },
+      { label: 'Sort by last modified', onSelect: () => updatePrefs({ sortField: 'updated', sortDir: 'desc' }), shortcut: tick(sortField === 'updated') },
+      { label: 'Sort by name', onSelect: () => updatePrefs({ sortField: 'name', sortDir: 'asc' }), shortcut: tick(sortField === 'name') },
+      { label: 'Ascending', icon: <ArrowUpIcon className="w-4 h-4" />, onSelect: () => updatePrefs({ sortDir: 'asc' }), shortcut: tick(sortDir === 'asc') },
+      { label: 'Descending', icon: <ArrowDownIcon className="w-4 h-4" />, onSelect: () => updatePrefs({ sortDir: 'desc' }), shortcut: tick(sortDir === 'desc') },
+    ]
+  }
+
   function deleteMessage(keys: ItemKey[]) {
     const { folderIds } = splitKeys(keys)
     let nestedFolders = 0
@@ -638,19 +659,33 @@ export function FileExplorer() {
       <section className="flex-1 min-w-0">
         {/* Toolbar. The selection bar overlays it in place so the content below never shifts. */}
         <div className={`relative mb-4 rounded-xl border shadow-lg shadow-slate-200/50 transition-colors duration-200 ${showSelectionBar ? 'bg-blue-600 border-blue-600' : 'bg-white border-slate-100'}`}>
-          <div className={`p-2.5 sm:p-3 flex flex-wrap items-center gap-2 ${showSelectionBar ? 'invisible' : ''}`} aria-hidden={showSelectionBar || undefined}>
-            <div className="flex-1 min-w-[10rem] flex items-center">
-              {searching ? (
-                <div className="text-sm text-slate-600 px-2 py-1">
-                  Results for <span className="font-semibold text-slate-900">“{query.trim()}”</span>
-                  <span className="text-slate-400"> · {pluralize(items.length, 'match', 'matches')}</span>
-                </div>
-              ) : (
-                <Breadcrumbs path={path} onNavigate={navigateTo} rootLabel={ROOT_LABEL} dropTargetId={dropTarget} getDropHandlers={getDropHandlers} />
-              )}
+          <div className={`p-2.5 sm:p-3 flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-2 ${showSelectionBar ? 'invisible' : ''}`} aria-hidden={showSelectionBar || undefined}>
+            {/* Row 1 on phones: where you are, plus create. On wider screens this is the left half of one row. */}
+            <div className="flex items-center gap-2 min-w-0 sm:flex-1 sm:min-w-[10rem]">
+              <div className="flex-1 min-w-0 flex items-center">
+                {searching ? (
+                  <div className="text-sm text-slate-600 px-2 py-1 truncate">
+                    Results for <span className="font-semibold text-slate-900">“{query.trim()}”</span>
+                    <span className="text-slate-400"> · {pluralize(items.length, 'match', 'matches')}</span>
+                  </div>
+                ) : (
+                  <Breadcrumbs path={path} onNavigate={navigateTo} rootLabel={ROOT_LABEL} dropTargetId={dropTarget} getDropHandlers={getDropHandlers} />
+                )}
+              </div>
+              <div className="flex sm:hidden items-center gap-1 flex-shrink-0">
+                <button type="button" className="btn-icon !p-1.5" title="New folder" aria-label="New folder" onClick={() => setDialog({ type: 'newFolder' })}>
+                  <FolderPlusIcon className="w-4 h-4" />
+                </button>
+                <button type="button" className="btn-primary !px-2.5 !py-1.5 text-sm inline-flex items-center gap-1" onClick={() => void createCardHere()}>
+                  <PlusIcon className="w-4 h-4" />
+                  New
+                </button>
+              </div>
             </div>
-            <div className="flex items-center gap-2 ml-auto">
-              <label className="relative block">
+
+            {/* Row 2 on phones: search fills the width, view options collapse into one menu. */}
+            <div className="flex items-center gap-2 min-w-0 sm:ml-auto">
+              <label className="relative block flex-1 min-w-0 sm:flex-none">
                 <SearchIcon className="w-4 h-4 text-slate-400 absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
                 <input
                   type="search"
@@ -664,7 +699,7 @@ export function FileExplorer() {
                   }}
                   placeholder="Search cards & folders"
                   aria-label="Search cards and folders"
-                  className="block w-40 sm:w-56 focus:w-56 sm:focus:w-72 py-1.5 pl-8 pr-8 bg-white border border-slate-200 rounded-lg text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                  className="block w-full sm:w-56 sm:focus:w-72 py-1.5 pl-8 pr-8 bg-white border border-slate-200 rounded-lg text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
                 />
                 {query && (
                   <button type="button" aria-label="Clear search" className="absolute right-2 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700" onClick={() => setQuery('')}>
@@ -672,6 +707,22 @@ export function FileExplorer() {
                   </button>
                 )}
               </label>
+
+              {/* Phones: view mode, artwork and sort live in one menu */}
+              <button
+                type="button"
+                className="sm:hidden btn-icon !p-1.5 flex-shrink-0"
+                aria-label="View options"
+                aria-haspopup="menu"
+                aria-expanded={!!viewMenu}
+                onClick={(e) => {
+                  const rect = e.currentTarget.getBoundingClientRect()
+                  setViewMenu({ x: rect.right, y: rect.bottom + 4 })
+                }}
+              >
+                <SlidersIcon className="w-4 h-4" />
+              </button>
+
               <div className="hidden sm:flex items-center gap-1">
                 <select
                   aria-label="Sort by"
@@ -695,7 +746,7 @@ export function FileExplorer() {
                   {sortDir === 'asc' ? <ArrowUpIcon className="w-4 h-4" /> : <ArrowDownIcon className="w-4 h-4" />}
                 </button>
               </div>
-              <div className="inline-flex rounded-lg border border-slate-200 bg-white shadow-sm p-0.5" role="radiogroup" aria-label="View mode">
+              <div className="hidden sm:inline-flex rounded-lg border border-slate-200 bg-white shadow-sm p-0.5" role="radiogroup" aria-label="View mode">
                 <button type="button" role="radio" aria-checked={view === 'grid'} title="Grid view" className={toggleButtonClass(view === 'grid')} onClick={() => updatePrefs({ view: 'grid' })}>
                   <GridIcon className="w-4 h-4" />
                 </button>
@@ -709,7 +760,7 @@ export function FileExplorer() {
                   {pluralize(previewQueue.length, 'preview')} to render
                 </span>
               )}
-              <div className="inline-flex rounded-lg border border-slate-200 bg-white shadow-sm p-0.5" role="radiogroup" aria-label="Card artwork">
+              <div className="hidden sm:inline-flex rounded-lg border border-slate-200 bg-white shadow-sm p-0.5" role="radiogroup" aria-label="Card artwork">
                 <button
                   type="button"
                   role="radio"
@@ -735,7 +786,7 @@ export function FileExplorer() {
                 type="button"
                 aria-pressed={selectMode}
                 title={selectMode ? 'Exit select mode' : 'Select items'}
-                className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border text-sm font-medium shadow-sm transition-all duration-200 active:scale-95 ${
+                className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border text-sm font-medium shadow-sm transition-all duration-200 active:scale-95 flex-shrink-0 ${
                   selectMode ? 'bg-slate-900 border-slate-900 text-white' : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-50 hover:border-slate-300'
                 }`}
                 onClick={() => (selectMode ? exitSelectMode() : setSelectMode(true))}
@@ -743,24 +794,26 @@ export function FileExplorer() {
                 <SelectIcon className="w-4 h-4" />
                 <span className="hidden md:inline">Select</span>
               </button>
-              <div className="flex lg:hidden items-center gap-1">
+              <div className="hidden sm:flex lg:hidden items-center gap-1">
                 <button type="button" className="btn-icon !p-1.5" title="New folder" aria-label="New folder" onClick={() => setDialog({ type: 'newFolder' })}>
                   <FolderPlusIcon className="w-4 h-4" />
                 </button>
                 <button type="button" className="btn-primary !px-2.5 !py-1.5 text-sm inline-flex items-center gap-1" onClick={() => void createCardHere()}>
                   <PlusIcon className="w-4 h-4" />
-                  <span className="hidden sm:inline">New</span>
+                  New
                 </button>
               </div>
             </div>
           </div>
 
           {showSelectionBar && (
-            <div className="absolute inset-0 flex items-center gap-2 px-3 text-white animate-fade-in">
+            <div className="absolute inset-0 flex items-center gap-1 sm:gap-2 px-2 sm:px-3 text-white animate-fade-in">
               <button type="button" aria-label="Clear selection" className="p-1 rounded-md hover:bg-white/15" onClick={exitSelectMode}>
                 <XIcon className="w-4 h-4" />
               </button>
-              <span className="text-sm font-medium whitespace-nowrap">{pluralize(selected.size, 'item')} selected</span>
+              <span className="text-sm font-medium whitespace-nowrap">
+                {selected.size} <span className="hidden sm:inline">{selected.size === 1 ? 'item ' : 'items '}</span>selected
+              </span>
               <div className="flex-1" />
               {!allSelected && (
                 <button type="button" className="hidden sm:inline text-sm px-2 py-1 rounded-md hover:bg-white/15" onClick={selectAll}>
@@ -884,6 +937,7 @@ export function FileExplorer() {
 
       {/* Overlays */}
       {menu && <ContextMenu x={menu.x} y={menu.y} items={menuItemsFor(menu.keys)} onClose={closeMenu} />}
+      {viewMenu && <ContextMenu x={viewMenu.x} y={viewMenu.y} items={viewMenuItems()} onClose={closeViewMenu} />}
       {dialog?.type === 'newFolder' && (
         <NameDialog
           title="New folder"
