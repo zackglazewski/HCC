@@ -1,4 +1,4 @@
-import { ServerCard } from '../lib/api'
+import { ServerCard, fetchImageBlob } from '../lib/api'
 import type { CustomTheme } from './CustomThemePanel'
 import { CardState, DEFAULT_CARD, HitboxState } from './types'
 
@@ -23,18 +23,24 @@ export function deserializeHitbox(json: string | null | undefined, images: { id:
 }
 
 /**
- * Turns a full server card (with image blobs and powers) into editor state.
- * Image blobs become object URLs — call `revokeCardImages` when the state is discarded.
+ * Turns a full server card (with image URLs and powers) into editor state. Each image is fetched from
+ * its short-lived URL and becomes an object URL — call `revokeCardImages` when the state is discarded.
+ * A layer whose bytes can't be fetched keeps an empty dataUrl rather than failing the whole card.
  */
-export function serverCardToState(server: ServerCard): CardState {
-  const images = (server.images || []).map((im) => {
+export async function serverCardToState(server: ServerCard): Promise<CardState> {
+  const images = await Promise.all((server.images || []).map(async (im) => {
     let dataUrl = ''
-    if (im.blob && Array.isArray(im.blob.data)) {
-      const u8 = new Uint8Array(im.blob.data)
-      dataUrl = URL.createObjectURL(new Blob([u8]))
+    if (im.url) {
+      try {
+        const blob = await fetchImageBlob(im.url)
+        if (blob) dataUrl = URL.createObjectURL(blob)
+        else console.warn('Image layer unavailable', im.id)
+      } catch (e) {
+        console.warn('Image layer fetch failed', im.id, e)
+      }
     }
     return { id: crypto.randomUUID(), name: im.name || undefined, dataUrl, x: im.x, y: im.y, scale: im.scale, rotation: im.rotation ?? null, order: im.order, remoteId: im.id }
-  })
+  }))
 
   // Always provide 4 power rows (orders 0..3), filling gaps with empty rows.
   const serverPowers = (server.powers || []).map((p) => ({ id: String(p.id), order: p.order, heading: p.heading, body: p.body, remoteId: p.id } as any))

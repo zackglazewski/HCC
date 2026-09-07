@@ -53,9 +53,13 @@ export function ThumbnailBackfill({
     ;(async () => {
       try {
         const full = await getCard(next.id, await getToken())
-        if (!mountedRef.current) return
+        const card = await serverCardToState(full)
+        if (!mountedRef.current) {
+          revokeCardImages(card)
+          return
+        }
         const theme = customThemeFromServer(full) ?? (full.general === 'custom' ? DEFAULT_CUSTOM_THEME : null)
-        setJob({ server: full, card: serverCardToState(full), theme })
+        setJob({ server: full, card, theme })
       } catch {
         // Skip this card and move on to the next one.
         busyRef.current = false

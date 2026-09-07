@@ -44,7 +44,8 @@ export type ServerCard = {
   /** Present (with its version stamp) when the editor has uploaded a rendered preview. */
   thumbnail?: { updated_at: string } | null
   powers?: { id: number; order: number; heading: string; body: string }[]
-  images?: { id: number; order: number; x: number; y: number; scale: number; rotation?: number | null; name?: string | null; blob?: { type: 'Buffer'; data: number[] } }[]
+  /** `url` is short-lived (see fetchImageBlob); fetch it right after loading the card. */
+  images?: { id: number; order: number; x: number; y: number; scale: number; rotation?: number | null; name?: string | null; mime?: string | null; size_bytes?: number | null; url?: string }[]
 }
 
 export async function listCards(token?: string | null) {
@@ -132,6 +133,17 @@ export async function moveItems(
   token?: string | null,
 ) {
   return api<{ ok: true; moved: { cards: number; folders: number } }>('/move', { method: 'POST', body: JSON.stringify(input) }, token)
+}
+
+/**
+ * Fetches an image layer's bytes from the short-lived URL the server put on the card. The URL is its
+ * own credential (a presigned R2 URL, or an HMAC-signed API URL), so no bearer token goes with it —
+ * R2 rejects requests that carry both.
+ */
+export async function fetchImageBlob(url: string): Promise<Blob | null> {
+  const res = await fetch(url)
+  if (!res.ok) return null
+  return res.blob()
 }
 
 export async function postImage(cardId: number, layer: ImageLayer, token?: string | null) {

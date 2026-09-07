@@ -9,7 +9,11 @@ import jwksRsa from 'jwks-rsa'
 import { fileURLToPath } from 'url'
 import { PrismaClient } from '@prisma/client'
 import { z } from 'zod'
-import { isSelfOrDescendant } from './folderTree.js'
+import { randomBytes } from 'crypto'
+import { collectDescendants, isSelfOrDescendant } from './folderTree.js'
+import { createStorage } from './storage.js'
+import { createUrlSigner } from './signedUrls.js'
+import { decodeImageDataUrl, imageObjectKey, sha256Hex, sniffImageMime } from './images.js'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -74,6 +78,25 @@ const requireAuth = expressjwt({
     jwksUri: `${issuer}.well-known/jwks.json`
   })
 })
+
+// Image bytes live in object storage (R2 in production, a local directory in development); the
+// database only keeps the key. See src/storage.js.
+let storage
+try {
+  storage = createStorage()
+} catch (e) {
+  // eslint-disable-next-line no-console
+  console.error(`[server] ${e.message}. Refusing to start.`)
+  process.exit(1)
+}
+const IMAGE_URL_TTL_SECONDS = parseInt(process.env.IMAGE_URL_TTL_SECONDS || '900', 10)
+let urlSigningSecret = process.env.URL_SIGNING_SECRET
+if (!urlSigningSecret) {
+  urlSigningSecret = randomBytes(32).toString('hex')
+  // eslint-disable-next-line no-console
+  console.warn('[server] URL_SIGNING_SECRET not set; using a random one, so signed image URLs stop working after a restart.')
+}
+const urlSigner = createUrlSigner(urlSigningSecret)
 
 // Simple in-memory rate limiting (per-IP or per-token). Not cluster-safe but sufficient for v1.
 const rateBuckets = new Map()
@@ -250,21 +273,6 @@ const ThemeCreateSchema = z.object({
 
 const ThemePatchSchema = ThemeCreateSchema.partial().strict()
 
-// Decodes a base64 data URL and validates the real content type by magic bytes
-// (files often carry the wrong extension/MIME). Returns null when it isn't PNG/JPEG/WebP.
-function decodeImageDataUrl(dataUrl) {
-  const match = dataUrl.match(/^data:([^;]+);base64,(.*)$/)
-  if (!match) return null
-  const blob = Buffer.from(match[2], 'base64')
-  const isPng = blob.length >= 8 && blob.subarray(0, 8).equals(Buffer.from([137,80,78,71,13,10,26,10]))
-  const isJpeg = blob.length >= 2 && blob[0] === 0xff && blob[1] === 0xd8
-  const isWebp = blob.length >= 12 && blob.subarray(0, 4).toString('ascii') === 'RIFF' && blob.subarray(8,12).toString('ascii') === 'WEBP'
-  if (isPng) return { blob, mime: 'image/png' }
-  if (isJpeg) return { blob, mime: 'image/jpeg' }
-  if (isWebp) return { blob, mime: 'image/webp' }
-  return null
-}
-
 function parsePreferences(raw) {
   if (!raw) return {}
   try {
@@ -317,6 +325,40 @@ async function loadFolderMap(userId) {
   return new Map(rows.map((f) => [f.id, f]))
 }
 
+// Image helpers
+// Image rows never leave the server with their bytes. Clients get a short-lived URL instead: a
+// presigned R2 URL when the object is in R2, otherwise a signed API URL that streams the bytes
+// (local storage driver, or a legacy row the backfill script hasn't reached yet).
+const IMAGE_SELECT = { id: true, card_id: true, order: true, x: true, y: true, scale: true, rotation: true, name: true, mime: true, size_bytes: true, object_key: true, created_at: true }
+
+async function imageUrl(image) {
+  if (image.object_key) {
+    const presigned = await storage.presignGet(image.object_key, IMAGE_URL_TTL_SECONDS)
+    if (presigned) return presigned
+  }
+  return urlSigner.imagePath(image.id, IMAGE_URL_TTL_SECONDS)
+}
+
+async function publicImage(image) {
+  const { object_key, ...rest } = image
+  return { ...rest, url: await imageUrl(image) }
+}
+
+// Deletes objects that no remaining row references. Errors are logged, never surfaced: a failed
+// cleanup leaves an orphaned object, which costs a little storage but breaks nothing.
+async function gcObjectKeys(keys) {
+  const unique = [...new Set(keys.filter(Boolean))]
+  await Promise.all(unique.map(async (key) => {
+    try {
+      const stillUsed = await prisma.card_images.count({ where: { object_key: key } })
+      if (stillUsed === 0) await storage.delete(key)
+    } catch (e) {
+      // eslint-disable-next-line no-console
+      console.warn(`[server] could not delete storage object ${key}:`, e?.message || e)
+    }
+  }))
+}
+
 // Cards API (minimal skeleton)
 app.get('/api/cards', requireAuth, async (req, res) => {
   const user = await getOrCreateUser(req)
@@ -350,10 +392,10 @@ app.get('/api/cards/:id', requireAuth, async (req, res) => {
   if (!id) return res.status(400).json({ error: 'invalid_id' })
   const card = await prisma.cards.findFirst({
     where: { id, user_id: user.id },
-    include: { powers: true, images: true }
+    include: { powers: true, images: { select: IMAGE_SELECT, orderBy: { order: 'asc' } } }
   })
   if (!card) return res.status(404).json({ error: 'not_found' })
-  res.json(card)
+  res.json({ ...card, images: await Promise.all(card.images.map(publicImage)) })
 })
 
 app.patch('/api/cards/:id', requireAuth, async (req, res) => {
@@ -382,8 +424,10 @@ app.delete('/api/cards/:id', requireAuth, async (req, res) => {
   if (!user) return res.status(401).json({ error: 'unauthorized' })
   const id = parseId(req.params.id)
   if (!id) return res.status(400).json({ error: 'invalid_id' })
+  const images = await prisma.card_images.findMany({ where: { card_id: id, card: { user_id: user.id } }, select: { object_key: true } })
   const deleted = await prisma.cards.deleteMany({ where: { id, user_id: user.id } })
   if (deleted.count === 0) return res.status(404).json({ error: 'not_found' })
+  await gcObjectKeys(images.map((i) => i.object_key))
   res.status(204).end()
 })
 
@@ -431,14 +475,23 @@ app.patch('/api/folders/:id', requireAuth, async (req, res) => {
   }
 })
 
-// Deleting a folder cascades (via FK constraints) to every nested folder and card.
+// Deleting a folder cascades (via FK constraints) to every nested folder and card. The FK cascade
+// can't reach object storage, so collect the affected image keys first and clean them up after.
 app.delete('/api/folders/:id', requireAuth, async (req, res) => {
   const user = await getOrCreateUser(req)
   if (!user) return res.status(401).json({ error: 'unauthorized' })
   const id = parseId(req.params.id)
   if (!id) return res.status(400).json({ error: 'invalid_id' })
+  const folderMap = await loadFolderMap(user.id)
+  if (!folderMap.has(id)) return res.status(404).json({ error: 'not_found' })
+  const folderIds = collectDescendants(folderMap, id)
+  const images = await prisma.card_images.findMany({
+    where: { card: { user_id: user.id, folder_id: { in: folderIds } } },
+    select: { object_key: true },
+  })
   const deleted = await prisma.folders.deleteMany({ where: { id, user_id: user.id } })
   if (deleted.count === 0) return res.status(404).json({ error: 'not_found' })
+  await gcObjectKeys(images.map((i) => i.object_key))
   res.status(204).end()
 })
 
@@ -480,13 +533,25 @@ app.post('/api/cards/:id/images', requireAuth, imageLimiter, async (req, res) =>
   if (!decoded) {
     return res.status(415).json({ error: 'unsupported_format', detail: 'Content must be PNG, JPEG, or WebP' })
   }
-  const { blob } = decoded
+  const { blob, mime } = decoded
+  const sha256 = sha256Hex(blob)
+  const object_key = imageObjectKey(user.id, sha256)
+  try {
+    // Always upload, even when another row already points at this key: the write is idempotent and
+    // it heals a missing object instead of trusting the database.
+    await storage.put(object_key, blob, mime)
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.error('[server] image upload to storage failed:', e?.message || e)
+    return res.status(502).json({ error: 'storage_unavailable' })
+  }
   const maxOrder = await prisma.card_images.aggregate({ _max: { order: true }, where: { card_id: id } })
   const order = (maxOrder._max.order ?? -1) + 1
   const created = await prisma.card_images.create({
-    data: { card_id: id, order, x, y, scale, rotation, name, blob }
+    data: { card_id: id, order, x, y, scale, rotation, name, object_key, mime, size_bytes: blob.length, sha256 },
+    select: IMAGE_SELECT,
   })
-  res.status(201).json(created)
+  res.status(201).json(await publicImage(created))
 })
 
 app.patch('/api/cards/:id/images/:imageId', requireAuth, imageLimiter, async (req, res) => {
@@ -498,10 +563,10 @@ app.patch('/api/cards/:id/images/:imageId', requireAuth, imageLimiter, async (re
   const parsed = ImagePatchSchema.safeParse(req.body || {})
   if (!parsed.success) return res.status(400).json({ error: 'invalid_body' })
   try {
-    const image = await prisma.card_images.findUnique({ where: { id: imageId }, include: { card: true } })
+    const image = await prisma.card_images.findUnique({ where: { id: imageId }, select: { card_id: true, card: { select: { user_id: true } } } })
     if (!image || image.card_id !== id || image.card.user_id !== user.id) return res.status(404).json({ error: 'not_found' })
-    const updated = await prisma.card_images.update({ where: { id: imageId }, data: parsed.data })
-    res.json(updated)
+    const updated = await prisma.card_images.update({ where: { id: imageId }, data: parsed.data, select: IMAGE_SELECT })
+    res.json(await publicImage(updated))
   } catch (e) {
     res.status(400).json({ error: 'update_failed' })
   }
@@ -513,10 +578,27 @@ app.delete('/api/cards/:id/images/:imageId', requireAuth, imageLimiter, async (r
   const id = parseId(req.params.id)
   const imageId = parseId(req.params.imageId)
   if (!id || !imageId) return res.status(400).json({ error: 'invalid_id' })
-  const image = await prisma.card_images.findUnique({ where: { id: imageId }, include: { card: true } })
+  const image = await prisma.card_images.findUnique({ where: { id: imageId }, select: { card_id: true, object_key: true, card: { select: { user_id: true } } } })
   if (!image || image.card_id !== id || image.card.user_id !== user.id) return res.status(404).json({ error: 'not_found' })
   await prisma.card_images.delete({ where: { id: imageId } })
+  await gcObjectKeys([image.object_key])
   res.status(204).end()
+})
+
+// Serves image bytes for the signed URLs `imageUrl` hands out. No bearer token: the signature is the
+// credential, which is what lets the browser fetch these like any other image.
+app.get('/api/images/:imageId/content', async (req, res) => {
+  const imageId = parseId(req.params.imageId)
+  if (!imageId) return res.status(400).json({ error: 'invalid_id' })
+  if (!urlSigner.verify(imageId, req.query.exp, req.query.sig)) return res.status(403).json({ error: 'invalid_signature' })
+  const image = await prisma.card_images.findUnique({ where: { id: imageId }, select: { object_key: true, mime: true, blob: true } })
+  if (!image) return res.status(404).json({ error: 'not_found' })
+  let bytes = image.object_key ? await storage.get(image.object_key) : null
+  if (!bytes && image.blob) bytes = Buffer.from(image.blob)
+  if (!bytes) return res.status(404).json({ error: 'not_found' })
+  res.set('Content-Type', image.mime || sniffImageMime(bytes) || 'application/octet-stream')
+  res.set('Cache-Control', `private, max-age=${IMAGE_URL_TTL_SECONDS}`)
+  res.send(bytes)
 })
 
 // Debug logging endpoint removed
@@ -672,4 +754,5 @@ app.use((err, req, res, next) => {
 app.listen(PORT, () => {
   console.log(`[server] listening on http://localhost:${PORT}`)
   console.log(`[server] serving assets from ${resolvedAssets} at /assets`)
+  console.log(`[server] image storage: ${storage.describe()}`)
 })

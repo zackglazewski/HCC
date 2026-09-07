@@ -98,6 +98,10 @@ model card_powers {
   card cards @relation(fields: [card_id], references: [id], onDelete: Cascade)
 }
 
+// Image layers on a card. The bytes live in object storage (see src/storage.js) under `object_key`,
+// which is content-addressed as u/<user_id>/<sha256> so a user re-uploading the same picture stores it
+// once. `blob` only holds bytes for rows created before object storage existed; the backfill script
+// (scripts/backfill-images.js) uploads them and clears the column.
 model card_images {
   id        Int      @id @default(autoincrement())
   card_id   Int
@@ -107,10 +111,16 @@ model card_images {
   scale     Float
   rotation  Float?
   name      String?
-  blob      Bytes
+  blob      Bytes?
+  object_key String?
+  mime       String?
+  size_bytes Int?
+  sha256     String?
   created_at DateTime @default(now())
 
   card cards @relation(fields: [card_id], references: [id], onDelete: Cascade)
+
+  @@index([object_key])
 }
 
 model user_themes {

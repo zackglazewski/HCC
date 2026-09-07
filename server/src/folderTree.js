@@ -21,3 +21,23 @@ export function isSelfOrDescendant(folderMap, folderId, targetId) {
   }
   return false
 }
+
+/** Ids of `rootId` and every folder nested under it, at any depth. */
+export function collectDescendants(folderMap, rootId) {
+  const children = new Map()
+  for (const f of folderMap.values()) {
+    if (f.parent_id == null) continue
+    if (!children.has(f.parent_id)) children.set(f.parent_id, [])
+    children.get(f.parent_id).push(f.id)
+  }
+  const result = [rootId]
+  const seen = new Set(result)
+  for (let i = 0; i < result.length; i++) {
+    for (const child of children.get(result[i]) || []) {
+      if (seen.has(child)) continue // defensive: never loop forever on corrupt data
+      seen.add(child)
+      result.push(child)
+    }
+  }
+  return result
+}
