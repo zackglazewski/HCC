@@ -222,6 +222,17 @@ export function CrestIcon(props: IconProps) {
   )
 }
 
+export function SlidersIcon(props: IconProps) {
+  return (
+    <Stroke {...props}>
+      <path d="M4 7h10M18 7h2M4 12h3M11 12h9M4 17h12M20 17h0" />
+      <circle cx="16" cy="7" r="2" />
+      <circle cx="9" cy="12" r="2" />
+      <circle cx="18" cy="17" r="2" />
+    </Stroke>
+  )
+}
+
 /** The general's crest, drawn from the same vector paths the canvas uses. Renders nothing for "custom". */
 export function Emblem({ general, className = 'w-12 h-12' }: { general: string | null | undefined; className?: string }) {
   const d = general ? EMBLEM_PATHS[general as General] : ''
