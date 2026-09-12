@@ -1,0 +1,8 @@
+[
+  {
+    "AllowedOrigins": ["https://REPLACE-WITH-PRODUCTION-ORIGIN", "http://localhost:3000"],
+    "AllowedMethods": ["GET"],
+    "AllowedHeaders": ["*"],
+    "MaxAgeSeconds": 3600
+  }
+]

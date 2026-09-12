@@ -20,6 +20,13 @@ test('local driver round-trips bytes', async (t) => {
   assert.equal(await storage.exists(key), true)
   assert.equal((await storage.get(key)).toString(), 'hello')
   assert.equal(await storage.presignGet(key, 60), null)
+  await storage.put('u/2/def456', Buffer.from('second'), 'image/png')
+  assert.deepEqual(
+    (await storage.list('u/')).sort((a, b) => a.key.localeCompare(b.key)),
+    [{ key: 'u/1/abc123', size: 5 }, { key: 'u/2/def456', size: 6 }],
+  )
+  assert.deepEqual(await storage.list('u/2/'), [{ key: 'u/2/def456', size: 6 }])
+  await storage.delete('u/2/def456')
   await storage.delete(key)
   await storage.delete(key) // deleting a missing object is a no-op
   assert.equal(await storage.exists(key), false)

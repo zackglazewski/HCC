@@ -1,7 +1,7 @@
 import fs from 'fs/promises'
 import path from 'path'
 import { fileURLToPath } from 'url'
-import { S3Client, PutObjectCommand, GetObjectCommand, DeleteObjectCommand, HeadObjectCommand } from '@aws-sdk/client-s3'
+import { S3Client, PutObjectCommand, GetObjectCommand, DeleteObjectCommand, HeadObjectCommand, ListObjectsV2Command } from '@aws-sdk/client-s3'
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
 
 const SERVER_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
@@ -13,6 +13,7 @@ const SERVER_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '
  *   exists(key)              boolean
  *   get(key)                 Buffer, or null when missing
  *   delete(key)              no-op when missing
+ *   list(prefix)             every stored object under prefix as { key, size }; used by verification
  *   presignGet(key, ttl)     absolute URL the browser can GET without credentials, or null when the
  *                            driver has no such thing (local). The API then serves the bytes itself
  *                            through a signed /api/images/:id/content URL (see signedUrls.js).
@@ -80,6 +81,16 @@ export function createR2Storage(env = process.env) {
     async delete(key) {
       await client.send(new DeleteObjectCommand({ Bucket, Key: key }))
     },
+    async list(prefix = '') {
+      const objects = []
+      let ContinuationToken
+      do {
+        const out = await client.send(new ListObjectsV2Command({ Bucket, Prefix: prefix, ContinuationToken }))
+        for (const o of out.Contents || []) objects.push({ key: o.Key, size: o.Size })
+        ContinuationToken = out.IsTruncated ? out.NextContinuationToken : undefined
+      } while (ContinuationToken)
+      return objects
+    },
     presignGet(key, ttlSeconds) {
       return getSignedUrl(client, new GetObjectCommand({ Bucket, Key: key }), { expiresIn: ttlSeconds })
     },
@@ -123,6 +134,29 @@ export function createLocalStorage(env = process.env) {
     },
     async delete(key) {
       await fs.rm(resolve(key), { force: true })
+    },
+    async list(prefix = '') {
+      const objects = []
+      const walk = async (dir) => {
+        let entries
+        try {
+          entries = await fs.readdir(dir, { withFileTypes: true })
+        } catch (e) {
+          if (e?.code === 'ENOENT') return
+          throw e
+        }
+        for (const entry of entries) {
+          const full = path.join(dir, entry.name)
+          if (entry.isDirectory()) {
+            await walk(full)
+          } else if (!entry.name.endsWith('.tmp')) {
+            const key = path.relative(root, full).split(path.sep).join('/')
+            if (key.startsWith(prefix)) objects.push({ key, size: (await fs.stat(full)).size })
+          }
+        }
+      }
+      await walk(root)
+      return objects
     },
     async presignGet() {
       return null

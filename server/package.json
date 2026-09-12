@@ -12,7 +12,9 @@
     "prisma:studio": "prisma studio",
     "test": "node --test",
     "storage:backfill": "node scripts/backfill-images.js",
-    "db:vacuum": "node scripts/vacuum-db.js"
+    "db:vacuum": "node scripts/vacuum-db.js",
+    "db:backup": "node scripts/backup-db.js",
+    "storage:verify": "node scripts/verify-storage.js"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.1127.0",
