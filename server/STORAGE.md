@@ -251,11 +251,11 @@ thumbnail counts were unchanged. The 2,230 rows produced 2,042 objects (1,810 MB
 duplicate uploads share one key; the rehearsal copy had every card under a single user, so
 production, with keys per user, will deduplicate less.
 
-On Render staging (a 4.9 GB network disk) the same migration took **4 minutes**, and the boot-time
-backup adds its own copy time to a deploy (Logs report it as `[backup] wrote ... in Ns`), which is also how
-long the API is unavailable during the production deploy. Two things will be slower on Render: the backfill pushes 1.8 GB over the network to R2 (expect
-minutes, not seconds, which is why step 5 detaches it), and Render's disk is slower than a laptop
-SSD, so the migration and VACUUM may take tens of seconds rather than two.
+On Render staging (512 MB instance, 4.9 GB network disk) with the same data: the migration took
+**4 minutes** and the boot-time backup **207 seconds**, so a production deploy that does both is
+about **8 minutes** of downtime. The backfill peaked at 177 MB RSS, `--clear-blobs` and the vacuum
+took seconds, and the file went from 3,782 MB to 29 MB. The backfill's own duration is set by
+reading 1.9 GB off that disk and about 2,000 sequential uploads; detach it as step 5 says.
 
 ### If something goes wrong
 
