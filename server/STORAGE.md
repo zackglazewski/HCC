@@ -22,7 +22,7 @@ rows that still have their bytes in the database, so a half-finished backfill ne
 | Environment | Bucket | Token | CORS policy |
 |---|---|---|---|
 | staging (Render PR preview + Pages preview) | `hcc-staging` | Object Read & Write, scoped to this bucket | `r2/cors-staging.json` (any origin, because preview hostnames change per branch) |
-| production | `hcc-prod` | Object Read & Write, scoped to this bucket | `r2/cors-production.json` (production origin plus localhost; edit the placeholder first) |
+| production | `hcc-prod` | Object Read & Write, scoped to this bucket | `r2/cors-production.json` (production origin `https://hcc-dw7.pages.dev` plus localhost) |
 
 Objects are private in both buckets. CORS only decides which web origins may read an object they
 already hold a valid presigned URL for, which is why `*` is acceptable on staging. R2 does not

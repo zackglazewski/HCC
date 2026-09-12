@@ -1,6 +1,6 @@
 [
   {
-    "AllowedOrigins": ["https://REPLACE-WITH-PRODUCTION-ORIGIN", "http://localhost:3000"],
+    "AllowedOrigins": ["https://hcc-dw7.pages.dev", "http://localhost:3000"],
     "AllowedMethods": ["GET"],
     "AllowedHeaders": ["*"],
     "MaxAgeSeconds": 3600
