@@ -72,7 +72,7 @@ so expect an empty database and load a snapshot into it to rehearse the migratio
 2. **Open a pull request for this branch.** Render builds `https://<service>-pr-<n>.onrender.com`.
    The first boot uses the parent's variables, so it runs with the `local` driver; that is fine.
    In the preview's **Environment** tab set the six variables above with the staging token and
-   bucket. Saving redeploys the preview. If the preview fails to boot because the production disk
+   bucket, overwriting the leftover point-model `R2_*` values that were copied from production. Saving redeploys the preview. If the preview fails to boot because the production disk
    path in `DATABASE_URL` does not exist, set `DATABASE_URL=file:./preview.db` on the preview too.
 3. **Seed the database.** Do this only after the env-var redeploy in step 2 has finished, and do
    not redeploy or restart the preview again until the test is over: unless the preview has a
@@ -151,8 +151,11 @@ last production snapshot was pulled). This backup is the recovery path for every
 the deploy, `node scripts/backup-db.js <path>` does the same and additionally reads the copy back.
 
 **2. Create the production bucket and token, set CORS, add the env vars** as in *Buckets: one per
-environment*, with `R2_BUCKET=hcc-prod` and the production token. Do this before deploying: with
-`STORAGE_DRIVER=r2` and any R2 variable missing, the server refuses to boot.
+environment*, with `R2_BUCKET=hcc-prod` and the production token. The API service already carries
+`R2_*` variables left over from the point-model experiment, which nothing on the API reads;
+overwrite their values rather than adding duplicates, or the server will boot against the wrong
+bucket. Do this before deploying: with `STORAGE_DRIVER=r2` and any R2 variable missing, the
+server refuses to boot.
 
 **3. Deploy the branch.** On boot `prisma migrate deploy` applies
 `20260906023507_add_image_object_storage`, then the API starts. Uploads made from now on go straight
