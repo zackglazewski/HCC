@@ -3,19 +3,35 @@ import { CardState, DEFAULT_CARD, ImageLayer, HitboxState, HitboxSilhouette, LOS
 
 const LOCAL_KEY = 'hcc:card'
 
-export function useCardState() {
-  const [card, setCard] = useState<CardState>(() => {
-    try {
-      const raw = localStorage.getItem(LOCAL_KEY)
-      const parsed = raw ? (JSON.parse(raw) as CardState) : DEFAULT_CARD
-      if (!parsed.powers || parsed.powers.length === 0) {
-        parsed.powers = [...DEFAULT_CARD.powers]
-      }
-      return parsed
-    } catch {
-      return DEFAULT_CARD
+function freshCard(): CardState {
+  return JSON.parse(JSON.stringify(DEFAULT_CARD))
+}
+
+/** The guest card saved in this browser, or the defaults when there is none. */
+function readLocalCard(): CardState {
+  try {
+    const raw = localStorage.getItem(LOCAL_KEY)
+    const parsed = raw ? (JSON.parse(raw) as CardState) : freshCard()
+    if (!parsed.powers || parsed.powers.length === 0) {
+      parsed.powers = [...DEFAULT_CARD.powers]
     }
-  })
+    return parsed
+  } catch {
+    return freshCard()
+  }
+}
+
+/**
+ * Editor card state.
+ *
+ * A guest card (no `remoteId`) lives in localStorage so a reload restores it. A server-backed card is
+ * loaded from the API by the page: it starts from a blank placeholder and never reads or writes the
+ * local snapshot. Seeding it from localStorage would show — and, worse, autosave — whatever card was
+ * edited last in this browser until the requested card arrives.
+ */
+export function useCardState(remoteId: number | null = null) {
+  const isLocal = remoteId == null
+  const [card, setCard] = useState<CardState>(() => (isLocal ? readLocalCard() : freshCard()))
   const [saving, setSaving] = useState(false)
   const saveTimer = useRef<number | null>(null)
 
@@ -25,6 +41,7 @@ export function useCardState() {
       setCard((c) => ({ ...c, powers: [...DEFAULT_CARD.powers] }))
       return
     }
+    if (!isLocal) return
     // debounce local save
     if (saveTimer.current) window.clearTimeout(saveTimer.current)
     saveTimer.current = window.setTimeout(() => {
@@ -35,7 +52,7 @@ export function useCardState() {
     return () => {
       if (saveTimer.current) window.clearTimeout(saveTimer.current)
     }
-  }, [card])
+  }, [card, isLocal])
 
   function updateField<K extends keyof CardState['fields']>(key: K, value: string) {
     setCard((c) => ({ ...c, fields: { ...c.fields, [key]: value } }))
@@ -82,7 +99,7 @@ export function useCardState() {
   }
 
   function resetToDefaults() {
-    const fresh: CardState = JSON.parse(JSON.stringify(DEFAULT_CARD))
+    const fresh = freshCard()
     setCard(fresh)
     try { localStorage.setItem(LOCAL_KEY, JSON.stringify(fresh)) } catch {}
   }
