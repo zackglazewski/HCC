@@ -1,5 +1,8 @@
 import 'dotenv/config'
 import express from 'express'
+// Express 4 drops rejected promises from async handlers, which crashes the process on any database
+// error. This patch routes them to the error handler below instead.
+import 'express-async-errors'
 import cors from 'cors'
 import helmet from 'helmet'
 import morgan from 'morgan'
@@ -165,12 +168,15 @@ function getUserIdFromToken(req) {
 async function getOrCreateUser(req) {
   const authSub = getUserIdFromToken(req)
   if (!authSub) return null
-  const user = await prisma.users.upsert({
+  // Read first: nearly every request only needs the row, and a read never waits on SQLite's single
+  // write lock, so long-running maintenance (backups, vacuum) can't stall plain page loads.
+  const existing = await prisma.users.findUnique({ where: { auth_sub: authSub } })
+  if (existing) return existing
+  return prisma.users.upsert({
     where: { auth_sub: authSub },
     update: {},
     create: { auth_provider: 'auth0', auth_sub: authSub }
   })
-  return user
 }
 
 function parseId(param) {

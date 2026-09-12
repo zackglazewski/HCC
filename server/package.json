@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "node --watch src/index.js",
     "start": "node src/index.js",
-    "start:migrate": "prisma migrate deploy && node src/index.js",
+    "start:migrate": "node scripts/backup-before-migrate.js && prisma migrate deploy && node src/index.js",
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev --name init",
     "prisma:studio": "prisma studio",
@@ -23,6 +23,7 @@
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
+    "express-async-errors": "^3.1.1",
     "express-jwt": "^8.4.1",
     "helmet": "^7.1.0",
     "jwks-rsa": "^3.1.0",

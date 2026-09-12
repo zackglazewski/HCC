@@ -107,9 +107,12 @@ so expect an empty database and load a snapshot into it to rehearse the migratio
    `/api/__preview?origin=https://<service>-pr-<n>.onrender.com`, log in, open a card. Images still
    load through the signed API route from database bytes at this point.
 5. **Run production runbook steps 4 to 9** in the preview Shell: verify, backfill (detached,
-   logging to `/data/backfill.log`),
-   verify, open cards and confirm the Network tab shows `r2.cloudflarestorage.com` URLs with no CORS
-   errors, backup, `--clear-blobs`, verify, vacuum.
+   logging to `/data/backfill.log`), verify, open cards and confirm the Network tab shows
+   `r2.cloudflarestorage.com` URLs with no CORS errors, then the pre-clear backup, `--clear-blobs`,
+   verify, vacuum. The preview's 4.9 GB disk cannot hold a backup next to the 3.8 GB migrated file,
+   so point `BACKUP_BEFORE_MIGRATE` at `/tmp/pre-clear.db` if `df -h /tmp` shows room, and skip the
+   backup on staging otherwise. Never run `scripts/backup-db.js` from the Shell against an instance
+   that is serving: its read lock stalls writes for minutes.
 6. **Exercise the write paths in the app.** Upload an image to a card and watch it appear under
    `u/<user_id>/` in the bucket. Run background removal on it (re-upload plus delete of the old
    object). Delete the image, then the card, then a folder containing cards, and confirm the
@@ -130,26 +133,21 @@ The backup in step 1 is another full copy if it lives on the same disk. Rule of 
 of at least 2× the database file, 3× if the backup stays on the disk. Render → service → **Disks**
 shows size and usage; disks can be grown, not shrunk.
 
-**1. Back up the database.** This happens before the deploy, so the Render **Shell** still runs the
-old code without `scripts/backup-db.js`. Paste this instead, from the `server/` directory so the
-script can find `@prisma/client` (adjust the target path to the disk mount):
+**1. Arrange the backup.** Do not take it from the Shell while the API is serving: `VACUUM INTO`
+holds a read lock for the whole copy, which takes minutes on Render's disk, and every write in that
+window waits and then times out. Instead the API takes the backup itself at boot, before running
+migrations, when nothing is serving. Add this to the service's environment together with the
+variables in step 2:
 
-```sh
-cat > backup.cjs <<'EOF'
-const { PrismaClient } = require('@prisma/client')
-const target = process.argv[2]
-const p = new PrismaClient()
-p.$executeRawUnsafe(`VACUUM INTO '${target}'`)
-  .then(() => console.log('backup written to', target))
-  .finally(() => p.$disconnect())
-EOF
-node backup.cjs /data/hcc.pre-r2.db && rm backup.cjs
+```
+BACKUP_BEFORE_MIGRATE=/data/hcc.pre-r2.db
 ```
 
-`VACUUM INTO` produces a consistent copy while the API keeps serving, unlike `cp` on an open
-database. Copy the file off the machine before continuing (`scp` over Render SSH, or however the
-last production snapshot was pulled). This backup is the recovery path for everything below. After
-the deploy, `node scripts/backup-db.js <path>` does the same and additionally reads the copy back.
+The deploy in step 3 then writes the backup first and refuses to migrate if that fails. Leave the
+variable in place; once the file exists every later restart logs "already exists; skipping". As a
+second net, note the time of the disk's latest automatic snapshot (Render → service → Disks →
+Snapshots). `node scripts/backup-db.js <path>` still exists for ad-hoc copies, but only run it when
+nothing is writing.
 
 **2. Create the production bucket and token, set CORS, add the env vars** as in *Buckets: one per
 environment*, with `R2_BUCKET=hcc-prod` and the production token. The API service already carries
@@ -158,10 +156,15 @@ overwrite their values rather than adding duplicates, or the server will boot ag
 bucket. Do this before deploying: with `STORAGE_DRIVER=r2` and any R2 variable missing, the
 server refuses to boot.
 
-**3. Deploy the branch.** On boot `prisma migrate deploy` applies
-`20260906023507_add_image_object_storage`, then the API starts. Uploads made from now on go straight
-to R2. Existing images keep loading through the signed `/api/images/:id/content` route straight
-from their database bytes, so users notice nothing.
+**3. Deploy the branch.** On boot the service writes the backup (Logs show `[backup] wrote
+/data/hcc.pre-r2.db ... integrity_check: ok`), `prisma migrate deploy` applies
+`20260906023507_add_image_object_storage`, then the API starts. The service is unavailable for the
+backup plus the migration; the migration alone took 4 minutes on Render's disk. Uploads made from
+now on go straight to R2. Existing images keep loading through the signed `/api/images/:id/content`
+route from their database bytes, so users notice nothing else.
+
+Then copy `/data/hcc.pre-r2.db` off the machine (`scp` over Render SSH, or however the last
+production snapshot was pulled). Do not continue until that copy is somewhere other than this disk.
 
 **4. Verify the bucket is reachable.** In the Render Shell:
 
@@ -208,10 +211,11 @@ the new columns).
 
 **8. Clear the database bytes.** The only destructive step. Per row it re-checks the object exists,
 then nulls `blob`; a row whose object cannot be confirmed keeps its bytes. Take one more backup
-first: it costs a few seconds and is the last moment the bytes exist in the database.
+first, the same way as step 1: change `BACKUP_BEFORE_MIGRATE` to `/data/hcc.pre-clear.db` and save.
+The service restarts, writes the backup, finds no pending migrations, and comes back; confirm the
+`[backup] wrote` line in Logs. This is the last moment the bytes exist in the database. Then:
 
 ```sh
-node scripts/backup-db.js /data/hcc.pre-clear.db
 node scripts/backfill-images.js --clear-blobs
 node scripts/verify-storage.js
 ```
@@ -224,8 +228,9 @@ node scripts/vacuum-db.js
 
 SQLite only shrinks the file on VACUUM. The file drops to roughly the size of the non-image data.
 
-**10. Later.** Once every row has an `object_key` and no blobs remain, a follow-up Prisma migration
-can drop the `blob` column. Not urgent.
+**10. Later.** Remove `BACKUP_BEFORE_MIGRATE` from the environment and, once you are comfortable,
+the two backup files from the disk (keep the off-box copy). Once every row has an `object_key` and
+no blobs remain, a follow-up Prisma migration can drop the `blob` column. Not urgent.
 
 ### Timings measured on a copy of the production database
 
@@ -246,7 +251,8 @@ thumbnail counts were unchanged. The 2,230 rows produced 2,042 objects (1,810 MB
 duplicate uploads share one key; the rehearsal copy had every card under a single user, so
 production, with keys per user, will deduplicate less.
 
-On Render staging (a 4.9 GB network disk) the same migration took **4 minutes**, which is also how
+On Render staging (a 4.9 GB network disk) the same migration took **4 minutes**, and the boot-time
+backup adds its own copy time to a deploy (Logs report it as `[backup] wrote ... in Ns`), which is also how
 long the API is unavailable during the production deploy. Two things will be slower on Render: the backfill pushes 1.8 GB over the network to R2 (expect
 minutes, not seconds, which is why step 5 detaches it), and Render's disk is slower than a laptop
 SSD, so the migration and VACUUM may take tens of seconds rather than two.
@@ -257,6 +263,12 @@ SSD, so the migration and VACUUM may take tens of seconds rather than two.
   finished). SQLite applied the migration atomically or not at all, but Prisma may have recorded it
   as started. In the Shell run `npx prisma migrate status`; if it reports a failed migration, run
   `npx prisma migrate resolve --rolled-back 20260906023507_add_image_object_storage` and redeploy.
+- **Deploy fails at the boot-time backup** (`[backup] FAILED` in Logs: wrong path, disk full).
+  Nothing has been migrated. Fix the path or free space and redeploy. Removing
+  `BACKUP_BEFORE_MIGRATE` would skip the backup; don't.
+- **A request hits a database error** (for example a timeout while a long read lock is held).
+  The API answers that request with a 500 and keeps running; before `express-async-errors` was
+  added, one such error crashed the process and Render restarted the container.
 - **"Instance failed: ran out of memory" during the backfill.** Render restarts the container.
   The API comes back on its own, `/data` is intact, and rows already backfilled stay done, but the
   detached backfill process and anything on the ephemeral filesystem are gone. Re-run the same
