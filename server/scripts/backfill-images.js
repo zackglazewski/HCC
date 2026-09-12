@@ -8,7 +8,10 @@
  *   3. with --clear-blobs, null `blob` on each row whose object was confirmed this run
  *
  * Run from server/ with the same env the API uses (STORAGE_DRIVER, R2_*, LOCAL_STORAGE_DIR):
- *   node scripts/backfill-images.js [--dry-run] [--clear-blobs] [--batch=25]
+ *   node scripts/backfill-images.js [--dry-run] [--clear-blobs] [--batch=100]
+ *
+ * Memory stays flat: images are loaded and uploaded one at a time (--batch only sizes the id pages).
+ * Write the log somewhere persistent, e.g. nohup node scripts/backfill-images.js > /data/backfill.log 2>&1 &
  *
  * Deploy the API first so new uploads already go to storage, run this without flags, check that
  * cards render, then run it again with --clear-blobs and follow with scripts/vacuum-db.js.
@@ -22,14 +25,14 @@ const args = new Set(process.argv.slice(2))
 const dryRun = args.has('--dry-run')
 const clearBlobs = args.has('--clear-blobs')
 const batchArg = [...args].find((a) => a.startsWith('--batch='))
-const BATCH = Math.max(1, parseInt(batchArg?.split('=')[1] || '25', 10) || 25)
+const BATCH = Math.max(1, parseInt(batchArg?.split('=')[1] || '100', 10) || 100) // ids per page, not blobs
 
 const prisma = new PrismaClient()
 const storage = createStorage()
 const stats = { scanned: 0, uploaded: 0, present: 0, cleared: 0, skipped: 0, failed: 0 }
 
 async function processRow(row) {
-  const blob = Buffer.from(row.blob)
+  const blob = Buffer.isBuffer(row.blob) ? row.blob : Buffer.from(row.blob)
   const mime = sniffImageMime(blob)
   if (!mime) {
     console.warn(`  image ${row.id}: unrecognised bytes (${blob.length} B), skipping`)
@@ -63,16 +66,24 @@ async function main() {
   const orphaned = await prisma.card_images.count({ where: { blob: null, object_key: null } })
   if (orphaned) console.warn(`[backfill] ${orphaned} row(s) have neither bytes nor an object key and cannot be recovered here`)
 
+  // Page over ids only, then load one image at a time. Prisma moves Bytes through its engine as
+  // base64 JSON, so pulling whole batches of blobs into memory can exceed a small instance's RAM
+  // and take the API down with it; this keeps peak memory at a few copies of the largest image.
   let lastId = 0
   for (;;) {
-    const rows = await prisma.card_images.findMany({
+    const ids = await prisma.card_images.findMany({
       where: { id: { gt: lastId }, blob: { not: null } },
       orderBy: { id: 'asc' },
       take: BATCH,
-      select: { id: true, blob: true, card: { select: { user_id: true } } },
+      select: { id: true },
     })
-    if (rows.length === 0) break
-    for (const row of rows) {
+    if (ids.length === 0) break
+    for (const { id } of ids) {
+      const row = await prisma.card_images.findUnique({
+        where: { id },
+        select: { id: true, blob: true, card: { select: { user_id: true } } },
+      })
+      if (!row || !row.blob) continue // deleted or cleared since the id page was read
       stats.scanned++
       try {
         await processRow(row)
@@ -80,9 +91,14 @@ async function main() {
         stats.failed++
         console.error(`  image ${row.id}: failed:`, e?.message || e)
       }
+      if (stats.scanned % 25 === 0) console.log(`[backfill] ${stats.scanned} scanned, ${stats.uploaded} uploaded, ${stats.present} already stored`)
+      if (process.env.BACKFILL_DEBUG_MEM && stats.scanned % 100 === 0) {
+        const m = process.memoryUsage()
+        const mb = (n) => `${Math.round(n / 1048576)}MB`
+        console.log(`[mem] rss=${mb(m.rss)} heap=${mb(m.heapUsed)} external=${mb(m.external)} arrayBuffers=${mb(m.arrayBuffers)}`)
+      }
     }
-    lastId = rows[rows.length - 1].id
-    console.log(`[backfill] ${stats.scanned} scanned, ${stats.uploaded} uploaded, ${stats.present} already stored`)
+    lastId = ids[ids.length - 1].id
   }
   console.log('[backfill] done', stats)
   if (clearBlobs && stats.cleared && !dryRun) console.log('[backfill] run `node scripts/vacuum-db.js` to hand the freed space back to the filesystem')

@@ -106,7 +106,8 @@ so expect an empty database and load a snapshot into it to rehearse the migratio
 4. **Pin the Pages preview.** Push the branch, open its `pages.dev` preview URL, visit
    `/api/__preview?origin=https://<service>-pr-<n>.onrender.com`, log in, open a card. Images still
    load through the signed API route from database bytes at this point.
-5. **Run production runbook steps 4 to 9** in the preview Shell: verify, backfill (detached),
+5. **Run production runbook steps 4 to 9** in the preview Shell: verify, backfill (detached,
+   logging to `/data/backfill.log`),
    verify, open cards and confirm the Network tab shows `r2.cloudflarestorage.com` URLs with no CORS
    errors, backup, `--clear-blobs`, verify, vacuum.
 6. **Exercise the write paths in the app.** Upload an image to a card and watch it appear under
@@ -142,7 +143,7 @@ p.$executeRawUnsafe(`VACUUM INTO '${target}'`)
   .then(() => console.log('backup written to', target))
   .finally(() => p.$disconnect())
 EOF
-node backup.cjs /var/data/hcc.pre-r2.db && rm backup.cjs
+node backup.cjs /data/hcc.pre-r2.db && rm backup.cjs
 ```
 
 `VACUUM INTO` produces a consistent copy while the API keeps serving, unlike `cp` on an open
@@ -172,16 +173,22 @@ Expect every row under "blob only, not yet migrated", zero objects in storage, a
 This proves credentials, endpoint and bucket name before any bytes move.
 
 **5. Backfill.** Still in the Shell. The upload takes a while (see timings below), and Shell
-sessions can drop, so detach it:
+sessions can drop, so detach it and keep the log on the persistent disk:
 
 ```sh
-nohup node scripts/backfill-images.js > /var/data/backfill.log 2>&1 &
-tail -f /var/data/backfill.log
+nohup node scripts/backfill-images.js > /data/backfill.log 2>&1 &
+tail -f /data/backfill.log
 ```
 
 It uploads each image to `u/<user_id>/<sha256>`, writes `object_key`, `mime`, `size_bytes` and
 `sha256` on the row, and leaves `blob` untouched. If it dies part-way, run it again: rows already
 uploaded are confirmed with a HEAD request and skipped.
+
+Memory: the instance limit covers the API and the backfill together. The script loads one image
+at a time and stayed between 170 and 250 MB of RSS under a 512 MB Linux limit with all 2,230
+images; an earlier version that batched 25 images was killed at 512 MB on staging and took the
+API down with it. Moving the service to a larger instance for the migration day is cheap
+insurance and can be reverted afterwards.
 
 **6. Verify the backfill.**
 
@@ -204,7 +211,7 @@ then nulls `blob`; a row whose object cannot be confirmed keeps its bytes. Take 
 first: it costs a few seconds and is the last moment the bytes exist in the database.
 
 ```sh
-node scripts/backup-db.js /var/data/hcc.pre-clear.db
+node scripts/backup-db.js /data/hcc.pre-clear.db
 node scripts/backfill-images.js --clear-blobs
 node scripts/verify-storage.js
 ```
@@ -239,7 +246,8 @@ thumbnail counts were unchanged. The 2,230 rows produced 2,042 objects (1,810 MB
 duplicate uploads share one key; the rehearsal copy had every card under a single user, so
 production, with keys per user, will deduplicate less.
 
-Two things will be slower on Render: the backfill pushes 1.8 GB over the network to R2 (expect
+On Render staging (a 4.9 GB network disk) the same migration took **4 minutes**, which is also how
+long the API is unavailable during the production deploy. Two things will be slower on Render: the backfill pushes 1.8 GB over the network to R2 (expect
 minutes, not seconds, which is why step 5 detaches it), and Render's disk is slower than a laptop
 SSD, so the migration and VACUUM may take tens of seconds rather than two.
 
@@ -249,6 +257,11 @@ SSD, so the migration and VACUUM may take tens of seconds rather than two.
   finished). SQLite applied the migration atomically or not at all, but Prisma may have recorded it
   as started. In the Shell run `npx prisma migrate status`; if it reports a failed migration, run
   `npx prisma migrate resolve --rolled-back 20260906023507_add_image_object_storage` and redeploy.
+- **"Instance failed: ran out of memory" during the backfill.** Render restarts the container.
+  The API comes back on its own, `/data` is intact, and rows already backfilled stay done, but the
+  detached backfill process and anything on the ephemeral filesystem are gone. Re-run the same
+  `nohup` command; it resumes. If it recurs, move the service to a larger instance for the rest of
+  the migration.
 - **Backfill errors on some rows.** The script prints each failing image id and exits 1. Fix the
   cause (usually credentials or a transient network error) and re-run; it resumes.
 - **Images broken after step 8.** Restore the pre-clear backup from step 8 (it has every byte plus
