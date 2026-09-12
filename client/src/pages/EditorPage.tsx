@@ -8,10 +8,10 @@ import { EditorCanvas, CanvasSnapshot } from '../editor/Canvas'
 import { PowersEditor } from '../editor/PowersEditor'
 import { HitboxEditor } from '../editor/HitboxEditor'
 import { CustomThemePanel, type CustomTheme } from '../editor/CustomThemePanel'
-import { createCard, getCard, patchCard, postImage, postPower, patchPower, patchImage, deleteImageApi, listThemes, createTheme, deleteTheme, putThumbnail } from '../lib/api'
+import { createCard, getCard, patchCard, postImage, postPower, patchPower, patchImage, deleteImageApi, listThemes, createTheme, deleteTheme, putThumbnail, type ServerCard } from '../lib/api'
 import { SupportLink } from '../lib/support'
 import { rememberLocalThumbnail } from '../projects/thumbnails'
-import { DEFAULT_CUSTOM_THEME, serverCardToState } from '../editor/serverCard'
+import { DEFAULT_CUSTOM_THEME, customThemeFromServer, revokeCardImages, serverCardToState } from '../editor/serverCard'
 import { encodeThumbnail, THUMBNAIL_PX } from '../editor/thumbnail'
 
 /** Wait for edits to settle before snapshotting a preview. */
@@ -35,7 +35,16 @@ function serializeHitbox(hitbox: HitboxState | undefined, images: { id: string; 
   })
 }
 
-/** Deserialize hitbox from server: convert server remoteIds → local imageId UUIDs */
+/** Colours the editor cached locally for a custom card whose theme never reached the server. */
+function localThemeFor(server: ServerCard): CustomTheme | null {
+  if (server.general !== 'custom') return null
+  try {
+    const parsed = JSON.parse(localStorage.getItem(`hcc:theme:${server.id}`) || 'null')
+    if (parsed && parsed.primary && parsed.secondary && parsed.background) return parsed
+  } catch {}
+  return null
+}
+
 type ViewMode = 'both' | 'canvas' | 'panel'
 
 function Header({ saving, title, onTitleChange, general, onGeneralChange, onExport, onSaveToAccount, isAuthenticated: authProp, cardId, viewMode, onViewModeChange, backTo = '/projects' }: {
@@ -190,12 +199,18 @@ function Header({ saving, title, onTitleChange, general, onGeneralChange, onExpo
 export default function EditorPage() {
   const params = useParams()
   const nav = useNavigate()
-  const { isAuthenticated, getAccessTokenSilently, logout } = useAuth0()
-  const { card, saving, setTitle, setGeneral, updateField, addImage, updateImage, deleteImage, setCard, resetToDefaults, updateSilhouette, addLOSMarker, updateLOSMarker, deleteLOSMarker, syncHitboxSilhouettes } = useCardState()
+  const { isAuthenticated, isLoading: authLoading, getAccessTokenSilently, logout } = useAuth0()
+  const cardId = params.id ? parseInt(params.id) : null
+  const { card, saving, setTitle, setGeneral, updateField, addImage, updateImage, deleteImage, setCard, resetToDefaults, updateSilhouette, addLOSMarker, updateLOSMarker, deleteLOSMarker, syncHitboxSilhouettes } = useCardState(cardId)
   const location = useLocation()
   const [selectedId, setSelectedId] = useState<string | null>(null)
-  const cardId = params.id ? parseInt(params.id) : null
   const [loading, setLoading] = useState<boolean>(!!cardId)
+  /**
+   * True once the card in state is the one the URL names (always true for a guest card). Until then
+   * the state is a placeholder — or, when moving between cards without leaving the editor, the
+   * previous card — and nothing may be saved from it: not the card, not its theme, not a thumbnail.
+   */
+  const cardReady = cardId == null || card.id === cardId
   const [folderId, setFolderId] = useState<number | null>(null)
   const snapshotRef = useRef<CanvasSnapshot | null>(null)
   /** Last thumbnail we sent, so leaving the editor doesn't re-upload an identical render. */
@@ -203,7 +218,7 @@ export default function EditorPage() {
   /** Latest values for the unmount-time snapshot (that effect deliberately has no deps). */
   const thumbnailCtxRef = useRef({ cardId: null as number | null, isAuthenticated: false })
   thumbnailCtxRef.current = { cardId: card.id ?? null, isAuthenticated }
-  const [customTheme, setCustomTheme] = useState<CustomTheme>({ primary: '#3080ff', secondary: '#88aacc', background: '#556677' })
+  const [customTheme, setCustomTheme] = useState<CustomTheme>(DEFAULT_CUSTOM_THEME)
   const [activeTab, setActiveTab] = useState<'images' | 'theme' | 'attributes' | 'powers' | 'hitbox'>('images')
   const [savedThemes, setSavedThemes] = useState<{ id: number; name: string; primary_hex: string; secondary_hex: string; background_hex: string }[]>([])
   const [viewMode, setViewMode] = useState<ViewMode>(() => window.innerWidth < 768 ? 'panel' : 'both')
@@ -232,46 +247,36 @@ export default function EditorPage() {
 
   
 
-  // Load card by id when available and signed in
+  // Load the card the URL names. State is only trusted once this has finished (see `cardReady`),
+  // and a response for a card the user has since navigated away from is dropped.
   useEffect(() => {
+    if (!cardId) { setLoading(false); return }
+    if (!isAuthenticated) {
+      if (!authLoading) setLoading(false)
+      return
+    }
+    let cancelled = false
+    setLoading(true)
     ;(async () => {
-      if (!cardId || !isAuthenticated) { setLoading(false); return }
       try {
         const token = await getAccessTokenSilently()
         const server = await getCard(cardId, token)
-        setFolderId(server.folder_id ?? null)
         const nextCard = await serverCardToState(server)
+        if (cancelled) { revokeCardImages(nextCard); return }
+        setFolderId(server.folder_id ?? null)
         setCard(nextCard)
-        // Load custom theme if present on server; otherwise reset to default
-        if ((server.general as any) !== 'custom') {
-          setCustomTheme(DEFAULT_CUSTOM_THEME)
-        } else if ((server.general as any) === 'custom') {
-          const fromServer = {
-            primary: (server as any).theme_primary_hex || null,
-            secondary: (server as any).theme_secondary_hex || null,
-            background: (server as any).theme_background_hex || null,
-          }
-          if (fromServer.primary && fromServer.secondary && fromServer.background) {
-            setCustomTheme(fromServer as any)
-          } else {
-            try {
-              const saved = localStorage.getItem(`hcc:theme:${server.id}`)
-              if (saved) {
-                const parsed = JSON.parse(saved)
-                if (parsed && parsed.primary && parsed.secondary && parsed.background) setCustomTheme(parsed)
-              }
-            } catch {}
-          }
-        }
+        setCustomTheme(customThemeFromServer(server) ?? localThemeFor(server) ?? DEFAULT_CUSTOM_THEME)
       } catch {
+        if (cancelled) return
         // Token expired or refresh failed — clear stale Auth0 cache
         logout({ openUrl: false })
       } finally {
-        setLoading(false)
+        if (!cancelled) setLoading(false)
       }
     })()
+    return () => { cancelled = true }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [cardId, isAuthenticated])
+  }, [cardId, isAuthenticated, authLoading])
 
   // Load saved themes when authenticated
   useEffect(() => {
@@ -285,11 +290,12 @@ export default function EditorPage() {
     })()
   }, [isAuthenticated, getAccessTokenSilently])
 
-  // Autosave to API; ensure remote card exists and include theme fields (requires DB migration)
+  // Autosave to API; ensure remote card exists and include theme fields (requires DB migration).
+  // Never runs from a placeholder or a previous card's state (see `cardReady`).
   useEffect(() => {
+    if (!isAuthenticated || !cardReady) return
     let timer: number | null = null
     async function save() {
-      if (!isAuthenticated) return
       // Ensure remote card exists so theme can be saved
       let remoteId = card.id
       if (!remoteId) {
@@ -329,14 +335,14 @@ export default function EditorPage() {
     }
     timer = window.setTimeout(save, 1000)
     return () => { if (timer) window.clearTimeout(timer) }
-  }, [card, customTheme, isAuthenticated, getAccessTokenSilently])
+  }, [card, customTheme, isAuthenticated, cardReady, getAccessTokenSilently])
 
   // Upload a small rendered preview for the projects explorer once edits settle.
   // Also runs on open (backfilling cards created before previews existed). The canvas can take a
   // moment to become ready after load — fonts, base images, custom-theme recolouring — so a snapshot
   // that isn't available yet is retried instead of silently skipped.
   useEffect(() => {
-    if (!isAuthenticated || !card.id) return
+    if (!isAuthenticated || !card.id || !cardReady) return
     const cardId = card.id
     let cancelled = false
     let attempts = 0
@@ -356,7 +362,7 @@ export default function EditorPage() {
       cancelled = true
       window.clearTimeout(timer)
     }
-  }, [card, customTheme, isAuthenticated, getAccessTokenSilently])
+  }, [card, customTheme, isAuthenticated, cardReady, getAccessTokenSilently])
 
   async function uploadThumbnail(cardId: number, dataUrl: string) {
     const last = lastThumbnailRef.current
@@ -386,12 +392,12 @@ export default function EditorPage() {
 
   // Persist custom theme to localStorage for fast restore and guest mode
   useEffect(() => {
-    if (card.general !== 'custom') return
+    if (card.general !== 'custom' || !cardReady) return
     const key = card.id ? `hcc:theme:${card.id}` : 'hcc:theme:local'
     try {
       localStorage.setItem(key, JSON.stringify(customTheme))
     } catch {}
-  }, [customTheme, card.general, card.id])
+  }, [customTheme, card.general, card.id, cardReady])
 
   async function ensureRemoteCard(navigateToEditor: boolean = true): Promise<number | undefined> {
     if (card.id) return card.id
