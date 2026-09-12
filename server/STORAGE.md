@@ -72,34 +72,34 @@ so expect an empty database and load a snapshot into it to rehearse the migratio
 2. **Open a pull request for this branch.** Render builds `https://<service>-pr-<n>.onrender.com`.
    The first boot uses the parent's variables, so it runs with the `local` driver; that is fine.
    In the preview's **Environment** tab set the six variables above with the staging token and
-   bucket, overwriting the leftover point-model `R2_*` values that were copied from production. Saving redeploys the preview. If the preview fails to boot because the production disk
-   path in `DATABASE_URL` does not exist, set `DATABASE_URL=file:./preview.db` on the preview too.
-3. **Seed the database.** Do this only after the env-var redeploy in step 2 has finished, and do
-   not redeploy or restart the preview again until the test is over: unless the preview has a
-   persistent disk, its filesystem is recreated on every deploy and the seed would vanish. The
-   Render Shell runs inside the live instance, so files you place there are the ones the API uses.
+   bucket, overwriting the leftover point-model `R2_*` values that were copied from production. Saving redeploys the preview.
+3. **Seed the database.** First confirm the preview keeps its database across deploys: after the
+   env-var redeploy in step 2 the logs should say "No pending migrations to apply" rather than
+   re-running every migration, and `df -h /data` in the Shell shows the database directory on its
+   own device. A preview without a persistent disk cannot be seeded this way.
 
    Use the staging bucket as the transfer medium. From your laptop, with the staging token:
 
    ```sh
    export AWS_ACCESS_KEY_ID=<staging key> AWS_SECRET_ACCESS_KEY=<staging secret>
-   export AWS_REQUEST_CHECKSUM_CALCULATION=WHEN_REQUIRED AWS_RESPONSE_CHECKSUM_VALIDATION=WHEN_REQUIRED
    R2=https://<account_id>.r2.cloudflarestorage.com
    aws s3 cp prisma/dev.db s3://hcc-staging/seed/hcc.db --endpoint-url $R2 --region auto
    aws s3 presign s3://hcc-staging/seed/hcc.db --expires-in 3600 --endpoint-url $R2 --region auto
    ```
 
-   In the preview's **Shell**: `echo $DATABASE_URL` to find the file (a relative `file:` path is
-   relative to `prisma/`), check `df -h` for about 4 GB free, then
+   In the preview's **Shell** (`echo $DATABASE_URL` shows the file, `/data/db.sqlite` on Render):
 
    ```sh
-   curl -o /path/to/db.new "<presigned url>" && mv /path/to/db.new /path/to/db
-   npx prisma migrate deploy
+   curl -o /data/db.sqlite.new "<presigned url>"
+   ls -la /data/db.sqlite.new          # about 1.9 GB
+   mv /data/db.sqlite.new /data/db.sqlite
    ```
 
-   Running the migration by hand from the Shell is production runbook step 3 rehearsed, minus the
-   restart. The already-running API picks up the new columns immediately. Then remove the seed
-   object, since it is a full copy of production data:
+   The running API still holds the old file open, so restart the preview: **Manual Deploy →
+   Restart service**. On boot `prisma migrate deploy` applies the image-storage migration to the
+   snapshot, which is production runbook step 3 rehearsed on real data; the logs show
+   `Applying migration 20260906023507_add_image_object_storage`. Then remove the seed object, since
+   it is a full copy of production data:
    `aws s3 rm s3://hcc-staging/seed/hcc.db --endpoint-url $R2 --region auto`.
    The local `dev.db` snapshot has every card under one user, so log in on staging with that
    Google account to see them.
