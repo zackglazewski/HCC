@@ -1,6 +1,6 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
-import { isSelfOrDescendant } from '../src/folderTree.js'
+import { collectDescendants, isSelfOrDescendant } from '../src/folderTree.js'
 
 // root
 // ├── 1
@@ -49,4 +49,11 @@ test('corrupt cyclic data terminates instead of looping forever', () => {
     [11, { id: 11, parent_id: 10 }],
   ])
   assert.equal(isSelfOrDescendant(cyclic, 42, 10), true)
+})
+
+test('collectDescendants returns the folder and everything nested under it', () => {
+  assert.deepEqual(collectDescendants(tree, 1).sort(), [1, 2, 3, 4])
+  assert.deepEqual(collectDescendants(tree, 2), [2, 3])
+  assert.deepEqual(collectDescendants(tree, 5), [5])
+  assert.deepEqual(collectDescendants(tree, 99), [99])
 })

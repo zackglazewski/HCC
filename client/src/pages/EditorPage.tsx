@@ -240,7 +240,7 @@ export default function EditorPage() {
         const token = await getAccessTokenSilently()
         const server = await getCard(cardId, token)
         setFolderId(server.folder_id ?? null)
-        const nextCard = serverCardToState(server)
+        const nextCard = await serverCardToState(server)
         setCard(nextCard)
         // Load custom theme if present on server; otherwise reset to default
         if ((server.general as any) !== 'custom') {

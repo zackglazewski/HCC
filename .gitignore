@@ -7,6 +7,9 @@
 *.db
 *.db-journal
 
+# Local image storage (STORAGE_DRIVER=local)
+server/storage/
+
 # Dependencies
 node_modules/
 .pnp
