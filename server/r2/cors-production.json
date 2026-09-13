@@ -1,6 +1,11 @@
 [
   {
-    "AllowedOrigins": ["https://hcc-dw7.pages.dev", "http://localhost:3000"],
+    "AllowedOrigins": [
+      "https://heroscapecardcreator.com",
+      "https://www.heroscapecardcreator.com",
+      "https://hcc-dw7.pages.dev",
+      "http://localhost:3000"
+    ],
     "AllowedMethods": ["GET"],
     "AllowedHeaders": ["*"],
     "MaxAgeSeconds": 3600
