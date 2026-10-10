@@ -1,0 +1,585 @@
+priority,source_file,name,figure_type,life,move,range,attack,defense,points,xgb_oof_pred,mpnet_cv_pred,flags
+1,custom-bill-cipher.png,BILL CIPHER,Unique Hero,1,0,0,0,0,500,13,5,both_models_off_2x;alternate_form_or_addon;zero_stat_event_or_vessel
+1,custom-ingrid-von-betten.png,Ingrid Von Betten,Unique Hero,2,6,1,4,4,5,67,70,both_models_off_2x;points_equals_height_blank_suspect;CONFIRMED_points_blank_on_card
+1,custom-grishnakh-custom-figures-ultron-primary.png,Ultron,Unique Hero,2,6,1,3,3,480,44,138,both_models_off_2x;designer_scale_1.67x
+1,custom-grima.png,Grima Wormtounge,Unique Hero,4,5,1,4,3,10,96,79,both_models_off_2x
+1,custom-tank-my-little-ponyscape.png,Tank,Unique Hero,2,1,1,1,6,10,84,40,both_models_off_2x
+1,custom-enchanted-tree.png,Enchanted Tree,Common Hero,1,0,1,3,2,5,39,7,points_equals_height_blank_suspect;same_name_points_disagree
+1,custom-grishnakh-custom-figures-ant-man-giant-man.png,Ant-Man (Hank Pym),Unique Hero,4,6,4,1,3,380,52,116,both_models_off_2x;designer_scale_1.67x
+1,custom-the-tardis-v1.png,THE TARDIS,Unique Hero,13,0,1,0,13,40,283,281,both_models_off_2x;alternate_form_or_addon;zero_stat_event_or_vessel
+1,custom-mittens.png,MITTENS,Unique Hero,2,5,1,2,3,5,30,32,both_models_off_2x
+1,custom-rock-n-roll-customs.png,Geddy Lee,Unique Hero,2,2,1,1,2,112,20,26,both_models_off_2x;not_multiple_of_5
+1,custom-innaria-copy.png,Innaria,Unique Hero,2,3,4,2,2,140,30,27,both_models_off_2x
+1,custom-grishnakh-custom-figures-triplicate-girl.png,TRIPLICATE GIRL,Unique Hero,1,6,1,4,4,240,54,94,both_models_off_2x;designer_scale_1.67x;same_name_points_disagree
+1,custom-grishnakh-custom-figures-green-lantern-john-stewart.png,John Stewart Green Lantern,Unique Hero,4,4,1,3,2,300,68,92,both_models_off_2x;designer_scale_1.67x
+1,marcu-esenwein.png,Marcu Esenwein,Unique Hero,6,6,1,4,1,20,87,79,both_models_off_2x;same_name_points_disagree
+1,custom-grishnakh-custom-figures-amon-sur.png,Amon Sur,Unique Hero,3,5,1,2,2,280,66,107,both_models_off_2x;designer_scale_1.67x
+1,custom-fate-custom-card.png,FATE,Unique Hero,1,6,1,3,2,5,21,39,both_models_off_2x
+1,custom-mlpscape-custom-card-nightmare-moon.png,Nightmare Moon,Unique Hero,6,5,7,6,5,60,229,251,both_models_off_2x;alternate_form_or_addon
+1,custom-300-artemis.png,Captain Artemis,Unique Hero,4,5,1,3,3,300,80,84,both_models_off_2x;CONFIRMED_subtitle_read_as_points(actual 40)
+1,custom-werewolf-oz.png,Werewolf Oz,Unique Hero,6,7,1,5,3,35,128,122,both_models_off_2x;alternate_form_or_addon
+1,custom-arboris.png,Arboris,Unique Hero,1,5,1,3,2,95,26,43,both_models_off_2x
+1,water-elemental-card.png,Water Elemental,Unique Hero,5,4,4,3,4,30,107,66,both_models_off_2x;CONFIRMED_stats_misread(actual L1 R5)
+1,custom-xvlthc.png,Xvlthc,Unique Hero,9,4,1,2,1,15,53,79,both_models_off_2x
+1,custom-the-piper-217280.png,The Piper,Common Hero,3,6,1,1,4,180,51,48,both_models_off_2x
+1,custom-marcu-esenwein-uncursed.png,Marcu Esenwein Uncursed,Unique Hero,6,7,1,4,4,45,158,145,both_models_off_2x;alternate_form_or_addon
+1,swog-rider.png,Swog Rider,Common Hero,5,8,1,3,3,25,86,69,both_models_off_2x
+1,custom-scarab-swarm.png,Scarab Swarm,Unique Hero,4,4,1,4,0,20,66,49,both_models_off_2x;alternate_form_or_addon
+1,custom-dragon-bot-fly.png,Dragon-Bot Fly,Unique Hero,1,7,1,2,3,10,32,60,both_models_off_2x
+1,custom-everquest-methis.png,METHIS,Common Hero,4,7,5,3,2,200,63,55,both_models_off_2x
+1,custom-blue-beetle-swc.png,Blue Beetle (Jaime Reyes),Unique Hero,4,6,1,2,3,250,79,124,both_models_off_2x
+1,custom-gollum.png,"Gollum, Vile Creature",Unique Hero,4,6,1,3,4,30,90,87,both_models_off_2x
+1,custom-mortanis.png,MORTANIS,Unique Hero,1,0,1,0,1,30,10,13,both_models_off_2x;zero_stat_event_or_vessel
+1,custom-tmnt-test-card-master-splinter.png,Master Splinter,Unique Hero,3,7,1,5,3,170,58,78,both_models_off_2x
+1,custom-grima-wormtongue-2-jpg.png,Grima Wormtongue,Unique Hero,2,5,1,2,2,10,29,33,both_models_off_2x;same_name_points_disagree
+1,custom-grishnakh-custom-figures-mera.png,MERA,Unique Hero,5,6,1,3,3,360,128,149,both_models_off_2x;designer_scale_1.67x
+1,custom-300-astinos.png,Astinos,Unique Hero,1,5,1,3,3,10,28,51,both_models_off_2x
+1,custom-slaad-spawn.png,Slaad Spawn,Common Hero,1,5,1,3,1,5,14,18,both_models_off_2x;alternate_form_or_addon
+1,custom-nathaniel-teager.png,Nathaniel Teager,Unique Hero,1,5,1,6,1,80,29,38,both_models_off_2x;alternate_form_or_addon
+1,custom-flinn-bruckett-taf-customs.png,Flinn Bruckett,Unique Hero,5,5,1,1,1,20,55,93,both_models_off_2x
+1,custom-skeletal-warriors.png,Skeletal Warriors,Common Squad,1,5,1,2,2,20,54,52,both_models_off_2x
+1,custom-marro-mutation-swc.png,Marro Mutation,Common Hero,1,6,1,3,3,10,27,22,both_models_off_2x;alternate_form_or_addon
+1,custom-grishnakh-custom-figures-yellow-lantern-lyssa-drak.png,Lyssa Drak,Unique Hero,4,4,1,3,2,300,118,131,both_models_off_2x;designer_scale_1.67x
+1,custom-grishnakh-custom-figures-ka-zar.png,KA-ZAR,Unique Hero,5,5,1,4,3,360,144,113,both_models_off_2x;designer_scale_1.67x
+1,custom-microsoft-office-assistant.png,The M.O.A,Unique Hero,1,6,1,2,2,50,20,21,both_models_off_2x
+1,custom-wild-hunt-taf-customs.png,Wild Hunt,Unique Hero,5,6,5,4,1,30,74,82,both_models_off_2x
+1,custom-merchant.png,Merchant,Unique Hero,2,4,1,1,2,15,37,39,both_models_off_2x
+1,custom-hof-super-mario.png,Super Mario,Unique Hero,2,5,1,0,4,25,61,76,both_models_off_2x
+1,custom-lassriel.png,Lassriel,Unique Hero,3,6,1,3,5,35,84,119,both_models_off_2x
+1,custom-dingbots.png,Dingbots,Unique Squad,1,6,1,2,2,20,47,46,both_models_off_2x
+1,custom-iron-man-mark-v.png,Iron Man,Unique Hero,4,5,5,3,4,60,140,182,both_models_off_2x;alternate_form_or_addon;same_name_points_disagree
+1,custom-uruk-hai-torchbearer.png,Uruk-hai Torchbearer,Unique Hero,1,6,1,3,5,100,43,37,both_models_off_2x
+1,isamu.png,Isamu,Unique Hero,1,6,6,3,1,10,23,23,both_models_off_2x
+1,custom-ijd-drones-swc.png,I.J.D. Drones,Common Squad,1,6,6,1,4,30,69,79,both_models_off_2x
+1,custom-patcher-pumpkinheads-taf-customs.png,Patcher Pumpkinheads,Common Squad,1,7,1,3,1,80,35,39,both_models_off_2x
+1,custom-babauligos.png,Babauligos,Unique Hero,4,5,4,3,2,150,66,67,both_models_off_2x
+1,custom-emma-frost-diamond-jpg.png,Emma Frost (Diamond),Unique Hero,5,5,1,5,5,70,159,152,both_models_off_2x;alternate_form_or_addon
+1,custom-aspect-of-klexkor-taf-customs.png,Aspect of Klexkor,Unique Hero,9,6,1,3,6,110,247,257,both_models_off_2x
+1,bursting-hive-master-png.png,Bursting Hive Soldier,Common Squad,1,6,1,2,4,30,67,64,both_models_off_2x
+1,custom-custom-mice-amp-mystics-rat-jailers.png,Rat Jailers,Common Squad,1,5,1,2,1,15,33,36,both_models_off_2x
+1,custom-galvaniclank.png,GALVANICLANK,Common Hero,1,5,1,3,5,20,44,57,both_models_off_2x
+1,custom-300-stilios.png,Stelios,Unique Hero,2,5,1,3,3,20,44,43,both_models_off_2x
+1,custom-142048194-10160815490408102-792736413534237930-n-10160815490398102.png,PARASITE,Common Hero,1,7,1,2,2,50,23,3,both_models_off_2x;alternate_form_or_addon
+1,custom-i-taf-customs.png,I.,Unique Hero,4,6,1,4,2,200,93,78,both_models_off_2x
+1,custom-stephen-colberts-army-card.png,Stephen Colbert,Unique Hero,3,5,1,3,3,135,63,57,both_models_off_2x
+1,custom-qfp.png,QFP,Unique Squad,1,5,1,0,2,30,64,89,both_models_off_2x;alternate_form_or_addon
+1,custom-d-amp-d-kobold-zombie.png,Kobold Zombie,Common Hero,1,3,1,1,3,10,21,21,both_models_off_2x
+1,custom-hei-bai.png,Hei Bai,Unique Hero,5,7,1,1,6,300,144,140,both_models_off_2x
+1,custom-atharm.png,ATHARM,Unique Hero,4,6,1,4,4,80,166,168,both_models_off_2x
+1,custom-birch-sentry.png,Birch Sentry,Common Hero,1,4,0,3,1,60,29,24,both_models_off_2x
+1,custom-300-dilios.png,Dilios,Unique Hero,3,5,1,3,3,30,62,100,both_models_off_2x
+1,custom-maggie-jones.png,Maggie Jones,Unique Hero,3,6,1,3,3,30,62,80,both_models_off_2x
+1,custom-alder-knights_master-png.png,The Alder Knights,Unique Squad,1,5,1,3,4,35,72,85,both_models_off_2x
+1,custom-marvel.png,"Brunnhilde, Valkyrie",Unique Hero,5,6,1,7,6,520,257,250,both_models_off_2x;superhero_economy
+1,custom-c3v-arashara-goshiri-master.png,Arashara Goshiri,Unique Hero,5,5,1,4,3,200,99,93,both_models_off_2x
+1,custom-gem-ardizaw-taf-customs.png,GEM ARDIZAW,Unique Hero,4,5,1,3,1,30,60,70,both_models_off_2x
+1,custom-cuc-marro-drudge.png,Marro Drudge,Common Hero,1,5,5,2,2,50,25,12,both_models_off_2x
+1,custom-funikofinal.png,FUNIKO,Unique Hero,1,6,1,3,3,15,30,36,both_models_off_2x
+1,custom-aotp-innistrad-conversion.png,Avacyn's Pilgrim,Common Hero,1,5,1,1,1,5,9,23,both_models_off_1.5x;points_equals_height_blank_suspect
+1,raelin-bt-master-png.png,Raelin the Kyrie Warrior,Unique Hero,6,6,1,3,3,105,166,89,official_duplicate_points_differ
+1,hatamoto-taro.png,Hatamoto Taro,Unique Hero,5,5,6,2,2,130,84,107,official_duplicate_points_differ
+1,sgt-drake-alexander-sotm.png,Sgt. Drake Alexander,Unique Hero,6,6,6,6,4,170,244,188,official_duplicate_points_differ
+1,hatamoto-taro-prototype.png,Hatamoto Taro,Unique Hero,5,5,1,1,2,100,76,109,official_duplicate_points_differ
+1,sgt-drake-alexander.png,Sgt. Drake Alexander,Unique Hero,6,5,1,6,3,135,175,127,official_duplicate_points_differ
+1,sonlen-aoa-master-png.png,Sonlen,Unique Hero,170,6,6,4,3,170,140,169,official_duplicate_points_differ
+1,sonlen.png,Sonlen,Unique Hero,6,5,6,4,3,160,137,163,official_duplicate_points_differ
+1,sir-gilbert-prototype.png,Sir Gilbert,Unique Hero,6,6,1,3,4,100,116,100,official_duplicate_points_differ
+1,sir-gilbert.png,Sir Gilbert,Unique Hero,6,5,4,3,4,105,121,101,official_duplicate_points_differ
+1,raelin-the-kyrie-warrior-sotm.png,Raelin the Kyrie Warrior,Unique Hero,5,6,5,3,3,120,133,107,official_duplicate_points_differ
+1,sir-glibert.png,Sir Gilbert,Unique Hero,6,6,1,3,4,105,116,106,official_duplicate_points_differ
+1,agent-carr.png,Agent Carr,Unique Hero,4,4,6,2,4,100,108,90,official_duplicate_points_differ
+1,agent-carr-aoa-master-png.png,Agent Carr,Unique Hero,5,6,6,2,4,130,125,116,official_duplicate_points_differ
+1,laglor-prototype.png,Laglor,Unique Hero,6,6,5,3,3,120,116,101,official_duplicate_points_differ
+1,raelin-the-kyrie-warrior.png,Raelin the Kyrie Warrior,Unique Hero,6,6,1,3,3,100,102,87,official_duplicate_points_differ
+1,laglor.png,Laglor,Unique Hero,6,5,7,3,3,110,110,114,official_duplicate_points_differ
+2,custom-jubokko.png,JUBOKKO,Unique Hero,3,0,2,4,4,35,114,40,alternate_form_or_addon
+2,custom-jubokko-2.png,JUBOKKO,Unique Hero,3,0,2,4,4,35,114,33,alternate_form_or_addon
+2,custom-blackroot-recruits.png,Blackroot Recruits,Unique Squad,1,5,3,1,3,20,63,38,both_models_off_1.5x
+2,custom-mtg-nissa-hero.png,Awoken Land,Unique Hero,1,4,1,4,4,20,62,34,both_models_off_1.5x
+2,custom-wailing-souls.png,Wailing Souls,Unique Hero,5,5,1,0,5,275,90,161,both_models_off_1.5x
+2,custom-super-adaptoid-marvel-hi1.png,Super-Adaptoid,Unique Hero,4,5,1,3,3,240,80,129,both_models_off_1.5x;superhero_economy
+2,custom-ripper.png,Ripper,Unique Hero,1,5,1,4,3,120,41,79,both_models_off_1.5x
+2,custom-grishnakh-custom-figures-green-lantern-kilowog.png,Kilowog,Unique Hero,5,5,1,4,4,370,132,234,both_models_off_1.5x;designer_scale_1.67x
+2,custom-revised-christmas-guenhwyvar.png,Guenhwyvar,Unique Hero,5,7,1,3,4,55,154,100,both_models_off_1.5x;alternate_form_or_addon
+2,custom-grishnakh-custom-figures-drone-torpedo.png,Drone Torpedo,Common Hero,1,8,1,2,6,100,37,59,both_models_off_1.5x;designer_scale_1.67x
+2,custom-marro-remainder-swc.png,Marro Remainder,Common Hero,1,5,1,4,3,10,27,20,both_models_off_1.5x;alternate_form_or_addon
+2,custom-puppet-master-1-2.png,Puppet Master,Unique Hero,3,5,1,2,2,130,49,78,both_models_off_1.5x
+2,custom-twigling.png,Twigling,Common Hero,1,6,1,1,1,5,13,6,alternate_form_or_addon
+2,deathwalker-7000.png,Deathwalker 7000,Unique Hero,6,6,4,5,7,100,259,180,both_models_off_1.5x
+2,custom-sir-preston-swc.png,Sir Preston,Unique Hero,4,5,1,3,4,40,99,71,both_models_off_1.5x
+2,custom-derpy-hooves.png,Derpy Hooves,Unique Hero,5,7,1,3,2,45,109,75,both_models_off_1.5x
+2,custom-mimic-taf-customs.png,MIMIC,Unique Hero,3,3,1,5,5,60,143,70,alternate_form_or_addon
+2,custom-mlpscape-custom-card-ditzy-doo.png,Ditzy Doo,Unique Hero,5,7,1,3,2,45,107,82,both_models_off_1.5x
+2,sonya-esenwein.png,Sonya Esenwein,Unique Hero,3,6,6,3,3,45,106,85,both_models_off_1.5x
+2,custom-wan-shi-tong.png,Wan Shi Tong,Unique Hero,7,8,1,3,4,360,154,195,both_models_off_1.5x
+2,custom-gnaw-demon.png,Gnaw Demon,Common Hero,1,5,1,1,2,30,13,19,both_models_off_1.5x
+2,custom-10-point-fillers.png,Carnifex,Unique Hero,1,5,1,1,2,10,23,19,both_models_off_1.5x
+2,custom-cpt-mark-yates.png,CPT. MARK YATES,Unique Hero,3,5,6,2,2,30,69,53,both_models_off_1.5x
+2,custom-skeletal-dwarf.png,Skeletal Dwarf,Common Hero,1,3,1,3,1,10,23,6,both_models_off_1.5x
+2,custom-c3v-patrick-ferguson-master.png,Patrick Ferguson,Unique Hero,4,5,7,1,3,40,91,78,both_models_off_1.5x
+2,custom-disgraced-knights-of-weston.png,Disgraced Knights of Weston,Unique Squad,1,4,1,3,4,40,91,65,both_models_off_1.5x
+2,custom-guenhwyvar-christmas-custom.png,Guenhwyvar,Unique Hero,5,7,1,3,4,45,101,40,alternate_form_or_addon
+2,brunak.png,Brunak,Unique Hero,6,5,4,4,7,110,245,210,both_models_off_1.5x
+2,sudema.png,Sudema,Unique Hero,4,5,1,2,3,140,63,86,both_models_off_1.5x
+2,iskra-esenwein.png,Iskra Esenwein,Unique Hero,4,6,6,3,3,50,111,88,both_models_off_1.5x
+2,custom-lord-of-the-rings-gollum.png,Gollum,Unique Hero,5,5,1,2,3,40,88,77,both_models_off_1.5x
+2,custom-carnifex.png,Carnifex,Unique Hero,1,6,1,1,2,10,22,7,both_models_off_1.5x
+2,custom-dr-dieulafoy.png,Dr. Dieulafoy,Unique Hero,4,5,1,3,3,40,88,62,both_models_off_1.5x
+2,custom-moria-goblin-captain-sword.png,Moria Goblin Captain,Common Hero,1,6,1,3,3,50,23,31,both_models_off_1.5x
+2,custom-warden-7-500-pt.png,Warden 7,Unique Hero,10,3,1,4,5,500,230,271,both_models_off_1.5x
+2,custom-grishnakh-custom-figures-the-riddler.png,The Riddler,Unique Hero,4,5,5,2,3,210,98,139,both_models_off_1.5x;designer_scale_1.67x
+2,custom-c3v-durgeth-ravagers-master.png,Darkprowl Thrall,Common Hero,1,6,1,2,1,30,14,17,both_models_off_1.5x
+2,custom-black-rider.png,Ringwraith - Mounted,Common Hero,1,8,1,3,6,100,47,62,both_models_off_1.5x
+2,custom-blade-brothers.png,Blade Brothers,Unique Squad,1,7,1,4,5,210,99,112,both_models_off_1.5x
+2,custom-sideswipe.png,Sideswipe,Unique Hero,4,6,1,4,3,210,99,117,both_models_off_1.5x
+2,custom-ert-the-underling-pit-fighter.png,Ert the Underling Pit Fighter,Unique Hero,4,6,1,4,5,50,106,94,both_models_off_1.5x
+2,taelord-the-kyrie-warrior.png,Taelord the Kyrie Warrior,Unique Hero,5,5,1,3,3,180,85,100,both_models_off_1.5x
+2,custom-spectre.png,Spectre,Unique Hero,12,7,1,5,6,650,308,401,both_models_off_1.5x
+2,custom-grishnakh-custom-figures-doctor-octopus.png,Doctor Octopus,Unique Hero,8,6,1,3,4,320,154,213,both_models_off_1.5x;designer_scale_1.67x;same_name_points_disagree
+2,custom-bumblebee.png,Bumblebee,Unique Hero,4,5,4,3,3,160,77,93,both_models_off_1.5x
+2,custom-praetorian-guards.png,Praetorian Guards,Unique Squad,1,5,1,2,4,140,68,77,both_models_off_1.5x
+2,custom-deputron.png,DEPUTRON,Unique Hero,2,5,6,1,2,20,41,34,both_models_off_1.5x
+2,tanuki-master-png.png,Tanuki Tricksters,Common Squad,1,6,4,3,4,45,92,90,both_models_off_1.5x
+2,custom-grishnakh-custom-figures-scarlet-witch.png,Scarlet Witch,Unique Hero,4,5,1,4,4,280,138,184,both_models_off_1.5x;designer_scale_1.67x;same_name_points_disagree
+2,custom-uruk-hai-commander.png,Uruk-Hai Commander,Unique Hero,5,6,1,4,4,240,119,136,both_models_off_1.5x
+2,custom-moloids.png,Moloids,Common Squad,1,5,1,2,2,20,40,51,both_models_off_1.5x;same_name_points_disagree
+2,custom-elf-rangers-jpg.png,Elf Rangers,Unique Squad,3,5,5,3,1,80,40,43,both_models_off_1.5x
+2,custom-jakaw.png,Jakaw Razorbeak,Unique Hero,4,6,1,4,3,50,100,78,both_models_off_1.5x
+2,custom-142096069-10160817167748102-1832970866921929893-n-10160817167743102.png,Plasma Pistol Grunts,Common Squad,1,5,4,2,2,30,60,61,both_models_off_1.5x
+2,custom-nomratu.png,Nomratu,Unique Hero,1,6,1,2,4,15,30,34,both_models_off_1.5x
+2,custom-xo-shaku-adapted.png,Xo Shaku,Unique Hero,1,6,1,3,2,10,20,43,both_models_off_1.5x
+2,custom-vaati-heroscape-card.png,Vaati,Unique Hero,4,5,1,2,5,145,73,73,both_models_off_1.5x
+2,custom-grishnakh-custom-figures-lex-luthor.png,Lex Luthor,Unique Hero,4,5,1,3,3,240,121,138,both_models_off_1.5x;designer_scale_1.67x
+2,custom-c3g-cards.png,Spoiler,Unique Hero,4,5,1,3,4,50,99,108,both_models_off_1.5x;superhero_economy
+2,custom-maruader.png,Quorik Marauder,Unique Hero,4,6,1,4,3,50,99,86,both_models_off_1.5x
+2,custom-cavs-dc-villians.png,Solomon Grundy,Unique Hero,4,5,1,8,4,300,152,188,both_models_off_1.5x;superhero_economy
+2,custom-suludan.png,Sulûdan The Serpent Lord,Unique Hero,3,8,1,4,3,150,76,79,both_models_off_1.5x
+2,custom-helmaverse-deadman-custom-card.png,Deadman,Unique Hero,6,0,0,0,0,155,305,276,both_models_off_1.5x;zero_stat_event_or_vessel
+2,custom-nightmare-the-fiendlord.png,Nightmare the Fiendlord,Unique Hero,6,5,1,2,3,200,102,111,both_models_off_1.5x
+2,custom-the-circle-elder.png,The Circle Elder,Unique Hero,6,1,1,0,3,180,92,87,both_models_off_1.5x
+2,custom-ryno-the-short.png,Ryno the Short,Unique Hero,3,5,5,2,2,80,41,41,both_models_off_1.5x
+2,custom-sir-lancelot.png,Sir Lancelot,Unique Hero,5,8,1,3,4,150,77,94,both_models_off_1.5x
+2,custom-skipping-stone-v1-3.png,Skipping Stone,Unique Hero,5,5,7,3,3,70,136,108,both_models_off_1.5x
+2,custom-leorio-200pts-png.png,Leorio,Unique Hero,4,5,1,3,4,200,103,102,both_models_off_1.5x
+2,custom-bodyguard-c3g-adapted.png,Bodyguard,Common Hero,1,5,1,3,4,15,29,48,both_models_off_1.5x;superhero_economy
+2,custom-city-guards.png,City Guards,Unique Squad,1,4,1,2,3,30,58,60,both_models_off_1.5x
+2,custom-project-pokemon-abra-1.png,Abra,Common Hero,1,4,1,1,2,25,13,2,both_models_off_1.5x
+2,custom-project-pokemon-abra.png,ABRA,Common Hero,1,4,1,1,2,25,13,2,both_models_off_1.5x
+2,custom-honored-soul-guides.png,Honored Soul Guides,Unique Squad,1,5,1,2,5,50,96,99,both_models_off_1.5x
+2,custom-grishnakh-custom-figures-jessica-jones.png,Jessica Jones,Unique Hero,5,5,1,5,4,280,147,72,both_models_off_1.5x;designer_scale_1.67x;same_name_points_disagree
+2,custom-tower.png,Tower,Unique Hero,6,6,1,3,2,200,105,124,both_models_off_1.5x
+2,custom-cloak.png,Cloak,Unique Hero,3,5,1,4,4,175,92,110,both_models_off_1.5x
+2,otonashi.png,Otonashi,Unique Hero,1,6,1,2,3,10,19,20,both_models_off_1.5x
+2,custom-beakface-sneaks.png,Beakface Sneaks,Common Squad,1,6,1,3,2,30,57,78,both_models_off_1.5x
+2,custom-dryad.png,Dryad,Common Hero,3,5,1,2,3,30,57,51,both_models_off_1.5x
+2,custom-reaper-king.png,The Reaper King,Unique Hero,6,5,1,1,3,60,114,124,both_models_off_1.5x
+2,custom-vantus-the-tactician.png,Vantus the Tactician,Unique Hero,1,4,1,2,3,10,19,25,both_models_off_1.5x
+2,custom-first-mate-lucy-taf-customs.png,Lucy Volthrax,Unique Hero,4,6,1,4,1,35,66,71,both_models_off_1.5x
+2,blade-gruts.png,Blade Gruts,Common Squad,6,6,1,2,2,40,75,61,both_models_off_1.5x
+2,theracus.png,Theracus,Unique Hero,3,8,1,3,3,40,75,66,both_models_off_1.5x
+2,custom-lion-bannermen.png,Lion Bannermen,Unique Squad,1,5,1,3,2,40,75,62,both_models_off_1.5x
+2,custom-xander-harris.png,Xander Harris,Unique Hero,4,5,1,2,3,40,75,85,both_models_off_1.5x
+2,custom-kraul-grunt.png,Kraul Grunt,Common Hero,1,6,1,3,1,30,16,10,both_models_off_1.5x
+2,custom-insectar-guard.png,INSECTAR GUARD,Common Hero,1,5,1,2,3,45,24,30,both_models_off_1.5x
+2,custom-the-gordons-832672.png,84th Gordon Highlanders,Common Squad,1,5,6,2,2,125,67,55,both_models_off_1.5x
+2,custom-ant-man.png,Ant-Man,Unique Hero,3,4,1,3,4,110,59,60,both_models_off_1.5x
+2,custom-agent-irina.png,Agent Irina,Unique Hero,3,6,1,2,3,95,51,47,both_models_off_1.5x
+2,custom-bog-bullies.png,Bog Bullies,Common Squad,1,5,1,2,3,35,65,79,both_models_off_1.5x
+2,custom-samurai-of-the-sun.png,Samurai of the Sun,Unique Squad,1,6,1,4,3,180,97,107,both_models_off_1.5x
+2,custom-tommy-the-bald-thanksgiving-custom-contest-entry.png,Tommy the Bald,Unique Hero,4,6,1,2,2,45,83,73,both_models_off_1.5x
+2,dumutef-guard.png,Dumutef Guard,Common Hero,1,6,1,4,4,25,46,70,both_models_off_1.5x
+2,custom-knights-sparier-taf-customs.png,Knights Sparier,Common Squad,1,4,1,2,5,110,60,71,both_models_off_1.5x
+2,custom-ant-man-aquilla-sd.png,Ant-Man,Unique Hero,3,4,1,3,4,110,60,59,both_models_off_1.5x
+2,grave-grim-master-png.png,Grave Grim,Unique Hero,2,6,1,4,4,40,73,89,both_models_off_1.5x
+2,custom-balan-nor.png,Balan Nor,Unique Hero,3,5,1,3,3,40,73,66,both_models_off_1.5x
+2,custom-griffin-executioners.png,Griffin Executioners,Unique Squad,1,6,1,3,3,125,69,81,both_models_off_1.5x
+2,marrden-nagrubs.png,Marrden Nagrubs,Common Squad,1,6,6,2,2,30,54,51,both_models_off_1.5x
+2,custom-clan-windhorn-cards.png,Windhorn Warrior,Common Hero,1,8,1,4,4,30,54,66,both_models_off_1.5x
+2,custom-marro-sentries-taf-customs.png,Marro Sentries,Common Squad,1,4,1,3,5,40,72,72,both_models_off_1.5x
+2,custom-custom-mice-amp-mystics-nez.png,NEZ,Unique Hero,1,5,1,3,0,5,9,3,both_models_off_1.5x
+2,custom-esenwein-blood-mage-swc.png,Esenwein Blood Mage,Unique Hero,2,6,4,2,3,30,54,56,both_models_off_1.5x
+2,custom-veguzza50.png,Veguzza,Unique Hero,5,6,1,4,2,50,90,95,both_models_off_1.5x
+2,custom-calamity-sue-custom.png,Calamity Sue,Unique Hero,1,5,6,1,2,10,18,27,both_models_off_1.5x
+2,custom-danny-phantom-swc.png,Danny Phantom,Unique Hero,5,6,4,4,3,250,140,152,both_models_off_1.5x
+2,custom-easterling-spearmen.png,Easterling Spearmen,Common Squad,1,5,1,1,1,80,45,53,both_models_off_1.5x
+2,custom-crypt-guards.png,Crypt Guards,Common Squad,1,4,1,3,4,40,71,68,both_models_off_1.5x
+2,custom-c3v-b-11-resistance-corps-master.png,B-11 Resistance Corps,Unique Squad,1,5,6,2,2,110,62,58,both_models_off_1.5x
+2,custom-iron-hide.png,Iron Hide,Unique Hero,3,4,1,4,4,200,113,131,both_models_off_1.5x
+2,custom-thornback.png,THORNBACK,Unique Hero,8,5,1,4,2,205,116,112,both_models_off_1.5x
+2,custom-hal-chandler.png,Hal Chandler,Unique Hero,3,5,1,2,2,30,53,58,both_models_off_1.5x
+2,custom-s1r-art0r1us-customs-baelon.png,Baelon,Unique Hero,5,5,1,5,3,60,106,95,both_models_off_1.5x
+2,custom-ticalla-serpents.png,Ticalla Serpents,Common Squad,1,6,1,2,2,30,53,68,both_models_off_1.5x
+2,custom-the-fallen.png,The Fallen,Unique Hero,4,5,1,5,4,250,142,147,both_models_off_1.5x
+2,custom-3-d-man.png,3-D MAN,Unique Hero,6,3,1,3,3,190,108,90,both_models_off_1.5x;alternate_form_or_addon
+2,custom-the-caller.png,The Caller,Unique Hero,5,6,1,3,2,160,91,104,both_models_off_1.5x
+2,custom-riot-controllers.png,Riot Controllers,Unique Squad,1,6,1,3,4,160,91,85,both_models_off_1.5x
+2,custom-captain-horvath.png,Captain Horvath,Unique Hero,3,3,4,2,4,130,74,69,both_models_off_1.5x
+2,custom-lyle-parker.png,Lyle Parker,Unique Hero,4,6,1,2,5,60,105,39,both_models_off_1.5x
+2,custom-grishnakh-custom-figures-luke-cage.png,Luke Cage,Unique Hero,5,5,1,6,5,320,183,182,both_models_off_1.5x;designer_scale_1.67x
+2,custom-ghirahim-heroscape-card.png,Ghirahim,Unique Hero,5,5,1,4,3,180,103,86,both_models_off_1.5x
+2,custom-derelict-taf-customs.png,DERELICT,Unique Hero,4,5,1,2,2,110,63,68,both_models_off_1.5x
+2,nuckelavee-master-png.png,Revna Nuckelavee,Unique Hero,3,7,1,3,4,50,87,89,both_models_off_1.5x
+2,custom-senthallas.png,Senthallass,Unique Hero,4,5,1,3,2,50,87,111,both_models_off_1.5x
+2,custom-sinister-siblings.png,Sinister Siblings,Unique Squad,1,5,1,3,4,50,87,117,both_models_off_1.5x
+2,custom-oberst-superspinne-taf-customs.png,Oberst Superspinne,Unique Hero,2,8,1,5,5,50,87,163,both_models_off_1.5x
+2,custom-141725452-10160817167798102-7868936938616848799-n-10160817167783102.png,Sgt. Maj. Johnson,Unique Hero,5,5,7,2,4,200,115,106,both_models_off_1.5x
+2,custom-assault-daleks-adapted.png,Assault Daleks,Common Squad,1,4,5,6,4,210,121,125,both_models_off_1.5x
+2,custom-shadow-fungus-405539.png,Shadow Fungus,Common Hero,1,2,1,2,2,15,26,11,alternate_form_or_addon
+2,custom-shadow-fungus.png,Shadow Fungus,Common Hero,1,2,1,2,2,15,26,11,alternate_form_or_addon
+2,custom-grishnakh-custom-figures-lockjaw.png,Lockjaw,Unique Hero,6,5,1,5,5,290,168,130,both_models_off_1.5x;designer_scale_1.67x
+2,custom-raccoon-40-jpeg.png,Ishikawa Goemon,Unique Hero,4,6,1,3,3,40,69,67,both_models_off_1.5x
+2,custom-grishnakh-custom-figures-trench-monster.png,Trench Monster,Common Hero,5,6,1,4,3,150,87,88,both_models_off_1.5x;designer_scale_1.67x
+2,custom-honoredsoulguides.png,Honored Soul-Guides,Unique Squad,1,5,1,2,5,50,86,92,both_models_off_1.5x
+2,custom-pestilence-of-karaloum.png,Pestilence of Karaloum,Unique Hero,1,6,1,1,5,25,43,41,both_models_off_1.5x
+2,custom-teracron-copy-png.png,Teracron,Unique Hero,1,4,6,3,3,25,43,71,both_models_off_1.5x
+2,custom-xenomorph-drone.png,Xenomorph Drone,Common Hero,3,6,1,3,3,45,77,93,both_models_off_1.5x
+2,custom-bokoblin-heroscape-card.png,Bokoblins,Common Squad,1,5,1,2,1,70,41,45,both_models_off_1.5x
+2,custom-elrond.png,Elrond,Unique Hero,6,5,1,4,4,225,132,130,both_models_off_1.5x
+2,custom-flame-familiar-swc.png,Flame Familiar,Unique Hero,1,6,4,1,2,10,17,34,both_models_off_1.5x
+2,custom-haradrim-chieftan.png,Haradrim Chieftan,Common Hero,5,1,2,4,3,50,85,78,both_models_off_1.5x
+2,custom-henchmen.png,Henchmen,Common Squad,1,5,3,2,2,110,65,69,both_models_off_1.5x
+2,custom-lothlorien-archers.png,Lothlórien Archers,Common Squad,1,5,7,2,2,110,65,73,both_models_off_1.5x
+2,custom-lutdrid-stormforge.png,Lutdrid Stormforge,Unique Hero,4,5,1,4,2,120,71,72,both_models_off_1.5x
+2,custom-custom-dbz-amp-avatar-tla.png,Majin Buu,Unique Hero,5,5,4,4,4,250,148,96,both_models_off_1.5x
+2,custom-troglodyte-bonecrusher.png,Troglodyte Bonecrusher,Unique Hero,5,5,1,3,3,135,80,85,both_models_off_1.5x
+2,custom-draft-horses.png,Draft Horses,Common Squad,1,7,1,3,4,140,83,53,both_models_off_1.5x
+2,custom-jurrassic-world-petrie.png,PETRIE,Unique Hero,3,5,1,2,3,35,59,57,both_models_off_1.5x
+2,custom-riders-of-harad.png,Riders Of Harad,Unique Squad,1,8,1,3,3,50,84,76,both_models_off_1.5x
+2,custom-swaysil-master-side.png,Swaysil,Unique Hero,4,8,6,3,2,50,84,76,both_models_off_1.5x
+2,custom-wind-riders-auggies-custom-contest-entry.png,Wind Riders,Common Squad,1,6,1,2,2,30,50,62,both_models_off_1.5x
+2,custom-easter-trip-easter-custom-contest-entry.png,Wind Riders,Common Squad,1,6,1,2,2,30,50,62,both_models_off_1.5x
+2,custom-ofc-daniel-maverick.png,Ofc. Daniel Maverick,Unique Hero,2,5,10,1,3,60,36,22,both_models_off_1.5x
+2,custom-ticalla-flytrap.png,Ticalla Flytrap,Common Hero,2,0,4,2,1,40,24,23,both_models_off_1.5x
+2,custom-deathwalker-7000-cua.png,Deathwalker 7000,Common Hero,1,6,1,3,7,80,48,52,both_models_off_1.5x
+2,custom-deepwater-spawn.png,Deepwater Spawn,Common Hero,1,3,1,4,1,30,18,19,both_models_off_1.5x
+2,custom-holy-ones-of-tethru-taf-customs.png,Holy Ones of Tethru,Common Squad,1,5,1,1,3,80,48,34,both_models_off_1.5x
+2,custom-kingpin-swc.png,Kingpin,Unique Hero,6,5,1,4,4,210,126,130,both_models_off_1.5x
+2,custom-patraga-st-patricks-day-custom-contest.png,Wind Riders,Common Squad,1,6,1,2,2,30,50,62,both_models_off_1.5x
+2,custom-sarob.png,Sarob,Unique Hero,1,5,1,1,1,10,6,42,both_models_off_1.5x
+2,custom-visages-of-aldorn-png.png,Visages of Aldorn,Unique Squad,1,4,1,2,0,30,50,47,both_models_off_1.5x
+2,custom-lugnash-bonegnaw.png,Lugnash Bonegnaw,Unique Hero,6,5,1,4,2,80,133,138,both_models_off_1.5x
+2,custom-johannisborg.png,JOHANNISBORG,Unique Hero,4,5,1,2,3,50,83,77,both_models_off_1.5x
+2,custom-sharku.png,"Sharku, Warg Captain",Unique Hero,3,7,1,3,4,50,83,93,both_models_off_1.5x
+2,custom-cavs-dc-heroes-hawkgirl.png,Hawkgirl,Unique Hero,5,6,7,3,4,170,103,107,both_models_off_1.5x;superhero_economy
+2,lady-jaye-advanced-png.png,Lady Jaye,Unique Hero,5,6,4,3,3,60,99,103,both_models_off_1.5x
+2,custom-elder.png,Elder,Unique Hero,6,6,1,7,4,300,182,177,both_models_off_1.5x
+2,custom-vision.png,Vision,Unique Hero,5,5,6,5,3,280,170,166,both_models_off_1.5x
+2,custom-marro-quills.png,Marro Quills,Unique Squad,1,6,1,4,3,130,79,82,both_models_off_1.5x
+2,custom-romoe-amp-bowser-taf-customs.png,Romoe & Bowser,Unique Hero,6,6,6,2,2,130,79,55,both_models_off_1.5x
+2,custom-hof-sleestak.png,Sleestak Raiders,Common Squad,1,4,1,2,3,115,70,66,both_models_off_1.5x
+2,custom-141813419-10160817980433102-5053538099618554822-n-10160817980428102.png,Saint Patrick,Unique Hero,3,5,1,3,3,110,67,66,both_models_off_1.5x
+2,custom-ejhin-of-vanth.png,Ejhin of Vanth,Unique Hero,3,5,5,2,3,110,67,73,both_models_off_1.5x
+2,custom-pokemon-ash-ketchum-145pts-png.png,Ash Ketchum,Unique Hero,4,5,1,3,3,145,89,94,both_models_off_1.5x
+2,custom-clerics-of-weston.png,Clerics of Weston,Unique Squad,1,4,1,1,1,70,43,42,both_models_off_1.5x
+2,custom-ub-lon-ra.png,UB-LON-RA,Unique Hero,6,5,1,4,3,210,129,121,both_models_off_1.5x
+2,custom-catalan-mercenaries-v2.png,Catalan Mercenaries,Common Squad,1,4,1,3,4,40,65,71,both_models_off_1.5x
+2,custom-custom-comic-marvel-wakandan-royal-guard.png,Wakandan Royal Guard,Unique Squad,1,5,5,3,2,40,65,62,both_models_off_1.5x;superhero_economy
+2,custom-iron-prowler.png,Iron Prowler,Unique Hero,3,5,1,3,5,120,74,78,both_models_off_1.5x
+2,custom-griffin-exorist.png,Griffin Exorist,Unique Hero,4,5,1,4,4,60,97,96,both_models_off_1.5x
+2,custom-ancalagon-taf-customs.png,ANCALAGON,Unique Hero,9,6,6,6,6,640,396,332,both_models_off_1.5x
+2,custom-uruk-hai-captain.png,Uruk-hai Captain,Common Hero,1,5,1,4,4,50,31,80,both_models_off_1.5x
+2,custom-cavs-dc-heroes-robin.png,Robin,Unique Hero,4,6,1,3,4,150,93,86,both_models_off_1.5x;superhero_economy
+2,custom-an-blath-dunmharu.png,An Bláth Dúnmharú,Unique Hero,3,0,1,4,2,130,81,97,alternate_form_or_addon
+2,custom-m-a-r-s.png,M.A.R.S.,Unique Hero,3,4,8,2,5,125,78,75,both_models_off_1.5x
+2,custom-pride.png,Pride,Unique Hero,4,5,7,5,4,280,175,132,both_models_off_1.5x
+2,custom-dread-warrior.png,Dread Warrior,Common Hero,1,4,1,2,3,15,24,41,both_models_off_1.5x;alternate_form_or_addon;same_name_points_disagree
+2,custom-custom-mice-amp-mystics-collin.png,"Collin, Warrior Prince",Unique Hero,1,5,1,2,1,5,8,10,both_models_off_1.5x
+2,custom-sumiko-swc.png,Sumiko,Unique Hero,1,6,1,3,2,10,16,20,both_models_off_1.5x
+2,custom-beggar.png,Beggar,Common Hero,1,4,1,1,1,5,8,1,both_models_off_1.5x
+2,custom-bol-master-side.png,BOL,Unique Hero,1,6,1,2,3,10,16,6,both_models_off_1.5x
+2,custom-sarys.png,SARYS,Unique Hero,4,4,1,2,2,45,72,75,both_models_off_1.5x
+2,custom-vahan-the-stalwart.png,Vahan the Stalwart,Unique Hero,4,5,1,2,4,60,96,102,both_models_off_1.5x
+2,custom-knights-of-golron.png,Knights of Golron,Unique Squad,1,5,1,3,5,150,94,90,both_models_off_1.5x
+2,custom-father-maleck.png,Father Maleck,Unique Hero,4,4,1,2,2,110,69,61,both_models_off_1.5x
+2,custom-wandering-wizard-swc.png,Wandering Wizard Bragi,Unique Hero,5,5,6,3,3,115,183,98,alternate_form_or_addon
+2,custom-cadaver-collector.png,Cadaver Collector,Unique Hero,4,5,1,5,6,100,159,183,both_models_off_1.5x
+2,custom-jessica-jones.png,Jessica Jones,Unique Hero,5,5,1,4,4,85,135,185,both_models_off_1.5x;same_name_points_disagree
+2,horned-skull-brutes.png,Horned Skull Brutes,Common Squad,1,5,5,4,4,75,119,117,both_models_off_1.5x
+2,custom-wong.png,Wong,Unique Hero,4,5,1,4,4,65,103,110,both_models_off_1.5x
+2,custom-142219912-10160819302913102-7319101314660663509-n-10160819302903102.png,GLAIPHEN,Unique Hero,6,7,1,3,3,160,101,97,both_models_off_1.5x
+2,custom-glaiphen.png,GLAIPHEN,Unique Hero,6,7,1,3,3,160,101,97,both_models_off_1.5x
+2,custom-sung-jinwoo-250-png.png,Sung Jin-Woo,Unique Hero,5,6,1,5,4,250,158,98,both_models_off_1.5x
+2,me-burq-sa.png,Me-Buro-Sa,Unique Hero,3,8,6,3,3,50,79,97,both_models_off_1.5x
+2,custom-rechets-of-bogdan-cua.png,Rechets of Bogdan,Unique Squad,1,6,1,3,3,50,79,50,alternate_form_or_addon
+2,custom-grima-wormtongue.png,Grima Wormtongue,Unique Hero,2,5,1,2,1,30,19,4,both_models_off_1.5x;same_name_points_disagree
+2,custom-bodak.png,BODAK,Common Hero,1,5,1,2,2,30,19,0,both_models_off_1.5x
+2,custom-bynreen.png,Bynreen,Unique Hero,5,5,1,3,4,80,126,79,alternate_form_or_addon
+2,custom-derthkell-guards-taf-customs.png,Derthkell Guards,Common Squad,1,5,1,2,4,40,63,68,both_models_off_1.5x
+2,custom-emmet.png,EMMET,Unique Hero,3,5,1,3,3,40,63,80,both_models_off_1.5x
+2,custom-scorpion-soldiers.png,Scorpion Soldiers,Common Squad,1,5,1,2,3,40,63,65,both_models_off_1.5x
+2,custom-darkwood-treant-guardian.png,Darkwood Treant Guardian,Unique Hero,6,5,1,5,4,100,157,156,both_models_off_1.5x
+2,custom-sucker-punch-babydoll-card.png,BABYDOLL,Unique Hero,5,6,1,6,4,270,172,146,both_models_off_1.5x
+2,geistfire-master-png.png,Vyoar Necrotech Geistfire,Common Hero,2,5,6,3,3,30,47,45,both_models_off_1.5x
+2,custom-nadezhda-kurova.png,Nadezhda Kurova,Unique Hero,5,5,1,2,3,130,83,83,both_models_off_1.5x
+2,custom-wildfire-embers.png,Wildfire Embers,Common Squad,1,3,1,2,0,50,32,26,both_models_off_1.5x
+2,custom-c3v-re-tak-shi-master.png,Re-Tak-Shi,Unique Hero,5,5,1,4,4,80,125,144,both_models_off_1.5x
+2,custom-waller.png,Amanda Waller,Unique Hero,4,5,5,3,4,220,141,136,both_models_off_1.5x;same_name_points_disagree
+2,custom-eckels-grimlock.png,Grimlock,Unique Hero,4,9,1,3,4,70,109,126,both_models_off_1.5x
+2,custom-landarians-elentar-by-truth.png,Elentar the Cloud Champion,Unique Hero,5,7,1,4,5,110,171,165,both_models_off_1.5x
+2,custom-clementine-ford.png,Clementine Ford,Unique Hero,2,5,7,2,2,20,31,32,both_models_off_1.5x
+2,custom-seevric-teserec.png,Seevric Tersec,Unique Hero,1,6,1,1,3,20,31,45,both_models_off_1.5x
+2,custom-imperial-officers.png,Imperial Officers,Common Squad,1,5,5,2,2,40,62,69,both_models_off_1.5x
+2,custom-cavs-dc-heroes-aquaman.png,Aquaman,Unique Hero,5,6,1,6,6,160,247,288,both_models_off_1.5x;superhero_economy
+2,custom-firestorm-swc.png,Firestorm,Unique Hero,6,7,5,5,5,350,227,220,both_models_off_1.5x
+2,custom-iron-rain-giant.png,Iron Rain Giant,Unique Hero,7,5,1,7,7,500,325,301,both_models_off_1.5x
+2,custom-carnivorous-plant.png,Carnivorous Plant,Unique Hero,4,0,2,3,2,120,78,72,both_models_off_1.5x
+2,custom-fyorlag-matriarch.png,Fyorlag Matriarch,Unique Hero,8,4,1,3,2,160,104,82,both_models_off_1.5x
+2,custom-c3v-knights-of-blackgaard-master.png,Knights of Blackgaard,Common Squad,1,5,1,3,4,120,78,66,both_models_off_1.5x
+2,custom-everquest-test-rastaf.png,Rastaf Skycaster,Unique Hero,4,6,7,5,2,65,100,143,both_models_off_1.5x
+2,custom-klammak-taf-customs.png,KLAMMAK,Unique Hero,4,6,1,4,3,60,92,90,both_models_off_1.5x
+2,duend.png,Dóno,Unique Hero,3,6,1,3,5,110,72,72,both_models_off_1.5x
+2,custom-defenders-of-oak.png,Defenders of Oak,Unique Squad,1,1,1,1,2,40,61,71,both_models_off_1.5x;alternate_form_or_addon
+2,custom-wood-eladrin.png,WOOD ELADRIN,Unique Squad,1,5,6,2,2,125,82,63,both_models_off_1.5x
+2,custom-human-torch-swc.png,Human Torch,Unique Hero,5,4,1,2,2,230,151,125,both_models_off_1.5x
+2,custom-grishnakh-custom-figures-moloids.png,Moloids,Common Squad,1,6,1,2,2,70,46,34,both_models_off_1.5x;designer_scale_1.67x;same_name_points_disagree
+2,custom-the-crystalline-champion-swc.png,The Crystalline Champion,Unique Hero,3,5,1,4,3,140,92,90,both_models_off_1.5x
+2,custom-xeph-warrior.png,Xeph Warrior,Common Hero,1,5,1,3,2,35,23,4,both_models_off_1.5x
+2,custom-lilja-master-side.png,Lilja,Unique Hero,6,6,1,4,5,115,175,228,both_models_off_1.5x
+2,custom-141811860-10160818429328102-3106152229114362566-n-10160818429318102.png,Easter Eggs,Unique Squad,1,6,1,3,3,50,76,84,both_models_off_1.5x;alternate_form_or_addon
+2,custom-sirg.png,Sir Gruger,Unique Hero,4,5,1,3,4,50,76,82,both_models_off_1.5x
+2,custom-raziel.png,Raziel,Unique Hero,4,6,1,3,3,60,91,101,both_models_off_1.5x
+2,custom-artifice.png,Artificer,Unique Hero,4,5,1,4,4,80,121,131,both_models_off_1.5x
+2,custom-hof-elsa.png,Elsa of Arendelle,Unique Hero,3,5,4,2,4,110,73,65,both_models_off_1.5x
+2,custom-echelon.png,Echelon,Unique Hero,5,7,1,3,4,80,120,140,both_models_off_1.5x
+2,custom-bol.png,BOL,Unique Hero,1,6,1,2,2,10,15,3,both_models_off_1.5x
+2,custom-deepwyrm-blackspawn-taf-customs.png,Deepwyrm Blackspawn,Common Hero,1,6,1,5,5,30,45,78,both_models_off_1.5x;alternate_form_or_addon
+2,custom-blue-slaad-ravager.png,Blue Slaad Ravager,Common Hero,1,6,1,3,5,30,45,67,both_models_off_1.5x
+2,custom-crimson-flame-cultist.png,Crimson Flame Cultist,Common Hero,1,5,1,2,1,10,15,42,both_models_off_1.5x
+2,custom-vengeful-spirit.png,VENGEFUL SPIRIT,Common Hero,1,7,1,1,4,20,30,47,alternate_form_or_addon
+2,custom-custom-mice-amp-mystics-centipede.png,Viscous Centipede,Common Hero,1,6,1,2,2,30,20,16,both_models_off_1.5x
+2,rechets-of-bogdan.png,Rechets of Bogdan,Unique Squad,1,4,1,3,3,50,74,53,alternate_form_or_addon
+2,custom-stalwart.png,Stalwart,Unique Hero,3,5,1,3,2,35,50,26,alternate_form_or_addon
+2,custom-space-marine-terminator-squad-playtest-jpg.png,Space Marine Terminator Squad,Common Squad,3,3,5,5,4,120,168,124,alternate_form_or_addon
+2,custom-pyro-vipers.png,Pyro Vipers,Common Squad,1,5,5,3,1,45,61,56,alternate_form_or_addon
+2,airborne-elite.png,Airborne Elite,Unique Squad,1,8,6,3,2,110,82,94,alternate_form_or_addon
+2,custom-fred-v1.png,F.R.E.D. (Fragmentation Remote Explosive Device),Unique Hero,1,6,1,0,3,20,15,13,alternate_form_or_addon
+2,custom-war-pig.png,WAR PIG,Common Hero,1,4,1,1,1,20,15,7,alternate_form_or_addon
+2,custom-deflectatron.png,DEFLECTATRON,Common Hero,1,4,1,3,4,25,33,18,alternate_form_or_addon
+2,tuck-harrigan-master-png.png,Wing Commander Tuck Harrigan,Unique Hero,4,5,6,3,2,60,79,62,alternate_form_or_addon
+2,custom-fred-v2.png,F.R.E.D. (Fragmentation Remote Explosive Device),Unique Hero,1,6,1,0,3,20,16,14,alternate_form_or_addon
+2,custom-storm-shadow-by-annerios.png,Storm Shadow,Unique Hero,5,6,1,5,2,150,120,95,alternate_form_or_addon
+2,deflectatron-master-png.png,Vydar Deflectatron,Common Hero,1,4,1,3,4,25,31,34,alternate_form_or_addon
+2,custom-nick-fury-c3g-adapted-movie-art.png,Nick Fury,Unique Hero,5,5,6,4,4,220,179,238,superhero_economy;alternate_form_or_addon
+2,custom-nick-fury-c3g-adapted-figure-art.png,Nick Fury,Unique Hero,5,5,6,4,4,220,179,216,superhero_economy;alternate_form_or_addon
+2,custom-dark-phoenix-2.png,Dark Phoenix (Jean Grey),Unique Hero,9,7,4,6,7,490,404,471,alternate_form_or_addon
+2,custom-dark-phoenix-1.png,Dark Phoenix (Jean Grey),Unique Hero,9,7,4,6,7,490,404,523,alternate_form_or_addon
+2,custom-bynreen-custom-einar-card-revision-1-copy.png,Bynreen,Unique Hero,5,5,1,3,4,110,128,93,alternate_form_or_addon
+2,custom-bat-swarm.png,Bat Swarm,Unique Hero,1,6,1,1,4,25,22,24,alternate_form_or_addon
+2,custom-morwyn-rhoderyk.png,Morwyn Rhoderyk,Unique Hero,6,6,1,4,4,190,168,151,alternate_form_or_addon
+2,custom-voidwalker.png,Voidwalker,Unique Hero,4,4,1,6,3,100,112,121,alternate_form_or_addon
+2,custom-koji-danuki.png,KOJI-DANUKI,Unique Hero,4,5,1,2,3,85,95,73,alternate_form_or_addon
+2,custom-cavs-dc-heroes-wonder-woman.png,Wonder Woman,Unique Hero,6,6,1,7,6,325,296,334,superhero_economy;alternate_form_or_addon
+2,custom-142079106-10160817167668102-5184994472300898183-n-10160817167663102.png,Orbital Drop Shock Troopers,Unique Squad,1,5,6,3,4,100,109,101,alternate_form_or_addon
+2,custom-the-specialists-paula-quelle.png,Paula Quelle,Unique Hero,3,5,5,2,3,60,65,47,alternate_form_or_addon
+2,custom-sif.png,SIF,Unique Hero,6,6,1,6,5,200,215,209,alternate_form_or_addon
+2,custom-jehdin.png,Jehdin,Unique Hero,5,6,1,6,4,160,169,137,alternate_form_or_addon
+2,vorid-glide-strikers-master-png.png,Vorid Glide Strikers,Unique Squad,1,4,6,2,2,65,68,45,alternate_form_or_addon
+2,custom-141990193-10160815490453102-4703794686986051625-n-10160815490448102.png,Phoenix,Unique Hero,4,6,1,3,3,80,77,117,alternate_form_or_addon;same_name_points_disagree
+2,custom-skrull-agent.png,Skrull Agent,Common Hero,1,5,1,3,3,30,31,52,alternate_form_or_addon
+2,custom-kingpin.png,Kingpin,Unique Hero,6,5,1,5,5,190,185,177,alternate_form_or_addon
+2,custom-seishin-samurai.png,Seishin Samurai,Common Hero,1,4,1,3,4,30,30,27,alternate_form_or_addon
+3,custom-grishnakh-custom-figures-wasp.png,Wasp,Unique Hero,3,7,4,1,2,140,30,99,designer_scale_1.67x
+3,custom-grishnakh-custom-figures-green-lantern-hal-jordan.png,Hal Jordan,Unique Hero,4,6,1,3,3,340,90,274,designer_scale_1.67x
+3,custom-grishnakh-custom-figures-yellow-lantern-sinestro.png,Sinestro,Unique Hero,5,5,1,3,3,380,107,331,designer_scale_1.67x
+3,custom-grishnakh-custom-figure-the-question.png,The Question,Unique Hero,4,6,1,2,1,230,68,228,designer_scale_1.67x
+3,custom-grishnakh-custom-figures-yellow-lantern-arkillo.png,Arkillo,Unique Hero,5,5,1,4,3,400,122,311,designer_scale_1.67x
+3,custom-angel-my-little-ponyscape.png,Angel,Unique Hero,1,6,1,1,1,20,7,14,same_name_points_disagree
+3,custom-grishnakh-custom-figures-doctor-strange.png,Doctor Strange,Unique Hero,5,5,1,4,4,420,177,297,designer_scale_1.67x
+3,custom-grishnakh-custom-figures-iron-fist.png,Iron Fist,Unique Hero,5,6,1,5,3,320,138,240,designer_scale_1.67x;same_name_points_disagree
+3,custom-grishnakh-custom-figures-batgirl.png,Batgirl,Unique Hero,3,6,1,3,4,150,75,132,designer_scale_1.67x;same_name_points_disagree
+3,custom-grishnakh-custom-figures-ms-marvel.png,MS. MARVEL,Unique Hero,7,8,6,4,4,420,214,340,designer_scale_1.67x
+3,custom-grishnakh-custom-figures-elektra.png,Elektra,Unique Hero,5,6,4,3,3,240,123,176,designer_scale_1.67x;same_name_points_disagree
+3,custom-cavs-dc-heroes-beastboy.png,Beastboy,Unique Hero,6,5,1,2,3,190,107,134,superhero_economy
+3,custom-grishnakh-custom-figures-mole-man.png,Mole Man,Unique Hero,4,4,3,4,3,220,124,152,designer_scale_1.67x;same_name_points_disagree
+3,custom-grishnakh-custom-figures-zatanna.png,Zatanna,Unique Hero,5,6,1,4,4,350,198,241,designer_scale_1.67x
+3,custom-grishnakh-custom-figures-poison-ivy.png,Poison Ivy,Unique Hero,4,5,1,3,3,160,91,135,designer_scale_1.67x
+3,custom-x-men.png,X-Men,Unique Squad,1,6,1,4,3,160,91,137,superhero_economy
+3,custom-grishnakh-custom-figures-black-widow.png,Black Widow,Unique Hero,5,6,5,4,3,220,128,218,designer_scale_1.67x
+3,custom-cavs-dc-heroes-raven.png,Raven,Unique Hero,5,5,1,3,3,180,105,122,superhero_economy
+3,custom-cavs-dc-heroes-hawkman.png,Hawkman,Unique Hero,6,6,1,5,4,190,112,216,superhero_economy;same_name_points_disagree
+3,custom-grishnakh-custom-figures-huntress.png,Huntress,Unique Hero,4,6,6,3,3,180,107,175,designer_scale_1.67x
+3,khosumet-the-darklord.png,Khosumet the Darklord,Unique Hero,6,6,3,5,3,75,125,96,same_name_points_disagree
+3,custom-dark-servant-taf-customs.png,Ozirael,Common Hero,1,5,1,4,4,55,33,82,same_name_points_disagree
+3,custom-grishnakh-custom-figures-amazon-warriors.png,Amazon Warriors,Common Squad,1,6,1,4,4,140,86,115,designer_scale_1.67x
+3,custom-red-skull-hasbro-comic-art.png,Red Skull,Unique Hero,5,5,5,4,3,190,117,191,superhero_economy
+3,custom-grishnakh-custom-figures-harley-quinn.png,Harley Quinn,Unique Hero,4,6,1,3,3,120,75,90,designer_scale_1.67x;same_name_points_disagree
+3,custom-grishnakh-custom-figures-ironman.png,Iron Man,Unique Hero,5,7,1,4,7,300,190,273,designer_scale_1.67x
+3,custom-grishnakh-custom-figures-magneto.png,Magneto,Unique Hero,8,6,1,5,5,410,260,347,designer_scale_1.67x
+3,custom-captain-marvel-carol-danvers.png,Captain Marvel,Unique Hero,6,6,6,4,5,350,224,275,superhero_economy
+3,custom-grishnakh-custom-figures-doomsday.png,DOOMSDAY,Unique Hero,8,6,1,8,5,560,361,445,designer_scale_1.67x;same_name_points_disagree
+3,custom-vydar-factory.png,Vydar Factory,Unique Hero,10,0,0,0,6,180,277,205,zero_stat_event_or_vessel
+3,custom-cavs-dc-heroes-rocket-red.png,Rocket Red,Unique Hero,4,6,1,5,5,215,140,177,superhero_economy
+3,custom-grishnakh-custom-figures-punisher.png,Punisher,Unique Hero,5,6,6,4,3,260,171,212,designer_scale_1.67x
+3,custom-c3g-poison-ivy.png,Poison Ivy,Unique Hero,6,5,1,3,3,165,109,164,superhero_economy
+3,custom-custom-comic-marvel-captain-america.png,Captain America,Unique Hero,6,6,2,4,5,220,147,156,superhero_economy
+3,custom-grishnakh-custom-figures-black-canary.png,Black Canary,Unique Hero,5,6,1,4,3,190,128,193,designer_scale_1.67x;same_name_points_disagree
+3,custom-d-amp-d-dread-warrior.png,Dread Warrior,Common Hero,3,5,1,3,5,80,54,43,same_name_points_disagree
+3,custom-grishnakh-custom-figures-rocket-raccoon.png,Rocket Raccoon,Unique Hero,3,7,1,4,4,160,108,141,designer_scale_1.67x
+3,custom-darth-vader-card-jpg.png,Darth Vader,Unique Hero,6,5,1,4,4,90,133,120,same_name_points_disagree
+3,custom-grishnakh-custom-figures-red-skull.png,Red Skull,Unique Hero,5,5,5,4,3,210,143,175,designer_scale_1.67x
+3,custom-grishnakh-custom-figures-query-and-echo.png,Query & Echo,Unique Squad,1,5,5,4,2,140,96,121,designer_scale_1.67x
+3,custom-the-riddler-c3g-adapted.png,The Riddler,Unique Hero,4,5,1,3,3,140,97,114,superhero_economy
+3,custom-grishnakh-custom-figures-atlantean-warriors.png,Atlantean Warriors,Common Squad,1,4,5,2,2,100,70,75,designer_scale_1.67x
+3,custom-grishnakh-custom-figure-yellow-lantern-corps-soldiers.png,Yellow Lantern Corps Soldiers,Common Squad,1,5,1,2,3,100,70,99,designer_scale_1.67x
+3,custom-grishnakh-custom-figures-crossbones.png,Crossbones,Unique Hero,4,6,6,4,4,230,161,172,designer_scale_1.67x
+3,custom-grishnakh-custom-figures-black-manta.png,Black Manta,Unique Hero,5,5,1,4,5,270,190,205,designer_scale_1.67x
+3,custom-cavs-dc-heroes-batgirl.png,Batgirl,Unique Hero,4,6,1,3,4,70,99,144,superhero_economy
+3,custom-mtg-chandra-v3.png,Chandra Nalaar,Unique Hero,8,5,5,6,2,230,163,108,same_name_points_disagree
+3,custom-grishnakh-custom-figures-daredevil.png,Daredevil,Unique Hero,5,6,1,4,4,280,199,195,designer_scale_1.67x;same_name_points_disagree
+3,custom-iron-man-hasbro-comic-art.png,Iron Man,Unique Hero,4,6,6,4,6,240,171,219,superhero_economy
+3,custom-c3g-doomsday.png,Doomsday,Unique Hero,6,5,1,7,5,390,278,407,superhero_economy
+3,custom-custom-comic-marvel-black-panther.png,Black Panther,Unique Hero,5,5,1,4,7,210,150,165,superhero_economy
+3,custom-idol-of-klexkor-taf-customs.png,Idol of Klexkor,Unique Hero,9,0,0,0,0,110,154,58,zero_stat_event_or_vessel
+3,custom-custom-comic-marvel-spider-man-v2.png,Spider-Man,Unique Hero,5,6,1,3,4,170,122,135,superhero_economy
+3,custom-mirror-master-c3g-adapted.png,Mirror Master,Unique Hero,4,5,5,3,3,130,94,116,superhero_economy
+3,custom-grishnakh-custom-figures-the-shadow.png,THE SHADOW,Unique Hero,5,6,5,4,5,280,204,229,designer_scale_1.67x
+3,custom-grishnakh-custom-figures-hawkgirl.png,Hawkgirl,Unique Hero,5,5,1,6,3,280,204,279,designer_scale_1.67x;same_name_points_disagree
+3,custom-grishnakhs-lord-of-the-rings-customs.png,Mordor Orc Archers,Common Squad,1,6,6,2,2,50,68,64,designer_scale_1.67x
+3,custom-grishnakh-custom-figures-terror-vines.png,TERROR VINES,Unique Squad,1,4,1,2,3,140,103,76,designer_scale_1.67x
+3,custom-grishnakh-custom-figures-penguin.png,Penguin,Unique Hero,4,5,5,4,3,180,133,168,designer_scale_1.67x;same_name_points_disagree
+3,custom-fyorlag-spiders-cua.png,Fyorlag Spiders,Common Squad,1,7,1,2,3,40,54,63,superhero_economy
+3,custom-penguin-sd.png,Penguin,Unique Hero,4,4,5,3,3,60,81,96,same_name_points_disagree
+3,custom-cavs-dc-heroes-dr-fate.png,Doctor Fate,Unique Hero,5,6,4,4,7,170,228,189,superhero_economy
+3,custom-grishnakh-custom-figures-batman.png,Batman,Unique Hero,6,6,1,6,5,320,239,276,designer_scale_1.67x;same_name_points_disagree
+3,custom-mole-man.png,Mole Man,Unique Hero,4,4,5,4,3,80,107,132,same_name_points_disagree
+3,custom-grishnakh-custom-figures-giant-mechanical-penguins.png,Giant Mechanical Penguins,Unique Squad,1,4,1,4,5,140,105,129,designer_scale_1.67x
+3,custom-cavs-marvel-heroes.png,Warmachine,Unique Hero,4,5,6,4,5,210,158,148,superhero_economy
+3,custom-spider-man-sd.png,Spider-Man,Unique Hero,5,6,1,4,4,190,143,158,superhero_economy
+3,custom-grishnakh-custom-figures-hydra-soliders.png,Hydra Soldiers,Common Squad,1,5,6,3,3,110,83,73,designer_scale_1.67x
+3,custom-cavs-x-men.png,Beast,Unique Hero,4,7,1,4,4,140,106,160,superhero_economy
+3,custom-grishnakh-custom-figures-hulk.png,Hulk,Unique Hero,8,5,1,6,6,440,334,379,designer_scale_1.67x
+3,custom-grishnakh-custom-figures-winter-soldier.png,Winter Solider,Unique Hero,5,6,1,6,5,260,198,162,designer_scale_1.67x
+3,custom-sokka.png,Sokka,Unique Hero,5,5,1,4,4,160,122,143,same_name_points_disagree
+3,custom-cavs-dc-heroes-batman.png,Batman,Unique Hero,4,6,1,5,5,200,153,183,superhero_economy
+3,custom-grishnakh-custom-figures-the-thing.png,The Thing,Unique Hero,7,5,1,7,4,380,292,257,designer_scale_1.67x
+3,custom-grishnakh-custom-figures-invisible-woman.png,Invisible Woman,Unique Hero,4,5,6,5,6,290,223,340,designer_scale_1.67x
+3,custom-custom-comic-dc-aquaman.png,Aquaman,Unique Hero,6,6,1,6,7,210,273,240,superhero_economy
+3,custom-dc-parademon.png,Parademon,Unique Hero,5,5,1,4,5,110,142,134,superhero_economy
+3,custom-c3g-plastic-man.png,Plastic Man,Unique Hero,5,4,2,4,6,145,187,228,superhero_economy
+3,custom-venom-hasbro-comic-art.png,Venom,Unique Hero,5,6,1,6,4,150,193,178,superhero_economy
+3,custom-custom-comic-dc-batman.png,Batman,Unique Hero,5,6,3,5,6,150,193,189,superhero_economy
+3,custom-grishnakh-custom-figures-green-lantern-corps-soldiers.png,Green Lantern Corps Soldiers,Common Squad,1,5,4,3,3,100,78,143,designer_scale_1.67x
+3,custom-mlpscape-custom-card-spike.png,Spike,Unique Hero,3,5,1,2,3,55,43,50,same_name_points_disagree
+3,custom-fyorlag-spiders-proxy.png,Fyorlag Spiders,Common Squad,1,7,1,2,2,40,51,41,superhero_economy
+3,custom-grishnakh-custom-figures-quicksilver.png,Quicksilver,Unique Hero,4,10,1,3,3,260,204,170,designer_scale_1.67x
+3,custom-grishnakh-custom-figures-vision-massive.png,Vision (Massive),Unique Hero,6,4,1,6,5,350,275,245,designer_scale_1.67x
+3,custom-grishnakh-custom-figures-ninjas-of-the-hand.png,Ninjas of the Hand,Common Squad,1,6,4,3,3,80,63,57,designer_scale_1.67x
+3,custom-triplicate-girl-custom-card.png,TRIPLICATE GIRL,Unique Squad,1,5,1,2,3,90,71,98,same_name_points_disagree
+3,custom-grishnakh-custom-figures-the-trench.png,The Trench,Common Squad,1,4,1,3,4,100,79,90,designer_scale_1.67x
+3,custom-silver-surfer-hasbro-comic-art.png,Silver Surfer,Unique Hero,6,6,4,4,7,320,253,339,superhero_economy
+3,storm-shadow-advanced-png.png,Storm Shadow,Unique Hero,4,6,1,4,3,80,101,108,same_name_points_disagree
+3,custom-sandman-wesley-dodds.png,Sandman,Unique Hero,5,5,1,3,3,80,101,110,same_name_points_disagree
+3,custom-thanos-hasbro-comic-art.png,Thanos,Unique Hero,6,6,6,6,7,360,288,355,superhero_economy
+3,fyorlag-spiders.png,Fyorlag Spiders,Common Squad,1,7,1,2,2,40,50,42,superhero_economy
+3,custom-custom-unit-by-iambatman-o-artwork-by-hextr1p.png,Batman,Unique Hero,4,6,1,5,5,190,153,187,superhero_economy
+3,custom-grishnakh-custom-figures-spider-man.png,Spider-Man,Unique Hero,6,7,1,4,4,240,194,206,designer_scale_1.67x;same_name_points_disagree
+3,custom-grishnakh-custom-figures-agents-of-s-h-i-e-l-d.png,Agents of S.H.I.E.L.D.,Common Squad,1,5,6,3,4,120,97,114,designer_scale_1.67x
+3,custom-grishnakh-custom-figures-catwoman.png,Catwoman,Unique Hero,5,7,1,4,4,160,130,167,designer_scale_1.67x
+3,custom-stormblast-spider.png,Stormblast Spider,Unique Hero,2,4,1,4,5,75,61,98,superhero_economy
+3,custom-spider-man-miles-morales.png,Spider-Man Miles Morales,Unique Hero,4,6,4,3,4,135,110,121,superhero_economy
+3,custom-grishnakh-custom-figures-flash.png,Flash,Unique Hero,5,12,1,4,4,320,391,316,designer_scale_1.67x
+3,custom-grishnakh-custom-figures-joker.png,Joker,Unique Hero,4,5,1,4,4,200,165,188,designer_scale_1.67x
+3,custom-grishnakh-custom-figures-valkyrie.png,Valkyrie,Unique Hero,6,6,1,7,6,380,314,396,designer_scale_1.67x;same_name_points_disagree
+3,custom-custom-comic-marvel-moonknight.png,Moon Knight,Unique Hero,4,6,3,3,4,90,108,188,superhero_economy
+3,custom-grishnakh-custom-figures-star-wars-luke-skywalker.png,Luke Skywalker,Unique Hero,5,6,1,5,5,200,167,187,designer_scale_1.67x
+3,custom-phoenix.png,Phoenix,Unique Hero,6,6,5,6,7,350,416,324,same_name_points_disagree
+3,custom-spider-man.png,Spider-Man,Unique Hero,5,6,1,5,4,200,170,171,superhero_economy
+3,custom-grishnakh-custom-figures-big-barda.png,Big Barda,Unique Hero,6,7,1,7,7,420,357,239,designer_scale_1.67x
+3,custom-c3g-huntress.png,Huntress,Unique Hero,4,6,1,4,5,170,145,159,superhero_economy
+3,custom-grishnakh-custom-figures-killer-croc.png,Killer Croc,Unique Hero,6,4,1,6,4,260,222,198,designer_scale_1.67x
+3,custom-captain-marvel-monica-rambeau.png,Captain Marvel,Unique Hero,4,8,6,6,4,260,223,270,superhero_economy
+3,custom-buffy-c3g-adapted.png,Buffy Summers,Unique Hero,5,6,1,5,5,210,181,193,superhero_economy
+3,custom-custom-comic-dc-green-arrow.png,Green Arrow,Unique Hero,4,6,12,3,4,140,121,111,superhero_economy
+3,custom-c3g-swamp-thing.png,Swamp Thing,Unique Hero,5,5,1,7,5,235,204,207,superhero_economy
+3,custom-grishnakh-custom-figures-venom.png,Venom,Unique Hero,5,6,1,6,4,240,276,207,designer_scale_1.67x;same_name_points_disagree
+3,custom-hulk-hasbro-comic-art.png,Incredible Hulk,Unique Hero,8,5,1,6,6,370,322,337,superhero_economy
+3,custom-grishnakh-custom-figures-wolverine.png,Wolverine,Unique Hero,6,6,1,5,4,260,227,269,designer_scale_1.67x
+3,custom-angel-buffy-c3g-adaptation.png,Angel,Unique Hero,6,6,1,5,4,200,175,182,superhero_economy;same_name_points_disagree
+3,custom-rorschach-c3g-adapted.png,Rorschach,Unique Hero,4,5,1,4,4,140,123,105,superhero_economy
+3,custom-grishnakh-custom-figures-aquaman.png,Aquaman,Unique Hero,6,6,1,6,5,340,299,247,designer_scale_1.67x;same_name_points_disagree
+3,custom-c3g-wave-7-cards.png,Supergirl,Unique Hero,7,7,1,6,6,320,282,369,superhero_economy
+3,custom-grishnakh-custom-figures-mister-fantastic.png,Mister Fantastic,Unique Hero,6,6,1,5,5,320,283,256,designer_scale_1.67x;same_name_points_disagree
+3,custom-grishnakh-custom-figures-hawkeye.png,Hawkeye,Unique Hero,5,5,9,4,4,210,186,155,designer_scale_1.67x
+3,custom-scarecrow-sd.png,Scarecrow,Unique Hero,4,5,1,2,3,70,79,94,same_name_points_disagree
+3,custom-c3g-wonder-woman-comic.png,Wonder Woman,Unique Hero,6,7,1,6,6,300,267,303,superhero_economy
+3,custom-grishnakhs-custom-figures-joker-goons.png,Joker Goons,Unique Squad,1,5,6,3,3,100,89,108,designer_scale_1.67x
+3,custom-c3g-wonder-woman-mini.png,Wonder Woman,Unique Hero,6,7,1,6,6,300,267,301,superhero_economy
+3,custom-abomination-utgar-comic.png,Abomination,Unique Hero,8,5,1,7,6,320,359,318,superhero_economy
+3,custom-grishnakh-custom-figures-robin.png,Robin,Unique Hero,4,6,5,3,4,130,116,173,designer_scale_1.67x
+3,spider-man.png,Spider-Man,Unique Hero,5,6,1,4,4,160,143,153,superhero_economy
+3,custom-spider-man-hasbro-figure-art.png,Spider-Man,Unique Hero,5,6,1,4,4,160,143,170,superhero_economy
+3,custom-spider-man-hasbro-comic-art.png,Spider-Man,Unique Hero,5,6,1,4,4,160,143,153,superhero_economy
+3,custom-captain-marvel.png,Captain Marvel (Mar-Vell),Unique Hero,6,7,1,6,6,220,246,288,superhero_economy
+3,custom-grishnakh-custom-figures-superman.png,Superman,Unique Hero,8,10,1,9,7,500,556,493,designer_scale_1.67x
+3,custom-fire-ant-swarm-c3g-adaptation.png,Fire Ant Swarm,Common Hero,1,4,1,1,1,10,9,20,superhero_economy
+3,custom-grishnakh.png,"Grishnákh, Captain",Unique Hero,3,5,1,3,3,60,54,74,designer_scale_1.67x
+3,custom-marvelzilla.png,GODZILLA,Unique Hero,10,5,1,8,4,350,315,346,superhero_economy
+3,custom-grishnakh-custom-figures-cyborg.png,Cyborg,Unique Hero,5,6,5,4,5,240,217,194,designer_scale_1.67x
+3,custom-custom-comic-dc-superman.png,Superman,Unique Hero,8,10,2,8,7,400,442,407,superhero_economy
+3,custom-8th-reich-spiders-taf-customs.png,8th Reich Spiders,Common Squad,1,7,1,3,2,60,66,83,superhero_economy
+3,custom-mary-marvel.png,Mary Marvel,Unique Hero,7,7,1,8,7,350,383,336,superhero_economy
+3,custom-nite-owl-c3g-adapted.png,Nite Owl,Unique Hero,4,5,3,4,4,130,119,120,superhero_economy
+3,custom-captain-marvel-jr.png,Captain Marvel Jr.,Unique Hero,7,7,1,8,7,350,381,282,superhero_economy
+3,custom-doctor-doom-hasbro-comic-art.png,Doctor Doom,Unique Hero,4,6,6,5,6,245,266,227,superhero_economy
+3,custom-grishnakh-custom-figures-powergirl.png,Power Girl,Unique Hero,7,7,1,6,6,380,350,381,designer_scale_1.67x
+3,custom-142609619-10160817980048102-7000955875665518788-n-10160817980043102.png,Feymire Crocodile,Unique Hero,4,5,1,4,4,120,111,100,same_name_points_disagree
+3,custom-cavs-dc-heroes-cyborg.png,Cyborg,Unique Hero,5,6,1,5,5,160,148,193,superhero_economy
+3,custom-grishnakh-custom-figures-the-human-torch.png,Human Torch,Unique Hero,5,6,6,5,5,260,281,244,designer_scale_1.67x
+3,custom-grishnakh-custom-figures-martian-manhunter.png,Martian Manhunter,Unique Hero,6,7,1,7,7,390,420,344,designer_scale_1.67x
+3,custom-cavs-dc-heroes-green-lantern.png,Green Lantern,Unique Hero,4,6,5,5,5,200,215,300,superhero_economy
+3,custom-grishnakh-custom-figures-namor-the-sub-mariner.png,Namor The Sub-Mariner,Unique Hero,7,6,1,6,5,360,335,234,designer_scale_1.67x
+3,custom-grishnakh-custom-figures-captain-america.png,Captain America,Unique Hero,5,6,1,6,5,280,261,237,designer_scale_1.67x
+3,custom-grishnakh-custom-figures-nick-fury.png,Nick Fury,Unique Hero,5,5,6,4,5,180,193,175,designer_scale_1.67x
+3,custom-custom-comic-dc-wonder-woman.png,Wonder Woman,Unique Hero,7,6,1,7,6,320,343,301,superhero_economy
+3,custom-grishnakh-custom-figures-thor.png,Thor,Unique Hero,8,6,1,9,8,460,493,473,designer_scale_1.67x
+3,custom-cavs-dc-heroes-flash.png,Flash,Unique Hero,4,12,1,3,6,240,257,189,superhero_economy
+3,custom-grishnakh-custom-figures-parademons.png,Parademons,Common Squad,1,5,5,4,5,140,131,113,designer_scale_1.67x
+3,custom-ozirael-taf-customs.png,OZIRAEL,Unique Hero,7,4,5,5,4,250,234,242,same_name_points_disagree
+3,custom-grishnakh-custom-figures-doctor-doom.png,Doctor Doom,Unique Hero,5,6,6,5,7,360,337,305,designer_scale_1.67x;same_name_points_disagree
+3,custom-ms-marvel-jpg.png,Ms. Marvel (Kamala Khan),Unique Hero,5,5,1,3,3,110,103,194,superhero_economy
+3,custom-grishnakh-custom-figures-thanos.png,Thanos,Unique Hero,6,6,6,6,7,420,394,440,designer_scale_1.67x
+3,custom-mystique-c3g-adapted.png,Mystique,Unique Hero,5,6,7,4,4,165,174,151,superhero_economy
+3,custom-omnicron-mercs.png,Gammacron,Common Hero,3,5,7,4,3,75,79,92,same_name_points_disagree
+3,custom-ant-man-c3g-adaptation.png,Ant-Man,Unique Hero,1,4,1,3,6,40,38,120,superhero_economy;same_name_points_disagree
+3,custom-grishnakh-custom-figures-krypto.png,Krypto,Unique Hero,4,8,3,5,5,280,266,261,designer_scale_1.67x
+3,custom-sokka-custom.png,Sokka,Unique Hero,4,5,1,2,3,60,63,112,same_name_points_disagree
+3,custom-grishnakh-custom-figures-mr-freeze.png,MR. FREEZE,Unique Hero,5,5,5,3,6,240,229,175,designer_scale_1.67x
+3,custom-c3g-commissionergordon-mini.png,Commissioner Gordon,Unique Hero,3,5,5,3,4,90,86,79,superhero_economy;same_name_points_disagree
+3,custom-symbiote-spider-man-by-hextr1p.png,Spider-Man Symbiote Suit,Unique Hero,6,6,1,5,5,200,209,216,superhero_economy
+3,custom-spike.png,Spike,Unique Hero,6,6,1,4,4,140,134,142,same_name_points_disagree
+3,custom-grishnakh-custom-figures-deadpool.png,Deadpool,Unique Hero,5,6,6,4,5,260,249,253,designer_scale_1.67x
+3,custom-grishnakh-custom-figures-rhino.png,Rhino,Unique Hero,6,8,1,6,5,260,249,336,designer_scale_1.67x
+3,custom-lacex-the-great-blue-spider.png,"Lacex, The Great Blue Spider",Unique Hero,6,6,1,3,3,100,96,100,superhero_economy
+3,custom-grishnakh-custom-figures-ocean-master.png,Ocean Master,Unique Hero,6,6,1,7,7,430,447,268,designer_scale_1.67x
+3,custom-grishnakh-custom-figures-supergirl.png,Supergirl,Unique Hero,7,8,1,7,6,410,426,376,designer_scale_1.67x
+3,custom-cavs-dc-heroes-superman.png,Superman,Unique Hero,7,8,1,7,9,400,414,471,superhero_economy
+3,custom-enchanted-tree-earlier-draft.png,Enchanted Tree,Common Hero,1,0,1,4,5,60,58,48,same_name_points_disagree
+3,custom-grishnakh-custom-figures-triplicate-girl-miniature-example.png,Daphne Blake,Common Squad,1,5,1,2,2,60,58,48,designer_scale_1.67x
+3,custom-superman.png,Superman,Unique Hero,8,8,1,7,7,520,504,386,superhero_economy
+3,custom-spider-slayer.png,Spider-Slayer,Unique Hero,4,5,1,5,5,130,126,159,superhero_economy
+3,custom-custom-comic-dc-granny-goodness.png,Granny Goodness,Unique Hero,7,6,1,5,5,190,196,189,superhero_economy
+3,custom-grishnakh-custom-figures-loki.png,Loki,Unique Hero,7,6,4,8,7,430,443,401,designer_scale_1.67x
+3,custom-grishnakh-custom-figures-star-wars.png,Tusken Raiders (Sand People),Common Squad,1,5,7,2,3,70,68,54,designer_scale_1.67x
+3,custom-sandman-marvel-sd.png,Sandman,Unique Hero,6,5,1,6,2,215,209,159,superhero_economy
+3,custom-grishnakh-custom-figures-thugs.png,Thugs,Common Squad,1,5,5,3,3,70,72,60,designer_scale_1.67x
+3,custom-grishnakh-custom-figures-doombots.png,Doombots,Common Squad,1,5,5,4,5,140,144,200,designer_scale_1.67x
+3,custom-grishnakhs-custom-lord-of-the-rings-figures-warriors-of-minas-tirtith.png,Warriors of Minas Tirith,Common Squad,1,4,1,3,4,70,72,68,designer_scale_1.67x
+3,custom-cavs-dc-heroes-starfire.png,Starfire,Unique Hero,5,5,6,4,4,150,146,133,superhero_economy
+3,custom-grishnakh-custom-figures-darkseid.png,Darkseid,Unique Hero,7,6,1,8,7,450,438,450,designer_scale_1.67x
+3,custom-grishnakh-custom-figures-ultron-bots.png,Ultron-Bots,Common Squad,1,6,6,4,5,130,133,280,designer_scale_1.67x
+3,custom-captain-america-hasbro-jandar-comic-art.png,Captain America,Unique Hero,5,5,1,6,6,220,225,197,superhero_economy
+3,custom-grishnakh-custom-figures-abomination.png,Abomination,Unique Hero,8,5,1,8,6,410,402,375,designer_scale_1.67x
+3,custom-batman.png,Batman,Unique Hero,5,5,1,5,5,175,172,180,superhero_economy
+3,custom-grishnakh-custom-figures-lizard.png,Lizard,Unique Hero,6,6,1,5,5,260,256,231,designer_scale_1.67x
+3,custom-cavs-marvel-customs.png,Elektra,Unique Hero,4,6,1,4,6,150,148,149,superhero_economy
+3,custom-c3g-flash.png,Flash,Unique Hero,4,12,1,5,4,250,253,269,superhero_economy
+3,custom-grishnakh-custom-figures-mantripod.png,MANTRIPOD,Unique Hero,5,6,0,0,6,200,198,257,designer_scale_1.67x
+3,custom-grishnakh-custom-figures-fin-fang-foom.png,Fin Fang Foom,Unique Hero,10,6,1,7,8,560,565,348,designer_scale_1.67x
+3,custom-custom-comic-marvel-spider-man.png,Spider-Man,Unique Hero,5,6,1,4,3,120,119,160,superhero_economy
+3,custom-cavs-dc-heroes-green-arrow.png,Green Arrow,Unique Hero,4,5,10,4,4,160,159,137,superhero_economy
+3,custom-grishnakh-custom-figures-asgardian-frost-giant.png,Frost Giant,Common Hero,4,5,1,6,5,160,161,182,designer_scale_1.67x
+3,custom-batman-sd.png,Batman,Unique Hero,5,5,1,5,5,175,174,182,superhero_economy
+3,custom-superman-sd.png,Superman,Unique Hero,7,7,1,8,7,380,382,383,superhero_economy
+3,custom-grishnakh-custom-figures-wonder-woman.png,Wonder Woman,Unique Hero,6,8,1,8,7,450,451,387,designer_scale_1.67x;same_name_points_disagree
+3,custom-scarecrow.png,Scarecrow,Common Hero,1,6,1,4,2,25,25,43,same_name_points_disagree
+3,custom-robin.png,Robin,Unique Hero,3,6,1,3,3,65,65,73,same_name_points_disagree

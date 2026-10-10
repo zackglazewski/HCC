@@ -1,0 +1,4318 @@
+[
+ {
+  "name": "Brannic Stonefist",
+  "general": "Jandar",
+  "entity_type": "Dwarf Berserker",
+  "figure_type": "Unique Hero",
+  "occupation": "Berserker",
+  "personality": "Stubborn",
+  "size": "Small",
+  "height": 4,
+  "life": 6,
+  "move": 5,
+  "range": 1,
+  "attack": 5,
+  "defense": 4,
+  "abilities": [
+   {
+    "title": "Stonefist Charge",
+    "description": "If Brannic Stonefist moves at least 4 spaces before attacking on his turn, he adds 1 to his Attack Value for each attack he makes this turn."
+   },
+   {
+    "title": "Braced Guard",
+    "description": "When Brannic Stonefist rolls defense dice against a normal attack from an adjacent attacking figure, he adds 1 automatic shield to his defense roll."
+   }
+  ],
+  "design_note": "A 6-life, attack-5 melee brick with a conditional +1 attack and a near-permanent +1 defense sits awkwardly between mid-tier bruisers and premium champions.",
+  "category": "drawback_twins_severe"
+ },
+ {
+  "name": "Brannic Stonefist (variant)",
+  "general": "Jandar",
+  "entity_type": "Dwarf Berserker",
+  "figure_type": "Unique Hero",
+  "occupation": "Berserker",
+  "personality": "Bloodmad",
+  "size": "Small",
+  "height": 4,
+  "life": 6,
+  "move": 5,
+  "range": 1,
+  "attack": 5,
+  "defense": 4,
+  "abilities": [
+   {
+    "title": "Stonefist Charge",
+    "description": "If Brannic Stonefist (variant) moves at least 4 spaces before attacking on his turn, he adds 1 to his Attack Value for each attack he makes this turn."
+   },
+   {
+    "title": "Braced Guard",
+    "description": "When Brannic Stonefist (variant) rolls defense dice against a normal attack from an adjacent attacking figure, he adds 1 automatic shield to his defense roll."
+   },
+   {
+    "title": "Blood In The Eyes",
+    "description": "When Brannic Stonefist (variant) attacks, he must attack the figure that is nearest to him, counting clear sight spaces, whether that figure is an opponent's figure or a figure you control. If two or more figures are equally near, you may choose which of those figures he attacks. Brannic Stonefist (variant) may not be moved so that a figure you control is the nearest figure only to avoid attacking an opponent's figure."
+   }
+  ],
+  "design_note": "Forced targeting of friendlies is crippling in a crowded melee army but nearly free in a solo-hero build, so the discount depends entirely on assumed army context.",
+  "category": "drawback_twins_severe"
+ },
+ {
+  "name": "Seraphine Vael",
+  "general": "Einar",
+  "entity_type": "Kyrie Lancer",
+  "figure_type": "Unique Hero",
+  "occupation": "Skylance Captain",
+  "personality": "Vigilant",
+  "size": "Medium",
+  "height": 5,
+  "life": 5,
+  "move": 6,
+  "range": 5,
+  "attack": 4,
+  "defense": 3,
+  "abilities": [
+   {
+    "title": "Wingguard Aura",
+    "description": "All figures you control that are adjacent to Seraphine Vael add 1 to their Defense Value when defending against a non-adjacent attacking figure."
+   },
+   {
+    "title": "Flying",
+    "description": "When counting spaces for Seraphine Vael's movement, ignore elevations. Seraphine Vael may fly over water without stopping, pass over figures without becoming engaged, and fly over obstacles such as ruins. When Seraphine Vael starts to fly, if she is engaged, she will take any leaving engagement attacks."
+   }
+  ],
+  "design_note": "Flying plus range 5, attack 4 and a friendly defensive aura stack into a support-and-damage package whose aura value swings wildly with squad count.",
+  "category": "drawback_twins_severe"
+ },
+ {
+  "name": "Seraphine Vael (variant)",
+  "general": "Einar",
+  "entity_type": "Kyrie Lancer",
+  "figure_type": "Unique Hero",
+  "occupation": "Skylance Captain",
+  "personality": "Crippled",
+  "size": "Medium",
+  "height": 5,
+  "life": 5,
+  "move": 6,
+  "range": 5,
+  "attack": 4,
+  "defense": 3,
+  "abilities": [
+   {
+    "title": "Wingguard Aura",
+    "description": "All figures you control that are adjacent to Seraphine Vael (variant) add 1 to their Defense Value when defending against a non-adjacent attacking figure."
+   },
+   {
+    "title": "Flying",
+    "description": "When counting spaces for Seraphine Vael (variant)'s movement, ignore elevations. Seraphine Vael (variant) may fly over water without stopping, pass over figures without becoming engaged, and fly over obstacles such as ruins. When Seraphine Vael (variant) starts to fly, if she is engaged, she will take any leaving engagement attacks."
+   },
+   {
+    "title": "Shattered Wing",
+    "description": "Seraphine Vael (variant) cannot move and attack in the same turn. After revealing an Order Marker on this Army Card, you must choose to either move with Seraphine Vael (variant) or attack with Seraphine Vael (variant), but not both."
+   }
+  ],
+  "design_note": "A ranged hero loses less from 'no move and attack' than a melee one, and her aura still works on a move-only turn, making the drawback softer than it reads.",
+  "category": "drawback_twins_severe"
+ },
+ {
+  "name": "Thrax Hollowspine",
+  "general": "Utgar",
+  "entity_type": "Undead Revenant",
+  "figure_type": "Unique Hero",
+  "occupation": "Grave Knight",
+  "personality": "Relentless",
+  "size": "Medium",
+  "height": 5,
+  "life": 7,
+  "move": 5,
+  "range": 1,
+  "attack": 4,
+  "defense": 5,
+  "abilities": [
+   {
+    "title": "Soul Harvest",
+    "description": "Each time Thrax Hollowspine destroys an opponent's figure with a normal attack, you may remove 1 wound marker from this Army Card. Thrax Hollowspine cannot Soul Harvest destructible objects."
+   },
+   {
+    "title": "Bone Armor",
+    "description": "When Thrax Hollowspine rolls defense dice against a special attack, he adds 1 automatic shield to his defense roll."
+   }
+  ],
+  "design_note": "Life 7 with defense 5, self-healing and extra shields against special attacks creates an attrition profile that is far tougher than its raw damage output suggests.",
+  "category": "drawback_twins_severe"
+ },
+ {
+  "name": "Thrax Hollowspine (variant)",
+  "general": "Utgar",
+  "entity_type": "Undead Revenant",
+  "figure_type": "Unique Hero",
+  "occupation": "Grave Knight",
+  "personality": "Decaying",
+  "size": "Medium",
+  "height": 5,
+  "life": 7,
+  "move": 5,
+  "range": 1,
+  "attack": 4,
+  "defense": 5,
+  "abilities": [
+   {
+    "title": "Soul Harvest",
+    "description": "Each time Thrax Hollowspine (variant) destroys an opponent's figure with a normal attack, you may remove 1 wound marker from this Army Card. Thrax Hollowspine (variant) cannot Soul Harvest destructible objects."
+   },
+   {
+    "title": "Bone Armor",
+    "description": "When Thrax Hollowspine (variant) rolls defense dice against a special attack, he adds 1 automatic shield to his defense roll."
+   },
+   {
+    "title": "Crumbling Form",
+    "description": "At the end of each round, after all Order Markers have been revealed and resolved, Thrax Hollowspine (variant) receives 1 wound. Wounds received from Crumbling Form cannot be prevented or ignored by any special power."
+   }
+  ],
+  "design_note": "The guaranteed one wound per round is a hard clock, but Soul Harvest can partly refund it, so the drawback's true cost hinges on how often he lands killing blows.",
+  "category": "drawback_twins_severe"
+ },
+ {
+  "name": "Kael Tessarin",
+  "general": "Vydar",
+  "entity_type": "Human Psion",
+  "figure_type": "Unique Hero",
+  "occupation": "Mind Adept",
+  "personality": "Calculating",
+  "size": "Medium",
+  "height": 5,
+  "life": 5,
+  "move": 6,
+  "range": 4,
+  "attack": 4,
+  "defense": 3,
+  "abilities": [
+   {
+    "title": "Mindshock Special Attack",
+    "description": "Range 4. Attack 2. Figures attacked by Mindshock Special Attack cannot roll any defense dice against this attack. Mindshock Special Attack does not affect destructible objects."
+   },
+   {
+    "title": "Telekinetic Shift",
+    "description": "Once per turn, after moving and before attacking with Kael Tessarin, you may choose one small or medium figure within 4 clear sight spaces of Kael Tessarin and move that figure 1 space. You may not move that figure to a space more than 1 level higher or lower than the space it occupied, and you may not move that figure onto a space it cannot normally occupy. A figure moved by Telekinetic Shift does not take any leaving engagement attacks."
+   }
+  ],
+  "design_note": "An unblockable 2-die special attack plus free repositioning of enemies or allies gives reliable chip damage and glyph/engagement control that is hard to convert into dice math.",
+  "category": "drawback_twins_severe"
+ },
+ {
+  "name": "Kael Tessarin (variant)",
+  "general": "Vydar",
+  "entity_type": "Human Psion",
+  "figure_type": "Unique Hero",
+  "occupation": "Mind Adept",
+  "personality": "Unstable",
+  "size": "Medium",
+  "height": 5,
+  "life": 5,
+  "move": 6,
+  "range": 4,
+  "attack": 4,
+  "defense": 3,
+  "abilities": [
+   {
+    "title": "Mindshock Special Attack",
+    "description": "Range 4. Attack 2. Figures attacked by Mindshock Special Attack cannot roll any defense dice against this attack. Mindshock Special Attack does not affect destructible objects."
+   },
+   {
+    "title": "Telekinetic Shift",
+    "description": "Once per turn, after moving and before attacking with Kael Tessarin (variant), you may choose one small or medium figure within 4 clear sight spaces and move that figure 1 space. You may not move that figure to a space more than 1 level higher or lower than the space it occupied, and you may not move that figure onto a space it cannot normally occupy. A figure moved by Telekinetic Shift does not take any leaving engagement attacks."
+   },
+   {
+    "title": "Fractured Mind 15",
+    "description": "After revealing an Order Marker on this Army Card, and before taking a turn with Kael Tessarin (variant), roll the 20-sided die. If you roll a 15 or higher, an opponent takes that entire turn with Kael Tessarin (variant) instead of you, using all of his powers. If there is more than one opponent, the opponent to your left takes the turn. That opponent may not move Kael Tessarin (variant) off the battlefield."
+   }
+  ],
+  "design_note": "A 30% chance per revealed Order Marker of handing an unblockable attacker to the opponent is a swingy, potentially self-destructive drawback that is far worse than simply losing the turn.",
+  "category": "drawback_twins_severe"
+ },
+ {
+  "name": "Valgrim Ashmantle",
+  "general": "Utgar",
+  "entity_type": "Dwarf Warlord",
+  "figure_type": "Unique Hero",
+  "occupation": "Warlord",
+  "personality": "Ferocious",
+  "size": "Medium",
+  "height": 4,
+  "life": 6,
+  "move": 5,
+  "range": 1,
+  "attack": 5,
+  "defense": 4,
+  "abilities": [
+   {
+    "title": "Emberforged Cleave Special Attack",
+    "description": "Range 1. Attack 4. Choose a figure adjacent to Valgrim Ashmantle. That figure, and all figures adjacent to both Valgrim Ashmantle and the chosen figure, are affected by Emberforged Cleave Special Attack. Roll attack dice once for all affected figures. Each affected figure rolls defense dice separately."
+   },
+   {
+    "title": "Highground Bulwark",
+    "description": "When rolling defense dice against a normal attack, if Valgrim Ashmantle is on a land space at least 2 levels above the attacking figure's base, add 2 dice to his defense."
+   }
+  ],
+  "design_note": "A wide multi-target special attack on a 6-life, 5-attack chassis with a conditional +2 defense makes the base pair-member's fair price already contested before any drawback is applied.",
+  "category": "drawback_twins_severe"
+ },
+ {
+  "name": "Valgrim Ashmantle (variant)",
+  "general": "Utgar",
+  "entity_type": "Dwarf Warlord",
+  "figure_type": "Unique Hero",
+  "occupation": "Warlord",
+  "personality": "Berserk",
+  "size": "Medium",
+  "height": 4,
+  "life": 6,
+  "move": 5,
+  "range": 1,
+  "attack": 5,
+  "defense": 4,
+  "abilities": [
+   {
+    "title": "Emberforged Cleave Special Attack",
+    "description": "Range 1. Attack 4. Choose a figure adjacent to Valgrim Ashmantle. That figure, and all figures adjacent to both Valgrim Ashmantle and the chosen figure, are affected by Emberforged Cleave Special Attack. Roll attack dice once for all affected figures. Each affected figure rolls defense dice separately."
+   },
+   {
+    "title": "Highground Bulwark",
+    "description": "When rolling defense dice against a normal attack, if Valgrim Ashmantle is on a land space at least 2 levels above the attacking figure's base, add 2 dice to his defense."
+   },
+   {
+    "title": "Ashen Frenzy",
+    "description": "After revealing an Order Marker on this Army Card, Valgrim Ashmantle must move by the shortest available path toward the figure nearest to him, friend or foe, and if he is able to attack that figure this turn he must attack it, with either a normal attack or Emberforged Cleave Special Attack. If two or more figures are equally near, you choose which of those figures he moves toward and attacks. Valgrim Ashmantle may not be given a turn in which he neither moves toward nor attacks the nearest figure."
+   },
+   {
+    "title": "Friendly Fire",
+    "description": "Figures you control may be chosen and attacked by Valgrim Ashmantle as described by Ashen Frenzy, and are affected normally by Emberforged Cleave Special Attack."
+   }
+  ],
+  "design_note": "Forced targeting of the nearest figure turns an area special attack into a liability near your own army, but the drawback is nearly harmless in a solo-hero build, so the discount is highly army-dependent.",
+  "category": "drawback_twins_severe"
+ },
+ {
+  "name": "Lysandra Orne",
+  "general": "Jandar",
+  "entity_type": "Human Duelist",
+  "figure_type": "Unique Hero",
+  "occupation": "Duelist",
+  "personality": "Precise",
+  "size": "Medium",
+  "height": 5,
+  "life": 5,
+  "move": 6,
+  "range": 1,
+  "attack": 4,
+  "defense": 5,
+  "abilities": [
+   {
+    "title": "Riposte 14",
+    "description": "When Lysandra Orne rolls defense dice against a normal attack from an adjacent attacking figure and receives no wounds, roll the 20-sided die. If you roll a 14 or higher, the attacking figure receives one wound."
+   },
+   {
+    "title": "Fencer's Footwork",
+    "description": "Lysandra Orne is never attacked when leaving an engagement. After taking a turn with Lysandra Orne, you may move her 1 space."
+   },
+   {
+    "title": "Duelist's Focus",
+    "description": "When Lysandra Orne attacks an adjacent figure that is not adjacent to any other figure you control, add 1 die to her attack."
+   }
+  ],
+  "design_note": "Defense 5 with a counterattack d20 and free repositioning stacks several small survivability bonuses that are easy to underrate individually and overrate together.",
+  "category": "drawback_twins_severe"
+ },
+ {
+  "name": "Lysandra Orne (variant)",
+  "general": "Jandar",
+  "entity_type": "Human Duelist",
+  "figure_type": "Unique Hero",
+  "occupation": "Duelist",
+  "personality": "Precise",
+  "size": "Medium",
+  "height": 5,
+  "life": 5,
+  "move": 6,
+  "range": 1,
+  "attack": 4,
+  "defense": 5,
+  "abilities": [
+   {
+    "title": "Riposte 14",
+    "description": "When Lysandra Orne rolls defense dice against a normal attack from an adjacent attacking figure and receives no wounds, roll the 20-sided die. If you roll a 14 or higher, the attacking figure receives one wound."
+   },
+   {
+    "title": "Fencer's Footwork",
+    "description": "Lysandra Orne is never attacked when leaving an engagement. After taking a turn with Lysandra Orne, you may move her 1 space."
+   },
+   {
+    "title": "Duelist's Focus",
+    "description": "When Lysandra Orne attacks an adjacent figure that is not adjacent to any other figure you control, add 1 die to her attack."
+   },
+   {
+    "title": "Hemorrhaging Wound",
+    "description": "At the end of every round, after all Order Markers have been revealed and all turns have been taken, place one Wound Marker on this Army Card. Wounds received from Hemorrhaging Wound cannot be prevented or ignored by any power. If this destroys Lysandra Orne, your opponents do not receive credit for destroying her for the purposes of any power that triggers on destroying a figure."
+   },
+   {
+    "title": "Staunch the Bleeding 17",
+    "description": "Instead of attacking with Lysandra Orne, you may roll the 20-sided die. If you roll a 17 or higher, remove one Wound Marker from this Army Card."
+   }
+  ],
+  "design_note": "A guaranteed wound per round caps her effective lifespan at about four rounds, but a 20% self-heal that costs her attack partially offsets it, making the size of the discount genuinely unclear.",
+  "category": "drawback_twins_severe"
+ },
+ {
+  "name": "Sulaan the Deepcaller",
+  "general": "Einar",
+  "entity_type": "Naga Tidecaller",
+  "figure_type": "Unique Hero",
+  "occupation": "Tidecaller",
+  "personality": "Serene",
+  "size": "Large",
+  "height": 6,
+  "life": 6,
+  "move": 5,
+  "range": 5,
+  "attack": 4,
+  "defense": 3,
+  "abilities": [
+   {
+    "title": "Tide Lance Special Attack",
+    "description": "Range 6. Attack 3. When attacking with Tide Lance Special Attack, if the defending figure is on or adjacent to a water space, roll 2 additional attack dice. Figures attacked with Tide Lance Special Attack cannot be affected by any power that ignores or prevents wounds on a 20-sided die roll."
+   },
+   {
+    "title": "Water Mastery",
+    "description": "Sulaan the Deepcaller does not have to stop his movement when entering water spaces. If Sulaan the Deepcaller starts his turn on a water space, add 2 to his Move number for that turn."
+   }
+  ],
+  "design_note": "Both of Sulaan's powers scale sharply with the amount of water terrain in play, so his value swings between mediocre and excellent depending on the map.",
+  "category": "drawback_twins_severe"
+ },
+ {
+  "name": "Sulaan the Deepcaller (variant)",
+  "general": "Einar",
+  "entity_type": "Naga Tidecaller",
+  "figure_type": "Unique Hero",
+  "occupation": "Tidecaller",
+  "personality": "Erratic",
+  "size": "Large",
+  "height": 6,
+  "life": 6,
+  "move": 5,
+  "range": 5,
+  "attack": 4,
+  "defense": 3,
+  "abilities": [
+   {
+    "title": "Tide Lance Special Attack",
+    "description": "Range 6. Attack 3. When attacking with Tide Lance Special Attack, if the defending figure is on or adjacent to a water space, roll 2 additional attack dice. Figures attacked with Tide Lance Special Attack cannot be affected by any power that ignores or prevents wounds on a 20-sided die roll."
+   },
+   {
+    "title": "Water Mastery",
+    "description": "Sulaan the Deepcaller does not have to stop his movement when entering water spaces. If Sulaan the Deepcaller starts his turn on a water space, add 2 to his Move number for that turn."
+   },
+   {
+    "title": "Riptide Trance 15",
+    "description": "After revealing an Order Marker on this Army Card and before taking a turn with Sulaan the Deepcaller, roll the 20-sided die. If you roll a 15 or higher, the opponent to your left takes this turn with Sulaan the Deepcaller instead of you. That opponent moves and attacks with Sulaan the Deepcaller as if he controlled this Army Card, and may attack figures you control. After that turn is finished, remove the revealed Order Marker as normal. While an opponent is taking a turn with Sulaan the Deepcaller, you may not use any power on this card to affect that turn."
+   }
+  ],
+  "design_note": "A 30% chance per turn to hand a 6-life, range-6 blaster to an opponent is a catastrophic swing that is much worse than simply losing the turn, so the discount must exceed the raw 30% activation loss.",
+  "category": "drawback_twins_severe"
+ },
+ {
+  "name": "Ysoril Thornwarden",
+  "general": "Ullar",
+  "entity_type": "Elf Ranger",
+  "figure_type": "Unique Hero",
+  "occupation": "Ranger",
+  "personality": "Watchful",
+  "size": "Medium",
+  "height": 5,
+  "life": 5,
+  "move": 6,
+  "range": 6,
+  "attack": 4,
+  "defense": 3,
+  "abilities": [
+   {
+    "title": "Brambleshot Special Attack",
+    "description": "Range 7. Attack 3. If a figure receives one or more wounds from Brambleshot Special Attack, subtract 2 from that figure's Move number until the end of the round. A figure with a Move number of 2 or less that is wounded by Brambleshot Special Attack cannot move until the end of the round."
+   },
+   {
+    "title": "Forest Concealment 13",
+    "description": "If Ysoril Thornwarden is targeted and would receive one or more wounds from an attacking figure who is not adjacent, and Ysoril Thornwarden is on or adjacent to a tree space, road space of the Wellspring, or any Glacier, Jungle, or Swamp terrain space, roll the 20-sided die. If you roll a 13 or higher, ignore any wounds from that attack."
+   }
+  ],
+  "design_note": "A long-range slowing special attack plus terrain-gated damage negation gives him strong board control but no damage ceiling, making him easy to price either as a utility archer or as a premium sniper.",
+  "category": "drawback_twins_severe"
+ },
+ {
+  "name": "Ysoril Thornwarden (variant)",
+  "general": "Ullar",
+  "entity_type": "Elf Ranger",
+  "figure_type": "Unique Hero",
+  "occupation": "Ranger",
+  "personality": "Watchful",
+  "size": "Medium",
+  "height": 5,
+  "life": 5,
+  "move": 6,
+  "range": 6,
+  "attack": 4,
+  "defense": 3,
+  "abilities": [
+   {
+    "title": "Brambleshot Special Attack",
+    "description": "Range 7. Attack 3. If a figure receives one or more wounds from Brambleshot Special Attack, subtract 2 from that figure's Move number until the end of the round. A figure with a Move number of 2 or less that is wounded by Brambleshot Special Attack cannot move until the end of the round."
+   },
+   {
+    "title": "Forest Concealment 13",
+    "description": "If Ysoril Thornwarden is targeted and would receive one or more wounds from an attacking figure who is not adjacent, and Ysoril Thornwarden is on or adjacent to a tree space, road space of the Wellspring, or any Glacier, Jungle, or Swamp terrain space, roll the 20-sided die. If you roll a 13 or higher, ignore any wounds from that attack."
+   },
+   {
+    "title": "Taut Bowstring",
+    "description": "Ysoril Thornwarden cannot move and attack on the same turn. When you reveal an Order Marker on this Army Card, you must choose either to move Ysoril Thornwarden up to his Move number, or to attack with a normal attack or Brambleshot Special Attack. If Ysoril Thornwarden is moved by any power on another Army Card during a turn on this card, he cannot attack that turn."
+   }
+  ],
+  "design_note": "Losing move-and-shoot hurts far less for a range-7 attacker who can camp a tree space than it would for a melee figure, so the correct discount is much smaller than the drawback's wording suggests.",
+  "category": "drawback_twins_severe"
+ },
+ {
+  "name": "Marrek Thal",
+  "general": "Vydar",
+  "entity_type": "Human",
+  "figure_type": "Unique Hero",
+  "occupation": "Duelist",
+  "personality": "Precise",
+  "size": "Medium",
+  "height": 5,
+  "life": 6,
+  "move": 5,
+  "range": 1,
+  "attack": 5,
+  "defense": 4,
+  "abilities": [
+   {
+    "title": "Counter Thrust",
+    "description": "When Marrek Thal rolls defense dice against a normal attack from an adjacent attacking figure, if he receives no wounds from that attack, the attacking figure receives 1 wound."
+   },
+   {
+    "title": "Duelist's Footwork",
+    "description": "Marrek Thal is never attacked when leaving an engagement."
+   }
+  ],
+  "design_note": "Attack 5 with a punishing counter power on a 6-life hero sits awkwardly between mid-tier and premium melee heroes.",
+  "category": "drawback_twins_severe"
+ },
+ {
+  "name": "Marrek Thal (variant)",
+  "general": "Vydar",
+  "entity_type": "Human",
+  "figure_type": "Unique Hero",
+  "occupation": "Duelist",
+  "personality": "Precise",
+  "size": "Medium",
+  "height": 5,
+  "life": 6,
+  "move": 5,
+  "range": 1,
+  "attack": 5,
+  "defense": 4,
+  "abilities": [
+   {
+    "title": "Counter Thrust",
+    "description": "When Marrek Thal rolls defense dice against a normal attack from an adjacent attacking figure, if he receives no wounds from that attack, the attacking figure receives 1 wound."
+   },
+   {
+    "title": "Duelist's Footwork",
+    "description": "Marrek Thal is never attacked when leaving an engagement."
+   },
+   {
+    "title": "Blood Haze",
+    "description": "After revealing an Order Marker on Marrek Thal and before taking his turn, roll the 20-sided die. If you roll a 15 or higher, an opponent takes Marrek Thal's turn this turn instead of you, moving and attacking with him as if he were his own figure. If there is more than one opponent, the opponent with the fewest figures on the battlefield takes the turn. Marrek Thal cannot be attacked by the figures of the opponent taking his turn during that turn."
+   }
+  ],
+  "design_note": "A 30% chance per order marker of handing a high-attack melee hero to the enemy also wastes the order marker, so the discount must cover both lost tempo and self-inflicted damage.",
+  "category": "drawback_twins_severe"
+ },
+ {
+  "name": "Eranthe Highwind",
+  "general": "Jandar",
+  "entity_type": "Kyrie",
+  "figure_type": "Unique Hero",
+  "occupation": "Vanguard",
+  "personality": "Valiant",
+  "size": "Medium",
+  "height": 5,
+  "life": 5,
+  "move": 6,
+  "range": 1,
+  "attack": 4,
+  "defense": 5,
+  "abilities": [
+   {
+    "title": "Flying",
+    "description": "When counting spaces for Eranthe Highwind's movement, ignore elevations. Eranthe Highwind may fly over water without stopping, pass over figures without becoming engaged, and fly over obstacles such as ruins. If Eranthe Highwind is engaged when she starts to fly, she will take any leaving engagement attacks."
+   },
+   {
+    "title": "Diving Strike",
+    "description": "If Eranthe Highwind moved 4 or more spaces this turn, add 1 die to her normal attack."
+   }
+  ],
+  "design_note": "Flying plus defense 5 and a conditional fifth attack die makes her durability and mobility hard to separate from her modest life total.",
+  "category": "drawback_twins_severe"
+ },
+ {
+  "name": "Eranthe Highwind (variant)",
+  "general": "Jandar",
+  "entity_type": "Kyrie",
+  "figure_type": "Unique Hero",
+  "occupation": "Vanguard",
+  "personality": "Valiant",
+  "size": "Medium",
+  "height": 5,
+  "life": 5,
+  "move": 6,
+  "range": 1,
+  "attack": 4,
+  "defense": 5,
+  "abilities": [
+   {
+    "title": "Flying",
+    "description": "When counting spaces for Eranthe Highwind's movement, ignore elevations. Eranthe Highwind may fly over water without stopping, pass over figures without becoming engaged, and fly over obstacles such as ruins. If Eranthe Highwind is engaged when she starts to fly, she will take any leaving engagement attacks."
+   },
+   {
+    "title": "Diving Strike",
+    "description": "If Eranthe Highwind moved 4 or more spaces this turn, add 1 die to her normal attack."
+   },
+   {
+    "title": "Shattered Wing",
+    "description": "At the end of every round, place 1 wound marker on this Army Card. Eranthe Highwind receives this wound whether or not she took a turn that round, and this wound cannot be prevented or ignored by any power."
+   },
+   {
+    "title": "Borrowed Time",
+    "description": "Eranthe Highwind cannot be healed or have wound markers removed from this Army Card by any power."
+   }
+  ],
+  "design_note": "A guaranteed wound every round caps her at roughly five rounds of life regardless of her defense 5, turning a durable flyer into a timer that must be discounted steeply.",
+  "category": "drawback_twins_severe"
+ },
+ {
+  "name": "Grosh Ironmaw",
+  "general": "Utgar",
+  "entity_type": "Orc",
+  "figure_type": "Unique Hero",
+  "occupation": "Champion",
+  "personality": "Ferocious",
+  "size": "Medium",
+  "height": 5,
+  "life": 6,
+  "move": 6,
+  "range": 1,
+  "attack": 5,
+  "defense": 3,
+  "abilities": [
+   {
+    "title": "Ironmaw Sweep Special Attack",
+    "description": "Range 1. Attack 3. All figures adjacent to Grosh Ironmaw are affected by Ironmaw Sweep Special Attack. Roll each defending figure's defense dice separately. Figures you control are also affected by this special attack."
+   },
+   {
+    "title": "Thick Hide",
+    "description": "When rolling defense dice against a normal attack from an adjacent attacking figure, Grosh Ironmaw adds 1 die to his defense."
+   }
+  ],
+  "design_note": "A sweep that also hits your own figures paired with attack 5 and only defense 3 makes his effective value swing wildly with the army built around him.",
+  "category": "drawback_twins_severe"
+ },
+ {
+  "name": "Grosh Ironmaw (variant)",
+  "general": "Utgar",
+  "entity_type": "Orc",
+  "figure_type": "Unique Hero",
+  "occupation": "Champion",
+  "personality": "Ferocious",
+  "size": "Medium",
+  "height": 5,
+  "life": 6,
+  "move": 6,
+  "range": 1,
+  "attack": 5,
+  "defense": 3,
+  "abilities": [
+   {
+    "title": "Ironmaw Sweep Special Attack",
+    "description": "Range 1. Attack 3. All figures adjacent to Grosh Ironmaw are affected by Ironmaw Sweep Special Attack. Roll each defending figure's defense dice separately. Figures you control are also affected by this special attack."
+   },
+   {
+    "title": "Thick Hide",
+    "description": "When rolling defense dice against a normal attack from an adjacent attacking figure, Grosh Ironmaw adds 1 die to his defense."
+   },
+   {
+    "title": "Red Rage",
+    "description": "When Grosh Ironmaw attacks with a normal attack, he must attack the figure with the fewest clear sight spaces between it and Grosh Ironmaw, whether that figure is an opponent's figure or a figure you control. If two or more figures are equally near, an opponent chooses which of those figures Grosh Ironmaw must attack. Grosh Ironmaw must move toward the nearest figure if he is able to end his move adjacent to it."
+   }
+  ],
+  "design_note": "Forced targeting of the nearest figure makes him a liability beside your own squads yet still lethal in a solo screen, so the drawback's cost depends entirely on army composition.",
+  "category": "drawback_twins_severe"
+ },
+ {
+  "name": "Sylvaen Duskarrow",
+  "general": "Ullar",
+  "entity_type": "Elf",
+  "figure_type": "Unique Hero",
+  "occupation": "Marksman",
+  "personality": "Disciplined",
+  "size": "Medium",
+  "height": 5,
+  "life": 5,
+  "move": 5,
+  "range": 7,
+  "attack": 4,
+  "defense": 3,
+  "abilities": [
+   {
+    "title": "Piercing Shot",
+    "description": "When Sylvaen Duskarrow attacks an opponent's figure that is 3 or more spaces away, the defending figure rolls 1 fewer defense die."
+   },
+   {
+    "title": "Steady Aim",
+    "description": "If Sylvaen Duskarrow did not move on his turn, you may add 1 die to his normal attack."
+   }
+  ],
+  "design_note": "Range 7 with defense-shredding shots plus a stand-still bonus blurs the line between a 100-point archer and a premium sniper.",
+  "category": "drawback_twins_severe"
+ },
+ {
+  "name": "Sylvaen Duskarrow (variant)",
+  "general": "Ullar",
+  "entity_type": "Elf",
+  "figure_type": "Unique Hero",
+  "occupation": "Marksman",
+  "personality": "Disciplined",
+  "size": "Medium",
+  "height": 5,
+  "life": 5,
+  "move": 5,
+  "range": 7,
+  "attack": 4,
+  "defense": 3,
+  "abilities": [
+   {
+    "title": "Piercing Shot",
+    "description": "When Sylvaen Duskarrow attacks an opponent's figure that is 3 or more spaces away, the defending figure rolls 1 fewer defense die."
+   },
+   {
+    "title": "Steady Aim",
+    "description": "If Sylvaen Duskarrow did not move on his turn, you may add 1 die to his normal attack."
+   },
+   {
+    "title": "Long Draw",
+    "description": "Sylvaen Duskarrow cannot move and attack on the same turn. When you reveal an Order Marker on Sylvaen Duskarrow, you must choose either to move him up to his Move value or to attack with him, but not both. Sylvaen Duskarrow may not be moved by any power you control on a turn in which he attacks."
+   }
+  ],
+  "design_note": "His own Steady Aim rewards standing still, so the cannot-move-and-attack drawback is far less punishing here than it would be on a melee hero and is easy to overprice as a discount.",
+  "category": "drawback_twins_severe"
+ },
+ {
+  "name": "Grimhold the Unbroken",
+  "general": "Aquilla",
+  "entity_type": "Golem",
+  "figure_type": "Unique Hero",
+  "occupation": "Sentinel",
+  "personality": "Relentless",
+  "size": "Large",
+  "height": 7,
+  "life": 6,
+  "move": 4,
+  "range": 1,
+  "attack": 4,
+  "defense": 5,
+  "abilities": [
+   {
+    "title": "Bulwark Aura 1",
+    "description": "All friendly figures adjacent to Grimhold the Unbroken add 1 to their defense dice."
+   },
+   {
+    "title": "Stone Mending 14",
+    "description": "After taking a turn with Grimhold the Unbroken, you may roll the 20-sided die. If you roll a 14 or higher, remove 1 wound marker from this Army Card."
+   },
+   {
+    "title": "Immovable",
+    "description": "Grimhold the Unbroken is never moved, placed, or affected by an opponent's special power that would move him from the space he occupies."
+   }
+  ],
+  "design_note": "A slow, high-defense aura anchor whose self-repair and wound-soaking both scale with how long he survives, making his real durability hard to convert into a flat cost.",
+  "category": "drawback_twins_mild"
+ },
+ {
+  "name": "Grimhold the Unbroken (variant)",
+  "general": "Aquilla",
+  "entity_type": "Golem",
+  "figure_type": "Unique Hero",
+  "occupation": "Sentinel",
+  "personality": "Relentless",
+  "size": "Large",
+  "height": 7,
+  "life": 6,
+  "move": 4,
+  "range": 1,
+  "attack": 4,
+  "defense": 5,
+  "abilities": [
+   {
+    "title": "Bulwark Aura 1",
+    "description": "All friendly figures adjacent to Grimhold the Unbroken (variant) add 1 to their defense dice."
+   },
+   {
+    "title": "Stone Mending 14",
+    "description": "After taking a turn with Grimhold the Unbroken (variant), you may roll the 20-sided die. If you roll a 14 or higher, remove 1 wound marker from this Army Card."
+   },
+   {
+    "title": "Immovable",
+    "description": "Grimhold the Unbroken (variant) is never moved, placed, or affected by an opponent's special power that would move him from the space he occupies."
+   },
+   {
+    "title": "Cracked Core",
+    "description": "Wound markers may never be removed from Grimhold the Unbroken (variant)'s Army Card. Grimhold the Unbroken (variant) cannot be healed by any special power, glyph, or other game effect."
+   }
+  ],
+  "design_note": "The added drawback silently turns his own Stone Mending 14 into a dead power, so the price drop must cover both the lost external healing and a printed ability that can never trigger.",
+  "category": "drawback_twins_mild"
+ },
+ {
+  "name": "Kestrel Vane",
+  "general": "Vydar",
+  "entity_type": "Vorid",
+  "figure_type": "Unique Hero",
+  "occupation": "Skyraider",
+  "personality": "Precise",
+  "size": "Small",
+  "height": 3,
+  "life": 4,
+  "move": 6,
+  "range": 5,
+  "attack": 3,
+  "defense": 3,
+  "abilities": [
+   {
+    "title": "Diving Volley Special Attack",
+    "description": "Range 4. Attack 2. When Kestrel Vane attacks with her Diving Volley Special Attack, she may attack 2 additional times. She may not attack the same figure more than once with Diving Volley Special Attack."
+   },
+   {
+    "title": "Evasive 1",
+    "description": "Kestrel Vane adds 1 to her Defense Value when defending against a non-adjacent figure."
+   },
+   {
+    "title": "Flying",
+    "description": "When counting spaces for Kestrel Vane's movement, ignore elevations. She may fly over water without stopping, pass over figures without becoming engaged, and fly over obstacles such as ruins. If Kestrel Vane is engaged when she starts to fly, she will take any leaving engagement attacks."
+   }
+  ],
+  "design_note": "A cheap-bodied flier whose three-target special attack and flight-plus-evasion mobility give her far more board impact than her raw 4 life and Attack 3 suggest.",
+  "category": "drawback_twins_mild"
+ },
+ {
+  "name": "Kestrel Vane (variant)",
+  "general": "Vydar",
+  "entity_type": "Vorid",
+  "figure_type": "Unique Hero",
+  "occupation": "Skyraider",
+  "personality": "Precise",
+  "size": "Small",
+  "height": 3,
+  "life": 4,
+  "move": 6,
+  "range": 5,
+  "attack": 3,
+  "defense": 3,
+  "abilities": [
+   {
+    "title": "Diving Volley Special Attack",
+    "description": "Range 4. Attack 2. When Kestrel Vane (variant) attacks with her Diving Volley Special Attack, she may attack 2 additional times. She may not attack the same figure more than once with Diving Volley Special Attack."
+   },
+   {
+    "title": "Evasive 1",
+    "description": "Kestrel Vane (variant) adds 1 to her Defense Value when defending against a non-adjacent figure."
+   },
+   {
+    "title": "Flying",
+    "description": "When counting spaces for Kestrel Vane (variant)'s movement, ignore elevations. She may fly over water without stopping, pass over figures without becoming engaged, and fly over obstacles such as ruins. If Kestrel Vane (variant) is engaged when she starts to fly, she will take any leaving engagement attacks."
+   },
+   {
+    "title": "Tattered Wings",
+    "description": "While there are one or more wound markers on Kestrel Vane (variant)'s Army Card, she loses her Flying special power."
+   }
+  ],
+  "design_note": "The drawback costs nothing until the first wound lands, after which her escape plan vanishes entirely, so the discount depends on how often opponents can reach her at all.",
+  "category": "drawback_twins_mild"
+ },
+ {
+  "name": "Ellyriel Dawnstride",
+  "general": "Ullar",
+  "entity_type": "Elf",
+  "figure_type": "Unique Hero",
+  "occupation": "Pathfinder",
+  "personality": "Independent",
+  "size": "Medium",
+  "height": 5,
+  "life": 4,
+  "move": 7,
+  "range": 5,
+  "attack": 3,
+  "defense": 3,
+  "abilities": [
+   {
+    "title": "Waystone Attunement",
+    "description": "While Ellyriel Dawnstride occupies a space containing a glyph, she adds 1 to her Attack Value and 1 to her Defense Value."
+   },
+   {
+    "title": "Trailmark Aura 1",
+    "description": "All friendly Elf Squad figures within 4 clear sight spaces of Ellyriel Dawnstride add 1 to their Move Value."
+   },
+   {
+    "title": "Stealth Dodge 15",
+    "description": "When Ellyriel Dawnstride rolls defense dice against a normal attack from a non-adjacent figure, roll the 20-sided die. If you roll a 15 or higher, ignore any wounds inflicted by that attack."
+   }
+  ],
+  "design_note": "Her value swings wildly with the map, since a glyph-heavy battlefield turns her into an Attack 4 Defense 4 runner while a glyph-poor one leaves a plain Attack 3 archer.",
+  "category": "drawback_twins_mild"
+ },
+ {
+  "name": "Ellyriel Dawnstride (variant)",
+  "general": "Ullar",
+  "entity_type": "Elf",
+  "figure_type": "Unique Hero",
+  "occupation": "Pathfinder",
+  "personality": "Independent",
+  "size": "Medium",
+  "height": 5,
+  "life": 4,
+  "move": 7,
+  "range": 5,
+  "attack": 3,
+  "defense": 3,
+  "abilities": [
+   {
+    "title": "Waystone Attunement",
+    "description": "While Ellyriel Dawnstride (variant) occupies a space containing a glyph, she adds 1 to her Attack Value and 1 to her Defense Value."
+   },
+   {
+    "title": "Trailmark Aura 1",
+    "description": "All friendly Elf Squad figures within 4 clear sight spaces of Ellyriel Dawnstride (variant) add 1 to their Move Value."
+   },
+   {
+    "title": "Stealth Dodge 15",
+    "description": "When Ellyriel Dawnstride (variant) rolls defense dice against a normal attack from a non-adjacent figure, roll the 20-sided die. If you roll a 15 or higher, ignore any wounds inflicted by that attack."
+   },
+   {
+    "title": "Unattuned",
+    "description": "Ellyriel Dawnstride (variant) may not pick up, carry, or use any glyphs. If she occupies a space containing a glyph, ignore that glyph's special power or effect for her, and she may not reveal or claim a Treasure Glyph."
+   }
+  ],
+  "design_note": "Denying glyphs also blanks her own Waystone Attunement, stacking a lost power on top of a lost tactical option for a fast figure whose whole job is claiming glyphs.",
+  "category": "drawback_twins_mild"
+ },
+ {
+  "name": "Skarn Ridge Cleavers",
+  "general": "Utgar",
+  "entity_type": "Orc",
+  "figure_type": "Common Squad",
+  "occupation": "Cleavers",
+  "personality": "Savage",
+  "size": "Medium",
+  "height": 5,
+  "life": 1,
+  "move": 5,
+  "range": 1,
+  "attack": 3,
+  "defense": 2,
+  "abilities": [
+   {
+    "title": "Warband Frenzy",
+    "description": "When a Skarn Ridge Cleaver you control attacks an adjacent figure, roll 1 additional attack die if at least one other friendly Orc or Goblin figure is adjacent to the defending figure."
+   },
+   {
+    "title": "Cleaving Swing",
+    "description": "If a Skarn Ridge Cleaver you control destroys an adjacent figure with a normal attack, that Cleaver may immediately make one additional normal attack against a different adjacent figure. A Skarn Ridge Cleaver may use Cleaving Swing only once per turn."
+   }
+  ],
+  "design_note": "A cheap 4-figure melee common whose damage output depends entirely on how tightly the army clumps, so its ceiling with a goblin-orc horde is far above its floor alone.",
+  "category": "drawback_twins_mild"
+ },
+ {
+  "name": "Skarn Ridge Cleavers (variant)",
+  "general": "Utgar",
+  "entity_type": "Orc",
+  "figure_type": "Common Squad",
+  "occupation": "Cleavers",
+  "personality": "Savage",
+  "size": "Medium",
+  "height": 5,
+  "life": 1,
+  "move": 5,
+  "range": 1,
+  "attack": 3,
+  "defense": 2,
+  "abilities": [
+   {
+    "title": "Warband Frenzy",
+    "description": "When a Skarn Ridge Cleaver (variant) you control attacks an adjacent figure, roll 1 additional attack die if at least one other friendly Orc or Goblin figure is adjacent to the defending figure."
+   },
+   {
+    "title": "Cleaving Swing",
+    "description": "If a Skarn Ridge Cleaver (variant) you control destroys an adjacent figure with a normal attack, that Cleaver may immediately make one additional normal attack against a different adjacent figure. A Skarn Ridge Cleaver (variant) may use Cleaving Swing only once per turn."
+   },
+   {
+    "title": "Pack Instinct",
+    "description": "If it is possible to do so, each Skarn Ridge Cleaver (variant) you control must end its movement on a space adjacent to at least one other friendly figure."
+   },
+   {
+    "title": "",
+    "description": ""
+   }
+  ],
+  "design_note": "The forced clustering is nearly free for a squad that already wants to swarm, but it hands opponents easy special-attack targets, so the discount should be small and is easy to overprice.",
+  "category": "drawback_twins_mild"
+ },
+ {
+  "name": "Thessaly Windshear",
+  "general": "Jandar",
+  "entity_type": "Kyrie",
+  "figure_type": "Unique Hero",
+  "occupation": "Skyblade",
+  "personality": "Valiant",
+  "size": "Medium",
+  "height": 5,
+  "life": 5,
+  "move": 7,
+  "range": 1,
+  "attack": 4,
+  "defense": 3,
+  "abilities": [
+   {
+    "title": "Diving Assault",
+    "description": "If Thessaly Windshear used her Flying special power this turn and moved at least 4 spaces before attacking, she rolls 2 additional attack dice on her first normal attack this turn."
+   },
+   {
+    "title": "Windshear Escort",
+    "description": "After taking a turn with Thessaly Windshear, you may choose one small or medium figure you control adjacent to Thessaly and move that figure up to 3 spaces. The chosen figure may not attack after moving with Windshear Escort."
+   },
+   {
+    "title": "Flying",
+    "description": "When counting spaces for Thessaly Windshear's movement, ignore elevations. Thessaly Windshear may fly over water without stopping, pass over figures without becoming engaged, and fly over obstacles such as ruins. When Thessaly Windshear starts to fly, if she is engaged, she will take any leaving engagement attacks."
+   }
+  ],
+  "design_note": "Move 7 with Flying plus a conditional +2 attack dice diving bonus and a free ally reposition stack three value sources that are hard to separate.",
+  "category": "drawback_twins_mild"
+ },
+ {
+  "name": "Thessaly Windshear (variant)",
+  "general": "Jandar",
+  "entity_type": "Kyrie",
+  "figure_type": "Unique Hero",
+  "occupation": "Skyblade",
+  "personality": "Valiant",
+  "size": "Medium",
+  "height": 5,
+  "life": 5,
+  "move": 7,
+  "range": 1,
+  "attack": 4,
+  "defense": 3,
+  "abilities": [
+   {
+    "title": "Diving Assault",
+    "description": "If Thessaly Windshear used her Flying special power this turn and moved at least 4 spaces before attacking, she rolls 2 additional attack dice on her first normal attack this turn."
+   },
+   {
+    "title": "Windshear Escort",
+    "description": "After taking a turn with Thessaly Windshear, you may choose one small or medium figure you control adjacent to Thessaly and move that figure up to 3 spaces. The chosen figure may not attack after moving with Windshear Escort."
+   },
+   {
+    "title": "Flying",
+    "description": "When counting spaces for Thessaly Windshear's movement, ignore elevations. Thessaly Windshear may fly over water without stopping, pass over figures without becoming engaged, and fly over obstacles such as ruins. When Thessaly Windshear starts to fly, if she is engaged, she will take any leaving engagement attacks."
+   },
+   {
+    "title": "Torn Wings",
+    "description": "While there are one or more wound markers on this Army Card, Thessaly Windshear cannot use her Flying special power."
+   }
+  ],
+  "design_note": "The drawback only bites after the first wound, but it also silently switches off Diving Assault, so its cost is larger than it first reads.",
+  "category": "drawback_twins_mild"
+ },
+ {
+  "name": "Grubhollow Sappers",
+  "general": "Utgar",
+  "entity_type": "Goblin",
+  "figure_type": "Common Squad",
+  "occupation": "Sappers",
+  "personality": "Sneaky",
+  "size": "Medium",
+  "height": 4,
+  "life": 1,
+  "move": 5,
+  "range": 1,
+  "attack": 3,
+  "defense": 2,
+  "abilities": [
+   {
+    "title": "Sapper's Charge Special Attack",
+    "description": "Range 4. Attack 2. After attacking with Sapper's Charge Special Attack, roll the 20-sided die. If you roll a 1-4, the attacking Grubhollow Sapper receives one wound."
+   },
+   {
+    "title": "Burrow Move",
+    "description": "When counting spaces for a Grubhollow Sapper's movement, that Sapper may move through spaces occupied by small or medium figures without becoming engaged."
+   },
+   {
+    "title": "Scatter",
+    "description": "After a Grubhollow Sapper you control is destroyed, you may move each other Grubhollow Sapper you control up to 1 space. These spaces may be up to 1 level higher or lower."
+   },
+   {
+    "title": "",
+    "description": ""
+   }
+  ],
+  "design_note": "A 4-figure common squad with a self-wounding ranged special attack and free mobility tricks sits awkwardly between cheap melee chaff and real ranged squads.",
+  "category": "drawback_twins_mild"
+ },
+ {
+  "name": "Grubhollow Sappers (variant)",
+  "general": "Utgar",
+  "entity_type": "Goblin",
+  "figure_type": "Common Squad",
+  "occupation": "Sappers",
+  "personality": "Sneaky",
+  "size": "Medium",
+  "height": 4,
+  "life": 1,
+  "move": 5,
+  "range": 1,
+  "attack": 3,
+  "defense": 2,
+  "abilities": [
+   {
+    "title": "Sapper's Charge Special Attack",
+    "description": "Range 4. Attack 2. After attacking with Sapper's Charge Special Attack, roll the 20-sided die. If you roll a 1-4, the attacking Grubhollow Sapper receives one wound."
+   },
+   {
+    "title": "Burrow Move",
+    "description": "When counting spaces for a Grubhollow Sapper's movement, that Sapper may move through spaces occupied by small or medium figures without becoming engaged."
+   },
+   {
+    "title": "Scatter",
+    "description": "After a Grubhollow Sapper you control is destroyed, you may move each other Grubhollow Sapper you control up to 1 space. These spaces may be up to 1 level higher or lower."
+   },
+   {
+    "title": "Cowardly Nerves",
+    "description": "When a Grubhollow Sapper you control is engaged with 2 or more opponent's figures, subtract 1 from that Sapper's Defense Value."
+   },
+   {
+    "title": "",
+    "description": ""
+   }
+  ],
+  "design_note": "Losing a die from an already thin defense of 2 matters most exactly when swarmed, which is how common squads usually die.",
+  "category": "drawback_twins_mild"
+ },
+ {
+  "name": "Zeroline Marksmen",
+  "general": "Vydar",
+  "entity_type": "Soulborg",
+  "figure_type": "Unique Squad",
+  "occupation": "Marksmen",
+  "personality": "Precise",
+  "size": "Medium",
+  "height": 5,
+  "life": 1,
+  "move": 5,
+  "range": 7,
+  "attack": 3,
+  "defense": 3,
+  "abilities": [
+   {
+    "title": "Targeting Uplink",
+    "description": "When a Zeroline Marksman attacks an opponent's figure that is within 4 clear sight spaces of another Soulborg you control, that Marksman rolls 1 additional attack die."
+   },
+   {
+    "title": "Repositioning Servos",
+    "description": "After taking a turn with Zeroline Marksmen, you may move each Zeroline Marksman you control up to 1 space. These spaces may be up to 1 level higher or lower."
+   },
+   {
+    "title": "Firing Lock",
+    "description": "A Zeroline Marksman that did not move this turn adds 1 to its Defense Value against normal attacks from non-adjacent figures."
+   }
+  ],
+  "design_note": "Range 7 attack 3 on a three-figure unique squad with a conditional fourth attack die pushes past the usual ranged-squad ceiling.",
+  "category": "drawback_twins_mild"
+ },
+ {
+  "name": "Zeroline Marksmen (variant)",
+  "general": "Vydar",
+  "entity_type": "Soulborg",
+  "figure_type": "Unique Squad",
+  "occupation": "Marksmen",
+  "personality": "Precise",
+  "size": "Medium",
+  "height": 5,
+  "life": 1,
+  "move": 5,
+  "range": 7,
+  "attack": 3,
+  "defense": 3,
+  "abilities": [
+   {
+    "title": "Targeting Uplink",
+    "description": "When a Zeroline Marksman attacks an opponent's figure that is within 4 clear sight spaces of another Soulborg you control, that Marksman rolls 1 additional attack die."
+   },
+   {
+    "title": "Repositioning Servos",
+    "description": "After taking a turn with Zeroline Marksmen, you may move each Zeroline Marksman you control up to 1 space. These spaces may be up to 1 level higher or lower."
+   },
+   {
+    "title": "Firing Lock",
+    "description": "A Zeroline Marksman that did not move this turn adds 1 to its Defense Value against normal attacks from non-adjacent figures."
+   },
+   {
+    "title": "Sealed Chassis",
+    "description": "Zeroline Marksmen may not pick up or carry any glyph, and are never affected by the powers of any glyph they occupy. Zeroline Marksmen may still move onto and stop on glyph spaces."
+   }
+  ],
+  "design_note": "Glyph denial costs nothing in some builds and a whole treasure strategy in others, so its price swings with the map rather than the card.",
+  "category": "drawback_twins_mild"
+ },
+ {
+  "name": "Bastion Argevaine",
+  "general": "Einar",
+  "entity_type": "Human",
+  "figure_type": "Unique Hero",
+  "occupation": "Champion",
+  "personality": "Disciplined",
+  "size": "Medium",
+  "height": 5,
+  "life": 6,
+  "move": 5,
+  "range": 1,
+  "attack": 5,
+  "defense": 4,
+  "abilities": [
+   {
+    "title": "Hold the Line",
+    "description": "Bastion Argevaine adds 1 to his Defense Value for each other Soldier you control adjacent to him, up to a maximum of 2 added dice."
+   },
+   {
+    "title": "Soldier Onslaught",
+    "description": "While there is an Order Marker on this Army Card, all Soldiers you control adjacent to Bastion Argevaine add 1 to their Attack Value when attacking an adjacent figure."
+   },
+   {
+    "title": "Second Wind 16",
+    "description": "After Bastion Argevaine receives one or more wounds from an attack, roll the 20-sided die. If you roll a 16 or higher, remove one wound marker from this Army Card."
+   }
+  ],
+  "design_note": "A tank-buff-heal bundle whose defense and aura both depend on keeping a Soldier screen alive, making its real durability very army-dependent.",
+  "category": "drawback_twins_mild"
+ },
+ {
+  "name": "Bastion Argevaine (variant)",
+  "general": "Einar",
+  "entity_type": "Human",
+  "figure_type": "Unique Hero",
+  "occupation": "Champion",
+  "personality": "Disciplined",
+  "size": "Medium",
+  "height": 5,
+  "life": 6,
+  "move": 5,
+  "range": 1,
+  "attack": 5,
+  "defense": 4,
+  "abilities": [
+   {
+    "title": "Hold the Line",
+    "description": "Bastion Argevaine adds 1 to his Defense Value for each other Soldier you control adjacent to him, up to a maximum of 2 added dice."
+   },
+   {
+    "title": "Soldier Onslaught",
+    "description": "While there is an Order Marker on this Army Card, all Soldiers you control adjacent to Bastion Argevaine add 1 to their Attack Value when attacking an adjacent figure."
+   },
+   {
+    "title": "Second Wind 16",
+    "description": "After Bastion Argevaine receives one or more wounds from an attack, roll the 20-sided die. If you roll a 16 or higher, remove one wound marker from this Army Card."
+   },
+   {
+    "title": "Festering Wounds",
+    "description": "Wound markers may never be removed from this Army Card by any special power or glyph, including Bastion Argevaine's own Second Wind 16 special power."
+   }
+  ],
+  "design_note": "The single added drawback fully cancels one of the card's three printed powers as well as all outside healing, blurring the line between mild and severe.",
+  "category": "drawback_twins_mild"
+ },
+ {
+  "name": "Vaelith Stormcaller",
+  "general": "Ullar",
+  "entity_type": "Kyrie Windpriest",
+  "figure_type": "Unique Hero",
+  "occupation": "Windpriest",
+  "personality": "Wise",
+  "size": "Medium",
+  "height": 5,
+  "life": 4,
+  "move": 6,
+  "range": 5,
+  "attack": 3,
+  "defense": 3,
+  "abilities": [
+   {
+    "title": "Gale Lash Special Attack",
+    "description": "Range 5. Attack 2. If Gale Lash Special Attack inflicts 1 or more wounds on a Small or Medium figure, after that attack you may move the defending figure up to 3 spaces. The defending figure will not take any leaving engagement attacks, and may not be moved to a space more than 1 level above the space it started on or into molten lava."
+   },
+   {
+    "title": "Cyclone Guard 1",
+    "description": "All friendly Kyrie adjacent to Vaelith Stormcaller add 1 die to their defense when rolling defense dice against attacks from non-adjacent figures."
+   },
+   {
+    "title": "Flying",
+    "description": "When counting spaces for Vaelith Stormcaller's movement, ignore elevations. Vaelith Stormcaller may fly over water without stopping, pass over figures without becoming engaged, and fly over obstacles such as ruins. When Vaelith Stormcaller starts to fly, if she is engaged she will take any leaving engagement attacks."
+   }
+  ],
+  "design_note": "A mid-life flyer whose push-away special attack and conditional squad aura are worth more in swarm armies than in duels, making the baseline hard to peg.",
+  "category": "drawback_twins_mild"
+ },
+ {
+  "name": "Vaelith Stormcaller (variant)",
+  "general": "Ullar",
+  "entity_type": "Kyrie Windpriest",
+  "figure_type": "Unique Hero",
+  "occupation": "Windpriest",
+  "personality": "Wise",
+  "size": "Medium",
+  "height": 5,
+  "life": 4,
+  "move": 6,
+  "range": 5,
+  "attack": 3,
+  "defense": 3,
+  "abilities": [
+   {
+    "title": "Gale Lash Special Attack",
+    "description": "Range 5. Attack 2. If Gale Lash Special Attack inflicts 1 or more wounds on a Small or Medium figure, after that attack you may move the defending figure up to 3 spaces. The defending figure will not take any leaving engagement attacks, and may not be moved to a space more than 1 level above the space it started on or into molten lava."
+   },
+   {
+    "title": "Cyclone Guard 1",
+    "description": "All friendly Kyrie adjacent to Vaelith Stormcaller (variant) add 1 die to their defense when rolling defense dice against attacks from non-adjacent figures."
+   },
+   {
+    "title": "Storm-Torn Wings",
+    "description": "If there are 1 or more wound markers on this Army Card, Vaelith Stormcaller (variant) loses Flying for the rest of the game."
+   },
+   {
+    "title": "Flying",
+    "description": "When counting spaces for Vaelith Stormcaller (variant)'s movement, ignore elevations. Vaelith Stormcaller (variant) may fly over water without stopping, pass over figures without becoming engaged, and fly over obstacles such as ruins. When Vaelith Stormcaller (variant) starts to fly, if she is engaged she will take any leaving engagement attacks."
+   }
+  ],
+  "design_note": "Losing Flying on the first wound strips her kiting game exactly when she needs it most, but a lucky untouched game costs her nothing.",
+  "category": "drawback_twins_mild"
+ },
+ {
+  "name": "Ironroot Hammerguard",
+  "general": "Jandar",
+  "entity_type": "Dwarf Warriors",
+  "figure_type": "Common Squad",
+  "occupation": "Warrior",
+  "personality": "Stalwart",
+  "size": "Medium",
+  "height": 4,
+  "life": 1,
+  "move": 4,
+  "range": 1,
+  "attack": 3,
+  "defense": 4,
+  "abilities": [
+   {
+    "title": "Shield Wall Defense",
+    "description": "When rolling defense dice for an Ironroot Hammerguard, if that Hammerguard is adjacent to 1 or more other Ironroot Hammerguards you control, add 1 die to his defense."
+   },
+   {
+    "title": "Rooted Stance",
+    "description": "Ironroot Hammerguard may not be moved by any special power on an Army Card or glyph, and they never roll for falling damage."
+   }
+  ],
+  "design_note": "Defense 4 that becomes an effective 5 in formation on a move-4 melee squad blurs the line between a cheap wall and a premium anchor.",
+  "category": "drawback_twins_mild"
+ },
+ {
+  "name": "Ironroot Hammerguard (variant)",
+  "general": "Jandar",
+  "entity_type": "Dwarf Warriors",
+  "figure_type": "Common Squad",
+  "occupation": "Warrior",
+  "personality": "Stalwart",
+  "size": "Medium",
+  "height": 4,
+  "life": 1,
+  "move": 4,
+  "range": 1,
+  "attack": 3,
+  "defense": 4,
+  "abilities": [
+   {
+    "title": "Shield Wall Defense",
+    "description": "When rolling defense dice for an Ironroot Hammerguard (variant), if that Hammerguard is adjacent to 1 or more other Ironroot Hammerguard (variant) figures you control, add 1 die to his defense."
+   },
+   {
+    "title": "Rooted Stance",
+    "description": "Ironroot Hammerguard (variant) may not be moved by any special power on an Army Card or glyph, and they never roll for falling damage."
+   },
+   {
+    "title": "Oathbound to Stone",
+    "description": "Ironroot Hammerguard (variant) figures may not pick up, carry, or be affected by any glyph. Treat any glyph a Hammerguard (variant) occupies as an ordinary space; that glyph's power does not activate and is not revealed by that figure."
+   }
+  ],
+  "design_note": "Glyph denial costs a slow melee squad little on glyph-light maps but cripples their role as cheap glyph-sitters on tournament maps.",
+  "category": "drawback_twins_mild"
+ },
+ {
+  "name": "Mordrek Vyle",
+  "general": "Utgar",
+  "entity_type": "Undead Necromancer",
+  "figure_type": "Unique Hero",
+  "occupation": "Necromancer",
+  "personality": "Ruthless",
+  "size": "Medium",
+  "height": 5,
+  "life": 5,
+  "move": 5,
+  "range": 1,
+  "attack": 4,
+  "defense": 3,
+  "abilities": [
+   {
+    "title": "Soul Siphon",
+    "description": "Each time Mordrek Vyle destroys an adjacent figure with a normal attack, you may remove 1 wound marker from this Army Card. Mordrek Vyle cannot Soul Siphon destructible objects."
+   },
+   {
+    "title": "Rise From Ruin 15",
+    "description": "After taking a turn with Mordrek Vyle, you may roll the 20-sided die. If you roll a 15 or higher, choose 1 Small or Medium Common Squad figure you control that has been destroyed this game and place it on an empty space adjacent to Mordrek Vyle."
+   },
+   {
+    "title": "Grave Chill",
+    "description": "Any opponent's figure that starts its turn adjacent to Mordrek Vyle subtracts 1 from its Move Value for that turn."
+   }
+  ],
+  "design_note": "Self-healing plus a 30% per-turn squad resurrection can generate unbounded value in a common-squad army while doing almost nothing in a hero build.",
+  "category": "drawback_twins_mild"
+ },
+ {
+  "name": "Mordrek Vyle (variant)",
+  "general": "Utgar",
+  "entity_type": "Undead Necromancer",
+  "figure_type": "Unique Hero",
+  "occupation": "Necromancer",
+  "personality": "Ruthless",
+  "size": "Medium",
+  "height": 5,
+  "life": 5,
+  "move": 5,
+  "range": 1,
+  "attack": 4,
+  "defense": 3,
+  "abilities": [
+   {
+    "title": "Soul Siphon",
+    "description": "Each time Mordrek Vyle (variant) destroys an adjacent figure with a normal attack, you may remove 1 wound marker from this Army Card. Mordrek Vyle (variant) cannot Soul Siphon destructible objects."
+   },
+   {
+    "title": "Rise From Ruin 15",
+    "description": "After taking a turn with Mordrek Vyle (variant), you may roll the 20-sided die. If you roll a 15 or higher, choose 1 Small or Medium Common Squad figure you control that has been destroyed this game and place it on an empty space adjacent to Mordrek Vyle (variant)."
+   },
+   {
+    "title": "Deathless Rot",
+    "description": "Wound markers may never be removed from Mordrek Vyle (variant)'s Army Card by any means, including his own Soul Siphon, other special powers, and glyphs."
+   }
+  ],
+  "design_note": "The drawback directly cancels one of his own printed powers, so its cost depends entirely on how often Soul Siphon would have triggered.",
+  "category": "drawback_twins_mild"
+ },
+ {
+  "name": "Sablewind Scouts",
+  "general": "Vydar",
+  "entity_type": "Human Scouts",
+  "figure_type": "Unique Squad",
+  "occupation": "Scout",
+  "personality": "Precise",
+  "size": "Medium",
+  "height": 5,
+  "life": 1,
+  "move": 6,
+  "range": 6,
+  "attack": 3,
+  "defense": 2,
+  "abilities": [
+   {
+    "title": "Crossfire",
+    "description": "When a Sablewind Scout attacks an opponent's figure that is adjacent to 1 or more other friendly figures, add 1 die to that Scout's attack."
+   },
+   {
+    "title": "Sighting Signals",
+    "description": "Before taking a turn with a Unique Hero you control, you may first move 1 Sablewind Scout you control up to 3 spaces. That Scout may not attack this turn."
+   }
+  ],
+  "design_note": "Range 6 attack 3 with a common conditional bonus and a free half-turn mover sits right at the ceiling for ranged squad pricing.",
+  "category": "drawback_twins_mild"
+ },
+ {
+  "name": "Sablewind Scouts (variant)",
+  "general": "Vydar",
+  "entity_type": "Human Scouts",
+  "figure_type": "Unique Squad",
+  "occupation": "Scout",
+  "personality": "Precise",
+  "size": "Medium",
+  "height": 5,
+  "life": 1,
+  "move": 6,
+  "range": 6,
+  "attack": 3,
+  "defense": 2,
+  "abilities": [
+   {
+    "title": "Crossfire",
+    "description": "When a Sablewind Scout (variant) attacks an opponent's figure that is adjacent to 1 or more other friendly figures, add 1 die to that Scout's attack."
+   },
+   {
+    "title": "Sighting Signals",
+    "description": "Before taking a turn with a Unique Hero you control, you may first move 1 Sablewind Scout (variant) you control up to 3 spaces. That Scout may not attack this turn."
+   },
+   {
+    "title": "Buddy System",
+    "description": "Whenever a Sablewind Scout (variant) moves, if it is possible for that figure to end its movement on a space adjacent to another friendly figure, it must do so."
+   },
+   {
+    "title": "Flying",
+    "description": ""
+   }
+  ],
+  "design_note": "Forced clustering both fuels their own Crossfire and hands opponents easy multi-figure special attack targets on defense 2 bodies.",
+  "category": "drawback_twins_mild"
+ },
+ {
+  "name": "Sir Callum of Greyhold",
+  "general": "Jandar",
+  "entity_type": "Human Knight",
+  "figure_type": "Unique Hero",
+  "occupation": "Knight",
+  "personality": "Valiant",
+  "size": "Medium",
+  "height": 5,
+  "life": 4,
+  "move": 5,
+  "range": 1,
+  "attack": 3,
+  "defense": 4,
+  "abilities": [
+   {
+    "title": "Lance Thrust Special Attack",
+    "description": "Range 2. Attack 3. When attacking with Lance Thrust Special Attack, Sir Callum of Greyhold is not considered engaged with the figure he attacks."
+   },
+   {
+    "title": "Shielded Advance",
+    "description": "When rolling defense dice against a normal attack from a non-adjacent figure, Sir Callum of Greyhold adds 1 die to his defense."
+   }
+  ],
+  "design_note": "A plain tanky melee hero whose reach-2 special attack dodges engagement rules, making his defensive value easy to over- or under-rate before any aura is added.",
+  "category": "aura_twins"
+ },
+ {
+  "name": "Sir Callum of Greyhold (variant)",
+  "general": "Jandar",
+  "entity_type": "Human Knight",
+  "figure_type": "Unique Hero",
+  "occupation": "Knight",
+  "personality": "Valiant",
+  "size": "Medium",
+  "height": 5,
+  "life": 4,
+  "move": 5,
+  "range": 1,
+  "attack": 3,
+  "defense": 4,
+  "abilities": [
+   {
+    "title": "Lance Thrust Special Attack",
+    "description": "Range 2. Attack 3. When attacking with Lance Thrust Special Attack, Sir Callum of Greyhold is not considered engaged with the figure he attacks."
+   },
+   {
+    "title": "Shielded Advance",
+    "description": "When rolling defense dice against a normal attack from a non-adjacent figure, Sir Callum of Greyhold adds 1 die to his defense."
+   },
+   {
+    "title": "Banner of Greyhold Aura 1",
+    "description": "All friendly figures within 4 clear sight spaces of Sir Callum of Greyhold add 1 die to their defense. Auras named Banner of Greyhold Aura 1 do not stack."
+   }
+  ],
+  "design_note": "The identical knight plus a 4-space army-wide defense aura, which is worth far more alongside a cheap squad swarm than it is in a hero-heavy army, so the premium over the base card is hard to pin down.",
+  "category": "aura_twins"
+ },
+ {
+  "name": "Unit 7-VEX",
+  "general": "Vydar",
+  "entity_type": "Soulborg Marksman",
+  "figure_type": "Unique Hero",
+  "occupation": "Marksman",
+  "personality": "Precise",
+  "size": "Medium",
+  "height": 6,
+  "life": 3,
+  "move": 5,
+  "range": 7,
+  "attack": 3,
+  "defense": 4,
+  "abilities": [
+   {
+    "title": "Targeting Uplink",
+    "description": "If Unit 7-VEX did not move this turn, add 1 die to its attack."
+   },
+   {
+    "title": "Range Calibration",
+    "description": "When attacking a figure that is 5 or more spaces away from Unit 7-VEX, all skulls rolled count for one additional hit."
+   }
+  ],
+  "design_note": "Low life but a long-range, hit-doubling sniper that only performs when it stands still, so its damage output swings wildly with terrain and map size.",
+  "category": "aura_twins"
+ },
+ {
+  "name": "Unit 7-VEX (variant)",
+  "general": "Vydar",
+  "entity_type": "Soulborg Marksman",
+  "figure_type": "Unique Hero",
+  "occupation": "Marksman",
+  "personality": "Precise",
+  "size": "Medium",
+  "height": 6,
+  "life": 3,
+  "move": 5,
+  "range": 7,
+  "attack": 3,
+  "defense": 4,
+  "abilities": [
+   {
+    "title": "Targeting Uplink",
+    "description": "If Unit 7-VEX did not move this turn, add 1 die to its attack."
+   },
+   {
+    "title": "Range Calibration",
+    "description": "When attacking a figure that is 5 or more spaces away from Unit 7-VEX, all skulls rolled count for one additional hit."
+   },
+   {
+    "title": "Firing Solution Aura 1",
+    "description": "When a friendly figure within 4 clear sight spaces of Unit 7-VEX attacks with a normal attack, that figure adds 1 die to its attack. Auras named Firing Solution Aura 1 do not stack."
+   }
+  ],
+  "design_note": "An army-wide attack die granted by a figure that wants to sit still in the back line pairs perfectly with ranged squads, but the aura's 4-space leash fights against its own 7-range sniping role.",
+  "category": "aura_twins"
+ },
+ {
+  "name": "Sludge Hollow Marauder",
+  "general": "Utgar",
+  "entity_type": "Goblin Marauder",
+  "figure_type": "Common Hero",
+  "occupation": "Marauder",
+  "personality": "Wild",
+  "size": "Small",
+  "height": 4,
+  "life": 1,
+  "move": 6,
+  "range": 1,
+  "attack": 3,
+  "defense": 2,
+  "abilities": [
+   {
+    "title": "Scrap Charge",
+    "description": "If a Sludge Hollow Marauder moved 4 or more spaces this turn, add 1 die to its attack."
+   },
+   {
+    "title": "Disengage",
+    "description": "Sludge Hollow Marauders are never attacked when leaving an engagement."
+   }
+  ],
+  "design_note": "A 1-life common hero is nearly worthless on its own, but Disengage plus a charging attack of 4 makes it a repeatable cheap harasser you can field in multiples.",
+  "category": "aura_twins"
+ },
+ {
+  "name": "Sludge Hollow Marauder (variant)",
+  "general": "Utgar",
+  "entity_type": "Goblin Marauder",
+  "figure_type": "Common Hero",
+  "occupation": "Marauder",
+  "personality": "Wild",
+  "size": "Small",
+  "height": 4,
+  "life": 1,
+  "move": 6,
+  "range": 1,
+  "attack": 3,
+  "defense": 2,
+  "abilities": [
+   {
+    "title": "Scrap Charge",
+    "description": "If a Sludge Hollow Marauder moved 4 or more spaces this turn, add 1 die to its attack."
+   },
+   {
+    "title": "Disengage",
+    "description": "Sludge Hollow Marauders are never attacked when leaving an engagement."
+   },
+   {
+    "title": "Hollow Rush Aura 1",
+    "description": "All friendly figures that begin their move within 4 clear sight spaces of a Sludge Hollow Marauder you control increase their Move Value by 1. Auras named Hollow Rush Aura 1 do not stack."
+   }
+  ],
+  "design_note": "Putting an army-wide move aura on a fragile common hero is the pricing trap: the aura is cheap to buy in multiples but trivially removed by one attack, so it cannot be priced like a durable aura hero.",
+  "category": "aura_twins"
+ },
+ {
+  "name": "Brialla Thornsong",
+  "general": "Ullar",
+  "entity_type": "Elf Warden",
+  "figure_type": "Unique Hero",
+  "occupation": "Warden",
+  "personality": "Serene",
+  "size": "Medium",
+  "height": 5,
+  "life": 4,
+  "move": 6,
+  "range": 5,
+  "attack": 3,
+  "defense": 3,
+  "abilities": [
+   {
+    "title": "Entangling Arrow Special Attack",
+    "description": "Range 5. Attack 2. If a figure receives at least 1 wound from Entangling Arrow Special Attack, that figure's Move Value is 0 until the end of the round."
+   },
+   {
+    "title": "Sylvan Renewal 15",
+    "description": "At the start of each round, before revealing any Order Markers, you may roll the 20-sided die. If you roll a 15 or higher, remove 1 wound marker from Brialla Thornsong or from any friendly Elf you control within 4 clear sight spaces of her."
+   }
+  ],
+  "design_note": "Soft control and a 25%-chance heal are both hard to convert into expected damage, so her worth depends almost entirely on whether her army has wounded Elves to mend.",
+  "category": "aura_twins"
+ },
+ {
+  "name": "Brialla Thornsong (variant)",
+  "general": "Ullar",
+  "entity_type": "Elf Warden",
+  "figure_type": "Unique Hero",
+  "occupation": "Warden",
+  "personality": "Serene",
+  "size": "Medium",
+  "height": 5,
+  "life": 4,
+  "move": 6,
+  "range": 5,
+  "attack": 3,
+  "defense": 3,
+  "abilities": [
+   {
+    "title": "Entangling Arrow Special Attack",
+    "description": "Range 5. Attack 2. If a figure receives at least 1 wound from Entangling Arrow Special Attack, that figure's Move Value is 0 until the end of the round."
+   },
+   {
+    "title": "Sylvan Renewal 15",
+    "description": "At the start of each round, before revealing any Order Markers, you may roll the 20-sided die. If you roll a 15 or higher, remove 1 wound marker from Brialla Thornsong or from any friendly Elf you control within 4 clear sight spaces of her."
+   },
+   {
+    "title": "Thornsong Chorus Aura 1",
+    "description": "When a friendly figure within 4 clear sight spaces of Brialla Thornsong attacks with a normal attack or a special attack, that figure adds 1 die to its attack. Auras named Thornsong Chorus Aura 1 do not stack."
+   }
+  ],
+  "design_note": "Her aura is unusually broad because it also boosts special attacks, which can add several dice to a single volley-style squad and inflate the card's value well past a normal attack aura.",
+  "category": "aura_twins"
+ },
+ {
+  "name": "Captain Orrin Halewood",
+  "general": "Jandar",
+  "entity_type": "Human",
+  "figure_type": "Unique Hero",
+  "occupation": "Captain",
+  "personality": "Valiant",
+  "size": "Medium",
+  "height": 5,
+  "life": 4,
+  "move": 5,
+  "range": 1,
+  "attack": 4,
+  "defense": 3,
+  "abilities": [
+   {
+    "title": "Tough",
+    "description": "When rolling defense dice against a normal attack, Captain Orrin Halewood always adds 1 automatic shield to whatever is rolled."
+   },
+   {
+    "title": "Hold the Line 13",
+    "description": "If an opponent's Small or Medium figure moves adjacent to Captain Orrin Halewood, roll the 20-sided die. If you roll a 13 or higher, that figure must immediately end its movement. Figures may be targeted only as they move into engagement with Captain Orrin Halewood, and only once per turn."
+   }
+  ],
+  "design_note": "A plain melee line-holder whose automatic shield and soft movement-lock are hard to separate from raw defense value.",
+  "category": "aura_twins"
+ },
+ {
+  "name": "Captain Orrin Halewood (variant)",
+  "general": "Jandar",
+  "entity_type": "Human",
+  "figure_type": "Unique Hero",
+  "occupation": "Captain",
+  "personality": "Valiant",
+  "size": "Medium",
+  "height": 5,
+  "life": 4,
+  "move": 5,
+  "range": 1,
+  "attack": 4,
+  "defense": 3,
+  "abilities": [
+   {
+    "title": "Tough",
+    "description": "When rolling defense dice against a normal attack, Captain Orrin Halewood always adds 1 automatic shield to whatever is rolled."
+   },
+   {
+    "title": "Hold the Line 13",
+    "description": "If an opponent's Small or Medium figure moves adjacent to Captain Orrin Halewood, roll the 20-sided die. If you roll a 13 or higher, that figure must immediately end its movement. Figures may be targeted only as they move into engagement with Captain Orrin Halewood, and only once per turn."
+   },
+   {
+    "title": "Banner of the Halewood Guard",
+    "description": "All friendly figures within 4 clear sight spaces of Captain Orrin Halewood add 1 die to their defense. A figure may not add more than 1 die for Banner of the Halewood Guard, no matter how many friendly figures with this special power are within 4 clear sight spaces."
+   }
+  ],
+  "design_note": "The unrestricted +1 defense die aura scales with however many cheap squad figures you crowd around him, so its worth depends entirely on the army built behind it.\n",
+  "category": "aura_twins"
+ },
+ {
+  "name": "Grukka Boneflail",
+  "general": "Utgar",
+  "entity_type": "Orc",
+  "figure_type": "Unique Hero",
+  "occupation": "Berserker",
+  "personality": "Savage",
+  "size": "Medium",
+  "height": 5,
+  "life": 5,
+  "move": 5,
+  "range": 1,
+  "attack": 4,
+  "defense": 2,
+  "abilities": [
+   {
+    "title": "Flailing Onslaught Special Attack",
+    "description": "Range 1. Attack 3. All figures adjacent to Grukka Boneflail are affected by Flailing Onslaught Special Attack. Roll attack dice once for all affected figures. Each figure rolls defense dice separately. After attacking with Flailing Onslaught Special Attack, Grukka Boneflail receives 1 wound."
+   },
+   {
+    "title": "Blood Frenzy",
+    "description": "If there are 1 or more wound markers on Grukka Boneflail's Army Card, add 1 to Grukka Boneflail's Attack Value."
+   }
+  ],
+  "design_note": "Self-wounding sweep attack combined with a wound-triggered attack bonus makes his effective damage output rise as his survivability collapses.",
+  "category": "aura_twins"
+ },
+ {
+  "name": "Grukka Boneflail (variant)",
+  "general": "Utgar",
+  "entity_type": "Orc",
+  "figure_type": "Unique Hero",
+  "occupation": "Berserker",
+  "personality": "Savage",
+  "size": "Medium",
+  "height": 5,
+  "life": 5,
+  "move": 5,
+  "range": 1,
+  "attack": 4,
+  "defense": 2,
+  "abilities": [
+   {
+    "title": "Flailing Onslaught Special Attack",
+    "description": "Range 1. Attack 3. All figures adjacent to Grukka Boneflail are affected by Flailing Onslaught Special Attack. Roll attack dice once for all affected figures. Each figure rolls defense dice separately. After attacking with Flailing Onslaught Special Attack, Grukka Boneflail receives 1 wound."
+   },
+   {
+    "title": "Blood Frenzy",
+    "description": "If there are 1 or more wound markers on Grukka Boneflail's Army Card, add 1 to Grukka Boneflail's Attack Value."
+   },
+   {
+    "title": "Blood Howl Aura",
+    "description": "All friendly Orc figures within 4 clear sight spaces of Grukka Boneflail add 1 die to their normal attacks. A figure may not add more than 1 die for Blood Howl Aura."
+   }
+  ],
+  "design_note": "The attack aura is restricted to Orcs and requires clustering a fragile Defense 2 hero near the front line, so the offensive upside is real but conditional.",
+  "category": "aura_twins"
+ },
+ {
+  "name": "Sentinel Kryx-9",
+  "general": "Vydar",
+  "entity_type": "Soulborg",
+  "figure_type": "Unique Hero",
+  "occupation": "Marksman",
+  "personality": "Precise",
+  "size": "Medium",
+  "height": 5,
+  "life": 4,
+  "move": 4,
+  "range": 6,
+  "attack": 3,
+  "defense": 4,
+  "abilities": [
+   {
+    "title": "Firing Lattice",
+    "description": "If Sentinel Kryx-9 did not move on his turn, add 1 to his Range Value and add 1 die to his normal attack for that turn."
+   },
+   {
+    "title": "Repair Protocol 16",
+    "description": "At the end of Sentinel Kryx-9's turn, if there are 1 or more wound markers on his Army Card, roll the 20-sided die. If you roll a 16 or higher, remove 1 wound marker from Sentinel Kryx-9's Army Card."
+   }
+  ],
+  "design_note": "A low-move ranged hero whose damage is only good when he stands still, and whose 25% self-heal is worth much more in a defensive build than an aggressive one.",
+  "category": "aura_twins"
+ },
+ {
+  "name": "Sentinel Kryx-9 (variant)",
+  "general": "Vydar",
+  "entity_type": "Soulborg",
+  "figure_type": "Unique Hero",
+  "occupation": "Marksman",
+  "personality": "Precise",
+  "size": "Medium",
+  "height": 5,
+  "life": 4,
+  "move": 4,
+  "range": 6,
+  "attack": 3,
+  "defense": 4,
+  "abilities": [
+   {
+    "title": "Firing Lattice",
+    "description": "If Sentinel Kryx-9 did not move on his turn, add 1 to his Range Value and add 1 die to his normal attack for that turn."
+   },
+   {
+    "title": "Repair Protocol 16",
+    "description": "At the end of Sentinel Kryx-9's turn, if there are 1 or more wound markers on his Army Card, roll the 20-sided die. If you roll a 16 or higher, remove 1 wound marker from Sentinel Kryx-9's Army Card."
+   },
+   {
+    "title": "Tactical Uplink Aura",
+    "description": "All friendly Soulborg figures within 4 clear sight spaces of Sentinel Kryx-9 add 1 to their Move Value. A figure may not add more than 1 to its Move Value for Tactical Uplink Aura."
+   }
+  ],
+  "design_note": "A move aura granted by a Move 4 figure who wants to stay stationary is awkwardly self-conflicting, making the buff easy to overvalue.",
+  "category": "aura_twins"
+ },
+ {
+  "name": "Sylvan Hornblower",
+  "general": "Ullar",
+  "entity_type": "Elf",
+  "figure_type": "Common Hero",
+  "occupation": "Herald",
+  "personality": "Watchful",
+  "size": "Medium",
+  "height": 5,
+  "life": 3,
+  "move": 5,
+  "range": 1,
+  "attack": 3,
+  "defense": 3,
+  "abilities": [
+   {
+    "title": "Woodland Camouflage",
+    "description": "When a Sylvan Hornblower is attacked by a non-adjacent figure, and the Sylvan Hornblower is on a jungle space or adjacent to a tree, add 1 die to its defense."
+   },
+   {
+    "title": "Signal Blast 15",
+    "description": "Before moving with a Sylvan Hornblower, you may choose a friendly Elf figure within 6 clear sight spaces of that Sylvan Hornblower. Roll the 20-sided die. If you roll a 15 or higher, you may move the chosen figure up to 3 spaces. A figure may be moved only once each turn with Signal Blast 15."
+   }
+  ],
+  "design_note": "A cheap common hero with a terrain-dependent defense bump and an unreliable ally-mover, both of which can be fielded in multiples to compound.",
+  "category": "aura_twins"
+ },
+ {
+  "name": "Sylvan Hornblower (variant)",
+  "general": "Ullar",
+  "entity_type": "Elf",
+  "figure_type": "Common Hero",
+  "occupation": "Herald",
+  "personality": "Watchful",
+  "size": "Medium",
+  "height": 5,
+  "life": 3,
+  "move": 5,
+  "range": 1,
+  "attack": 3,
+  "defense": 3,
+  "abilities": [
+   {
+    "title": "Woodland Camouflage",
+    "description": "When a Sylvan Hornblower is attacked by a non-adjacent figure, and the Sylvan Hornblower is on a jungle space or adjacent to a tree, add 1 die to its defense."
+   },
+   {
+    "title": "Signal Blast 15",
+    "description": "Before moving with a Sylvan Hornblower, you may choose a friendly Elf figure within 6 clear sight spaces of that Sylvan Hornblower. Roll the 20-sided die. If you roll a 15 or higher, you may move the chosen figure up to 3 spaces. A figure may be moved only once each turn with Signal Blast 15."
+   },
+   {
+    "title": "Rallying Horn Aura",
+    "description": "All friendly figures within 4 clear sight spaces of a Sylvan Hornblower add 1 to their Move Value. A figure may not add more than 1 to its Move Value for Rallying Horn Aura, no matter how many Sylvan Hornblowers are within 4 clear sight spaces."
+   }
+  ],
+  "design_note": "Because this is a common hero, the aura can be purchased repeatedly for redundant coverage even though the bonus itself does not stack.",
+  "category": "aura_twins"
+ },
+ {
+  "name": "Halvor Steelbeard",
+  "general": "Jandar",
+  "entity_type": "Dwarf",
+  "figure_type": "Unique Hero",
+  "occupation": "Warden",
+  "personality": "Stalwart",
+  "size": "Medium",
+  "height": 5,
+  "life": 5,
+  "move": 5,
+  "range": 1,
+  "attack": 4,
+  "defense": 4,
+  "abilities": [
+   {
+    "title": "Anvil Stance",
+    "description": "If you did not move Halvor Steelbeard on his turn, add 2 to his Defense value until the beginning of his next turn."
+   },
+   {
+    "title": "Hammer Smash 15",
+    "description": "After attacking an adjacent Small or Medium figure with a normal attack, if the defending figure was not destroyed, roll the 20-sided die. If you roll a 15 or higher, the defending figure receives 1 wound and you may move it 1 space. The chosen space must be empty and may not be more than 1 level higher than the space the defending figure is on."
+   }
+  ],
+  "design_note": "A tanky mid-cost melee hero whose Anvil Stance rewards not moving, making his real defense higher than the printed 4 without any aura to pay for.",
+  "category": "aura_twins"
+ },
+ {
+  "name": "Halvor Steelbeard (variant)",
+  "general": "Jandar",
+  "entity_type": "Dwarf",
+  "figure_type": "Unique Hero",
+  "occupation": "Warden",
+  "personality": "Stalwart",
+  "size": "Medium",
+  "height": 5,
+  "life": 5,
+  "move": 5,
+  "range": 1,
+  "attack": 4,
+  "defense": 4,
+  "abilities": [
+   {
+    "title": "Anvil Stance",
+    "description": "If you did not move Halvor Steelbeard on his turn, add 2 to his Defense value until the beginning of his next turn."
+   },
+   {
+    "title": "Hammer Smash 15",
+    "description": "After attacking an adjacent Small or Medium figure with a normal attack, if the defending figure was not destroyed, roll the 20-sided die. If you roll a 15 or higher, the defending figure receives 1 wound and you may move it 1 space. The chosen space must be empty and may not be more than 1 level higher than the space the defending figure is on."
+   },
+   {
+    "title": "Warden's Bulwark Aura",
+    "description": "All friendly figures within 4 clear sight spaces of Halvor Steelbeard add 1 die to their defense."
+   }
+  ],
+  "design_note": "The added defense aura is worth very little in a small hero-only force but enormous behind a wide screen of common squads, so its price depends entirely on the army built around it.",
+  "category": "aura_twins"
+ },
+ {
+  "name": "Vanguard Model K-77",
+  "general": "Vydar",
+  "entity_type": "Soulborg",
+  "figure_type": "Unique Hero",
+  "occupation": "Vanguard Gunner",
+  "personality": "Calculating",
+  "size": "Medium",
+  "height": 5,
+  "life": 4,
+  "move": 5,
+  "range": 6,
+  "attack": 3,
+  "defense": 5,
+  "abilities": [
+   {
+    "title": "Suppressive Volley Special Attack",
+    "description": "Range 6. Attack 2. Choose a figure to attack. Whether or not the defending figure receives any wounds, subtract 2 from that figure's Move value until the next time you reveal an Order Marker. Suppressive Volley Special Attack does not affect destructible objects."
+   },
+   {
+    "title": "Deflector Shield 16",
+    "description": "If Vanguard Model K-77 is attacked with a normal attack by a figure that is not adjacent to him, roll the 20-sided die. If you roll a 16 or higher, Vanguard Model K-77 receives no wounds from that attack."
+   }
+  ],
+  "design_note": "Range 6 with only Attack 3 plus a soft-control special attack makes the base figure's damage output unimpressive while its Defense 5 and Deflector Shield make it very hard to remove.",
+  "category": "aura_twins"
+ },
+ {
+  "name": "Vanguard Model K-77 (variant)",
+  "general": "Vydar",
+  "entity_type": "Soulborg",
+  "figure_type": "Unique Hero",
+  "occupation": "Vanguard Gunner",
+  "personality": "Calculating",
+  "size": "Medium",
+  "height": 5,
+  "life": 4,
+  "move": 5,
+  "range": 6,
+  "attack": 3,
+  "defense": 5,
+  "abilities": [
+   {
+    "title": "Suppressive Volley Special Attack",
+    "description": "Range 6. Attack 2. Choose a figure to attack. Whether or not the defending figure receives any wounds, subtract 2 from that figure's Move value until the next time you reveal an Order Marker. Suppressive Volley Special Attack does not affect destructible objects."
+   },
+   {
+    "title": "Deflector Shield 16",
+    "description": "If Vanguard Model K-77 is attacked with a normal attack by a figure that is not adjacent to him, roll the 20-sided die. If you roll a 16 or higher, Vanguard Model K-77 receives no wounds from that attack."
+   },
+   {
+    "title": "Fire Control Aura",
+    "description": "All friendly figures within 4 clear sight spaces of Vanguard Model K-77 add 1 die to their attack when attacking with a normal attack."
+   }
+  ],
+  "design_note": "An attack-die aura on a durable long-range figure is easy to keep active all game, and it scales with the number of friendly attack rolls rather than with this hero's own stats.",
+  "category": "aura_twins"
+ },
+ {
+  "name": "Zurrek Broodcaller",
+  "general": "Utgar",
+  "entity_type": "Marro",
+  "figure_type": "Uncommon Hero",
+  "occupation": "Broodcaller",
+  "personality": "Ravenous",
+  "size": "Large",
+  "height": 6,
+  "life": 5,
+  "move": 6,
+  "range": 1,
+  "attack": 4,
+  "defense": 3,
+  "abilities": [
+   {
+    "title": "Frenzied Charge",
+    "description": "If this Zurrek Broodcaller moved at least 4 spaces on his turn before attacking, add 1 die to his attack for the duration of that turn."
+   },
+   {
+    "title": "Marro Regeneration 13",
+    "description": "At the end of each round, if this Zurrek Broodcaller has one or more wound markers on his Army Card, roll the 20-sided die. If you roll a 13 or higher, remove 1 wound marker from this Army Card."
+   }
+  ],
+  "design_note": "Self-healing on an uncommon hero that can be fielded in multiples makes each copy better than its raw 5-life, 3-defense profile suggests.",
+  "category": "aura_twins"
+ },
+ {
+  "name": "Zurrek Broodcaller (variant)",
+  "general": "Utgar",
+  "entity_type": "Marro",
+  "figure_type": "Uncommon Hero",
+  "occupation": "Broodcaller",
+  "personality": "Ravenous",
+  "size": "Large",
+  "height": 6,
+  "life": 5,
+  "move": 6,
+  "range": 1,
+  "attack": 4,
+  "defense": 3,
+  "abilities": [
+   {
+    "title": "Frenzied Charge",
+    "description": "If this Zurrek Broodcaller moved at least 4 spaces on his turn before attacking, add 1 die to his attack for the duration of that turn."
+   },
+   {
+    "title": "Marro Regeneration 13",
+    "description": "At the end of each round, if this Zurrek Broodcaller has one or more wound markers on his Army Card, roll the 20-sided die. If you roll a 13 or higher, remove 1 wound marker from this Army Card."
+   },
+   {
+    "title": "Broodcaller's Frenzy Aura",
+    "description": "All friendly figures within 4 clear sight spaces of this Zurrek Broodcaller add 1 to their Move value. If a figure is within 4 clear sight spaces of more than one Zurrek Broodcaller you control, it still adds only 1 to its Move value."
+   }
+  ],
+  "design_note": "A move aura is the weakest of the three aura types in a vacuum, yet on an uncommon hero it can be stacked across several copies for board-wide reach even though the bonus itself does not stack.",
+  "category": "aura_twins"
+ },
+ {
+  "name": "Ashgrove Halberdier",
+  "general": "Einar",
+  "entity_type": "Human",
+  "figure_type": "Common Hero",
+  "occupation": "Halberdier",
+  "personality": "Disciplined",
+  "size": "Medium",
+  "height": 5,
+  "life": 2,
+  "move": 5,
+  "range": 1,
+  "attack": 3,
+  "defense": 3,
+  "abilities": [
+   {
+    "title": "Brace For Impact",
+    "description": "If this Ashgrove Halberdier is attacked with a normal attack by an adjacent figure that moved 3 or more spaces on its turn, add 2 dice to this Ashgrove Halberdier's defense for that attack."
+   },
+   {
+    "title": "Formation Drill",
+    "description": "When this Ashgrove Halberdier attacks a figure that is engaged with at least 1 other friendly Human figure, add 1 die to his attack."
+   }
+  ],
+  "design_note": "A two-life common hero with conditional bonuses on both defense and attack is priced by how often those conditions actually trigger, which varies wildly by army.",
+  "category": "aura_twins"
+ },
+ {
+  "name": "Ashgrove Halberdier (variant)",
+  "general": "Einar",
+  "entity_type": "Human",
+  "figure_type": "Common Hero",
+  "occupation": "Halberdier",
+  "personality": "Disciplined",
+  "size": "Medium",
+  "height": 5,
+  "life": 2,
+  "move": 5,
+  "range": 1,
+  "attack": 3,
+  "defense": 3,
+  "abilities": [
+   {
+    "title": "Brace For Impact",
+    "description": "If this Ashgrove Halberdier is attacked with a normal attack by an adjacent figure that moved 3 or more spaces on its turn, add 2 dice to this Ashgrove Halberdier's defense for that attack."
+   },
+   {
+    "title": "Formation Drill",
+    "description": "When this Ashgrove Halberdier attacks a figure that is engaged with at least 1 other friendly Human figure, add 1 die to his attack."
+   },
+   {
+    "title": "Steady Line Aura",
+    "description": "All friendly figures within 4 clear sight spaces of this Ashgrove Halberdier add 1 die to their defense. If a figure is within 4 clear sight spaces of more than one Ashgrove Halberdier you control, it still adds only 1 die to its defense."
+   }
+  ],
+  "design_note": "Putting a faction-wide defense aura on a cheap, fragile common hero that can be fielded in multiples means the aura's value is nearly independent of the figure's own combat stats and hard to price at common-hero rates.",
+  "category": "aura_twins"
+ },
+ {
+  "name": "Vashri the Flamecaller",
+  "general": "Utgar",
+  "entity_type": "Kyrie",
+  "figure_type": "Unique Hero",
+  "occupation": "Sorceress",
+  "personality": "Merciless",
+  "size": "Medium",
+  "height": 5,
+  "life": 4,
+  "move": 5,
+  "range": 1,
+  "attack": 3,
+  "defense": 3,
+  "abilities": [
+   {
+    "title": "Cinderburst 8",
+    "description": "Instead of attacking with Vashri the Flamecaller, you may choose a non-adjacent figure within 5 clear sight spaces of Vashri and roll the 20-sided die. If you roll an 8 or higher, the chosen figure receives 2 wounds, and each figure adjacent to the chosen figure receives 1 wound. If you roll a 1-7, nothing happens."
+   },
+   {
+    "title": "Ashen Wake",
+    "description": "After using Cinderburst, if the chosen figure was destroyed, you may move Vashri the Flamecaller up to 3 spaces. Vashri may not attack after moving with Ashen Wake."
+   },
+   {
+    "title": "Flying",
+    "description": "When counting spaces for Vashri's movement, ignore elevations. Vashri may fly over water without stopping, pass over figures without becoming engaged, and fly over obstacles such as ruins. When Vashri starts to fly, if she is engaged she will take any leaving engagement attacks."
+   }
+  ],
+  "design_note": "A 65% chance at a 2-wound, no-defense-dice blast with splash damage at range 5 is close to a guaranteed squad-killer each turn, so the card's worth is driven almost entirely by the threshold rather than its ordinary 4-life body.",
+  "category": "d20_threshold_twins"
+ },
+ {
+  "name": "Vashri the Flamecaller (variant)",
+  "general": "Utgar",
+  "entity_type": "Kyrie",
+  "figure_type": "Unique Hero",
+  "occupation": "Sorceress",
+  "personality": "Merciless",
+  "size": "Medium",
+  "height": 5,
+  "life": 4,
+  "move": 5,
+  "range": 1,
+  "attack": 3,
+  "defense": 3,
+  "abilities": [
+   {
+    "title": "Cinderburst 15",
+    "description": "Instead of attacking with Vashri the Flamecaller, you may choose a non-adjacent figure within 5 clear sight spaces of Vashri and roll the 20-sided die. If you roll a 15 or higher, the chosen figure receives 2 wounds, and each figure adjacent to the chosen figure receives 1 wound. If you roll a 1-14, nothing happens."
+   },
+   {
+    "title": "Ashen Wake",
+    "description": "After using Cinderburst, if the chosen figure was destroyed, you may move Vashri the Flamecaller up to 3 spaces. Vashri may not attack after moving with Ashen Wake."
+   },
+   {
+    "title": "Flying",
+    "description": "When counting spaces for Vashri's movement, ignore elevations. Vashri may fly over water without stopping, pass over figures without becoming engaged, and fly over obstacles such as ruins. When Vashri starts to fly, if she is engaged she will take any leaving engagement attacks."
+   }
+  ],
+  "design_note": "At only a 30% success rate the same blast becomes a gamble you often trade away a whole turn for, but the follow-up move and flight keep some floor value, making the drop from the 8+ version hard to size.",
+  "category": "d20_threshold_twins"
+ },
+ {
+  "name": "Sepulcher Ghouls",
+  "general": "Utgar",
+  "entity_type": "Undead",
+  "figure_type": "Common Squad",
+  "occupation": "Ghouls",
+  "personality": "Ravenous",
+  "size": "Medium",
+  "height": 4,
+  "life": 1,
+  "move": 5,
+  "range": 1,
+  "attack": 2,
+  "defense": 2,
+  "abilities": [
+   {
+    "title": "Clawing Frenzy",
+    "description": "When attacking with a Sepulcher Ghoul you control, if the defending figure has one or more wounds on its Army Card, that Sepulcher Ghoul rolls 1 additional attack die."
+   },
+   {
+    "title": "Rise Again 11",
+    "description": "After an opponent's turn, for each Sepulcher Ghoul you control that was destroyed during that turn, you may roll the 20-sided die. If you roll an 11 or higher, take that Sepulcher Ghoul and place it on any empty space within 3 clear sight spaces of another Sepulcher Ghoul you control. If you roll a 1-10, nothing happens. You may not use Rise Again if you control no Sepulcher Ghouls on the battlefield."
+   },
+   {
+    "title": "Undead Swarm",
+    "description": "Sepulcher Ghouls can move through all other Undead figures you control."
+   }
+  ],
+  "design_note": "Recurring half of the squad's casualties every round effectively multiplies the card's life total, so the threshold quietly decides whether this is a cheap chaff squad or a persistent board-control engine.",
+  "category": "d20_threshold_twins"
+ },
+ {
+  "name": "Sepulcher Ghouls (variant)",
+  "general": "Utgar",
+  "entity_type": "Undead",
+  "figure_type": "Common Squad",
+  "occupation": "Ghouls",
+  "personality": "Ravenous",
+  "size": "Medium",
+  "height": 4,
+  "life": 1,
+  "move": 5,
+  "range": 1,
+  "attack": 2,
+  "defense": 2,
+  "abilities": [
+   {
+    "title": "Clawing Frenzy",
+    "description": "When attacking with a Sepulcher Ghoul you control, if the defending figure has one or more wounds on its Army Card, that Sepulcher Ghoul rolls 1 additional attack die."
+   },
+   {
+    "title": "Rise Again 17",
+    "description": "After an opponent's turn, for each Sepulcher Ghoul you control that was destroyed during that turn, you may roll the 20-sided die. If you roll a 17 or higher, take that Sepulcher Ghoul and place it on any empty space within 3 clear sight spaces of another Sepulcher Ghoul you control. If you roll a 1-16, nothing happens. You may not use Rise Again if you control no Sepulcher Ghouls on the battlefield."
+   },
+   {
+    "title": "Undead Swarm",
+    "description": "Sepulcher Ghouls can move through all other Undead figures you control."
+   }
+  ],
+  "design_note": "At 20% the resurrection is a pleasant surprise rather than a plan, but because the roll happens for every ghoul destroyed the swarm can still generate value in large games, complicating a clean discount.",
+  "category": "d20_threshold_twins"
+ },
+ {
+  "name": "Unit 7-Vex",
+  "general": "Vydar",
+  "entity_type": "Soulborg",
+  "figure_type": "Unique Hero",
+  "occupation": "Saboteur",
+  "personality": "Calculating",
+  "size": "Medium",
+  "height": 5,
+  "life": 4,
+  "move": 5,
+  "range": 5,
+  "attack": 3,
+  "defense": 3,
+  "abilities": [
+   {
+    "title": "Disruption Pulse 11",
+    "description": "After revealing an Order Marker on Unit 7-Vex and before taking its turn, you may choose an opponent's Hero within 6 clear sight spaces of Unit 7-Vex and roll the 20-sided die. If you roll an 11 or higher, until the end of the round that Hero cannot use any of its special powers and subtracts 2 from its Move value. If you roll a 1-10, nothing happens."
+   },
+   {
+    "title": "Reactive Fire",
+    "description": "After an opponent's figure ends its movement within 5 clear sight spaces of Unit 7-Vex, you may roll 1 attack die. If you roll a skull, that figure receives 1 wound. You may use Reactive Fire only once each round."
+   },
+   {
+    "title": "Repair Protocol",
+    "description": "After taking a turn with Unit 7-Vex, if it did not attack this turn, you may remove 1 wound marker from Unit 7-Vex's Army Card."
+   }
+  ],
+  "design_note": "Shutting off an enemy Hero's special powers for a round is an effect with no fixed damage value, so its price swings wildly depending on whether the 50% roll lands often enough to be a reliable answer to big Heroes.",
+  "category": "d20_threshold_twins"
+ },
+ {
+  "name": "Unit 7-Vex (variant)",
+  "general": "Vydar",
+  "entity_type": "Soulborg",
+  "figure_type": "Unique Hero",
+  "occupation": "Saboteur",
+  "personality": "Calculating",
+  "size": "Medium",
+  "height": 5,
+  "life": 4,
+  "move": 5,
+  "range": 5,
+  "attack": 3,
+  "defense": 3,
+  "abilities": [
+   {
+    "title": "Disruption Pulse 17",
+    "description": "After revealing an Order Marker on Unit 7-Vex and before taking its turn, you may choose an opponent's Hero within 6 clear sight spaces of Unit 7-Vex and roll the 20-sided die. If you roll a 17 or higher, until the end of the round that Hero cannot use any of its special powers and subtracts 2 from its Move value. If you roll a 1-16, nothing happens."
+   },
+   {
+    "title": "Reactive Fire",
+    "description": "After an opponent's figure ends its movement within 5 clear sight spaces of Unit 7-Vex, you may roll 1 attack die. If you roll a skull, that figure receives 1 wound. You may use Reactive Fire only once each round."
+   },
+   {
+    "title": "Repair Protocol",
+    "description": "After taking a turn with Unit 7-Vex, if it did not attack this turn, you may remove 1 wound marker from Unit 7-Vex's Army Card."
+   }
+  ],
+  "design_note": "Because the pulse costs nothing but a die roll before a normal turn, even a 20% hit rate is pure upside, which means the variant should lose far less value than the raw odds suggest.",
+  "category": "d20_threshold_twins"
+ },
+ {
+  "name": "Ironhold Shieldbearers",
+  "general": "Jandar",
+  "entity_type": "Dwarf",
+  "figure_type": "Unique Squad",
+  "occupation": "Shieldbearers",
+  "personality": "Stalwart",
+  "size": "Medium",
+  "height": 4,
+  "life": 1,
+  "move": 4,
+  "range": 1,
+  "attack": 3,
+  "defense": 3,
+  "abilities": [
+   {
+    "title": "Shield Wall 8",
+    "description": "When an Ironhold Shieldbearer you control rolls defense dice against a normal attack from an adjacent figure, before rolling defense dice you may roll the 20-sided die. If you roll an 8 or higher, one shield will block all damage from that attack. If you roll a 1-7, roll defense dice normally."
+   },
+   {
+    "title": "Dwarven Bonding",
+    "description": "Before taking a turn with the Ironhold Shieldbearers, you may first take a turn with any Unique Dwarf Hero you control."
+   },
+   {
+    "title": "Bulwark",
+    "description": "All figures you control adjacent to an Ironhold Shieldbearer add 1 to their defense dice when rolling defense against a normal attack from a non-adjacent figure."
+   }
+  ],
+  "design_note": "Bonding plus a 65% chance to turn a single shield into full damage prevention stacks two of the strongest value multipliers in the game onto a three-figure squad, making the threshold nearly the whole price.",
+  "category": "d20_threshold_twins"
+ },
+ {
+  "name": "Ironhold Shieldbearers (variant)",
+  "general": "Jandar",
+  "entity_type": "Dwarf",
+  "figure_type": "Unique Squad",
+  "occupation": "Shieldbearers",
+  "personality": "Stalwart",
+  "size": "Medium",
+  "height": 4,
+  "life": 1,
+  "move": 4,
+  "range": 1,
+  "attack": 3,
+  "defense": 3,
+  "abilities": [
+   {
+    "title": "Shield Wall 15",
+    "description": "When an Ironhold Shieldbearer you control rolls defense dice against a normal attack from an adjacent figure, before rolling defense dice you may roll the 20-sided die. If you roll a 15 or higher, one shield will block all damage from that attack. If you roll a 1-14, roll defense dice normally."
+   },
+   {
+    "title": "Dwarven Bonding",
+    "description": "Before taking a turn with the Ironhold Shieldbearers, you may first take a turn with any Unique Dwarf Hero you control."
+   },
+   {
+    "title": "Bulwark",
+    "description": "All figures you control adjacent to an Ironhold Shieldbearer add 1 to their defense dice when rolling defense against a normal attack from a non-adjacent figure."
+   }
+  ],
+  "design_note": "With only a 30% save the squad's survivability leans back on 3 defense and Bulwark, but the bonding and aura keep the card competitive, so the correct gap between the twins is smaller than the odds difference implies.",
+  "category": "d20_threshold_twins"
+ },
+ {
+  "name": "Sylvani Thornwhisper",
+  "general": "Ullar",
+  "entity_type": "Elf",
+  "figure_type": "Unique Hero",
+  "occupation": "Druid",
+  "personality": "Wise",
+  "size": "Medium",
+  "height": 5,
+  "life": 4,
+  "move": 6,
+  "range": 1,
+  "attack": 3,
+  "defense": 3,
+  "abilities": [
+   {
+    "title": "Bramble Snare 8",
+    "description": "After moving and before attacking with Sylvani Thornwhisper, you may choose an opponent's figure within 4 clear sight spaces of Sylvani and roll the 20-sided die. If you roll an 8 or higher, the chosen figure may not move until the end of the round. A figure affected by Bramble Snare cannot be moved by any special power on an Army Card or glyph."
+   },
+   {
+    "title": "Grove Stride",
+    "description": "Sylvani Thornwhisper may move through all figures and is never attacked when leaving an engagement."
+   }
+  ],
+  "design_note": "A 65%-reliable no-move lockdown on any figure within 4 spaces is close to a soft Cyberclaw on demand, so the threshold does most of the pricing work here.",
+  "category": "d20_threshold_twins"
+ },
+ {
+  "name": "Sylvani Thornwhisper (variant)",
+  "general": "Ullar",
+  "entity_type": "Elf",
+  "figure_type": "Unique Hero",
+  "occupation": "Druid",
+  "personality": "Wise",
+  "size": "Medium",
+  "height": 5,
+  "life": 4,
+  "move": 6,
+  "range": 1,
+  "attack": 3,
+  "defense": 3,
+  "abilities": [
+   {
+    "title": "Bramble Snare 15",
+    "description": "After moving and before attacking with Sylvani Thornwhisper, you may choose an opponent's figure within 4 clear sight spaces of Sylvani and roll the 20-sided die. If you roll a 15 or higher, the chosen figure may not move until the end of the round. A figure affected by Bramble Snare cannot be moved by any special power on an Army Card or glyph."
+   },
+   {
+    "title": "Grove Stride",
+    "description": "Sylvani Thornwhisper may move through all figures and is never attacked when leaving an engagement."
+   }
+  ],
+  "design_note": "At 30% success the snare becomes an occasional bonus rather than a plan, so the card must be priced nearer to its mediocre melee stat line.",
+  "category": "d20_threshold_twins"
+ },
+ {
+  "name": "Grubnak Bogstalkers",
+  "general": "Utgar",
+  "entity_type": "Marro",
+  "figure_type": "Common Squad",
+  "occupation": "Hunters",
+  "personality": "Wild",
+  "size": "Medium",
+  "height": 5,
+  "life": 1,
+  "move": 5,
+  "range": 5,
+  "attack": 2,
+  "defense": 2,
+  "abilities": [
+   {
+    "title": "Paralyzing Spittle 11",
+    "description": "Instead of attacking with a Grubnak Bogstalker, you may choose an opponent's small or medium figure within 5 clear sight spaces of that Bogstalker and roll the 20-sided die. If you roll an 11 or higher, the chosen figure may not move or be moved until the end of the round. Only one figure may be chosen for Paralyzing Spittle each turn."
+   },
+   {
+    "title": "Slither",
+    "description": "Grubnak Bogstalkers do not have to stop their movement when entering water spaces."
+   }
+  ],
+  "design_note": "Trading a weak 2-attack shot for a 50% chance to strand an enemy hero across the board is hard to value against a plain Range 5 Attack 2 common squad.",
+  "category": "d20_threshold_twins"
+ },
+ {
+  "name": "Grubnak Bogstalkers (variant)",
+  "general": "Utgar",
+  "entity_type": "Marro",
+  "figure_type": "Common Squad",
+  "occupation": "Hunters",
+  "personality": "Wild",
+  "size": "Medium",
+  "height": 5,
+  "life": 1,
+  "move": 5,
+  "range": 5,
+  "attack": 2,
+  "defense": 2,
+  "abilities": [
+   {
+    "title": "Paralyzing Spittle 17",
+    "description": "Instead of attacking with a Grubnak Bogstalker, you may choose an opponent's small or medium figure within 5 clear sight spaces of that Bogstalker and roll the 20-sided die. If you roll a 17 or higher, the chosen figure may not move or be moved until the end of the round. Only one figure may be chosen for Paralyzing Spittle each turn."
+   },
+   {
+    "title": "Slither",
+    "description": "Grubnak Bogstalkers do not have to stop their movement when entering water spaces."
+   }
+  ],
+  "design_note": "A 20% spittle is almost never worth giving up an attack die roll, so the squad prices as a bare-bones ranged common with a novelty power.",
+  "category": "d20_threshold_twins"
+ },
+ {
+  "name": "Overseer Tallow-9",
+  "general": "Vydar",
+  "entity_type": "Soulborg",
+  "figure_type": "Unique Hero",
+  "occupation": "Overseer",
+  "personality": "Precise",
+  "size": "Medium",
+  "height": 5,
+  "life": 5,
+  "move": 5,
+  "range": 6,
+  "attack": 3,
+  "defense": 4,
+  "abilities": [
+   {
+    "title": "Recalibrate Protocol 8",
+    "description": "At the start of the round, after rolling for initiative, you may roll the 20-sided die. If you roll an 8 or higher, you may remove 1 unrevealed Order Marker from an Army Card you control and place it on another Army Card you control. You may not place more than 3 Order Markers on the same Army Card."
+   },
+   {
+    "title": "Targeting Uplink",
+    "description": "Any Unique Soulborg you control within 4 clear sight spaces of Overseer Tallow-9 adds 1 to its Range Value."
+   }
+  ],
+  "design_note": "Order-marker manipulation is one of the strongest effects in the game, so the gap between a 65% and a 30% Recalibrate swings the price far more than the shared stat line suggests.",
+  "category": "d20_threshold_twins"
+ },
+ {
+  "name": "Overseer Tallow-9 (variant)",
+  "general": "Vydar",
+  "entity_type": "Soulborg",
+  "figure_type": "Unique Hero",
+  "occupation": "Overseer",
+  "personality": "Precise",
+  "size": "Medium",
+  "height": 5,
+  "life": 5,
+  "move": 5,
+  "range": 6,
+  "attack": 3,
+  "defense": 4,
+  "abilities": [
+   {
+    "title": "Recalibrate Protocol 15",
+    "description": "At the start of the round, after rolling for initiative, you may roll the 20-sided die. If you roll a 15 or higher, you may remove 1 unrevealed Order Marker from an Army Card you control and place it on another Army Card you control. You may not place more than 3 Order Markers on the same Army Card."
+   },
+   {
+    "title": "Targeting Uplink",
+    "description": "Any Unique Soulborg you control within 4 clear sight spaces of Overseer Tallow-9 adds 1 to its Range Value."
+   }
+  ],
+  "design_note": "With only a 30% chance per round the marker fix is a lucky bailout, leaving a solid but unspectacular Range 6 hero with a small Soulborg aura.",
+  "category": "d20_threshold_twins"
+ },
+ {
+  "name": "Hearthguard of Kandras",
+  "general": "Jandar",
+  "entity_type": "Human",
+  "figure_type": "Unique Squad",
+  "occupation": "Knights",
+  "personality": "Valiant",
+  "size": "Medium",
+  "height": 5,
+  "life": 1,
+  "move": 5,
+  "range": 1,
+  "attack": 3,
+  "defense": 4,
+  "abilities": [
+   {
+    "title": "Oath of Return 11",
+    "description": "If a Hearthguard of Kandras would be destroyed by an attack, roll the 20-sided die. If you roll an 11 or higher, that Hearthguard is not destroyed and you ignore all wounds from that attack. You may roll for Oath of Return only once for each Hearthguard of Kandras figure each round."
+   },
+   {
+    "title": "Shield Wall",
+    "description": "When rolling defense dice against a normal attack, a Hearthguard of Kandras adds 1 die for each other Hearthguard of Kandras adjacent to it."
+   }
+  ],
+  "design_note": "Effectively doubling the survivability of three Defense 4 squad figures stacks multiplicatively with Shield Wall, which makes the 11+ version much stronger than a simple dice comparison implies.",
+  "category": "d20_threshold_twins"
+ },
+ {
+  "name": "Hearthguard of Kandras (variant)",
+  "general": "Jandar",
+  "entity_type": "Human",
+  "figure_type": "Unique Squad",
+  "occupation": "Knights",
+  "personality": "Valiant",
+  "size": "Medium",
+  "height": 5,
+  "life": 1,
+  "move": 5,
+  "range": 1,
+  "attack": 3,
+  "defense": 4,
+  "abilities": [
+   {
+    "title": "Oath of Return 17",
+    "description": "If a Hearthguard of Kandras would be destroyed by an attack, roll the 20-sided die. If you roll a 17 or higher, that Hearthguard is not destroyed and you ignore all wounds from that attack. You may roll for Oath of Return only once for each Hearthguard of Kandras figure each round."
+   },
+   {
+    "title": "Shield Wall",
+    "description": "When rolling defense dice against a normal attack, a Hearthguard of Kandras adds 1 die for each other Hearthguard of Kandras adjacent to it."
+   }
+  ],
+  "design_note": "A 20% save only rarely changes an engagement, so this version must be priced mostly on three tough but slow Attack 3 melee figures.",
+  "category": "d20_threshold_twins"
+ },
+ {
+  "name": "Tholgrin Anvilbreaker",
+  "general": "Jandar",
+  "entity_type": "Dwarf",
+  "figure_type": "Unique Hero",
+  "occupation": "Champion",
+  "personality": "Stalwart",
+  "size": "Medium",
+  "height": 5,
+  "life": 5,
+  "move": 5,
+  "range": 1,
+  "attack": 4,
+  "defense": 4,
+  "abilities": [
+   {
+    "title": "Anvil Smash 8",
+    "description": "After moving and before attacking with Tholgrin Anvilbreaker, you may choose one adjacent Small or Medium enemy figure and roll the 20-sided die. If you roll an 8 or higher, the chosen figure receives one wound and you may then place that figure on any empty space adjacent to Tholgrin that is not more than 1 level higher than the space it occupied. Tholgrin may still attack normally this turn."
+   },
+   {
+    "title": "Counter Strike",
+    "description": "When Tholgrin Anvilbreaker rolls defense dice against an adjacent attacking figure's normal attack, if he rolls more shields than the attacking figure rolls skulls, the attacking figure receives one wound. Counter Strike does not affect Destructible Objects."
+   }
+  ],
+  "design_note": "Anvil Smash at 8+ is a near-reliable free wound plus repositioning stapled onto solid 5-life melee stats, so the pair's value hinges almost entirely on how often the d20 succeeds.",
+  "category": "d20_threshold_twins"
+ },
+ {
+  "name": "Tholgrin Anvilbreaker (variant)",
+  "general": "Jandar",
+  "entity_type": "Dwarf",
+  "figure_type": "Unique Hero",
+  "occupation": "Champion",
+  "personality": "Stalwart",
+  "size": "Medium",
+  "height": 5,
+  "life": 5,
+  "move": 5,
+  "range": 1,
+  "attack": 4,
+  "defense": 4,
+  "abilities": [
+   {
+    "title": "Anvil Smash 15",
+    "description": "After moving and before attacking with Tholgrin Anvilbreaker, you may choose one adjacent Small or Medium enemy figure and roll the 20-sided die. If you roll a 15 or higher, the chosen figure receives one wound and you may then place that figure on any empty space adjacent to Tholgrin that is not more than 1 level higher than the space it occupied. Tholgrin may still attack normally this turn."
+   },
+   {
+    "title": "Counter Strike",
+    "description": "When Tholgrin Anvilbreaker rolls defense dice against an adjacent attacking figure's normal attack, if he rolls more shields than the attacking figure rolls skulls, the attacking figure receives one wound. Counter Strike does not affect Destructible Objects."
+   }
+  ],
+  "design_note": "At 15+ the smash becomes an occasional bonus rather than a plan, leaving a vanilla 5-life melee hero whose price must sit far below its twin.",
+  "category": "d20_threshold_twins"
+ },
+ {
+  "name": "Marro Spitterlings",
+  "general": "Utgar",
+  "entity_type": "Marro",
+  "figure_type": "Common Squad",
+  "occupation": "Drone",
+  "personality": "Mindless",
+  "size": "Medium",
+  "height": 4,
+  "life": 1,
+  "move": 5,
+  "range": 4,
+  "attack": 2,
+  "defense": 2,
+  "abilities": [
+   {
+    "title": "Hive Frenzy 11",
+    "description": "After attacking with a Marro Spitterling, roll the 20-sided die. If you roll an 11 or higher, you may attack one additional time with that same Marro Spitterling. A Marro Spitterling may attack only one additional time each turn with Hive Frenzy."
+   },
+   {
+    "title": "Swamp Water Camouflage",
+    "description": "When a Marro Spitterling is on a swamp water space, add 2 to its Defense Value. A Marro Spitterling does not have to stop its movement when entering a swamp water space."
+   }
+  ],
+  "design_note": "A 50% chance of a second range 4 attack on each of four figures roughly acts as a half-strength double attack squad, which is hard to price against ordinary ranged commons.",
+  "category": "d20_threshold_twins"
+ },
+ {
+  "name": "Marro Spitterlings (variant)",
+  "general": "Utgar",
+  "entity_type": "Marro",
+  "figure_type": "Common Squad",
+  "occupation": "Drone",
+  "personality": "Mindless",
+  "size": "Medium",
+  "height": 4,
+  "life": 1,
+  "move": 5,
+  "range": 4,
+  "attack": 2,
+  "defense": 2,
+  "abilities": [
+   {
+    "title": "Hive Frenzy 17",
+    "description": "After attacking with a Marro Spitterling, roll the 20-sided die. If you roll a 17 or higher, you may attack one additional time with that same Marro Spitterling. A Marro Spitterling may attack only one additional time each turn with Hive Frenzy."
+   },
+   {
+    "title": "Swamp Water Camouflage",
+    "description": "When a Marro Spitterling is on a swamp water space, add 2 to its Defense Value. A Marro Spitterling does not have to stop its movement when entering a swamp water space."
+   }
+  ],
+  "design_note": "With only a 20% frenzy chance the squad is close to a bare attack 2 defense 2 ranged common, so the pair tests how steeply extra-attack odds should be discounted.",
+  "category": "d20_threshold_twins"
+ },
+ {
+  "name": "Stormlance Vanguard",
+  "general": "Einar",
+  "entity_type": "Kyrie",
+  "figure_type": "Unique Squad",
+  "occupation": "Lancer",
+  "personality": "Disciplined",
+  "size": "Medium",
+  "height": 5,
+  "life": 1,
+  "move": 6,
+  "range": 1,
+  "attack": 3,
+  "defense": 3,
+  "abilities": [
+   {
+    "title": "Diving Charge 11",
+    "description": "Before attacking with a Stormlance Vanguard who moved at least 4 spaces this turn, roll the 20-sided die. If you roll an 11 or higher, add 2 dice to that figure's attack for its normal attack this turn. Roll the 20-sided die separately for each Stormlance Vanguard figure taking a normal attack this turn."
+   },
+   {
+    "title": "Flying",
+    "description": "When counting spaces for a Stormlance Vanguard's movement, ignore elevations. A Stormlance Vanguard may fly over water without stopping, pass over figures without becoming engaged, and fly over obstacles such as ruins. When a Stormlance Vanguard starts to fly, if it is engaged, it will take any leaving engagement attacks."
+   }
+  ],
+  "design_note": "Flying melee squad figures that each average about a 1-die attack bonus at 11+ blur the line between a 3-attack and a 4-attack unique squad.",
+  "category": "d20_threshold_twins"
+ },
+ {
+  "name": "Stormlance Vanguard (variant)",
+  "general": "Einar",
+  "entity_type": "Kyrie",
+  "figure_type": "Unique Squad",
+  "occupation": "Lancer",
+  "personality": "Disciplined",
+  "size": "Medium",
+  "height": 5,
+  "life": 1,
+  "move": 6,
+  "range": 1,
+  "attack": 3,
+  "defense": 3,
+  "abilities": [
+   {
+    "title": "Diving Charge 17",
+    "description": "Before attacking with a Stormlance Vanguard who moved at least 4 spaces this turn, roll the 20-sided die. If you roll a 17 or higher, add 2 dice to that figure's attack for its normal attack this turn. Roll the 20-sided die separately for each Stormlance Vanguard figure taking a normal attack this turn."
+   },
+   {
+    "title": "Flying",
+    "description": "When counting spaces for a Stormlance Vanguard's movement, ignore elevations. A Stormlance Vanguard may fly over water without stopping, pass over figures without becoming engaged, and fly over obstacles such as ruins. When a Stormlance Vanguard starts to fly, if it is engaged, it will take any leaving engagement attacks."
+   }
+  ],
+  "design_note": "At 17+ the charge is a rare spike, so the card is priced mostly on flying move 6 melee bodies and must be cheap enough to show the threshold gap.",
+  "category": "d20_threshold_twins"
+ },
+ {
+  "name": "Ashmane Prowler",
+  "general": "Ullar",
+  "entity_type": "Beast",
+  "figure_type": "Uncommon Hero",
+  "occupation": "Predator",
+  "personality": "Feral",
+  "size": "Large",
+  "height": 6,
+  "life": 4,
+  "move": 6,
+  "range": 1,
+  "attack": 5,
+  "defense": 2,
+  "abilities": [
+   {
+    "title": "Ember Pounce 8",
+    "description": "After moving and before attacking with this Ashmane Prowler, roll the 20-sided die. If you roll an 8 or higher, this Ashmane Prowler may move up to 4 additional spaces and add 1 die to its attack this turn. If you roll a 1, this Ashmane Prowler cannot attack this turn."
+   },
+   {
+    "title": "Pack Hunter",
+    "description": "Add 1 to the Attack Value of each Ashmane Prowler you control who is adjacent to at least one other Ashmane Prowler you control."
+   }
+  ],
+  "design_note": "An uncommon hero that can stack Pack Hunter with a frequently-successful pounce scales superlinearly as you buy more copies, making the single-card price ambiguous.",
+  "category": "d20_threshold_twins"
+ },
+ {
+  "name": "Ashmane Prowler (variant)",
+  "general": "Ullar",
+  "entity_type": "Beast",
+  "figure_type": "Uncommon Hero",
+  "occupation": "Predator",
+  "personality": "Feral",
+  "size": "Large",
+  "height": 6,
+  "life": 4,
+  "move": 6,
+  "range": 1,
+  "attack": 5,
+  "defense": 2,
+  "abilities": [
+   {
+    "title": "Ember Pounce 15",
+    "description": "After moving and before attacking with this Ashmane Prowler, roll the 20-sided die. If you roll a 15 or higher, this Ashmane Prowler may move up to 4 additional spaces and add 1 die to its attack this turn. If you roll a 1, this Ashmane Prowler cannot attack this turn."
+   },
+   {
+    "title": "Pack Hunter",
+    "description": "Add 1 to the Attack Value of each Ashmane Prowler you control who is adjacent to at least one other Ashmane Prowler you control."
+   }
+  ],
+  "design_note": "The same 1-in-20 whiff penalty now sits alongside only a 30% success rate, so the drawback eats into the power's value and the price should drop noticeably.",
+  "category": "d20_threshold_twins"
+ },
+ {
+  "name": "Halberdiers of Kinsguard",
+  "general": "Jandar",
+  "entity_type": "Human Soldiers",
+  "figure_type": "Common Squad",
+  "occupation": "Halberdier",
+  "personality": "Disciplined",
+  "size": "Medium",
+  "height": 5,
+  "life": 1,
+  "move": 5,
+  "range": 1,
+  "attack": 3,
+  "defense": 3,
+  "abilities": [
+   {
+    "title": "Halberd Sweep Special Attack",
+    "description": "Range 1. Attack 2. Choose up to 2 figures adjacent to the attacking Halberdier of Kinsguard. All chosen figures are affected by Halberd Sweep Special Attack. Roll 2 attack dice once for all affected figures. Each affected figure rolls defense dice separately."
+   },
+   {
+    "title": "Set Against The Charge",
+    "description": "When a Halberdier of Kinsguard is attacked with a normal attack by an adjacent Large or Huge figure, that Halberdier adds 2 to its Defense Value."
+   },
+   {
+    "title": "Kinsguard Formation",
+    "description": "When a Halberdier of Kinsguard is attacked, add 1 to its Defense Value if it is adjacent to at least one other Halberdier of Kinsguard you control."
+   }
+  ],
+  "design_note": "A cheap-looking melee common squad whose sweep attack, anti-big bonus, and formation defense all compound only when the figures are allowed to hold ground.",
+  "category": "drawback_twins_squad"
+ },
+ {
+  "name": "Halberdiers of Kinsguard (variant)",
+  "general": "Jandar",
+  "entity_type": "Human Soldiers",
+  "figure_type": "Common Squad",
+  "occupation": "Halberdier",
+  "personality": "Disciplined",
+  "size": "Medium",
+  "height": 5,
+  "life": 1,
+  "move": 5,
+  "range": 1,
+  "attack": 3,
+  "defense": 3,
+  "abilities": [
+   {
+    "title": "Halberd Sweep Special Attack",
+    "description": "Range 1. Attack 2. Choose up to 2 figures adjacent to the attacking Halberdier of Kinsguard. All chosen figures are affected by Halberd Sweep Special Attack. Roll 2 attack dice once for all affected figures. Each affected figure rolls defense dice separately."
+   },
+   {
+    "title": "Set Against The Charge",
+    "description": "When a Halberdier of Kinsguard is attacked with a normal attack by an adjacent Large or Huge figure, that Halberdier adds 2 to its Defense Value."
+   },
+   {
+    "title": "Kinsguard Formation",
+    "description": "When a Halberdier of Kinsguard is attacked, add 1 to its Defense Value if it is adjacent to at least one other Halberdier of Kinsguard you control."
+   },
+   {
+    "title": "Blind Zeal",
+    "description": "When you take a turn with the Halberdiers of Kinsguard (variant), each Halberdier you control must move its full Move Value if possible, and every space it enters must be closer to the nearest opponent's figure than the space it just left. If a Halberdier cannot move closer to the nearest opponent's figure, that Halberdier does not move."
+   }
+  ],
+  "design_note": "The forced advance guarantees the squad breaks its own adjacency formation and walks into enemy range, so the drawback erases much of the defensive value while leaving the offense intact.",
+  "category": "drawback_twins_squad"
+ },
+ {
+  "name": "Mekaneth Pulse Troopers",
+  "general": "Vydar",
+  "entity_type": "Soulborg Snipers",
+  "figure_type": "Unique Squad",
+  "occupation": "Pulse Rifle Trooper",
+  "personality": "Precise",
+  "size": "Medium",
+  "height": 5,
+  "life": 1,
+  "move": 5,
+  "range": 6,
+  "attack": 3,
+  "defense": 3,
+  "abilities": [
+   {
+    "title": "Soulborg Command Bonding",
+    "description": "Before taking a turn with the Mekaneth Pulse Troopers, you may first take a turn with any Unique Soulborg Hero you control."
+   },
+   {
+    "title": "Overcharged Pulse Rifle",
+    "description": "When a Mekaneth Pulse Trooper attacks a figure that is at least 4 spaces away, that Trooper rolls 1 additional attack die."
+   },
+   {
+    "title": "Targeting Relay",
+    "description": "When a Mekaneth Pulse Trooper you control attacks a figure that is in the line of sight of another Mekaneth Pulse Trooper you control, the defending figure rolls 1 fewer defense die."
+   }
+  ],
+  "design_note": "Range 6 with attack 3 plus two stacking accuracy powers and hero bonding puts this near the top of the ranged-squad band, making the twin's lost bonding hard to subtract cleanly.",
+  "category": "drawback_twins_squad"
+ },
+ {
+  "name": "Mekaneth Pulse Troopers (variant)",
+  "general": "Vydar",
+  "entity_type": "Soulborg Snipers",
+  "figure_type": "Unique Squad",
+  "occupation": "Pulse Rifle Trooper",
+  "personality": "Precise",
+  "size": "Medium",
+  "height": 5,
+  "life": 1,
+  "move": 5,
+  "range": 6,
+  "attack": 3,
+  "defense": 3,
+  "abilities": [
+   {
+    "title": "Soulborg Command Bonding",
+    "description": "Before taking a turn with the Mekaneth Pulse Troopers, you may first take a turn with any Unique Soulborg Hero you control."
+   },
+   {
+    "title": "Overcharged Pulse Rifle",
+    "description": "When a Mekaneth Pulse Trooper attacks a figure that is at least 4 spaces away, that Trooper rolls 1 additional attack die."
+   },
+   {
+    "title": "Targeting Relay",
+    "description": "When a Mekaneth Pulse Trooper you control attacks a figure that is in the line of sight of another Mekaneth Pulse Trooper you control, the defending figure rolls 1 fewer defense die."
+   },
+   {
+    "title": "Severed Command Net",
+    "description": "The Mekaneth Pulse Troopers (variant) cannot be bonded with. No bonding power on any Army Card, including their own Soulborg Command Bonding, may be used to take a turn with the Mekaneth Pulse Troopers (variant), and they may not be used to take a turn with any other Army Card."
+   }
+  ],
+  "design_note": "The drawback leaves a dead printed bonding power on the card, so its cost must reflect pure order-marker efficiency loss rather than any stat change.",
+  "category": "drawback_twins_squad"
+ },
+ {
+  "name": "Blightfang Broodlings",
+  "general": "Utgar",
+  "entity_type": "Marro Beasts",
+  "figure_type": "Common Squad",
+  "occupation": "Brood Swarmer",
+  "personality": "Ferocious",
+  "size": "Small",
+  "height": 4,
+  "life": 1,
+  "move": 6,
+  "range": 1,
+  "attack": 3,
+  "defense": 2,
+  "abilities": [
+   {
+    "title": "Swarm Tactics",
+    "description": "When a Blightfang Broodling attacks an adjacent figure, it rolls 1 additional attack die for each other Blightfang Broodling you control who is also adjacent to the defending figure, up to a maximum of 2 additional attack dice."
+   },
+   {
+    "title": "Scuttling Movement",
+    "description": "Blightfang Broodlings do not have to stop their movement when entering water spaces, and may move through spaces occupied by other Marro figures you control without becoming engaged."
+   },
+   {
+    "title": "Brood Frenzy 16",
+    "description": "After taking a turn with the Blightfang Broodlings, you may roll the 20-sided die. If you roll a 16 or higher, you may immediately take a turn with one other Common Marro Squad you control."
+   }
+  ],
+  "design_note": "Fragile attack-3 swarmers whose damage output swings wildly with adjacency and whose 25% extra-turn power is worth far more in a mass-Marro army than alone.",
+  "category": "drawback_twins_squad"
+ },
+ {
+  "name": "Blightfang Broodlings (variant)",
+  "general": "Utgar",
+  "entity_type": "Marro Beasts",
+  "figure_type": "Common Squad",
+  "occupation": "Brood Swarmer",
+  "personality": "Ferocious",
+  "size": "Small",
+  "height": 4,
+  "life": 1,
+  "move": 6,
+  "range": 1,
+  "attack": 3,
+  "defense": 2,
+  "abilities": [
+   {
+    "title": "Swarm Tactics",
+    "description": "When a Blightfang Broodling attacks an adjacent figure, it rolls 1 additional attack die for each other Blightfang Broodling you control who is also adjacent to the defending figure, up to a maximum of 2 additional attack dice."
+   },
+   {
+    "title": "Scuttling Movement",
+    "description": "Blightfang Broodlings do not have to stop their movement when entering water spaces, and may move through spaces occupied by other Marro figures you control without becoming engaged."
+   },
+   {
+    "title": "Brood Frenzy 16",
+    "description": "After taking a turn with the Blightfang Broodlings, you may roll the 20-sided die. If you roll a 16 or higher, you may immediately take a turn with one other Common Marro Squad you control."
+   },
+   {
+    "title": "Venom Backlash",
+    "description": "After a Blightfang Broodling attacks, roll the 20-sided die. If you roll a 1-5, that Blightfang Broodling receives 1 wound. Roll separately for each Blightfang Broodling that attacks."
+   }
+  ],
+  "design_note": "A 25% self-destruct chance on 1-life figures is close to losing a quarter of the squad every full turn, which is a steeper penalty than it looks on the card.",
+  "category": "drawback_twins_squad"
+ },
+ {
+  "name": "Shieldbearers of Grimhold Deep",
+  "general": "Einar",
+  "entity_type": "Dwarf Guards",
+  "figure_type": "Common Squad",
+  "occupation": "Shieldbearer",
+  "personality": "Relentless",
+  "size": "Small",
+  "height": 4,
+  "life": 1,
+  "move": 4,
+  "range": 1,
+  "attack": 2,
+  "defense": 4,
+  "abilities": [
+   {
+    "title": "Einar Warlord Bonding",
+    "description": "Before taking a turn with the Shieldbearers of Grimhold Deep, you may first take a turn with any Warlord or Dwarf Hero you control who follows Einar."
+   },
+   {
+    "title": "Shield Wall",
+    "description": "When a Shieldbearer of Grimhold Deep is attacked with a normal attack, add 1 to its Defense Value for each other Shieldbearer of Grimhold Deep you control adjacent to it, up to a maximum of 2."
+   },
+   {
+    "title": "Braced Guard",
+    "description": "A Shieldbearer of Grimhold Deep never rolls fewer than 2 defense dice, no matter how many dice any special power or glyph would remove."
+   }
+  ],
+  "design_note": "Defense 4 that can reach 6 in formation makes a low-attack squad nearly unkillable by small arms, so its price rides almost entirely on the bonding and the wall staying intact.",
+  "category": "drawback_twins_squad"
+ },
+ {
+  "name": "Shieldbearers of Grimhold Deep (variant)",
+  "general": "Einar",
+  "entity_type": "Dwarf Guards",
+  "figure_type": "Common Squad",
+  "occupation": "Shieldbearer",
+  "personality": "Relentless",
+  "size": "Small",
+  "height": 4,
+  "life": 1,
+  "move": 4,
+  "range": 1,
+  "attack": 2,
+  "defense": 4,
+  "abilities": [
+   {
+    "title": "Einar Warlord Bonding",
+    "description": "Before taking a turn with the Shieldbearers of Grimhold Deep, you may first take a turn with any Warlord or Dwarf Hero you control who follows Einar."
+   },
+   {
+    "title": "Shield Wall",
+    "description": "When a Shieldbearer of Grimhold Deep is attacked with a normal attack, add 1 to its Defense Value for each other Shieldbearer of Grimhold Deep you control adjacent to it, up to a maximum of 2."
+   },
+   {
+    "title": "Braced Guard",
+    "description": "A Shieldbearer of Grimhold Deep never rolls fewer than 2 defense dice, no matter how many dice any special power or glyph would remove."
+   },
+   {
+    "title": "Fractured Oathstone",
+    "description": "The Shieldbearers of Grimhold Deep (variant) cannot be bonded with. Ignore their Einar Warlord Bonding, and no other Army Card's bonding power may be used to take a turn with the Shieldbearers of Grimhold Deep (variant). You may only take a turn with this card by revealing an Order Marker on it."
+   }
+  ],
+  "design_note": "With Move 4, no bonding, and only Attack 2, the variant must spend its own Order Markers just to crawl into contact, which taxes the whole army's action economy rather than the squad's own dice.",
+  "category": "drawback_twins_squad"
+ },
+ {
+  "name": "Ashvale Pikewardens",
+  "general": "Jandar",
+  "entity_type": "Human",
+  "figure_type": "Common Squad",
+  "occupation": "Pikemen",
+  "personality": "Disciplined",
+  "size": "Medium",
+  "height": 5,
+  "life": 1,
+  "move": 5,
+  "range": 1,
+  "attack": 3,
+  "defense": 3,
+  "abilities": [
+   {
+    "title": "Phalanx Defense 1",
+    "description": "When rolling defense dice against a normal attack, an Ashvale Pikewarden you control adds 1 defense die for each other Ashvale Pikewarden you control adjacent to it, to a maximum of 1 additional defense die."
+   },
+   {
+    "title": "Set Spears",
+    "description": "After an opponent's Small, Medium, or Large figure moves adjacent to an Ashvale Pikewarden you control, you may roll 1 attack die. If you roll a skull, the moving figure receives 1 wound. You may use Set Spears only once per opponent's figure per turn, and never on a figure that was already adjacent at the start of that turn."
+   }
+  ],
+  "design_note": "A vanilla 3/3 melee common squad whose cheap free-swing power and adjacency defense both scale with how many figures survive, making its true value sensitive to squad-wipe rates.",
+  "category": "drawback_twins_squad"
+ },
+ {
+  "name": "Ashvale Pikewardens (variant)",
+  "general": "Jandar",
+  "entity_type": "Human",
+  "figure_type": "Common Squad",
+  "occupation": "Pikemen",
+  "personality": "Disciplined",
+  "size": "Medium",
+  "height": 5,
+  "life": 1,
+  "move": 5,
+  "range": 1,
+  "attack": 3,
+  "defense": 3,
+  "abilities": [
+   {
+    "title": "Phalanx Defense 1",
+    "description": "When rolling defense dice against a normal attack, an Ashvale Pikewarden you control adds 1 defense die for each other Ashvale Pikewarden you control adjacent to it, to a maximum of 1 additional defense die."
+   },
+   {
+    "title": "Set Spears",
+    "description": "After an opponent's Small, Medium, or Large figure moves adjacent to an Ashvale Pikewarden you control, you may roll 1 attack die. If you roll a skull, the moving figure receives 1 wound. You may use Set Spears only once per opponent's figure per turn, and never on a figure that was already adjacent at the start of that turn."
+   },
+   {
+    "title": "Broken Chain of Command",
+    "description": "Ashvale Pikewardens (variant) cannot be bonded with. Ignore all special powers on other Army Cards that would allow you to take a turn with, or move, Ashvale Pikewardens (variant). You may take a turn with Ashvale Pikewardens (variant) only by revealing an Order Marker on this Army Card."
+   },
+   {
+    "title": "Iron Discipline",
+    "description": "Ashvale Pikewardens (variant) are never affected by an opponent's special powers that would cause them to be moved or to take a turn out of order."
+   }
+  ],
+  "design_note": "Losing all bonding access is a severe drawback for a Jandar Soldier squad that would otherwise ride Soldier bonding heroes, but the added immunity to opposing turn-stealing powers partly offsets it, so the discount is hard to size.",
+  "category": "drawback_twins_squad"
+ },
+ {
+  "name": "Emberjaw Hounds",
+  "general": "Utgar",
+  "entity_type": "Hellhound",
+  "figure_type": "Common Squad",
+  "occupation": "Beasts",
+  "personality": "Ravenous",
+  "size": "Small",
+  "height": 4,
+  "life": 1,
+  "move": 7,
+  "range": 1,
+  "attack": 3,
+  "defense": 2,
+  "abilities": [
+   {
+    "title": "Pack Frenzy",
+    "description": "When an Emberjaw Hound you control attacks an opponent's figure that is engaged with at least 2 other Emberjaw Hounds you control, add 1 die to that attack."
+   },
+   {
+    "title": "Bounding Leap",
+    "description": "When moving up or down levels of terrain, Emberjaw Hounds may add 2 to their height. Emberjaw Hounds do not have to stop their movement when entering water spaces."
+   }
+  ],
+  "design_note": "Move 7 with leaping mobility and a conditional fourth attack die pushes a fragile defense-2 common squad well above baseline melee rates, but only when all four figures are alive and swarming.",
+  "category": "drawback_twins_squad"
+ },
+ {
+  "name": "Emberjaw Hounds (variant)",
+  "general": "Utgar",
+  "entity_type": "Hellhound",
+  "figure_type": "Common Squad",
+  "occupation": "Beasts",
+  "personality": "Ravenous",
+  "size": "Small",
+  "height": 4,
+  "life": 1,
+  "move": 7,
+  "range": 1,
+  "attack": 3,
+  "defense": 2,
+  "abilities": [
+   {
+    "title": "Pack Frenzy",
+    "description": "When an Emberjaw Hound you control attacks an opponent's figure that is engaged with at least 2 other Emberjaw Hounds you control, add 1 die to that attack."
+   },
+   {
+    "title": "Bounding Leap",
+    "description": "When moving up or down levels of terrain, Emberjaw Hounds may add 2 to their height. Emberjaw Hounds do not have to stop their movement when entering water spaces."
+   },
+   {
+    "title": "Searing Bile",
+    "description": "After an Emberjaw Hound (variant) you control attacks, roll the 20-sided die. If you roll a 1-5, that Emberjaw Hound (variant) receives 1 wound. Roll separately for each Emberjaw Hound (variant) that attacks this turn, after that figure's attack is resolved."
+   }
+  ],
+  "design_note": "A flat 25% chance to destroy each attacking figure effectively taxes the squad's own offense, and because these are 1-life figures the drawback compounds with their low defense far faster than a simple point subtraction suggests.",
+  "category": "drawback_twins_squad"
+ },
+ {
+  "name": "Verdant Hollow Longbows",
+  "general": "Ullar",
+  "entity_type": "Elf",
+  "figure_type": "Common Squad",
+  "occupation": "Archers",
+  "personality": "Watchful",
+  "size": "Medium",
+  "height": 5,
+  "life": 1,
+  "move": 5,
+  "range": 6,
+  "attack": 3,
+  "defense": 2,
+  "abilities": [
+   {
+    "title": "Forest Cover Defense 1",
+    "description": "When rolling defense dice for a Verdant Hollow Longbow you control that is adjacent to an Evergreen Tree, Brush, or Jungle Piece, add 1 defense die."
+   },
+   {
+    "title": "Steady Aim",
+    "description": "If a Verdant Hollow Longbow you control does not move before attacking on its turn, add 1 die to that figure's normal attack."
+   }
+  ],
+  "design_note": "Range 6 attack 3 is already premium for a common squad, and Steady Aim converts stationary turns into attack 4, so the card's value swings heavily on whether the map rewards holding a firing line.",
+  "category": "drawback_twins_squad"
+ },
+ {
+  "name": "Verdant Hollow Longbows (variant)",
+  "general": "Ullar",
+  "entity_type": "Elf",
+  "figure_type": "Common Squad",
+  "occupation": "Archers",
+  "personality": "Reckless",
+  "size": "Medium",
+  "height": 5,
+  "life": 1,
+  "move": 5,
+  "range": 6,
+  "attack": 3,
+  "defense": 2,
+  "abilities": [
+   {
+    "title": "Forest Cover Defense 1",
+    "description": "When rolling defense dice for a Verdant Hollow Longbow (variant) you control that is adjacent to an Evergreen Tree, Brush, or Jungle Piece, add 1 defense die."
+   },
+   {
+    "title": "Steady Aim",
+    "description": "If a Verdant Hollow Longbow (variant) you control does not move before attacking on its turn, add 1 die to that figure's normal attack."
+   },
+   {
+    "title": "Hollow Bloodlust",
+    "description": "When you reveal an Order Marker on this Army Card, each Verdant Hollow Longbow (variant) you control that is not engaged must move, and must end its movement on a space closer to the nearest opponent's figure than the space it started on, if possible. Count spaces to determine the nearest opponent's figure; if two or more are equally near, you may choose which one to move toward."
+   },
+   {
+    "title": "Steady Aim Denied",
+    "description": "A Verdant Hollow Longbow (variant) that was required to move by Hollow Bloodlust cannot use Steady Aim this turn."
+   }
+  ],
+  "design_note": "Forced advance guts a range 6 squad's entire advantage by dragging it into melee and switching off its bonus attack die, but figures already engaged are exempt, which makes the penalty inconsistent and hard to price.",
+  "category": "drawback_twins_squad"
+ },
+ {
+  "name": "Skyclaw Talonguard",
+  "general": "Einar",
+  "entity_type": "Kyrie",
+  "figure_type": "Unique Squad",
+  "occupation": "Aerial Guards",
+  "personality": "Loyal",
+  "size": "Medium",
+  "height": 6,
+  "life": 1,
+  "move": 6,
+  "range": 1,
+  "attack": 3,
+  "defense": 3,
+  "abilities": [
+   {
+    "title": "Flying",
+    "description": "When counting spaces for a Skyclaw Talonguard's movement, ignore elevations. A Skyclaw Talonguard may fly over water without stopping, pass over figures without becoming engaged, and fly over obstacles such as ruins. When a Skyclaw Talonguard starts to fly, if it is engaged it will take any leaving engagement attacks."
+   },
+   {
+    "title": "Dive Strike",
+    "description": "If a Skyclaw Talonguard you control moves at least 4 spaces before attacking, and the space it attacks from is at least 2 levels higher than the space of the defending figure, add 1 die to that attack."
+   },
+   {
+    "title": "Empress's Escort",
+    "description": "When rolling defense dice for a Skyclaw Talonguard you control that is within 3 clear sight spaces of a Kyrie Hero you control who follows Einar, add 1 defense die."
+   }
+  ],
+  "design_note": "A three-figure unique squad with flight, a conditional attack 4 dive, and a defense aura that only turns on alongside Einar Kyrie heroes is worth far more in its home army than alone.",
+  "category": "drawback_twins_squad"
+ },
+ {
+  "name": "Skyclaw Talonguard (variant)",
+  "general": "Einar",
+  "entity_type": "Kyrie",
+  "figure_type": "Unique Squad",
+  "occupation": "Aerial Guards",
+  "personality": "Solitary",
+  "size": "Medium",
+  "height": 6,
+  "life": 1,
+  "move": 6,
+  "range": 1,
+  "attack": 3,
+  "defense": 3,
+  "abilities": [
+   {
+    "title": "Flying",
+    "description": "When counting spaces for a Skyclaw Talonguard (variant)'s movement, ignore elevations. A Skyclaw Talonguard (variant) may fly over water without stopping, pass over figures without becoming engaged, and fly over obstacles such as ruins. When a Skyclaw Talonguard (variant) starts to fly, if it is engaged it will take any leaving engagement attacks."
+   },
+   {
+    "title": "Dive Strike",
+    "description": "If a Skyclaw Talonguard (variant) you control moves at least 4 spaces before attacking, and the space it attacks from is at least 2 levels higher than the space of the defending figure, add 1 die to that attack."
+   },
+   {
+    "title": "Empress's Escort",
+    "description": "When rolling defense dice for a Skyclaw Talonguard (variant) you control that is within 3 clear sight spaces of a Kyrie Hero you control who follows Einar, add 1 defense die."
+   },
+   {
+    "title": "Severed Wingbond",
+    "description": "Skyclaw Talonguard (variant) cannot be bonded with. Ignore all special powers on other Army Cards that would allow you to take a turn with Skyclaw Talonguard (variant) or allow you to move Skyclaw Talonguard (variant). You may take a turn with Skyclaw Talonguard (variant) only by revealing an Order Marker on this Army Card."
+   },
+   {
+    "title": "Lone Vigil",
+    "description": "If there are no other unengaged figures you control within 4 clear sight spaces of a Skyclaw Talonguard (variant), add 1 to that figure's Attack Value."
+   }
+  ],
+  "design_note": "The no-bonding clause strips Kyrie hero synergy that the card's own defense aura still encourages, while Lone Vigil pays the squad to operate away from that aura, creating two powers that pull the price in opposite directions.",
+  "category": "drawback_twins_squad"
+ },
+ {
+  "name": "Sablewood Scouts",
+  "general": "Ullar",
+  "entity_type": "Elves",
+  "figure_type": "Common Squad",
+  "occupation": "Rangers",
+  "personality": "Watchful",
+  "size": "Medium",
+  "height": 5,
+  "life": 1,
+  "move": 6,
+  "range": 5,
+  "attack": 2,
+  "defense": 3,
+  "abilities": [
+   {
+    "title": "Thornbrush Vigil",
+    "description": "When rolling defense dice against a normal attack from a non-adjacent attacking figure, a Sablewood Scout adds 1 die to its defense."
+   },
+   {
+    "title": "Ranger's Withdrawal",
+    "description": "After a Sablewood Scout you control rolls defense dice against a normal attack and receives no wounds, you may move that Sablewood Scout up to 2 spaces. A Sablewood Scout moving with Ranger's Withdrawal is never attacked when leaving an engagement."
+   }
+  ],
+  "design_note": "A cheap-statted ranged squad whose free repositioning after every clean defense roll quietly converts a low Attack Value into strong board control, which is hard to weigh against its fragility.",
+  "category": "drawback_twins_squad"
+ },
+ {
+  "name": "Sablewood Scouts (variant)",
+  "general": "Ullar",
+  "entity_type": "Elves",
+  "figure_type": "Common Squad",
+  "occupation": "Rangers",
+  "personality": "Bloodhound-Driven",
+  "size": "Medium",
+  "height": 5,
+  "life": 1,
+  "move": 6,
+  "range": 5,
+  "attack": 2,
+  "defense": 3,
+  "abilities": [
+   {
+    "title": "Thornbrush Vigil",
+    "description": "When rolling defense dice against a normal attack from a non-adjacent attacking figure, a Sablewood Scout adds 1 die to its defense."
+   },
+   {
+    "title": "Ranger's Withdrawal",
+    "description": "After a Sablewood Scout you control rolls defense dice against a normal attack and receives no wounds, you may move that Sablewood Scout up to 2 spaces. A Sablewood Scout moving with Ranger's Withdrawal is never attacked when leaving an engagement."
+   },
+   {
+    "title": "Blood Trail Compulsion",
+    "description": "Whenever you move a Sablewood Scout, it must end its movement closer to the nearest enemy figure than it was at the start of that movement, if possible. To determine the nearest enemy figure, count the fewest number of spaces to each enemy figure, ignoring elevation. Ranger's Withdrawal movement is also affected by Blood Trail Compulsion."
+   }
+  ],
+  "design_note": "Forcing a Range 5 squad to close the gap every turn both wastes its range and drags it out of the non-adjacent bonus of Thornbrush Vigil, so the drawback compounds twice over.",
+  "category": "drawback_twins_squad"
+ },
+ {
+  "name": "Gorehide Ripperkin",
+  "general": "Utgar",
+  "entity_type": "Orcs",
+  "figure_type": "Common Squad",
+  "occupation": "Marauders",
+  "personality": "Savage",
+  "size": "Medium",
+  "height": 5,
+  "life": 1,
+  "move": 5,
+  "range": 1,
+  "attack": 3,
+  "defense": 2,
+  "abilities": [
+   {
+    "title": "Warpath Frenzy",
+    "description": "When a Gorehide Ripperkin attacks a figure with at least 1 Wound Marker on its Army Card, add 1 die to its attack."
+   },
+   {
+    "title": "Chieftain's Shadow",
+    "description": "A Gorehide Ripperkin adjacent to a friendly Orc Hero adds 1 die to its defense."
+   },
+   {
+    "title": "Scavenge Charge",
+    "description": "After a Gorehide Ripperkin you control destroys an enemy figure with a normal attack, you may move that Gorehide Ripperkin up to 2 spaces. It is never attacked when leaving an engagement with Scavenge Charge."
+   }
+  ],
+  "design_note": "Both of its bonuses are conditional on friendly Orc Heroes and wounded targets, so its real value swings wildly between a solo filler squad and a warlord-supported hammer.",
+  "category": "drawback_twins_squad"
+ },
+ {
+  "name": "Gorehide Ripperkin (variant)",
+  "general": "Utgar",
+  "entity_type": "Orcs",
+  "figure_type": "Common Squad",
+  "occupation": "Marauders",
+  "personality": "Mutinous",
+  "size": "Medium",
+  "height": 5,
+  "life": 1,
+  "move": 5,
+  "range": 1,
+  "attack": 3,
+  "defense": 2,
+  "abilities": [
+   {
+    "title": "Warpath Frenzy",
+    "description": "When a Gorehide Ripperkin attacks a figure with at least 1 Wound Marker on its Army Card, add 1 die to its attack."
+   },
+   {
+    "title": "Chieftain's Shadow",
+    "description": "A Gorehide Ripperkin adjacent to a friendly Orc Hero adds 1 die to its defense."
+   },
+   {
+    "title": "Scavenge Charge",
+    "description": "After a Gorehide Ripperkin you control destroys an enemy figure with a normal attack, you may move that Gorehide Ripperkin up to 2 spaces. It is never attacked when leaving an engagement with Scavenge Charge."
+   },
+   {
+    "title": "Mutinous Rabble",
+    "description": "You may never use a bonding power, or any other power on another Army Card that allows you to take a turn with or move figures, to take a turn with, move, or attack with Gorehide Ripperkin. Gorehide Ripperkin may only be activated by revealing an Order Marker on this Army Card."
+   }
+  ],
+  "design_note": "Losing all external bonding and activation synergy costs a cheap Orc swarm most of its army-building upside while leaving its raw stats untouched.",
+  "category": "drawback_twins_squad"
+ },
+ {
+  "name": "Ohm-Class Arc Wardens",
+  "general": "Vydar",
+  "entity_type": "Soulborgs",
+  "figure_type": "Unique Squad",
+  "occupation": "Guards",
+  "personality": "Calculating",
+  "size": "Medium",
+  "height": 4,
+  "life": 1,
+  "move": 5,
+  "range": 6,
+  "attack": 3,
+  "defense": 3,
+  "abilities": [
+   {
+    "title": "Arc Chain Special Attack",
+    "description": "Range 6. Attack 2. Choose a figure to attack. All figures adjacent to the defending figure are also affected by Arc Chain Special Attack. Roll attack dice once for all affected figures. Each affected figure rolls defense dice separately."
+   },
+   {
+    "title": "Targeting Uplink",
+    "description": "When an Arc Warden attacks a figure that is adjacent to another friendly Soulborg, add 1 die to its attack."
+   },
+   {
+    "title": "Insulated Chassis",
+    "description": "Arc Wardens are never affected by special attacks or powers that would move them, and they do not roll defense dice against Arc Chain Special Attack."
+   }
+  ],
+  "design_note": "A three-figure unique squad with Range 6, Attack 3, and a splash special attack sits right at the top of the ranged-squad band, so every point of its splash potential matters.",
+  "category": "drawback_twins_squad"
+ },
+ {
+  "name": "Ohm-Class Arc Wardens (variant)",
+  "general": "Vydar",
+  "entity_type": "Soulborgs",
+  "figure_type": "Unique Squad",
+  "occupation": "Guards",
+  "personality": "Overclocked",
+  "size": "Medium",
+  "height": 4,
+  "life": 1,
+  "move": 5,
+  "range": 6,
+  "attack": 3,
+  "defense": 3,
+  "abilities": [
+   {
+    "title": "Arc Chain Special Attack",
+    "description": "Range 6. Attack 2. Choose a figure to attack. All figures adjacent to the defending figure are also affected by Arc Chain Special Attack. Roll attack dice once for all affected figures. Each affected figure rolls defense dice separately."
+   },
+   {
+    "title": "Targeting Uplink",
+    "description": "When an Arc Warden attacks a figure that is adjacent to another friendly Soulborg, add 1 die to its attack."
+   },
+   {
+    "title": "Insulated Chassis",
+    "description": "Arc Wardens are never affected by special attacks or powers that would move them, and they do not roll defense dice against Arc Chain Special Attack."
+   },
+   {
+    "title": "Unstable Capacitors",
+    "description": "After an Arc Warden you control attacks with a normal attack or with Arc Chain Special Attack, roll the 20-sided die. If you roll a 1, 2, 3, 4, or 5, that Arc Warden receives 1 wound. Defense dice are not rolled against this wound."
+   }
+  ],
+  "design_note": "Because squad figures have only 1 life, a 25% self-destruct chance on every attack erases roughly a quarter of the card's total output and shortens its lifespan unpredictably.",
+  "category": "drawback_twins_squad"
+ },
+ {
+  "name": "Naginata Ashigaru of Kaburagi",
+  "general": "Einar",
+  "entity_type": "Humans",
+  "figure_type": "Common Squad",
+  "occupation": "Samurai",
+  "personality": "Disciplined",
+  "size": "Medium",
+  "height": 5,
+  "life": 1,
+  "move": 5,
+  "range": 1,
+  "attack": 3,
+  "defense": 3,
+  "abilities": [
+   {
+    "title": "Naginata Reach",
+    "description": "When attacking, a Naginata Ashigaru may attack an enemy figure exactly 2 spaces away, as long as it has clear line of sight to that figure and that figure's base is no more than 4 levels above or below it. When attacking with Naginata Reach, subtract 1 from that Naginata Ashigaru's Attack Value."
+   },
+   {
+    "title": "Ashigaru Formation",
+    "description": "When rolling defense dice against a normal attack, a Naginata Ashigaru adds 1 die to its defense if it is adjacent to at least 2 other Naginata Ashigaru you control."
+   }
+  ],
+  "design_note": "A melee squad that can strike from 2 spaces away without becoming engaged blurs the line between melee and ranged pricing, especially paired with a formation defense bonus that rewards clumping.",
+  "category": "drawback_twins_squad"
+ },
+ {
+  "name": "Naginata Ashigaru of Kaburagi (variant)",
+  "general": "Einar",
+  "entity_type": "Humans",
+  "figure_type": "Common Squad",
+  "occupation": "Samurai",
+  "personality": "Honor-Maddened",
+  "size": "Medium",
+  "height": 5,
+  "life": 1,
+  "move": 5,
+  "range": 1,
+  "attack": 3,
+  "defense": 3,
+  "abilities": [
+   {
+    "title": "Naginata Reach",
+    "description": "When attacking, a Naginata Ashigaru may attack an enemy figure exactly 2 spaces away, as long as it has clear line of sight to that figure and that figure's base is no more than 4 levels above or below it. When attacking with Naginata Reach, subtract 1 from that Naginata Ashigaru's Attack Value."
+   },
+   {
+    "title": "Ashigaru Formation",
+    "description": "When rolling defense dice against a normal attack, a Naginata Ashigaru adds 1 die to its defense if it is adjacent to at least 2 other Naginata Ashigaru you control."
+   },
+   {
+    "title": "Reckless Honor Charge",
+    "description": "Whenever you move a Naginata Ashigaru, it must end its movement closer to the nearest enemy figure than it was at the start of that movement, if possible. To determine the nearest enemy figure, count the fewest number of spaces to each enemy figure, ignoring elevation."
+   }
+  ],
+  "design_note": "Forced advancement hurts far less on a melee squad that wants engagement, but it also scatters the figures out of Ashigaru Formation range, making the true discount small and easy to misjudge.",
+  "category": "drawback_twins_squad"
+ },
+ {
+  "name": "Rogue Unit XR-9",
+  "general": "Vydar",
+  "entity_type": "Soulborg Ranger",
+  "figure_type": "Unique Hero",
+  "occupation": "Ranger",
+  "personality": "Erratic",
+  "size": "Medium",
+  "height": 5,
+  "life": 4,
+  "move": 5,
+  "range": 7,
+  "attack": 4,
+  "defense": 3,
+  "abilities": [
+   {
+    "title": "TARGETING UPLINK",
+    "description": "When Rogue Unit XR-9 attacks a figure at Range 5 or greater with a normal attack, add 1 to his Attack Value."
+   },
+   {
+    "title": "CORRUPTED COMMAND 5",
+    "description": "When you reveal an Order Marker on this card, before taking a turn with Rogue Unit XR-9, roll the 20-sided die. If you roll a 5 or lower, the opponent of your choice takes this turn with Rogue Unit XR-9 instead, moving him and attacking with him as if they controlled this Army Card. That opponent may not attack their own figures with Rogue Unit XR-9."
+   }
+  ],
+  "design_note": "A 25% chance per revealed Order Marker of handing a Range 7, Attack 4 sniper to the opponent is a rare, game-swinging drawback whose cost is hard to weigh against three otherwise-premium turns.",
+  "category": "drawback_removal_twins"
+ },
+ {
+  "name": "Rogue Unit XR-9 (variant)",
+  "general": "Vydar",
+  "entity_type": "Soulborg Ranger",
+  "figure_type": "Unique Hero",
+  "occupation": "Ranger",
+  "personality": "Erratic",
+  "size": "Medium",
+  "height": 5,
+  "life": 4,
+  "move": 5,
+  "range": 7,
+  "attack": 4,
+  "defense": 3,
+  "abilities": [
+   {
+    "title": "TARGETING UPLINK",
+    "description": "When Rogue Unit XR-9 attacks a figure at Range 5 or greater with a normal attack, add 1 to his Attack Value."
+   }
+  ],
+  "design_note": "With the control-loss clause deleted and nothing added, this is a clean long-range hero whose price must be set purely on stats plus a modest conditional attack bonus.",
+  "category": "drawback_removal_twins"
+ },
+ {
+  "name": "Glimmerwisp Sprites",
+  "general": "Ullar",
+  "entity_type": "Sprite Trickster",
+  "figure_type": "Unique Squad",
+  "occupation": "Trickster",
+  "personality": "Capricious",
+  "size": "Small",
+  "height": 3,
+  "life": 1,
+  "move": 7,
+  "range": 1,
+  "attack": 2,
+  "defense": 3,
+  "abilities": [
+   {
+    "title": "BEDAZZLE",
+    "description": "When an opponent's figure adjacent to one or more Glimmerwisp Sprites you control attacks with a normal attack, it subtracts 1 from its Attack Value."
+   },
+   {
+    "title": "FLYING",
+    "description": "When counting spaces for a Glimmerwisp Sprite's movement, ignore elevations. A Glimmerwisp Sprite may fly over water without stopping, pass over figures without becoming engaged, and fly over obstacles such as ruins. When a Glimmerwisp Sprite starts to fly, if it is engaged it will take any leaving engagement attacks."
+   },
+   {
+    "title": "DISSIPATE 3",
+    "description": "At the end of each round, roll the 20-sided die once for each Glimmerwisp Sprite you control on the battlefield. If you roll a 3 or lower for that figure, destroy it. Destroyed Glimmerwisp Sprites cannot be returned to the battlefield by any special power or glyph."
+   }
+  ],
+  "design_note": "The squad slowly deletes itself for free on a 15% per-figure per-round roll, so its value depends entirely on how many rounds the buyer expects the game to last.",
+  "category": "drawback_removal_twins"
+ },
+ {
+  "name": "Glimmerwisp Sprites (variant)",
+  "general": "Ullar",
+  "entity_type": "Sprite Trickster",
+  "figure_type": "Unique Squad",
+  "occupation": "Trickster",
+  "personality": "Capricious",
+  "size": "Small",
+  "height": 3,
+  "life": 1,
+  "move": 7,
+  "range": 1,
+  "attack": 2,
+  "defense": 3,
+  "abilities": [
+   {
+    "title": "BEDAZZLE",
+    "description": "When an opponent's figure adjacent to one or more Glimmerwisp Sprites you control attacks with a normal attack, it subtracts 1 from its Attack Value."
+   },
+   {
+    "title": "FLYING",
+    "description": "When counting spaces for a Glimmerwisp Sprite's movement, ignore elevations. A Glimmerwisp Sprite may fly over water without stopping, pass over figures without becoming engaged, and fly over obstacles such as ruins. When a Glimmerwisp Sprite starts to fly, if it is engaged it will take any leaving engagement attacks."
+   }
+  ],
+  "design_note": "Removing the self-destruct turns a fragile gimmick into a durable flying debuff squad, and the pricing gap between the twins is easy to over- or under-shoot.",
+  "category": "drawback_removal_twins"
+ },
+ {
+  "name": "Grukk Skullmad",
+  "general": "Utgar",
+  "entity_type": "Orc Champion",
+  "figure_type": "Unique Hero",
+  "occupation": "Champion",
+  "personality": "Berserk",
+  "size": "Medium",
+  "height": 5,
+  "life": 5,
+  "move": 6,
+  "range": 1,
+  "attack": 5,
+  "defense": 3,
+  "abilities": [
+   {
+    "title": "FRENZIED ONSLAUGHT",
+    "description": "If Grukk Skullmad destroys one or more figures with a normal attack during his turn, he may immediately attack one additional time with a normal attack. Grukk may not attack more than three times in a single turn with Frenzied Onslaught."
+   },
+   {
+    "title": "MINDLESS RAGE",
+    "description": "At the start of Grukk Skullmad's turn, if there is any figure within 6 clear sight spaces of Grukk, he must move by the shortest available route to engage the figure nearest to him, friendly or opposing, and if he is engaged with that figure after moving he must attack it with his normal attack. You may not choose any other target for Grukk's normal attack while that figure is engaged with him."
+   },
+   {
+    "title": "DISENGAGE",
+    "description": "Grukk Skullmad is never attacked when leaving an engagement."
+   }
+  ],
+  "design_note": "Forced targeting that can compel a 5-die attack into your own squads is crippling in mixed armies but nearly harmless in a solo-melee build, making the discount highly army-dependent.",
+  "category": "drawback_removal_twins"
+ },
+ {
+  "name": "Grukk Skullmad (variant)",
+  "general": "Utgar",
+  "entity_type": "Orc Champion",
+  "figure_type": "Unique Hero",
+  "occupation": "Champion",
+  "personality": "Berserk",
+  "size": "Medium",
+  "height": 5,
+  "life": 5,
+  "move": 6,
+  "range": 1,
+  "attack": 5,
+  "defense": 3,
+  "abilities": [
+   {
+    "title": "FRENZIED ONSLAUGHT",
+    "description": "If Grukk Skullmad destroys one or more figures with a normal attack during his turn, he may immediately attack one additional time with a normal attack. Grukk may not attack more than three times in a single turn with Frenzied Onslaught."
+   },
+   {
+    "title": "DISENGAGE",
+    "description": "Grukk Skullmad is never attacked when leaving an engagement."
+   }
+  ],
+  "design_note": "Free target choice plus chain attacks makes this an elite squad-shredding melee hero, and its price must reflect that Frenzied Onslaught is now fully reliable.",
+  "category": "drawback_removal_twins"
+ },
+ {
+  "name": "Ashpyre Firecaller",
+  "general": "Einar",
+  "entity_type": "Kyrie Zealot",
+  "figure_type": "Common Hero",
+  "occupation": "Zealot",
+  "personality": "Fanatical",
+  "size": "Medium",
+  "height": 5,
+  "life": 3,
+  "move": 5,
+  "range": 1,
+  "attack": 3,
+  "defense": 3,
+  "abilities": [
+   {
+    "title": "FIRESTORM SPECIAL ATTACK",
+    "description": "Range 1. Attack 3. Firestorm Special Attack affects all figures adjacent to the Ashpyre Firecaller, friendly and opposing. Roll 3 attack dice once for all affected figures. Each affected figure rolls defense dice separately."
+   },
+   {
+    "title": "SEARING BACKLASH",
+    "description": "Each time an Ashpyre Firecaller uses Firestorm Special Attack, after all defense dice have been rolled, that Ashpyre Firecaller receives one wound."
+   },
+   {
+    "title": "FLYING",
+    "description": "When counting spaces for an Ashpyre Firecaller's movement, ignore elevations. An Ashpyre Firecaller may fly over water without stopping, pass over figures without becoming engaged, and fly over obstacles such as ruins. When an Ashpyre Firecaller starts to fly, if it is engaged it will take any leaving engagement attacks."
+   }
+  ],
+  "design_note": "A 3-life common hero that wounds itself every time it uses its best power can only fire twice, so the drawback effectively caps its lifetime output rather than merely taxing it.",
+  "category": "drawback_removal_twins"
+ },
+ {
+  "name": "Ashpyre Firecaller (variant)",
+  "general": "Einar",
+  "entity_type": "Kyrie Zealot",
+  "figure_type": "Common Hero",
+  "occupation": "Zealot",
+  "personality": "Fanatical",
+  "size": "Medium",
+  "height": 5,
+  "life": 3,
+  "move": 5,
+  "range": 1,
+  "attack": 3,
+  "defense": 3,
+  "abilities": [
+   {
+    "title": "FIRESTORM SPECIAL ATTACK",
+    "description": "Range 1. Attack 3. Firestorm Special Attack affects all figures adjacent to the Ashpyre Firecaller, friendly and opposing. Roll 3 attack dice once for all affected figures. Each affected figure rolls defense dike separately."
+   },
+   {
+    "title": "FLYING",
+    "description": "When counting spaces for an Ashpyre Firecaller's movement, ignore elevations. An Ashpyre Firecaller may fly over water without stopping, pass over figures without becoming engaged, and fly over obstacles such as ruins. When an Ashpyre Firecaller starts to fly, if it is engaged it will take any leaving engagement attacks."
+   }
+  ],
+  "design_note": "Unlimited repeatable area attacks on a cheap flying common hero that can be fielded in multiples risks being far more than a small discount away from its wounded twin.",
+  "category": "drawback_removal_twins"
+ },
+ {
+  "name": "Ithkarr Emberhusk",
+  "general": "Valkrill",
+  "entity_type": "Eisenek",
+  "figure_type": "Unique Hero",
+  "occupation": "Pyromancer",
+  "personality": "Volatile",
+  "size": "Medium",
+  "height": 5,
+  "life": 4,
+  "move": 5,
+  "range": 6,
+  "attack": 4,
+  "defense": 2,
+  "abilities": [
+   {
+    "title": "Cinder Lance Special Attack",
+    "description": "Range 6. Attack 3. When counting spaces for Ithkarr Emberhusk's Cinder Lance Special Attack, ignore all figures. After attacking with Cinder Lance Special Attack, you may choose one figure adjacent to the defending figure and roll 1 attack die against that figure. If you roll a skull, the chosen figure receives 1 wound. Figures attacked in this way do not roll defense dice."
+   },
+   {
+    "title": "Ashen Ward",
+    "description": "When rolling defense dice for Ithkarr Emberhusk against a normal attack from an adjacent figure, add 1 automatic shield to the defense roll."
+   },
+   {
+    "title": "Unstable Core 5",
+    "description": "At the end of each round, roll the 20-sided die. If you roll a 1-5, destroy Ithkarr Emberhusk."
+   }
+  ],
+  "design_note": "A 25% chance of self-destruction at the end of every round means the card is likely gone by round three or four, so the discount must account for lost order markers as well as lost stats.",
+  "category": "drawback_removal_twins"
+ },
+ {
+  "name": "Ithkarr Emberhusk (variant)",
+  "general": "Valkrill",
+  "entity_type": "Eisenek",
+  "figure_type": "Unique Hero",
+  "occupation": "Pyromancer",
+  "personality": "Volatile",
+  "size": "Medium",
+  "height": 5,
+  "life": 4,
+  "move": 5,
+  "range": 6,
+  "attack": 4,
+  "defense": 2,
+  "abilities": [
+   {
+    "title": "Cinder Lance Special Attack",
+    "description": "Range 6. Attack 3. When counting spaces for Ithkarr Emberhusk's Cinder Lance Special Attack, ignore all figures. After attacking with Cinder Lance Special Attack, you may choose one figure adjacent to the defending figure and roll 1 attack die against that figure. If you roll a skull, the chosen figure receives 1 wound. Figures attacked in this way do not roll defense dice."
+   },
+   {
+    "title": "Ashen Ward",
+    "description": "When rolling defense dice for Ithkarr Emberhusk against a normal attack from an adjacent figure, add 1 automatic shield to the defense roll."
+   }
+  ],
+  "design_note": "Without the self-destruct clause this becomes a reliable range 6 attack 4 hero with splash damage and a defensive boost, and pricing must weigh how much of his old cost was pure risk.",
+  "category": "drawback_removal_twins"
+ },
+ {
+  "name": "Grinlok Ripperhounds",
+  "general": "Utgar",
+  "entity_type": "Beast",
+  "figure_type": "Common Squad",
+  "occupation": "Hounds",
+  "personality": "Wild",
+  "size": "Medium",
+  "height": 4,
+  "life": 1,
+  "move": 7,
+  "range": 1,
+  "attack": 3,
+  "defense": 2,
+  "abilities": [
+   {
+    "title": "Pack Charge",
+    "description": "When attacking with a Grinlok Ripperhound, roll 1 additional attack die for each other Grinlok Ripperhound you control adjacent to the defending figure."
+   },
+   {
+    "title": "Disengage",
+    "description": "Grinlok Ripperhounds are never attacked when leaving an engagement."
+   },
+   {
+    "title": "Feral Instinct",
+    "description": "When attacking with a Grinlok Ripperhound, you must choose as the defending figure the opponent's figure nearest to that Grinlok Ripperhound, counting the minimum number of spaces. If two or more of an opponent's figures are equally near, you may choose which one to attack."
+   }
+  ],
+  "design_note": "Forced targeting of the nearest enemy actively fights against Pack Charge, since the squad cannot concentrate its attacks on one figure unless the terrain cooperates.",
+  "category": "drawback_removal_twins"
+ },
+ {
+  "name": "Grinlok Ripperhounds (variant)",
+  "general": "Utgar",
+  "entity_type": "Beast",
+  "figure_type": "Common Squad",
+  "occupation": "Hounds",
+  "personality": "Wild",
+  "size": "Medium",
+  "height": 4,
+  "life": 1,
+  "move": 7,
+  "range": 1,
+  "attack": 3,
+  "defense": 2,
+  "abilities": [
+   {
+    "title": "Pack Charge",
+    "description": "When attacking with a Grinlok Ripperhound, roll 1 additional attack die for each other Grinlok Ripperhound you control adjacent to the defending figure."
+   },
+   {
+    "title": "Disengage",
+    "description": "Grinlok Ripperhounds are never attacked when leaving an engagement."
+   }
+  ],
+  "design_note": "Free targeting turns a move 7 disengaging swarm into a focus-fire machine that can throw five or six attack dice at a single hero, which is worth far more than the die-roll math suggests.",
+  "category": "drawback_removal_twins"
+ },
+ {
+  "name": "Tidewrack Marauders",
+  "general": "Vydar",
+  "entity_type": "Human",
+  "figure_type": "Unique Squad",
+  "occupation": "Marauders",
+  "personality": "Greedy",
+  "size": "Medium",
+  "height": 5,
+  "life": 1,
+  "move": 5,
+  "range": 5,
+  "attack": 3,
+  "defense": 2,
+  "abilities": [
+   {
+    "title": "Harpoon Line",
+    "description": "After attacking a non-adjacent figure with a Tidewrack Marauder, if at least 1 skull was rolled, you may place the defending figure on any empty space adjacent to that Tidewrack Marauder that is not more than 3 levels above or below that Marauder. Huge figures cannot be moved by Harpoon Line."
+   },
+   {
+    "title": "Sea Legs",
+    "description": "Tidewrack Marauders may move through water spaces without stopping and never take leaving engagement attacks when leaving a water space."
+   },
+   {
+    "title": "Mutiny 5",
+    "description": "At the start of each round, after Order Markers have been placed, roll the 20-sided die. If you roll a 1-5, your opponent takes control of this Army Card for the round. Your opponent reveals Order Markers on this card and takes turns with the Tidewrack Marauders as if they were figures they control. At the end of the round, you regain control of this Army Card."
+   }
+  ],
+  "design_note": "A 25% per-round chance that the opponent gets your order markers and your ranged attacks is a swing far worse than simply losing the turns, so the drawback is worth more than the squad's offense.",
+  "category": "drawback_removal_twins"
+ },
+ {
+  "name": "Tidewrack Marauders (variant)",
+  "general": "Vydar",
+  "entity_type": "Human",
+  "figure_type": "Unique Squad",
+  "occupation": "Marauders",
+  "personality": "Greedy",
+  "size": "Medium",
+  "height": 5,
+  "life": 1,
+  "move": 5,
+  "range": 5,
+  "attack": 3,
+  "defense": 2,
+  "abilities": [
+   {
+    "title": "Harpoon Line",
+    "description": "After attacking a non-adjacent figure with a Tidewrack Marauder, if at least 1 skull was rolled, you may place the defending figure on any empty space adjacent to that Tidewrack Marauder that is not more than 3 levels above or below that Marauder. Huge figures cannot be moved by Harpoon Line."
+   },
+   {
+    "title": "Sea Legs",
+    "description": "Tidewrack Marauders may move through water spaces without stopping and never take leaving engagement attacks when leaving a water space."
+   }
+  ],
+  "design_note": "Range 5 attack 3 on three unique figures plus free forced movement is already premium squad territory, so the clean version has to be priced near the top of the ranged-squad band.",
+  "category": "drawback_removal_twins"
+ },
+ {
+  "name": "Vaelith Stormtalon",
+  "general": "Ullar",
+  "entity_type": "Kyrie",
+  "figure_type": "Unique Hero",
+  "occupation": "Skyreaver",
+  "personality": "Relentless",
+  "size": "Large",
+  "height": 6,
+  "life": 5,
+  "move": 6,
+  "range": 1,
+  "attack": 4,
+  "defense": 3,
+  "abilities": [
+   {
+    "title": "Talon Dive Special Attack",
+    "description": "Range 1. Attack 4. Vaelith Stormtalon may attack with Talon Dive Special Attack only if she moved at least 4 spaces this turn and is at least 3 levels above the defending figure. Figures attacked by Talon Dive Special Attack roll 1 fewer defense die."
+   },
+   {
+    "title": "Flying",
+    "description": "When counting spaces for Vaelith Stormtalon's movement, ignore elevations. She may fly over water without stopping, pass over figures without becoming engaged, and fly over obstacles such as ruins. When Vaelith Stormtalon starts to fly, if she is engaged, she will take any leaving engagement attacks."
+   },
+   {
+    "title": "Blood Oath Fixation",
+    "description": "After revealing an Order Marker on Vaelith Stormtalon and before taking a turn with her, your opponent chooses one figure they control within 10 clear sight spaces of Vaelith Stormtalon. This turn, Vaelith Stormtalon must move as close as possible to the chosen figure, and she may attack only the chosen figure."
+   }
+  ],
+  "design_note": "The opponent chooses her target every turn, which both nullifies her dive requirements and lets them bait her into their strongest defenders, gutting an otherwise elite flier.",
+  "category": "drawback_removal_twins"
+ },
+ {
+  "name": "Vaelith Stormtalon (variant)",
+  "general": "Ullar",
+  "entity_type": "Kyrie",
+  "figure_type": "Unique Hero",
+  "occupation": "Skyreaver",
+  "personality": "Relentless",
+  "size": "Large",
+  "height": 6,
+  "life": 5,
+  "move": 6,
+  "range": 1,
+  "attack": 4,
+  "defense": 3,
+  "abilities": [
+   {
+    "title": "Talon Dive Special Attack",
+    "description": "Range 1. Attack 4. Vaelith Stormtalon may attack with Talon Dive Special Attack only if she moved at least 4 spaces this turn and is at least 3 levels above the defending figure. Figures attacked by Talon Dive Special Attack roll 1 fewer defense die."
+   },
+   {
+    "title": "Flying",
+    "description": "When counting spaces for Vaelith Stormtalon's movement, ignore elevations. She may fly over water without stopping, pass over figures without becoming engaged, and fly over obstacles such as ruins. When Vaelith Stormtalon starts to fly, if she is engaged, she will take any leaving engagement attacks."
+   }
+  ],
+  "design_note": "With target selection back in the owner's hands, her dive becomes a reliable assassination tool on high terrain maps, but its elevation requirement makes the value swing map-dependent.",
+  "category": "drawback_removal_twins"
+ },
+ {
+  "name": "Malvek the Hollow",
+  "general": "Utgar",
+  "entity_type": "Undead Wraith",
+  "figure_type": "Unique Hero",
+  "occupation": "Wraith Reaper",
+  "personality": "Hungry",
+  "size": "Medium",
+  "height": 5,
+  "life": 4,
+  "move": 6,
+  "range": 1,
+  "attack": 4,
+  "defense": 3,
+  "abilities": [
+   {
+    "title": "Soul Drain Special Attack",
+    "description": "Range 1. Attack 3. If the defending figure receives one or more wounds from Soul Drain Special Attack, you may remove one Wound Marker from Malvek the Hollow's Army Card."
+   },
+   {
+    "title": "Phantom Walk",
+    "description": "Malvek the Hollow can move through all figures and never takes leaving engagement attacks."
+   },
+   {
+    "title": "Untethered Spirit 5",
+    "description": "At the end of each round, roll the 20-sided die. If you roll a 5 or lower, the player to your left gains control of Malvek the Hollow. That player places order markers on and takes turns with Malvek the Hollow until the end of the next round, at which time you gain control of Malvek the Hollow again."
+   }
+  ],
+  "design_note": "A 25%-per-round chance of handing a Life 4, Attack 4 self-healing hero to an opponent is a swingy, hard-to-quantify tempo and information loss.",
+  "category": "drawback_removal_twins"
+ },
+ {
+  "name": "Malvek the Hollow (variant)",
+  "general": "Utgar",
+  "entity_type": "Undead Wraith",
+  "figure_type": "Unique Hero",
+  "occupation": "Wraith Reaper",
+  "personality": "Hungry",
+  "size": "Medium",
+  "height": 5,
+  "life": 4,
+  "move": 6,
+  "range": 1,
+  "attack": 4,
+  "defense": 3,
+  "abilities": [
+   {
+    "title": "Soul Drain Special Attack",
+    "description": "Range 1. Attack 3. If the defending figure receives one or more wounds from Soul Drain Special Attack, you may remove one Wound Marker from Malvek the Hollow's Army Card."
+   },
+   {
+    "title": "Phantom Walk",
+    "description": "Malvek the Hollow can move through all figures and never takes leaving engagement attacks."
+   }
+  ],
+  "design_note": "With no control-loss clause, this becomes a clean self-sustaining skirmisher whose price must sit above its twin by exactly the value of never losing him.",
+  "category": "drawback_removal_twins"
+ },
+ {
+  "name": "Sunspear Zealots",
+  "general": "Jandar",
+  "entity_type": "Human Zealot",
+  "figure_type": "Common Squad",
+  "occupation": "Fanatic Spearman",
+  "personality": "Fervent",
+  "size": "Medium",
+  "height": 5,
+  "life": 1,
+  "move": 5,
+  "range": 1,
+  "attack": 3,
+  "defense": 2,
+  "abilities": [
+   {
+    "title": "Fervent Charge",
+    "description": "If a Sunspear Zealot moves 3 or more spaces on its turn, add 1 die to its attack for the rest of that turn."
+   },
+   {
+    "title": "Blind Fervor",
+    "description": "When a Sunspear Zealot attacks, it must attack the enemy figure that is the fewest spaces away from it, ignoring elevation and line of sight. If two or more enemy figures are tied for the fewest spaces away, you may choose which of those figures the Sunspear Zealot attacks."
+   }
+  ],
+  "design_note": "Forced targeting on a cheap 4-figure charging squad both blunts focus-fire plans and hands opponents a screening trick, which is easy to under- or over-discount.",
+  "category": "drawback_removal_twins"
+ },
+ {
+  "name": "Sunspear Zealots (variant)",
+  "general": "Jandar",
+  "entity_type": "Human Zealot",
+  "figure_type": "Common Squad",
+  "occupation": "Fanatic Spearman",
+  "personality": "Fervent",
+  "size": "Medium",
+  "height": 5,
+  "life": 1,
+  "move": 5,
+  "range": 1,
+  "attack": 3,
+  "defense": 2,
+  "abilities": [
+   {
+    "title": "Fervent Charge",
+    "description": "If a Sunspear Zealot moves 3 or more spaces on its turn, add 1 die to its attack for the rest of that turn."
+   }
+  ],
+  "design_note": "Stripped of Blind Fervor, this is a plain Attack 4-on-the-charge common squad, so the whole price gap between the twins is the cost of choosing your own targets.",
+  "category": "drawback_removal_twins"
+ },
+ {
+  "name": "Ghorumel the Unraveling",
+  "general": "Valkrill",
+  "entity_type": "Chaos Elemental Rift Stalker",
+  "figure_type": "Unique Hero",
+  "occupation": "Rift Stalker",
+  "personality": "Unstable",
+  "size": "Large",
+  "height": 7,
+  "life": 6,
+  "move": 6,
+  "range": 1,
+  "attack": 5,
+  "defense": 4,
+  "abilities": [
+   {
+    "title": "Rift Step 7",
+    "description": "Instead of moving normally with Ghorumel the Unraveling, you may place him on any empty land space within 7 spaces of his current location. Ghorumel the Unraveling may Rift Step even if he is engaged, and he never takes leaving engagement attacks when he Rift Steps."
+   },
+   {
+    "title": "Tearing Claws",
+    "description": "If Ghorumel the Unraveling did not move on his turn, he may attack one additional time. He cannot attack the same figure more than once per turn with Tearing Claws."
+   },
+   {
+    "title": "Unraveling 3",
+    "description": "At the end of each round, roll the 20-sided die. If you roll a 3 or lower, Ghorumel the Unraveling is immediately destroyed."
+   }
+  ],
+  "design_note": "A flat 15% chance each round of simply losing a premium beefy attacker with no wounds dealt to him is an all-or-nothing risk that resists straight expected-damage math.",
+  "category": "drawback_removal_twins"
+ },
+ {
+  "name": "Ghorumel the Unraveling (variant)",
+  "general": "Valkrill",
+  "entity_type": "Chaos Elemental Rift Stalker",
+  "figure_type": "Unique Hero",
+  "occupation": "Rift Stalker",
+  "personality": "Unstable",
+  "size": "Large",
+  "height": 7,
+  "life": 6,
+  "move": 6,
+  "range": 1,
+  "attack": 5,
+  "defense": 4,
+  "abilities": [
+   {
+    "title": "Rift Step 7",
+    "description": "Instead of moving normally with Ghorumel the Unraveling, you may place him on any empty land space within 7 spaces of his current location. Ghorumel the Unraveling may Rift Step even if he is engaged, and he never takes leaving engagement attacks when he Rift Steps."
+   },
+   {
+    "title": "Tearing Claws",
+    "description": "If Ghorumel the Unraveling did not move on his turn, he may attack one additional time. He cannot attack the same figure more than once per turn with Tearing Claws."
+   }
+  ],
+  "design_note": "Without the self-destruct roll this is a durable teleporting double-attacker, so pricing hinges on how many rounds a game is expected to last.",
+  "category": "drawback_removal_twins"
+ },
+ {
+  "name": "Mistwalker Scouts",
+  "general": "Aquilla",
+  "entity_type": "Elf Scout",
+  "figure_type": "Unique Squad",
+  "occupation": "Veiled Archer",
+  "personality": "Elusive",
+  "size": "Medium",
+  "height": 5,
+  "life": 1,
+  "move": 6,
+  "range": 5,
+  "attack": 3,
+  "defense": 2,
+  "abilities": [
+   {
+    "title": "Mistveil Marksmanship",
+    "description": "When a Mistwalker Scout that has not moved this turn attacks an enemy figure that is 3 or more spaces away, add 1 die to its attack."
+   },
+   {
+    "title": "Woodland Stealth",
+    "description": "When counting spaces for a Mistwalker Scout's movement, all tree spaces and jungle spaces are considered level terrain. Mistwalker Scouts do not have to stop their movement when entering water spaces."
+   },
+   {
+    "title": "Mistbound 5",
+    "description": "When revealing an order marker on the Mistwalker Scouts Army Card, before taking a turn with the Mistwalker Scouts, roll the 20-sided die. If you roll a 5 or lower, remove that order marker and you may not take a turn with the Mistwalker Scouts this turn."
+   }
+  ],
+  "design_note": "A 25% chance to waste an entire order marker on a 3-figure Range 5 squad is a turn-economy tax rather than a combat penalty, making its point discount unusually hard to pin down.",
+  "category": "drawback_removal_twins"
+ },
+ {
+  "name": "Mistwalker Scouts (variant)",
+  "general": "Aquilla",
+  "entity_type": "Elf Scout",
+  "figure_type": "Unique Squad",
+  "occupation": "Veiled Archer",
+  "personality": "Elusive",
+  "size": "Medium",
+  "height": 5,
+  "life": 1,
+  "move": 6,
+  "range": 5,
+  "attack": 3,
+  "defense": 2,
+  "abilities": [
+   {
+    "title": "Mistveil Marksmanship",
+    "description": "When a Mistwalker Scout that has not moved this turn attacks an enemy figure that is 3 or more spaces away, add 1 die to its attack."
+   },
+   {
+    "title": "Woodland Stealth",
+    "description": "When counting spaces for a Mistwalker Scout's movement, all tree spaces and jungle spaces are considered level terrain. Mistwalker Scouts do not have to stop their movement when entering water spaces."
+   }
+  ],
+  "design_note": "Reliable Range 5, Attack 4 stationary fire from three unique figures must be valued near the top of the ranged-squad band, and the gap to its Mistbound twin is pure order-marker reliability.",
+  "category": "drawback_removal_twins"
+ }
+]

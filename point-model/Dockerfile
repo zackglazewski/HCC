@@ -14,4 +14,5 @@ ARG R2_BUCKET
 
 RUN uv run python download_model.py
 
+ENV POINT_MODEL_DIR=/app/output/llm/best/model
 CMD uv run uvicorn serve:app --host 0.0.0.0 --port ${PORT:-5175}
